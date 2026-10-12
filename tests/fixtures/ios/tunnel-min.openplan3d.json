@@ -1,0 +1,325 @@
+{
+  "defaults" : {
+    "ceilingHeight" : 2.3999999999999999,
+    "exteriorWallThickness" : 0.20000000000000001,
+    "interiorWallThickness" : 0.12
+  },
+  "doors" : [
+    {
+      "dimensions" : [
+        0.90000000000000002,
+        2.0299999999999998,
+        0.20000000000000001
+      ],
+      "identifier" : "acb84897-1387-4618-ad3a-7c1513963636",
+      "parentIdentifier" : "6d2f84a3-577e-4d5e-acd1-49a5c19090b0",
+      "story" : 0,
+      "style" : "single",
+      "transform" : [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        6.9500000000000002,
+        1.0149999999999999,
+        -0.10000000000000001,
+        1
+      ]
+    }
+  ],
+  "floors" : [
+
+  ],
+  "objects" : [
+    {
+      "attributes" : {
+        "opencatio3dKind" : "tunnel",
+        "opencatio3dRole" : "structure",
+        "segment" : 0,
+        "structureId" : "5f5d671a-e92b-45e9-9d10-b8701429730f"
+      },
+      "category" : {
+        "greenhouse_small" : {
+
+        }
+      },
+      "dimensions" : [
+        0.59999999999999998,
+        0.29999999999999999,
+        0.29999999999999999
+      ],
+      "identifier" : "a1b1c654-5d63-4d3b-86aa-d6cefc9f20ad",
+      "story" : 0,
+      "transform" : [
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        2.6499999999999999,
+        0.14999999999999999,
+        0.29999999999999999,
+        1
+      ]
+    }
+  ],
+  "opencatio3d" : {
+    "alternatives" : [
+
+    ],
+    "assumptions" : {
+      "fastenerOverage" : 0.10000000000000001,
+      "kerf" : 0.0030000000000000001,
+      "stockLengths" : [
+
+      ],
+      "wasteFactor" : 0.10000000000000001
+    },
+    "building" : null,
+    "captureSource" : "template",
+    "catalogVersion" : "oc-catalog@0.1",
+    "cats" : [
+      {
+        "ageClass" : "adult",
+        "climber" : true,
+        "escapeRisk" : "medium",
+        "id" : "771d8bb1-b7e0-4902-827d-785f12e43758",
+        "mobility" : "full",
+        "name" : "My cat",
+        "size" : "medium"
+      }
+    ],
+    "createdAt" : "2026-10-12T12:00:00Z",
+    "currency" : "USD",
+    "lengthUnit" : "m",
+    "name" : "tunnel min",
+    "observations" : [
+
+    ],
+    "overrides" : [
+
+    ],
+    "plants" : [
+
+    ],
+    "producer" : "ios",
+    "projectId" : "c79444c2-540b-40c3-8853-1f50de76af79",
+    "region" : {
+      "climate" : {
+        "hot" : false,
+        "rainy" : false,
+        "snowLoad" : "none",
+        "wind" : "normal"
+      },
+      "country" : "US"
+    },
+    "schema" : "opencatio3d\/project@0.1",
+    "site" : {
+      "ground" : "grass",
+      "measurements" : [
+        {
+          "confirmed" : true,
+          "field" : "width",
+          "id" : "db267d54-7d26-4eb7-b15b-431ea055dc11",
+          "source" : "tape",
+          "targetId" : "5f5d671a-e92b-45e9-9d10-b8701429730f",
+          "value" : 0.29999999999999999
+        },
+        {
+          "confirmed" : true,
+          "field" : "height",
+          "id" : "dc267ee7-7c26-4d24-b25b-44b19f55da7e",
+          "source" : "tape",
+          "targetId" : "5f5d671a-e92b-45e9-9d10-b8701429730f",
+          "value" : 0.29999999999999999
+        },
+        {
+          "confirmed" : true,
+          "field" : "path",
+          "id" : "dd26807a-7f26-41dd-af5b-3ff89e55d8eb",
+          "source" : "tape",
+          "targetId" : "5f5d671a-e92b-45e9-9d10-b8701429730f",
+          "value" : 0.59999999999999998
+        }
+      ],
+      "northDeg" : 0,
+      "obstacles" : [
+
+      ],
+      "walls" : [
+        {
+          "a" : [
+            0,
+            0
+          ],
+          "b" : [
+            10,
+            0
+          ],
+          "height" : 2.7000000000000002,
+          "id" : "6d2f84a3-577e-4d5e-acd1-49a5c19090b0",
+          "openings" : [
+            {
+              "height" : 1.2,
+              "id" : "abb84704-1487-47ab-ac3a-7a82149637c9",
+              "kind" : "window",
+              "name" : "Living room window",
+              "offset" : 2.2000000000000002,
+              "sill" : 0.90000000000000002,
+              "width" : 0.90000000000000002
+            },
+            {
+              "height" : 2.0299999999999998,
+              "id" : "acb84897-1387-4618-ad3a-7c1513963636",
+              "kind" : "door",
+              "name" : "Back door",
+              "offset" : 6.5,
+              "sill" : 0,
+              "width" : 0.90000000000000002
+            }
+          ]
+        }
+      ]
+    },
+    "structures" : [
+      {
+        "base" : {
+          "kind" : "pavers"
+        },
+        "depth" : 3.048,
+        "frame" : {
+          "materialId" : "lumber-2x2-cedar",
+          "maxPostSpacing" : 0.90000000000000002,
+          "profile" : "wood-2x2",
+          "railSpacing" : 0.90000000000000002
+        },
+        "furnishings" : [
+
+        ],
+        "height" : 0.29999999999999999,
+        "id" : "5f5d671a-e92b-45e9-9d10-b8701429730f",
+        "mesh" : {
+          "materialId" : "mesh-1x1-16ga-gaw-36"
+        },
+        "name" : "Tunnel run",
+        "openings" : [
+
+        ],
+        "path" : [
+          [
+            0,
+            0
+          ],
+          [
+            0.59999999999999998,
+            0
+          ]
+        ],
+        "roof" : {
+          "kind" : "mesh"
+        },
+        "rotation" : 90,
+        "template" : "tunnel",
+        "width" : 0.29999999999999999,
+        "x" : 2.6499999999999999,
+        "y" : 0
+      }
+    ],
+    "units" : "imperial",
+    "updatedAt" : "2026-10-12T12:00:00Z",
+    "web" : {
+
+    }
+  },
+  "openings" : [
+
+  ],
+  "openplanHandoffVersion" : 1,
+  "openplanPrepared" : true,
+  "planNotes" : "Created with OpenCatio3D for iOS. Catios are shown as boxes; the full design is in the opencatio3d block. Planning guidance only — confirm dimensions on site.",
+  "sections" : [
+
+  ],
+  "stories" : [
+    {
+      "index" : 0,
+      "name" : "Ground Floor"
+    }
+  ],
+  "version" : 2,
+  "walls" : [
+    {
+      "dimensions" : [
+        10,
+        2.7000000000000002,
+        0.20000000000000001
+      ],
+      "identifier" : "6d2f84a3-577e-4d5e-acd1-49a5c19090b0",
+      "story" : 0,
+      "transform" : [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        5,
+        1.3500000000000001,
+        -0.10000000000000001,
+        1
+      ]
+    }
+  ],
+  "windows" : [
+    {
+      "dimensions" : [
+        0.90000000000000002,
+        1.2,
+        0.20000000000000001
+      ],
+      "identifier" : "abb84704-1487-47ab-ac3a-7a82149637c9",
+      "parentIdentifier" : "6d2f84a3-577e-4d5e-acd1-49a5c19090b0",
+      "sillHeight" : 0.90000000000000002,
+      "story" : 0,
+      "transform" : [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2.6499999999999999,
+        1.5,
+        -0.10000000000000001,
+        1
+      ]
+    }
+  ]
+}

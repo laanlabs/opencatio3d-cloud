@@ -1,0 +1,396 @@
+{
+  "defaults" : {
+    "ceilingHeight" : 2.3999999999999999,
+    "exteriorWallThickness" : 0.20000000000000001,
+    "interiorWallThickness" : 0.12
+  },
+  "doors" : [
+    {
+      "dimensions" : [
+        1.5,
+        2.1000000000000001,
+        0.20000000000000001
+      ],
+      "identifier" : "005fa5e8-a4e8-4a39-b9e5-ad4eb3388037",
+      "parentIdentifier" : "a73a8e28-b999-44ad-acf5-f542916936c7",
+      "story" : 0,
+      "style" : "patio",
+      "transform" : [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        5.1500000000000004,
+        1.05,
+        -0.10000000000000001,
+        1
+      ]
+    }
+  ],
+  "floors" : [
+
+  ],
+  "objects" : [
+    {
+      "attributes" : {
+        "opencatio3dKind" : "lean-to",
+        "opencatio3dRole" : "structure",
+        "structureId" : "07ea93b7-50f2-4112-8e1e-ff21d60f0c2c"
+      },
+      "category" : {
+        "greenhouse" : {
+
+        }
+      },
+      "dimensions" : [
+        2.4380000000000002,
+        2.1339999999999999,
+        1.2190000000000001
+      ],
+      "identifier" : "07ea93b7-50f2-4112-8e1e-ff21d60f0c2c",
+      "story" : 0,
+      "transform" : [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2.5499999999999998,
+        1.0669999999999999,
+        0.60950000000000004,
+        1
+      ]
+    }
+  ],
+  "opencatio3d" : {
+    "alternatives" : [
+
+    ],
+    "assumptions" : {
+      "fastenerOverage" : 0.10000000000000001,
+      "kerf" : 0.0030000000000000001,
+      "stockLengths" : [
+
+      ],
+      "wasteFactor" : 0.10000000000000001
+    },
+    "building" : null,
+    "captureSource" : "template",
+    "catalogVersion" : "oc-catalog@0.1",
+    "cats" : [
+      {
+        "ageClass" : "adult",
+        "climber" : true,
+        "escapeRisk" : "high",
+        "id" : "1f6bcfc0-5bba-41e9-8dd6-7e7a67041e93",
+        "mobility" : "full",
+        "name" : "Miso",
+        "size" : "medium"
+      },
+      {
+        "ageClass" : "senior",
+        "climber" : false,
+        "escapeRisk" : "low",
+        "id" : "206bd153-5aba-4056-8ed6-800d66041d00",
+        "mobility" : "reduced",
+        "name" : "Pepper",
+        "size" : "small"
+      }
+    ],
+    "createdAt" : "2026-10-12T12:00:00Z",
+    "currency" : "USD",
+    "ios" : {
+      "mountingContext" : "ground"
+    },
+    "lengthUnit" : "m",
+    "name" : "Sample lean-to catio",
+    "observations" : [
+
+    ],
+    "overrides" : [
+
+    ],
+    "plants" : [
+
+    ],
+    "producer" : "ios",
+    "projectId" : "6c910951-66bb-434a-8972-5e8b2951152c",
+    "region" : {
+      "climate" : {
+        "hot" : false,
+        "rainy" : true,
+        "snowLoad" : "light",
+        "wind" : "normal"
+      },
+      "country" : "US",
+      "state" : "OR"
+    },
+    "schema" : "opencatio3d\/project@0.1",
+    "site" : {
+      "ground" : "grass",
+      "measurements" : [
+        {
+          "confirmed" : false,
+          "field" : "width",
+          "id" : "73efbae9-4ce3-403c-8241-7e7fd9ce6b22",
+          "source" : "typed",
+          "targetId" : "07ea93b7-50f2-4112-8e1e-ff21d60f0c2c",
+          "value" : 2.4380000000000002
+        },
+        {
+          "confirmed" : false,
+          "field" : "depth",
+          "id" : "72efb956-4de3-41cf-8141-7cecdace6cb5",
+          "source" : "typed",
+          "targetId" : "07ea93b7-50f2-4112-8e1e-ff21d60f0c2c",
+          "value" : 1.2190000000000001
+        },
+        {
+          "confirmed" : false,
+          "field" : "height",
+          "id" : "71efb7c3-4ee3-4362-8441-81a5d7ce67fc",
+          "source" : "typed",
+          "targetId" : "07ea93b7-50f2-4112-8e1e-ff21d60f0c2c",
+          "value" : 2.1339999999999999
+        },
+        {
+          "confirmed" : true,
+          "field" : "sill",
+          "id" : "70efb630-4fe3-44f5-8341-8012d8ce698f",
+          "source" : "tape",
+          "targetId" : "7edc0220-042f-4565-980b-23e669c4ee5b",
+          "value" : 0.90000000000000002
+        }
+      ],
+      "northDeg" : 0,
+      "obstacles" : [
+
+      ],
+      "walls" : [
+        {
+          "a" : [
+            0,
+            0
+          ],
+          "b" : [
+            6,
+            0
+          ],
+          "height" : 2.7000000000000002,
+          "id" : "a73a8e28-b999-44ad-acf5-f542916936c7",
+          "openings" : [
+            {
+              "height" : 1.2,
+              "id" : "7edc0220-042f-4565-980b-23e669c4ee5b",
+              "kind" : "window",
+              "name" : "Living room window",
+              "offset" : 2.1000000000000001,
+              "sill" : 0.90000000000000002,
+              "width" : 0.90000000000000002
+            },
+            {
+              "height" : 2.1000000000000001,
+              "id" : "005fa5e8-a4e8-4a39-b9e5-ad4eb3388037",
+              "kind" : "patio-door",
+              "name" : "Patio door",
+              "offset" : 4.4000000000000004,
+              "sill" : 0,
+              "width" : 1.5
+            }
+          ]
+        }
+      ]
+    },
+    "structures" : [
+      {
+        "base" : {
+          "kind" : "pavers"
+        },
+        "depth" : 1.2190000000000001,
+        "frame" : {
+          "materialId" : "lumber-2x3-pt",
+          "maxPostSpacing" : 1.2,
+          "profile" : "wood-2x3",
+          "railSpacing" : 0.90000000000000002
+        },
+        "furnishings" : [
+          {
+            "componentId" : "shelf",
+            "id" : "18965709-8c72-4a3e-a0b3-4a8fa7f479f4",
+            "length" : 0.59999999999999998,
+            "mountHeight" : 0.90000000000000002,
+            "offset" : 0.29999999999999999,
+            "side" : "left"
+          },
+          {
+            "componentId" : "shelf",
+            "id" : "17965576-8d72-4bd1-9fb3-48fca8f47b87",
+            "length" : 0.59999999999999998,
+            "mountHeight" : 1.3999999999999999,
+            "offset" : 0.29999999999999999,
+            "side" : "right"
+          },
+          {
+            "componentId" : "scratcher-post",
+            "id" : "169653e3-8a72-4718-a2b3-4db5a9f47d1a",
+            "mountHeight" : 0.90000000000000002,
+            "offset" : 0.94999999999999996,
+            "side" : "left"
+          },
+          {
+            "componentId" : "bed",
+            "id" : "15965250-8b72-48ab-a1b3-4c22aaf47ead",
+            "mountHeight" : 0,
+            "offset" : 0.14999999999999999,
+            "side" : "front"
+          },
+          {
+            "componentId" : "water-station",
+            "id" : "1c965d55-9072-408a-9cb3-4443a3f473a8",
+            "mountHeight" : 0,
+            "offset" : 0.90000000000000002,
+            "side" : "right"
+          }
+        ],
+        "height" : 2.1339999999999999,
+        "hostOpeningId" : "7edc0220-042f-4565-980b-23e669c4ee5b",
+        "hostWallId" : "a73a8e28-b999-44ad-acf5-f542916936c7",
+        "id" : "07ea93b7-50f2-4112-8e1e-ff21d60f0c2c",
+        "lowHeight" : 1.829,
+        "mesh" : {
+          "materialId" : "mesh-1x1-16ga-gaw-48"
+        },
+        "name" : "Lean-to catio",
+        "openings" : [
+          {
+            "height" : 1.651,
+            "hinge" : "left",
+            "id" : "22a7afe8-8261-415f-aac4-a36e9e0a3085",
+            "kind" : "human-door",
+            "latch" : "hasp",
+            "offset" : 0.83799999999999997,
+            "selfClosing" : true,
+            "side" : "front",
+            "swing" : "out",
+            "width" : 0.76200000000000001
+          },
+          {
+            "height" : 1.2,
+            "id" : "23a7b17b-8161-4fcc-abc4-a5019d0a2ef2",
+            "kind" : "window-access",
+            "offset" : 0.76899999999999991,
+            "side" : "back",
+            "sill" : 0.90000000000000002,
+            "width" : 0.90000000000000002
+          }
+        ],
+        "roof" : {
+          "coverFraction" : 0.5,
+          "kind" : "partial",
+          "materialId" : "roof-polycarb-corrugated"
+        },
+        "rotation" : 0,
+        "template" : "lean-to",
+        "width" : 2.4380000000000002,
+        "x" : 1.3310000000000002,
+        "y" : 0
+      }
+    ],
+    "units" : "imperial",
+    "updatedAt" : "2026-10-12T12:00:00Z",
+    "web" : {
+
+    }
+  },
+  "openings" : [
+
+  ],
+  "openplanHandoffVersion" : 1,
+  "openplanPrepared" : true,
+  "planNotes" : "Created with OpenCatio3D for iOS. Catios are shown as boxes; the full design is in the opencatio3d block. Planning guidance only — confirm dimensions on site.",
+  "sections" : [
+
+  ],
+  "stories" : [
+    {
+      "index" : 0,
+      "name" : "Ground Floor"
+    }
+  ],
+  "version" : 2,
+  "walls" : [
+    {
+      "dimensions" : [
+        6,
+        2.7000000000000002,
+        0.20000000000000001
+      ],
+      "identifier" : "a73a8e28-b999-44ad-acf5-f542916936c7",
+      "story" : 0,
+      "transform" : [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        3,
+        1.3500000000000001,
+        -0.10000000000000001,
+        1
+      ]
+    }
+  ],
+  "windows" : [
+    {
+      "dimensions" : [
+        0.90000000000000002,
+        1.2,
+        0.20000000000000001
+      ],
+      "identifier" : "7edc0220-042f-4565-980b-23e669c4ee5b",
+      "parentIdentifier" : "a73a8e28-b999-44ad-acf5-f542916936c7",
+      "sillHeight" : 0.90000000000000002,
+      "story" : 0,
+      "transform" : [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2.5499999999999998,
+        1.5,
+        -0.10000000000000001,
+        1
+      ]
+    }
+  ]
+}

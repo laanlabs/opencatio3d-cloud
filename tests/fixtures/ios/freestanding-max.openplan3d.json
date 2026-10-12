@@ -1,0 +1,370 @@
+{
+  "defaults" : {
+    "ceilingHeight" : 2.3999999999999999,
+    "exteriorWallThickness" : 0.20000000000000001,
+    "interiorWallThickness" : 0.12
+  },
+  "doors" : [
+    {
+      "dimensions" : [
+        0.90000000000000002,
+        2.0299999999999998,
+        0.20000000000000001
+      ],
+      "identifier" : "035fda35-7e7d-4dd2-b026-6dc73f42180c",
+      "parentIdentifier" : "c17f0cc5-a753-4f8c-8c0b-f1f3af04b452",
+      "story" : 0,
+      "style" : "single",
+      "transform" : [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        6.9500000000000002,
+        1.0149999999999999,
+        -0.10000000000000001,
+        1
+      ]
+    }
+  ],
+  "floors" : [
+
+  ],
+  "objects" : [
+    {
+      "attributes" : {
+        "opencatio3dKind" : "freestanding",
+        "opencatio3dRole" : "structure",
+        "structureId" : "54745490-9844-4bfb-9180-1a0ac5e97e0d"
+      },
+      "category" : {
+        "greenhouse" : {
+
+        }
+      },
+      "dimensions" : [
+        6,
+        2.7000000000000002,
+        4
+      ],
+      "identifier" : "54745490-9844-4bfb-9180-1a0ac5e97e0d",
+      "story" : 0,
+      "transform" : [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        5,
+        1.3500000000000001,
+        5,
+        1
+      ]
+    }
+  ],
+  "opencatio3d" : {
+    "alternatives" : [
+
+    ],
+    "assumptions" : {
+      "fastenerOverage" : 0.10000000000000001,
+      "kerf" : 0.0030000000000000001,
+      "stockLengths" : [
+
+      ],
+      "wasteFactor" : 0.10000000000000001
+    },
+    "building" : null,
+    "captureSource" : "template",
+    "catalogVersion" : "oc-catalog@0.1",
+    "cats" : [
+      {
+        "ageClass" : "adult",
+        "climber" : true,
+        "escapeRisk" : "medium",
+        "id" : "b9824f7f-4097-43ac-992d-1b210d7c864e",
+        "mobility" : "full",
+        "name" : "My cat",
+        "size" : "medium"
+      }
+    ],
+    "createdAt" : "2026-10-12T12:00:00Z",
+    "currency" : "USD",
+    "lengthUnit" : "m",
+    "name" : "freestanding max",
+    "observations" : [
+
+    ],
+    "overrides" : [
+
+    ],
+    "plants" : [
+
+    ],
+    "producer" : "ios",
+    "projectId" : "66317670-aa2a-49a5-9e03-6af2531569b7",
+    "region" : {
+      "climate" : {
+        "hot" : false,
+        "rainy" : false,
+        "snowLoad" : "none",
+        "wind" : "normal"
+      },
+      "country" : "US"
+    },
+    "schema" : "opencatio3d\/project@0.1",
+    "site" : {
+      "ground" : "grass",
+      "measurements" : [
+        {
+          "confirmed" : true,
+          "field" : "width",
+          "id" : "68be15be-9435-4b25-8d98-e22429d08393",
+          "source" : "tape",
+          "targetId" : "54745490-9844-4bfb-9180-1a0ac5e97e0d",
+          "value" : 6
+        },
+        {
+          "confirmed" : true,
+          "field" : "depth",
+          "id" : "69be1751-9335-4992-8e98-e3b728d08200",
+          "source" : "tape",
+          "targetId" : "54745490-9844-4bfb-9180-1a0ac5e97e0d",
+          "value" : 4
+        },
+        {
+          "confirmed" : true,
+          "field" : "height",
+          "id" : "66be1298-9235-47ff-8f98-e54a2bd086b9",
+          "source" : "tape",
+          "targetId" : "54745490-9844-4bfb-9180-1a0ac5e97e0d",
+          "value" : 2.7000000000000002
+        }
+      ],
+      "northDeg" : 0,
+      "obstacles" : [
+
+      ],
+      "walls" : [
+        {
+          "a" : [
+            0,
+            0
+          ],
+          "b" : [
+            10,
+            0
+          ],
+          "height" : 2.7000000000000002,
+          "id" : "c17f0cc5-a753-4f8c-8c0b-f1f3af04b452",
+          "openings" : [
+            {
+              "height" : 1.2,
+              "id" : "025fd8a2-7f7d-4f65-af26-6c344042199f",
+              "kind" : "window",
+              "name" : "Living room window",
+              "offset" : 2.2000000000000002,
+              "sill" : 0.90000000000000002,
+              "width" : 0.90000000000000002
+            },
+            {
+              "height" : 2.0299999999999998,
+              "id" : "035fda35-7e7d-4dd2-b026-6dc73f42180c",
+              "kind" : "door",
+              "name" : "Back door",
+              "offset" : 6.5,
+              "sill" : 0,
+              "width" : 0.90000000000000002
+            }
+          ]
+        }
+      ]
+    },
+    "structures" : [
+      {
+        "base" : {
+          "kind" : "pavers"
+        },
+        "depth" : 4,
+        "frame" : {
+          "materialId" : "lumber-2x3-pt",
+          "maxPostSpacing" : 1.2,
+          "profile" : "wood-2x3",
+          "railSpacing" : 0.90000000000000002
+        },
+        "furnishings" : [
+          {
+            "componentId" : "shelf",
+            "id" : "9ee29b88-9486-430d-aef4-4d761afbad3b",
+            "length" : 0.59999999999999998,
+            "mountHeight" : 0.80000000000000004,
+            "offset" : 0.20000000000000001,
+            "side" : "back"
+          },
+          {
+            "componentId" : "shelf",
+            "id" : "9fe29d1b-9386-417a-aff4-4f0919fbaba8",
+            "length" : 0.59999999999999998,
+            "mountHeight" : 1.3,
+            "offset" : 1,
+            "side" : "back"
+          },
+          {
+            "componentId" : "bridge",
+            "id" : "a0e29eae-9286-4fe7-acf4-4a501cfbb061",
+            "length" : 2.3620000000000001,
+            "mountHeight" : 1.7,
+            "offset" : 0.90000000000000002,
+            "side" : "span"
+          },
+          {
+            "componentId" : "cubby",
+            "id" : "a1e2a041-9186-4e54-adf4-4be31bfbaece",
+            "mountHeight" : 0,
+            "offset" : 0.20000000000000001,
+            "side" : "right"
+          },
+          {
+            "componentId" : "scratcher-post",
+            "id" : "a2e2a1d4-9086-4cc1-b2f4-53c21efbb387",
+            "mountHeight" : 1,
+            "offset" : 1.2,
+            "side" : "left"
+          },
+          {
+            "componentId" : "water-station",
+            "id" : "a3e2a367-8f86-4b2e-b3f4-55551dfbb1f4",
+            "mountHeight" : 0,
+            "offset" : 1.2,
+            "side" : "right"
+          }
+        ],
+        "height" : 2.7000000000000002,
+        "id" : "54745490-9844-4bfb-9180-1a0ac5e97e0d",
+        "lowHeight" : 2.4000000000000004,
+        "mesh" : {
+          "materialId" : "mesh-1x1-16ga-gaw-48"
+        },
+        "name" : "Freestanding catio",
+        "openings" : [
+          {
+            "height" : 1.829,
+            "hinge" : "left",
+            "id" : "94d142a9-7e97-498c-850a-3667250d061a",
+            "kind" : "human-door",
+            "latch" : "hasp",
+            "offset" : 0.83799999999999997,
+            "selfClosing" : true,
+            "side" : "front",
+            "swing" : "out",
+            "width" : 0.76200000000000001
+          }
+        ],
+        "roof" : {
+          "kind" : "mesh"
+        },
+        "rotation" : 0,
+        "template" : "freestanding",
+        "width" : 6,
+        "x" : 2,
+        "y" : 3
+      }
+    ],
+    "units" : "imperial",
+    "updatedAt" : "2026-10-12T12:00:00Z",
+    "web" : {
+
+    }
+  },
+  "openings" : [
+
+  ],
+  "openplanHandoffVersion" : 1,
+  "openplanPrepared" : true,
+  "planNotes" : "Created with OpenCatio3D for iOS. Catios are shown as boxes; the full design is in the opencatio3d block. Planning guidance only — confirm dimensions on site.",
+  "sections" : [
+
+  ],
+  "stories" : [
+    {
+      "index" : 0,
+      "name" : "Ground Floor"
+    }
+  ],
+  "version" : 2,
+  "walls" : [
+    {
+      "dimensions" : [
+        10,
+        2.7000000000000002,
+        0.20000000000000001
+      ],
+      "identifier" : "c17f0cc5-a753-4f8c-8c0b-f1f3af04b452",
+      "story" : 0,
+      "transform" : [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        5,
+        1.3500000000000001,
+        -0.10000000000000001,
+        1
+      ]
+    }
+  ],
+  "windows" : [
+    {
+      "dimensions" : [
+        0.90000000000000002,
+        1.2,
+        0.20000000000000001
+      ],
+      "identifier" : "025fd8a2-7f7d-4f65-af26-6c344042199f",
+      "parentIdentifier" : "c17f0cc5-a753-4f8c-8c0b-f1f3af04b452",
+      "sillHeight" : 0.90000000000000002,
+      "story" : 0,
+      "transform" : [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2.6499999999999999,
+        1.5,
+        -0.10000000000000001,
+        1
+      ]
+    }
+  ]
+}

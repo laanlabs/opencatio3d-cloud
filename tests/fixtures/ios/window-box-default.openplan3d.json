@@ -1,0 +1,354 @@
+{
+  "defaults" : {
+    "ceilingHeight" : 2.3999999999999999,
+    "exteriorWallThickness" : 0.20000000000000001,
+    "interiorWallThickness" : 0.12
+  },
+  "doors" : [
+    {
+      "dimensions" : [
+        0.90000000000000002,
+        2.0299999999999998,
+        0.20000000000000001
+      ],
+      "identifier" : "350ee62e-da3f-415d-bd22-5e3ced5f8d8b",
+      "parentIdentifier" : "2097da38-ff2a-455d-8181-e4a290ff48e7",
+      "story" : 0,
+      "style" : "single",
+      "transform" : [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        6.9500000000000002,
+        1.0149999999999999,
+        -0.10000000000000001,
+        1
+      ]
+    }
+  ],
+  "floors" : [
+
+  ],
+  "objects" : [
+    {
+      "attributes" : {
+        "opencatio3dKind" : "window-box",
+        "opencatio3dRole" : "structure",
+        "structureId" : "fe2b8fc7-2e7f-4538-ab37-633dd95f47ae"
+      },
+      "category" : {
+        "greenhouse_small" : {
+
+        }
+      },
+      "dimensions" : [
+        0.91400000000000003,
+        0.76200000000000001,
+        0.45700000000000002
+      ],
+      "identifier" : "fe2b8fc7-2e7f-4538-ab37-633dd95f47ae",
+      "story" : 0,
+      "transform" : [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2.6499999999999999,
+        1.2310000000000001,
+        0.22850000000000001,
+        1
+      ]
+    }
+  ],
+  "opencatio3d" : {
+    "alternatives" : [
+
+    ],
+    "assumptions" : {
+      "fastenerOverage" : 0.10000000000000001,
+      "kerf" : 0.0030000000000000001,
+      "stockLengths" : [
+
+      ],
+      "wasteFactor" : 0.10000000000000001
+    },
+    "building" : null,
+    "captureSource" : "template",
+    "catalogVersion" : "oc-catalog@0.1",
+    "cats" : [
+      {
+        "ageClass" : "adult",
+        "climber" : true,
+        "escapeRisk" : "medium",
+        "id" : "2da5d0d0-6b85-49a7-a7f2-9cfea2b3906d",
+        "mobility" : "full",
+        "name" : "My cat",
+        "size" : "medium"
+      }
+    ],
+    "createdAt" : "2026-10-12T12:00:00Z",
+    "currency" : "USD",
+    "lengthUnit" : "m",
+    "name" : "window-box default",
+    "observations" : [
+
+    ],
+    "overrides" : [
+
+    ],
+    "plants" : [
+
+    ],
+    "producer" : "ios",
+    "projectId" : "9dabede1-b967-4ba8-9f87-c9e77ff10de6",
+    "region" : {
+      "climate" : {
+        "hot" : false,
+        "rainy" : false,
+        "snowLoad" : "none",
+        "wind" : "normal"
+      },
+      "country" : "US"
+    },
+    "schema" : "opencatio3d\/project@0.1",
+    "site" : {
+      "ground" : "grass",
+      "measurements" : [
+        {
+          "confirmed" : true,
+          "field" : "width",
+          "id" : "69e10519-22a2-4496-8f6e-1aa345646ee0",
+          "source" : "tape",
+          "targetId" : "fe2b8fc7-2e7f-4538-ab37-633dd95f47ae",
+          "value" : 0.91400000000000003
+        },
+        {
+          "confirmed" : true,
+          "field" : "depth",
+          "id" : "68e10386-23a2-4629-8e6e-191046647073",
+          "source" : "tape",
+          "targetId" : "fe2b8fc7-2e7f-4538-ab37-633dd95f47ae",
+          "value" : 0.45700000000000002
+        },
+        {
+          "confirmed" : true,
+          "field" : "height",
+          "id" : "67e101f3-20a2-4170-916e-1dc947647206",
+          "source" : "tape",
+          "targetId" : "fe2b8fc7-2e7f-4538-ab37-633dd95f47ae",
+          "value" : 0.76200000000000001
+        },
+        {
+          "confirmed" : true,
+          "field" : "elevation",
+          "id" : "66e10060-21a2-4303-906e-1c3648647399",
+          "source" : "tape",
+          "targetId" : "fe2b8fc7-2e7f-4538-ab37-633dd95f47ae",
+          "value" : 0.84999999999999998
+        }
+      ],
+      "northDeg" : 0,
+      "obstacles" : [
+
+      ],
+      "walls" : [
+        {
+          "a" : [
+            0,
+            0
+          ],
+          "b" : [
+            10,
+            0
+          ],
+          "height" : 2.7000000000000002,
+          "id" : "2097da38-ff2a-455d-8181-e4a290ff48e7",
+          "openings" : [
+            {
+              "height" : 1.2,
+              "id" : "360ee7c1-d93f-4fca-be22-5fcfec5f8bf8",
+              "kind" : "window",
+              "name" : "Living room window",
+              "offset" : 2.2000000000000002,
+              "sill" : 0.90000000000000002,
+              "width" : 0.90000000000000002
+            },
+            {
+              "height" : 2.0299999999999998,
+              "id" : "350ee62e-da3f-415d-bd22-5e3ced5f8d8b",
+              "kind" : "door",
+              "name" : "Back door",
+              "offset" : 6.5,
+              "sill" : 0,
+              "width" : 0.90000000000000002
+            }
+          ]
+        }
+      ]
+    },
+    "structures" : [
+      {
+        "base" : {
+          "kind" : "raised-floor"
+        },
+        "depth" : 0.45700000000000002,
+        "elevation" : 0.84999999999999998,
+        "frame" : {
+          "materialId" : "lumber-2x2-cedar",
+          "maxPostSpacing" : 0.90000000000000002,
+          "profile" : "wood-2x2",
+          "railSpacing" : 0.59999999999999998
+        },
+        "furnishings" : [
+          {
+            "componentId" : "shelf",
+            "id" : "bb609ef9-3c9d-47d0-92aa-f3cbd7fb7efa",
+            "length" : 0.35999999999999999,
+            "mountHeight" : 0.34999999999999998,
+            "offset" : 0.050000000000000003,
+            "side" : "left"
+          }
+        ],
+        "height" : 0.76200000000000001,
+        "hostOpeningId" : "360ee7c1-d93f-4fca-be22-5fcfec5f8bf8",
+        "hostWallId" : "2097da38-ff2a-455d-8181-e4a290ff48e7",
+        "id" : "fe2b8fc7-2e7f-4538-ab37-633dd95f47ae",
+        "lowHeight" : 0.66000000000000003,
+        "mesh" : {
+          "materialId" : "mesh-1x1-16ga-gaw-36"
+        },
+        "name" : "Window box",
+        "openings" : [
+          {
+            "height" : 0.71199999999999997,
+            "id" : "c571f7d8-52b3-40c1-9cbc-4caacdea261b",
+            "kind" : "window-access",
+            "offset" : 0.006999999999999673,
+            "side" : "back",
+            "sill" : 0.050000000000000044,
+            "width" : 0.90000000000000002
+          },
+          {
+            "height" : 0.34999999999999998,
+            "hinge" : "left",
+            "id" : "c671f96b-51b3-4f2e-9dbc-4e3dccea2488",
+            "kind" : "cleaning-hatch",
+            "latch" : "slide-bolt",
+            "offset" : 0.20000000000000001,
+            "side" : "front",
+            "sill" : 0.10000000000000001,
+            "swing" : "out",
+            "width" : 0.5
+          }
+        ],
+        "roof" : {
+          "kind" : "polycarbonate",
+          "materialId" : "roof-polycarb-corrugated"
+        },
+        "rotation" : 0,
+        "template" : "window-box",
+        "width" : 0.91400000000000003,
+        "x" : 2.1930000000000005,
+        "y" : 0
+      }
+    ],
+    "units" : "imperial",
+    "updatedAt" : "2026-10-12T12:00:00Z",
+    "web" : {
+
+    }
+  },
+  "openings" : [
+
+  ],
+  "openplanHandoffVersion" : 1,
+  "openplanPrepared" : true,
+  "planNotes" : "Created with OpenCatio3D for iOS. Catios are shown as boxes; the full design is in the opencatio3d block. Planning guidance only — confirm dimensions on site.",
+  "sections" : [
+
+  ],
+  "stories" : [
+    {
+      "index" : 0,
+      "name" : "Ground Floor"
+    }
+  ],
+  "version" : 2,
+  "walls" : [
+    {
+      "dimensions" : [
+        10,
+        2.7000000000000002,
+        0.20000000000000001
+      ],
+      "identifier" : "2097da38-ff2a-455d-8181-e4a290ff48e7",
+      "story" : 0,
+      "transform" : [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        5,
+        1.3500000000000001,
+        -0.10000000000000001,
+        1
+      ]
+    }
+  ],
+  "windows" : [
+    {
+      "dimensions" : [
+        0.90000000000000002,
+        1.2,
+        0.20000000000000001
+      ],
+      "identifier" : "360ee7c1-d93f-4fca-be22-5fcfec5f8bf8",
+      "parentIdentifier" : "2097da38-ff2a-455d-8181-e4a290ff48e7",
+      "sillHeight" : 0.90000000000000002,
+      "story" : 0,
+      "transform" : [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2.6499999999999999,
+        1.5,
+        -0.10000000000000001,
+        1
+      ]
+    }
+  ]
+}

@@ -1,0 +1,318 @@
+{
+  "defaults" : {
+    "ceilingHeight" : 2.3999999999999999,
+    "exteriorWallThickness" : 0.20000000000000001,
+    "interiorWallThickness" : 0.12
+  },
+  "doors" : [
+    {
+      "dimensions" : [
+        0.90000000000000002,
+        2.0299999999999998,
+        0.20000000000000001
+      ],
+      "identifier" : "bb2dc3de-7f03-496f-8a4d-08f88df83c21",
+      "parentIdentifier" : "544bc748-0764-45eb-a5f0-dd3e523fe0c1",
+      "story" : 0,
+      "style" : "single",
+      "transform" : [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        6.9500000000000002,
+        1.0149999999999999,
+        -0.10000000000000001,
+        1
+      ]
+    }
+  ],
+  "floors" : [
+
+  ],
+  "objects" : [
+    {
+      "attributes" : {
+        "opencatio3dKind" : "balcony-concept",
+        "opencatio3dRole" : "structure",
+        "structureId" : "746a95f7-a0c4-4bb2-9d4e-c4c98ec413ac"
+      },
+      "category" : {
+        "greenhouse" : {
+
+        }
+      },
+      "dimensions" : [
+        1,
+        1.8,
+        0.59999999999999998
+      ],
+      "identifier" : "746a95f7-a0c4-4bb2-9d4e-c4c98ec413ac",
+      "story" : 0,
+      "transform" : [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1.95,
+        2.8999999999999999,
+        0.29999999999999999,
+        1
+      ]
+    }
+  ],
+  "opencatio3d" : {
+    "alternatives" : [
+
+    ],
+    "assumptions" : {
+      "fastenerOverage" : 0.10000000000000001,
+      "kerf" : 0.0030000000000000001,
+      "stockLengths" : [
+
+      ],
+      "wasteFactor" : 0.10000000000000001
+    },
+    "building" : null,
+    "captureSource" : "template",
+    "catalogVersion" : "oc-catalog@0.1",
+    "cats" : [
+      {
+        "ageClass" : "adult",
+        "climber" : true,
+        "escapeRisk" : "medium",
+        "id" : "b0e86200-eac4-4809-bd03-78627dd73213",
+        "mobility" : "full",
+        "name" : "My cat",
+        "size" : "medium"
+      }
+    ],
+    "createdAt" : "2026-10-12T12:00:00Z",
+    "currency" : "USD",
+    "lengthUnit" : "m",
+    "name" : "balcony-concept min",
+    "observations" : [
+
+    ],
+    "overrides" : [
+
+    ],
+    "plants" : [
+
+    ],
+    "producer" : "ios",
+    "projectId" : "3dc84d11-8086-4d6a-a8de-2923f4ca4bac",
+    "region" : {
+      "climate" : {
+        "hot" : false,
+        "rainy" : false,
+        "snowLoad" : "none",
+        "wind" : "normal"
+      },
+      "country" : "US"
+    },
+    "schema" : "opencatio3d\/project@0.1",
+    "site" : {
+      "ground" : "grass",
+      "measurements" : [
+        {
+          "confirmed" : true,
+          "field" : "width",
+          "id" : "e06fbd29-1cb5-445c-b149-9d97928372a2",
+          "source" : "tape",
+          "targetId" : "746a95f7-a0c4-4bb2-9d4e-c4c98ec413ac",
+          "value" : 1
+        },
+        {
+          "confirmed" : true,
+          "field" : "depth",
+          "id" : "df6fbb96-1db5-45ef-b049-9c0493837435",
+          "source" : "tape",
+          "targetId" : "746a95f7-a0c4-4bb2-9d4e-c4c98ec413ac",
+          "value" : 0.59999999999999998
+        },
+        {
+          "confirmed" : true,
+          "field" : "height",
+          "id" : "de6fba03-1eb5-4782-b349-a0bd90836f7c",
+          "source" : "tape",
+          "targetId" : "746a95f7-a0c4-4bb2-9d4e-c4c98ec413ac",
+          "value" : 1.8
+        }
+      ],
+      "northDeg" : 0,
+      "obstacles" : [
+
+      ],
+      "walls" : [
+        {
+          "a" : [
+            0,
+            0
+          ],
+          "b" : [
+            10,
+            0
+          ],
+          "height" : 2.7000000000000002,
+          "id" : "544bc748-0764-45eb-a5f0-dd3e523fe0c1",
+          "openings" : [
+            {
+              "height" : 1.2,
+              "id" : "bc2dc571-7e03-47dc-8b4d-0a8b8cf83a8e",
+              "kind" : "window",
+              "name" : "Living room window",
+              "offset" : 2.2000000000000002,
+              "sill" : 0.90000000000000002,
+              "width" : 0.90000000000000002
+            },
+            {
+              "height" : 2.0299999999999998,
+              "id" : "bb2dc3de-7f03-496f-8a4d-08f88df83c21",
+              "kind" : "door",
+              "name" : "Back door",
+              "offset" : 6.5,
+              "sill" : 0,
+              "width" : 0.90000000000000002
+            }
+          ]
+        }
+      ]
+    },
+    "structures" : [
+      {
+        "base" : {
+          "kind" : "deck"
+        },
+        "depth" : 0.59999999999999998,
+        "elevation" : 2,
+        "frame" : {
+          "materialId" : "lumber-2x3-pt",
+          "maxPostSpacing" : 1.2,
+          "profile" : "wood-2x3",
+          "railSpacing" : 0.90000000000000002
+        },
+        "furnishings" : [
+
+        ],
+        "height" : 1.8,
+        "hostOpeningId" : "bc2dc571-7e03-47dc-8b4d-0a8b8cf83a8e",
+        "hostWallId" : "544bc748-0764-45eb-a5f0-dd3e523fe0c1",
+        "id" : "746a95f7-a0c4-4bb2-9d4e-c4c98ec413ac",
+        "lowHeight" : 1.8,
+        "mesh" : {
+          "materialId" : "mesh-pvc-1x1-14ga-48"
+        },
+        "name" : "Balcony",
+        "openings" : [
+
+        ],
+        "roof" : {
+          "kind" : "mesh"
+        },
+        "rotation" : 0,
+        "template" : "balcony-concept",
+        "width" : 1,
+        "x" : 1.4500000000000004,
+        "y" : 0
+      }
+    ],
+    "units" : "imperial",
+    "updatedAt" : "2026-10-12T12:00:00Z",
+    "web" : {
+
+    }
+  },
+  "openings" : [
+
+  ],
+  "openplanHandoffVersion" : 1,
+  "openplanPrepared" : true,
+  "planNotes" : "Created with OpenCatio3D for iOS. Catios are shown as boxes; the full design is in the opencatio3d block. Planning guidance only — confirm dimensions on site.",
+  "sections" : [
+
+  ],
+  "stories" : [
+    {
+      "index" : 0,
+      "name" : "Ground Floor"
+    }
+  ],
+  "version" : 2,
+  "walls" : [
+    {
+      "dimensions" : [
+        10,
+        2.7000000000000002,
+        0.20000000000000001
+      ],
+      "identifier" : "544bc748-0764-45eb-a5f0-dd3e523fe0c1",
+      "story" : 0,
+      "transform" : [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        5,
+        1.3500000000000001,
+        -0.10000000000000001,
+        1
+      ]
+    }
+  ],
+  "windows" : [
+    {
+      "dimensions" : [
+        0.90000000000000002,
+        1.2,
+        0.20000000000000001
+      ],
+      "identifier" : "bc2dc571-7e03-47dc-8b4d-0a8b8cf83a8e",
+      "parentIdentifier" : "544bc748-0764-45eb-a5f0-dd3e523fe0c1",
+      "sillHeight" : 0.90000000000000002,
+      "story" : 0,
+      "transform" : [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2.6499999999999999,
+        1.5,
+        -0.10000000000000001,
+        1
+      ]
+    }
+  ]
+}
