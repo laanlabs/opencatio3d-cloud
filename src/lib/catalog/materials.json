@@ -1,0 +1,852 @@
+{
+	"catalogVersion": "oc-catalog@0.1",
+	"currency": "USD",
+	"materials": [
+		{
+			"category": "base",
+			"id": "anchor-auger",
+			"kind": "base",
+			"name": "15″ auger ground anchor",
+			"price": [
+				4,
+				8
+			],
+			"unit": "each"
+		},
+		{
+			"actual": [
+				0.019,
+				0.235
+			],
+			"category": "lumber",
+			"groundContact": false,
+			"id": "board-1x10-cedar",
+			"kind": "lumber",
+			"name": "1×10 cedar board",
+			"nominal": "1x10",
+			"notes": "Shelves, ramps and bridges.",
+			"pricePerMeter": [
+				7.4,
+				12.3
+			],
+			"profile": "board-1x10",
+			"species": "cedar",
+			"stockLengths": [
+				1.829,
+				2.438,
+				3.048
+			],
+			"treatment": "none",
+			"unit": "piece"
+		},
+		{
+			"actual": [
+				0.019,
+				0.038
+			],
+			"category": "lumber",
+			"groundContact": false,
+			"id": "board-1x2-furring",
+			"kind": "lumber",
+			"name": "1×2 furring strip",
+			"nominal": "1x2",
+			"notes": "Ramp cleats and trim that closes gaps at the house wall.",
+			"pricePerMeter": [
+				0.6,
+				1.2
+			],
+			"profile": "board-1x2",
+			"species": "pine",
+			"stockLengths": [
+				2.438
+			],
+			"treatment": "none",
+			"unit": "piece"
+		},
+		{
+			"category": "hardware",
+			"id": "bracket-corner",
+			"kind": "hardware",
+			"name": "Galvanized corner bracket (L angle)",
+			"price": [
+				1,
+				2
+			],
+			"unit": "each"
+		},
+		{
+			"category": "hardware",
+			"id": "bracket-knee",
+			"kind": "hardware",
+			"name": "Heavy-duty knee brace bracket, 16″",
+			"price": [
+				15,
+				25
+			],
+			"unit": "each"
+		},
+		{
+			"category": "hardware",
+			"id": "bracket-shelf",
+			"kind": "hardware",
+			"name": "Heavy shelf bracket, 8″",
+			"price": [
+				4,
+				8
+			],
+			"unit": "each"
+		},
+		{
+			"category": "hardware",
+			"id": "handle-pull",
+			"kind": "hardware",
+			"name": "Door pull handle",
+			"price": [
+				4,
+				8
+			],
+			"unit": "each"
+		},
+		{
+			"category": "hardware",
+			"hinge": "spring",
+			"id": "hinge-spring-4in",
+			"kind": "hardware",
+			"name": "4″ self-closing spring hinge",
+			"price": [
+				8,
+				14
+			],
+			"unit": "each"
+		},
+		{
+			"category": "hardware",
+			"hinge": "standard",
+			"id": "hinge-tee-4in",
+			"kind": "hardware",
+			"name": "4″ galvanized T-hinge",
+			"price": [
+				4,
+				7
+			],
+			"unit": "each"
+		},
+		{
+			"category": "kits",
+			"id": "kit-bed-outdoor",
+			"kind": "kit",
+			"name": "Outdoor cat bed (washable, raised)",
+			"price": [
+				25,
+				60
+			],
+			"unit": "each"
+		},
+		{
+			"category": "kits",
+			"id": "kit-cat-cube",
+			"kind": "kit",
+			"name": "Weatherproof cat cube / hideaway",
+			"price": [
+				30,
+				70
+			],
+			"unit": "each"
+		},
+		{
+			"category": "kits",
+			"id": "kit-cat-door",
+			"kind": "kit",
+			"name": "Cat door (flap) kit for a framed panel",
+			"price": [
+				35,
+				80
+			],
+			"unit": "each"
+		},
+		{
+			"category": "kits",
+			"id": "kit-hammock",
+			"kind": "kit",
+			"name": "Wall-mounted cat hammock",
+			"price": [
+				25,
+				50
+			],
+			"unit": "each"
+		},
+		{
+			"category": "kits",
+			"id": "kit-litter-enclosure",
+			"kind": "kit",
+			"name": "Outdoor litter enclosure",
+			"price": [
+				80,
+				180
+			],
+			"unit": "each"
+		},
+		{
+			"category": "kits",
+			"id": "kit-planter-large",
+			"kind": "kit",
+			"name": "16″ planter with saucer",
+			"price": [
+				18,
+				40
+			],
+			"unit": "each"
+		},
+		{
+			"category": "kits",
+			"id": "kit-planter-small",
+			"kind": "kit",
+			"name": "12″ planter with saucer",
+			"price": [
+				10,
+				25
+			],
+			"unit": "each"
+		},
+		{
+			"category": "kits",
+			"id": "kit-water-bowl",
+			"kind": "kit",
+			"name": "Heavy tip-proof water bowl",
+			"price": [
+				10,
+				25
+			],
+			"unit": "each"
+		},
+		{
+			"category": "kits",
+			"id": "kit-window-insert",
+			"kind": "kit",
+			"name": "Window cat-door insert panel (adjustable)",
+			"notes": "Fits sliding or sash windows; keeps the window lockable.",
+			"price": [
+				90,
+				200
+			],
+			"unit": "each"
+		},
+		{
+			"category": "hardware",
+			"id": "latch-gravity",
+			"kind": "hardware",
+			"latch": "gravity",
+			"name": "Gravity gate latch",
+			"price": [
+				6,
+				12
+			],
+			"unit": "each"
+		},
+		{
+			"category": "hardware",
+			"id": "latch-hasp",
+			"kind": "hardware",
+			"latch": "hasp",
+			"name": "Hasp and staple (padlockable)",
+			"price": [
+				5,
+				9
+			],
+			"unit": "each"
+		},
+		{
+			"category": "hardware",
+			"id": "latch-keyed",
+			"kind": "hardware",
+			"latch": "keyed",
+			"name": "Keyed gate latch",
+			"price": [
+				18,
+				35
+			],
+			"unit": "each"
+		},
+		{
+			"category": "hardware",
+			"id": "latch-slide-bolt",
+			"kind": "hardware",
+			"latch": "slide-bolt",
+			"name": "Galvanized slide bolt",
+			"price": [
+				4,
+				8
+			],
+			"unit": "each"
+		},
+		{
+			"actual": [
+				0.038,
+				0.038
+			],
+			"category": "lumber",
+			"groundContact": false,
+			"id": "lumber-2x2-cedar",
+			"kind": "lumber",
+			"name": "2×2 western red cedar",
+			"nominal": "2x2",
+			"notes": "Naturally decay-resistant heartwood above ground; light frames, door leaves and window boxes.",
+			"pricePerMeter": [
+				2,
+				3.3
+			],
+			"profile": "wood-2x2",
+			"species": "cedar",
+			"stockLengths": [
+				2.438
+			],
+			"treatment": "none",
+			"unit": "piece"
+		},
+		{
+			"actual": [
+				0.038,
+				0.038
+			],
+			"category": "lumber",
+			"groundContact": false,
+			"id": "lumber-2x2-pt",
+			"kind": "lumber",
+			"name": "2×2 pressure-treated pine (above ground)",
+			"nominal": "2x2",
+			"pricePerMeter": [
+				1.3,
+				2.2
+			],
+			"profile": "wood-2x2",
+			"species": "pine",
+			"stockLengths": [
+				2.438
+			],
+			"treatment": "above-ground",
+			"unit": "piece"
+		},
+		{
+			"actual": [
+				0.038,
+				0.064
+			],
+			"category": "lumber",
+			"groundContact": false,
+			"id": "lumber-2x3-pt",
+			"kind": "lumber",
+			"name": "2×3 pressure-treated pine (above ground)",
+			"nominal": "2x3",
+			"pricePerMeter": [
+				2,
+				3
+			],
+			"profile": "wood-2x3",
+			"species": "pine",
+			"stockLengths": [
+				2.438,
+				3.048
+			],
+			"treatment": "above-ground",
+			"unit": "piece"
+		},
+		{
+			"actual": [
+				0.038,
+				0.064
+			],
+			"category": "lumber",
+			"groundContact": false,
+			"id": "lumber-2x3-spf",
+			"kind": "lumber",
+			"name": "2×3 SPF stud (untreated)",
+			"nominal": "2x3",
+			"notes": "Seal or paint for outdoor use; keep off the ground.",
+			"pricePerMeter": [
+				1.6,
+				2.5
+			],
+			"profile": "wood-2x3",
+			"species": "spf",
+			"stockLengths": [
+				2.438,
+				3.048
+			],
+			"treatment": "none",
+			"unit": "piece"
+		},
+		{
+			"actual": [
+				0.038,
+				0.089
+			],
+			"category": "lumber",
+			"groundContact": false,
+			"id": "lumber-2x4-cedar",
+			"kind": "lumber",
+			"name": "2×4 western red cedar",
+			"nominal": "2x4",
+			"pricePerMeter": [
+				4.1,
+				6.6
+			],
+			"profile": "wood-2x4",
+			"species": "cedar",
+			"stockLengths": [
+				2.438,
+				3.048,
+				3.658
+			],
+			"treatment": "none",
+			"unit": "piece"
+		},
+		{
+			"actual": [
+				0.038,
+				0.089
+			],
+			"category": "lumber",
+			"groundContact": false,
+			"id": "lumber-2x4-pt",
+			"kind": "lumber",
+			"name": "2×4 pressure-treated pine (above ground)",
+			"nominal": "2x4",
+			"pricePerMeter": [
+				2.1,
+				3.3
+			],
+			"profile": "wood-2x4",
+			"species": "pine",
+			"stockLengths": [
+				2.438,
+				3.048,
+				3.658,
+				4.877
+			],
+			"treatment": "above-ground",
+			"unit": "piece"
+		},
+		{
+			"actual": [
+				0.038,
+				0.089
+			],
+			"category": "lumber",
+			"groundContact": true,
+			"id": "lumber-2x4-pt-gc",
+			"kind": "lumber",
+			"name": "2×4 pressure-treated pine (ground contact)",
+			"nominal": "2x4",
+			"notes": "Rated for ground contact (AWPA UC4A).",
+			"pricePerMeter": [
+				2.5,
+				3.7
+			],
+			"profile": "wood-2x4",
+			"species": "pine",
+			"stockLengths": [
+				2.438,
+				3.048,
+				3.658,
+				4.877
+			],
+			"treatment": "ground-contact",
+			"unit": "piece"
+		},
+		{
+			"actual": [
+				0.038,
+				0.089
+			],
+			"category": "lumber",
+			"groundContact": false,
+			"id": "lumber-2x4-spf",
+			"kind": "lumber",
+			"name": "2×4 SPF stud (untreated)",
+			"nominal": "2x4",
+			"notes": "Seal or paint for outdoor use; keep off the ground.",
+			"pricePerMeter": [
+				1.6,
+				2.9
+			],
+			"profile": "wood-2x4",
+			"species": "spf",
+			"stockLengths": [
+				2.438,
+				3.048,
+				3.658,
+				4.877
+			],
+			"treatment": "none",
+			"unit": "piece"
+		},
+		{
+			"actual": [
+				0.089,
+				0.089
+			],
+			"category": "lumber",
+			"groundContact": false,
+			"id": "lumber-4x4-cedar",
+			"kind": "lumber",
+			"name": "4×4 western red cedar post",
+			"nominal": "4x4",
+			"notes": "Untreated: a good core for sisal-wrapped scratching posts.",
+			"pricePerMeter": [
+				10,
+				16
+			],
+			"profile": "wood-4x4",
+			"species": "cedar",
+			"stockLengths": [
+				2.438,
+				3.048
+			],
+			"treatment": "none",
+			"unit": "piece"
+		},
+		{
+			"actual": [
+				0.089,
+				0.089
+			],
+			"category": "lumber",
+			"groundContact": true,
+			"id": "lumber-4x4-pt-gc",
+			"kind": "lumber",
+			"name": "4×4 pressure-treated post (ground contact)",
+			"nominal": "4x4",
+			"pricePerMeter": [
+				4.9,
+				7.4
+			],
+			"profile": "wood-4x4",
+			"species": "pine",
+			"stockLengths": [
+				2.438,
+				3.048,
+				3.658
+			],
+			"treatment": "ground-contact",
+			"unit": "piece"
+		},
+		{
+			"category": "mesh",
+			"coating": "galvanized-after-welding",
+			"gauge": 16,
+			"id": "mesh-1x1-16ga-gaw-36",
+			"kind": "mesh",
+			"name": "1″×1″ 16-gauge welded wire, galvanized after welding, 36″×50′",
+			"opening": [
+				0.0254,
+				0.0254
+			],
+			"price": [
+				70,
+				110
+			],
+			"rollLength": 15.24,
+			"rollWidth": 0.9144,
+			"unit": "roll"
+		},
+		{
+			"category": "mesh",
+			"coating": "galvanized-after-welding",
+			"gauge": 16,
+			"id": "mesh-1x1-16ga-gaw-48",
+			"kind": "mesh",
+			"name": "1″×1″ 16-gauge welded wire, galvanized after welding, 48″×50′",
+			"opening": [
+				0.0254,
+				0.0254
+			],
+			"price": [
+				90,
+				140
+			],
+			"rollLength": 15.24,
+			"rollWidth": 1.2192,
+			"unit": "roll"
+		},
+		{
+			"category": "mesh",
+			"coating": "galvanized-after-welding",
+			"gauge": 14,
+			"id": "mesh-1x2-14ga-gaw-48",
+			"kind": "mesh",
+			"name": "1″×2″ 14-gauge welded wire, galvanized after welding, 48″×50′",
+			"opening": [
+				0.0254,
+				0.0508
+			],
+			"price": [
+				80,
+				125
+			],
+			"rollLength": 15.24,
+			"rollWidth": 1.2192,
+			"unit": "roll"
+		},
+		{
+			"category": "mesh",
+			"coating": "galvanized-before-welding",
+			"gauge": 16,
+			"id": "mesh-1x2-16ga-gbw-48",
+			"kind": "mesh",
+			"name": "1″×2″ 16-gauge welded wire, galvanized before welding, 48″×50′",
+			"opening": [
+				0.0254,
+				0.0508
+			],
+			"price": [
+				50,
+				75
+			],
+			"rollLength": 15.24,
+			"rollWidth": 1.2192,
+			"unit": "roll"
+		},
+		{
+			"category": "mesh",
+			"coating": "galvanized-before-welding",
+			"gauge": 14,
+			"id": "mesh-2x4-14ga-fence-48",
+			"kind": "mesh",
+			"name": "2″×4″ 14-gauge welded wire fence, 48″×50′",
+			"notes": "Garden fencing. Openings are large enough for many cats to squeeze through.",
+			"opening": [
+				0.0508,
+				0.1016
+			],
+			"price": [
+				45,
+				70
+			],
+			"rollLength": 15.24,
+			"rollWidth": 1.2192,
+			"unit": "roll"
+		},
+		{
+			"category": "mesh",
+			"coating": "galvanized-after-welding",
+			"gauge": 16,
+			"id": "mesh-half-1-16ga-gaw-36",
+			"kind": "mesh",
+			"name": "½″×1″ 16-gauge welded wire, galvanized after welding, 36″×50′",
+			"opening": [
+				0.0127,
+				0.0254
+			],
+			"price": [
+				85,
+				130
+			],
+			"rollLength": 15.24,
+			"rollWidth": 0.9144,
+			"unit": "roll"
+		},
+		{
+			"category": "mesh",
+			"coating": "galvanized-after-welding",
+			"gauge": 19,
+			"id": "mesh-hwcloth-19ga-36",
+			"kind": "mesh",
+			"name": "½″ hardware cloth, 19-gauge, 36″×50′",
+			"opening": [
+				0.0127,
+				0.0127
+			],
+			"price": [
+				45,
+				70
+			],
+			"rollLength": 15.24,
+			"rollWidth": 0.9144,
+			"unit": "roll"
+		},
+		{
+			"category": "mesh",
+			"coating": "pvc-coated",
+			"gauge": 14,
+			"id": "mesh-pvc-1x1-14ga-48",
+			"kind": "mesh",
+			"name": "1″×1″ 14-gauge PVC-coated welded wire, 48″×50′",
+			"opening": [
+				0.0254,
+				0.0254
+			],
+			"price": [
+				110,
+				170
+			],
+			"rollLength": 15.24,
+			"rollWidth": 1.2192,
+			"unit": "roll"
+		},
+		{
+			"category": "base",
+			"id": "paver-16in",
+			"kind": "base",
+			"name": "16″ × 16″ concrete paver",
+			"price": [
+				3,
+				5
+			],
+			"size": 0.4064,
+			"unit": "each"
+		},
+		{
+			"category": "sheet",
+			"id": "plywood-ext-15mm",
+			"kind": "sheet",
+			"name": "Exterior plywood ⅝″, 4′×8′",
+			"price": [
+				45,
+				70
+			],
+			"sheetLength": 2.4384,
+			"sheetWidth": 1.2192,
+			"thickness": 0.015,
+			"unit": "sheet"
+		},
+		{
+			"category": "roof",
+			"coverWidth": 0.6096,
+			"id": "roof-polycarb-corrugated",
+			"kind": "roof-panel",
+			"name": "Clear corrugated polycarbonate panel, 26″×8′",
+			"price": [
+				25,
+				40
+			],
+			"sheetLength": 2.4384,
+			"sheetWidth": 0.6604,
+			"translucent": true,
+			"unit": "sheet"
+		},
+		{
+			"category": "roof",
+			"coverWidth": 0.6096,
+			"id": "roof-steel-corrugated",
+			"kind": "roof-panel",
+			"name": "Galvanized corrugated steel panel, 26″×8′",
+			"price": [
+				25,
+				38
+			],
+			"sheetLength": 2.4384,
+			"sheetWidth": 0.6604,
+			"translucent": false,
+			"unit": "sheet"
+		},
+		{
+			"category": "enrichment",
+			"id": "rope-sisal",
+			"kind": "rope",
+			"name": "⅜″ natural sisal rope, 50′",
+			"price": [
+				15,
+				25
+			],
+			"rollLength": 15.24,
+			"unit": "roll"
+		},
+		{
+			"category": "base",
+			"id": "sand-leveling",
+			"kind": "base",
+			"name": "Paver leveling sand, 0.5 ft³ bag",
+			"price": [
+				5,
+				7
+			],
+			"unit": "each"
+		},
+		{
+			"category": "fasteners",
+			"id": "screw-ext-1in-washer",
+			"kind": "fastener",
+			"name": "#8 × 1¼″ exterior pan-head screws (100)",
+			"perBox": 100,
+			"price": [
+				8,
+				12
+			],
+			"unit": "box"
+		},
+		{
+			"category": "fasteners",
+			"id": "screw-ext-3in",
+			"kind": "fastener",
+			"name": "#9 × 3″ exterior wood screws (100)",
+			"perBox": 100,
+			"price": [
+				11,
+				16
+			],
+			"unit": "box"
+		},
+		{
+			"category": "fasteners",
+			"id": "screw-masonry",
+			"kind": "fastener",
+			"name": "¼″ × 2¾″ masonry screws (25)",
+			"perBox": 25,
+			"price": [
+				14,
+				22
+			],
+			"unit": "box"
+		},
+		{
+			"category": "fasteners",
+			"id": "screw-roofing",
+			"kind": "fastener",
+			"name": "#10 × 1½″ roofing screws with EPDM washers (100)",
+			"perBox": 100,
+			"price": [
+				14,
+				22
+			],
+			"unit": "box"
+		},
+		{
+			"category": "fasteners",
+			"id": "screw-structural-5in",
+			"kind": "fastener",
+			"name": "5″ structural ledger screws (50)",
+			"perBox": 50,
+			"price": [
+				30,
+				45
+			],
+			"unit": "box"
+		},
+		{
+			"category": "fasteners",
+			"id": "staple-landscape",
+			"kind": "fastener",
+			"name": "6″ landscape staples (50)",
+			"perBox": 50,
+			"price": [
+				8,
+				14
+			],
+			"unit": "box"
+		},
+		{
+			"category": "fasteners",
+			"id": "washer-fender-1in",
+			"kind": "fastener",
+			"name": "1″ galvanized fender washers (100)",
+			"perBox": 100,
+			"price": [
+				8,
+				14
+			],
+			"unit": "box"
+		}
+	],
+	"pricesAsOf": "2026-10",
+	"updated": "2026-10-12"
+}

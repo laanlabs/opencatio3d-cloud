@@ -1,0 +1,4 @@
+{
+  "projects": { "default": "opencatio3d" },
+  "targets": { "opencatio3d": { "hosting": { "app": ["opencatio3d-cloud"] } } }
+}

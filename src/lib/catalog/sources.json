@@ -1,0 +1,152 @@
+{
+	"catalogVersion": "oc-catalog@0.1",
+	"sources": [
+		{
+			"id": "aafp-isfm-environment-2013",
+			"kind": "professional-guidance",
+			"license": "Cited by reference only.",
+			"notes": "Five pillars: a safe place; multiple, separated key resources (food, water, toileting, scratching, play, resting); play and predatory behaviour; positive, predictable human interaction; respect for the sense of smell.",
+			"publisher": "American Association of Feline Practitioners / International Society of Feline Medicine",
+			"retrievedAt": "2026-10-12",
+			"title": "AAFP and ISFM Feline Environmental Needs Guidelines (Ellis et al., J Feline Med Surg 2013;15:219–230)",
+			"url": "https://doi.org/10.1177/1098612X13477537"
+		},
+		{
+			"id": "aspca-apcc",
+			"kind": "professional-guidance",
+			"license": "Cited by link only.",
+			"notes": "Emergency contact for suspected ingestion; shown with every plant finding.",
+			"publisher": "ASPCA Animal Poison Control Center",
+			"retrievedAt": "2026-10-12",
+			"title": "ASPCA Animal Poison Control",
+			"url": "https://www.aspca.org/pet-care/aspca-poison-control"
+		},
+		{
+			"id": "aspca-disaster",
+			"kind": "professional-guidance",
+			"license": "Cited by link only.",
+			"notes": "Plan how pets are brought in quickly in storms, fire and other emergencies.",
+			"publisher": "ASPCA",
+			"retrievedAt": "2026-10-12",
+			"title": "Disaster Preparedness (pets)",
+			"url": "https://www.aspca.org/pet-care/general-pet-care/disaster-preparedness"
+		},
+		{
+			"id": "aspca-plants",
+			"kind": "professional-guidance",
+			"license": "Cited by link only; plant listings are not copied beyond name and toxicity status.",
+			"notes": "The ASPCA states its list is not exhaustive. A plant missing from the list is not evidence of safety.",
+			"publisher": "ASPCA Animal Poison Control Center",
+			"retrievedAt": "2026-10-12",
+			"title": "Toxic and Non-Toxic Plant List",
+			"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants"
+		},
+		{
+			"id": "awpa-standards",
+			"kind": "authoritative-requirement",
+			"license": "Cited by reference only.",
+			"publisher": "American Wood Protection Association",
+			"retrievedAt": "2026-10-12",
+			"title": "AWPA Standards — Use Category System (UC3B above ground, UC4A ground contact)",
+			"url": "https://awpa.com/standards"
+		},
+		{
+			"id": "catvets-environment",
+			"kind": "professional-guidance",
+			"license": "Cited by link only.",
+			"publisher": "American Association of Feline Practitioners (catvets.com)",
+			"retrievedAt": "2026-10-12",
+			"title": "Environmental Needs Guidelines",
+			"url": "https://catvets.com/guidelines/practice-guidelines/environmental-needs-guidelines"
+		},
+		{
+			"id": "epa-wood-preservatives",
+			"kind": "authoritative-requirement",
+			"license": "U.S. government work; cited by link.",
+			"publisher": "U.S. Environmental Protection Agency",
+			"retrievedAt": "2026-10-12",
+			"title": "Overview of Wood Preservative Chemicals",
+			"url": "https://www.epa.gov/ingredients-used-pesticide-products/overview-wood-preservative-chemicals"
+		},
+		{
+			"id": "fda-lilies",
+			"kind": "authoritative-requirement",
+			"license": "U.S. government work; cited by link.",
+			"notes": "True lilies (Lilium) and daylilies (Hemerocallis) can cause kidney failure in cats; all parts including pollen and vase water.",
+			"publisher": "U.S. Food and Drug Administration, Center for Veterinary Medicine",
+			"retrievedAt": "2026-10-12",
+			"title": "Lovely Lilies and Curious Cats: A Dangerous Combination",
+			"url": "https://www.fda.gov/animal-veterinary/animal-health-literacy/lovely-lilies-and-curious-cats-dangerous-combination"
+		},
+		{
+			"id": "fpl-wood-handbook",
+			"kind": "professional-guidance",
+			"license": "U.S. government work; cited by link.",
+			"notes": "Decay resistance of untreated heartwood, moisture and ground contact.",
+			"publisher": "USDA Forest Service, Forest Products Laboratory",
+			"retrievedAt": "2026-10-12",
+			"title": "Wood Handbook: Wood as an Engineering Material (FPL-GTR-190)",
+			"url": "https://www.fpl.fs.usda.gov/documnts/fplgtr/fpl_gtr190.pdf"
+		},
+		{
+			"id": "icc-irc-2021",
+			"kind": "authoritative-requirement",
+			"license": "Cited by reference only.",
+			"notes": "Model code; the adopted edition and local amendments vary by jurisdiction. Check with your building department.",
+			"publisher": "International Code Council",
+			"retrievedAt": "2026-10-12",
+			"title": "2021 International Residential Code — R310 Emergency escape and rescue openings",
+			"url": "https://codes.iccsafe.org/content/IRC2021P2"
+		},
+		{
+			"id": "nws-heat",
+			"kind": "professional-guidance",
+			"license": "U.S. government work; cited by link.",
+			"notes": "Includes guidance on pets in heat: shade and water.",
+			"publisher": "National Weather Service",
+			"retrievedAt": "2026-10-12",
+			"title": "Heat Safety",
+			"url": "https://www.weather.gov/safety/heat"
+		},
+		{
+			"id": "nws-wind",
+			"kind": "professional-guidance",
+			"license": "U.S. government work; cited by link.",
+			"publisher": "National Weather Service",
+			"retrievedAt": "2026-10-12",
+			"title": "Wind Safety",
+			"url": "https://www.weather.gov/safety/wind"
+		},
+		{
+			"id": "opencatio3d-practice",
+			"kind": "product-best-practice",
+			"license": "MIT",
+			"notes": "Common catio-builder practice adopted as a product default. Not an authority; shown so you can weigh it.",
+			"publisher": "OpenCatio3D",
+			"retrievedAt": "2026-10-12",
+			"title": "OpenCatio3D design practice (product best practice)",
+			"url": "https://opencatio3d.com/docs/methodology"
+		},
+		{
+			"id": "osu-indoor-pet",
+			"kind": "professional-guidance",
+			"license": "Cited by link only.",
+			"notes": "Vertical space, hiding places, scratching, resource placement and multi-cat considerations.",
+			"publisher": "The Ohio State University College of Veterinary Medicine, Indoor Pet Initiative",
+			"retrievedAt": "2026-10-12",
+			"title": "Basic Indoor Cat Needs",
+			"url": "https://indoorpet.osu.edu/cats/basicneeds"
+		},
+		{
+			"id": "usfa-home-fires",
+			"kind": "authoritative-requirement",
+			"license": "U.S. government work; cited by link.",
+			"notes": "Clothes dryer exhaust must vent freely outdoors; lint build-up is a leading cause of dryer fires.",
+			"publisher": "U.S. Fire Administration (FEMA)",
+			"retrievedAt": "2026-10-12",
+			"title": "Prevent home fires",
+			"url": "https://www.usfa.fema.gov/prevention/home-fires/prevent-fires/"
+		}
+	],
+	"updated": "2026-10-12"
+}

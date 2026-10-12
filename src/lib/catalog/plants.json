@@ -1,0 +1,3395 @@
+{
+	"catalogVersion": "oc-catalog@0.1",
+	"plants": [
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"African violet"
+			],
+			"containerMinL": 1,
+			"habit": "perennial",
+			"id": "african-violet",
+			"name": "African violet",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Streptocarpus sect. Saintpaulia",
+			"sources": [
+				{
+					"listedAs": "Saintpaulia spp.",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/african-violet"
+				}
+			],
+			"sun": [
+				"part"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"affectedParts": [
+				"leaf latex"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Aloe vera"
+			],
+			"containerMinL": 4,
+			"habit": "succulent",
+			"hazardLevel": "moderate",
+			"id": "aloe",
+			"name": "Aloe vera",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Aloe vera",
+			"sources": [
+				{
+					"listedAs": "Aloe vera",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/aloe"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "low",
+			"zones": [
+				9,
+				11
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Sweet alyssum"
+			],
+			"containerMinL": 2,
+			"habit": "annual",
+			"id": "alyssum",
+			"name": "Sweet alyssum",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Lobularia maritima",
+			"sources": [
+				{
+					"listedAs": "Alyssum spp.",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/alyssum"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"affectedParts": [
+				"bulb",
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Amaryllis"
+			],
+			"containerMinL": 4,
+			"habit": "bulb",
+			"hazardLevel": "moderate",
+			"id": "amaryllis",
+			"name": "Amaryllis",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Amaryllis spp.",
+			"sources": [
+				{
+					"listedAs": "Amaryllis spp.",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/amaryllis"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				8,
+				11
+			]
+		},
+		{
+			"affectedParts": [
+				"berries",
+				"leaves"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"American holly"
+			],
+			"containerMinL": 30,
+			"habit": "shrub",
+			"hazardLevel": "mild",
+			"id": "american-holly",
+			"name": "American holly",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Ilex opaca",
+			"sources": [
+				{
+					"listedAs": "Ilex opaca",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/american-holly"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				5,
+				9
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Areca palm",
+				"Butterfly palm"
+			],
+			"containerMinL": 20,
+			"habit": "palm",
+			"id": "areca-palm",
+			"name": "Areca palm",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Dypsis lutescens",
+			"sources": [
+				{
+					"listedAs": "Dypsis lutescens",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/areca-palm"
+				}
+			],
+			"sun": [
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				10,
+				11
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts",
+				"bulb"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Autumn crocus",
+				"Meadow saffron"
+			],
+			"containerMinL": 4,
+			"habit": "bulb",
+			"hazardLevel": "severe",
+			"id": "autumn-crocus",
+			"name": "Autumn crocus",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Colchicum autumnale",
+			"sources": [
+				{
+					"listedAs": "Colchicum autumnale",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/autumn-crocus"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				4,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Azalea",
+				"Rhododendron"
+			],
+			"containerMinL": 20,
+			"habit": "shrub",
+			"hazardLevel": "severe",
+			"id": "azalea",
+			"name": "Azalea",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Rhododendron spp.",
+			"sources": [
+				{
+					"listedAs": "Rhododendron spp",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/azalea"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "medium",
+			"zones": [
+				4,
+				9
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Basil"
+			],
+			"containerMinL": 3,
+			"habit": "annual",
+			"id": "basil",
+			"name": "Basil",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Ocimum basilicum",
+			"sources": [
+				{
+					"listedAs": "Ocimum basilicum",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/basil"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"affectedParts": [
+				"tubers",
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Begonia"
+			],
+			"containerMinL": 3,
+			"habit": "annual",
+			"hazardLevel": "mild",
+			"id": "begonia",
+			"name": "Begonia",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Begonia spp.",
+			"sources": [
+				{
+					"listedAs": "Begonia spp.",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/begonia"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Blue echeveria"
+			],
+			"containerMinL": 1,
+			"habit": "succulent",
+			"id": "blue-echeveria",
+			"name": "Blue echeveria",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Echeveria glauca",
+			"sources": [
+				{
+					"listedAs": "Echeveria glauca",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/blue-echeveria"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "low",
+			"zones": [
+				9,
+				11
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Boston fern"
+			],
+			"containerMinL": 5,
+			"habit": "fern",
+			"id": "boston-fern",
+			"name": "Boston fern",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Nephrolepis exaltata",
+			"sources": [
+				{
+					"listedAs": "Nephrolepis exalta bostoniensis",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/boston-fern"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "high",
+			"zones": [
+				9,
+				11
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Bottlebrush"
+			],
+			"containerMinL": 20,
+			"habit": "shrub",
+			"id": "bottlebrush",
+			"name": "Bottlebrush",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Callistemon spp.",
+			"sources": [
+				{
+					"listedAs": "Callistemon species",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/bottlebrush"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "low",
+			"zones": [
+				8,
+				11
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Boxwood"
+			],
+			"containerMinL": 20,
+			"habit": "shrub",
+			"hazardLevel": "moderate",
+			"id": "boxwood",
+			"name": "Boxwood",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Buxus spp.",
+			"sources": [
+				{
+					"listedAs": "Buxus spp.",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/boxwood"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				5,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Caladium",
+				"Elephant’s ear"
+			],
+			"containerMinL": 5,
+			"habit": "bulb",
+			"hazardLevel": "moderate",
+			"id": "caladium",
+			"name": "Caladium",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Caladium × hortulanum",
+			"sources": [
+				{
+					"listedAs": "Caladium hortulanum",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/caladium"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "medium",
+			"zones": [
+				9,
+				11
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Calathea"
+			],
+			"containerMinL": 5,
+			"habit": "perennial",
+			"id": "calathea",
+			"name": "Calathea",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Goeppertia spp.",
+			"sources": [
+				{
+					"listedAs": "Calathea spp.",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/calathea"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "high",
+			"zones": null
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Calla lily"
+			],
+			"containerMinL": 8,
+			"habit": "perennial",
+			"hazardLevel": "moderate",
+			"id": "calla-lily",
+			"name": "Calla lily",
+			"notes": "Not a true lily: oral irritation rather than kidney injury.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Zantedeschia aethiopica",
+			"sources": [
+				{
+					"listedAs": "Zantedeschia aethiopica",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/calla-lily"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "high",
+			"zones": [
+				8,
+				10
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Camellia"
+			],
+			"containerMinL": 25,
+			"habit": "shrub",
+			"id": "camellia",
+			"name": "Camellia",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Camellia japonica",
+			"sources": [
+				{
+					"listedAs": "Camellia japonica",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/camellia"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "medium",
+			"zones": [
+				7,
+				9
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Canna"
+			],
+			"containerMinL": 15,
+			"habit": "perennial",
+			"id": "canna-lily",
+			"name": "Canna",
+			"notes": "Not a true lily despite the name.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Canna × generalis",
+			"sources": [
+				{
+					"listedAs": "Canna generalis",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/canna-lily"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "high",
+			"zones": [
+				8,
+				11
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Cast iron plant"
+			],
+			"containerMinL": 8,
+			"habit": "perennial",
+			"id": "cast-iron-plant",
+			"name": "Cast iron plant",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Aspidistra elatior",
+			"sources": [
+				{
+					"listedAs": "Aspidistra elatior",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/cast-iron-plant"
+				}
+			],
+			"sun": [
+				"shade",
+				"part"
+			],
+			"water": "low",
+			"zones": [
+				7,
+				11
+			]
+		},
+		{
+			"catAttractant": true,
+			"catSafety": "insufficient-data",
+			"commonNames": [
+				"Cat grass",
+				"Oat grass"
+			],
+			"containerMinL": 2,
+			"habit": "grass",
+			"id": "cat-grass-oat",
+			"name": "Cat grass",
+			"notes": "Sold specifically for cats, but not found in the reviewed toxicity source. Keep it to its own pot and ask your veterinarian.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Avena sativa",
+			"sources": [
+				{
+					"listing": "Not listed",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"catAttractant": true,
+			"catSafety": "insufficient-data",
+			"commonNames": [
+				"Cat thyme"
+			],
+			"containerMinL": 5,
+			"habit": "shrub",
+			"id": "cat-thyme",
+			"name": "Cat thyme",
+			"notes": "Not found in the reviewed toxicity source.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Teucrium marum",
+			"sources": [
+				{
+					"listing": "Not listed",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "low",
+			"zones": [
+				7,
+				10
+			]
+		},
+		{
+			"affectedParts": [
+				"large amounts"
+			],
+			"catAttractant": true,
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Catnip"
+			],
+			"containerMinL": 5,
+			"habit": "perennial",
+			"hazardLevel": "mild",
+			"id": "catnip",
+			"name": "Catnip",
+			"notes": "ASPCA lists catnip as toxic to cats (vomiting and diarrhoea in large amounts). Many owners offer small amounts; ask your veterinarian.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Nepeta cataria",
+			"sources": [
+				{
+					"listedAs": "Nepeta cataria",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/catnip"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				3,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Roman chamomile"
+			],
+			"containerMinL": 3,
+			"habit": "perennial",
+			"hazardLevel": "mild",
+			"id": "chamomile",
+			"name": "Roman chamomile",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Chamaemelum nobile",
+			"sources": [
+				{
+					"listedAs": "Anthemis nobilis",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/chamomile"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				4,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Chinese evergreen"
+			],
+			"containerMinL": 5,
+			"habit": "perennial",
+			"hazardLevel": "moderate",
+			"id": "chinese-evergreen",
+			"name": "Chinese evergreen",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Aglaonema modestum",
+			"sources": [
+				{
+					"listedAs": "Aglaonema modestum",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/chinese-evergreen"
+				}
+			],
+			"sun": [
+				"shade",
+				"part"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Chives"
+			],
+			"containerMinL": 3,
+			"habit": "perennial",
+			"hazardLevel": "moderate",
+			"id": "chives",
+			"name": "Chives",
+			"notes": "Allium: red blood cell damage with larger or repeated exposure.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Allium schoenoprasum",
+			"sources": [
+				{
+					"listedAs": "Allium schoenoprasum",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/chives"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				3,
+				9
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Christmas cactus"
+			],
+			"containerMinL": 2,
+			"habit": "succulent",
+			"id": "christmas-cactus",
+			"name": "Christmas cactus",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Schlumbergera bridgesii",
+			"sources": [
+				{
+					"listedAs": "Schlumbergera bridgesii",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/christmas-cactus"
+				}
+			],
+			"sun": [
+				"part"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Chrysanthemum",
+				"Mum"
+			],
+			"containerMinL": 5,
+			"habit": "perennial",
+			"hazardLevel": "moderate",
+			"id": "chrysanthemum",
+			"name": "Chrysanthemum",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Chrysanthemum spp.",
+			"sources": [
+				{
+					"listedAs": "Chrysanthemum spp.",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/chrysanthemum"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "medium",
+			"zones": [
+				5,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Clematis"
+			],
+			"containerMinL": 20,
+			"habit": "vine",
+			"hazardLevel": "moderate",
+			"id": "clematis",
+			"name": "Clematis",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Clematis spp.",
+			"sources": [
+				{
+					"listedAs": "Clematis spp.",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/clematis"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				4,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Coleus"
+			],
+			"containerMinL": 4,
+			"habit": "annual",
+			"hazardLevel": "mild",
+			"id": "coleus",
+			"name": "Coleus",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Coleus scutellarioides",
+			"sources": [
+				{
+					"listedAs": "Coleus ampoinicus",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/coleus"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Coral bells",
+				"Heuchera"
+			],
+			"containerMinL": 5,
+			"habit": "perennial",
+			"id": "coral-bells",
+			"name": "Coral bells",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Heuchera sanguinea",
+			"sources": [
+				{
+					"listedAs": "Heuchera sanguinea",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/coral-bells"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "medium",
+			"zones": [
+				4,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"tubers",
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Cyclamen"
+			],
+			"containerMinL": 2,
+			"habit": "perennial",
+			"hazardLevel": "moderate",
+			"id": "cyclamen",
+			"name": "Cyclamen",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Cyclamen spp.",
+			"sources": [
+				{
+					"listedAs": "Cyclamen spp",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/cyclamen"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "medium",
+			"zones": [
+				5,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"bulb",
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Daffodil",
+				"Narcissus"
+			],
+			"containerMinL": 4,
+			"habit": "bulb",
+			"hazardLevel": "moderate",
+			"id": "daffodil",
+			"name": "Daffodil",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Narcissus spp.",
+			"sources": [
+				{
+					"listedAs": "Narcissus spp",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/daffodil"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				3,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Dieffenbachia",
+				"Dumb cane"
+			],
+			"containerMinL": 8,
+			"habit": "perennial",
+			"hazardLevel": "moderate",
+			"id": "dieffenbachia",
+			"name": "Dieffenbachia",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Dieffenbachia spp.",
+			"sources": [
+				{
+					"listedAs": "Dieffenbachia",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/dieffenbachia"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Dill"
+			],
+			"containerMinL": 5,
+			"habit": "annual",
+			"id": "dill",
+			"name": "Dill",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Anethum graveolens",
+			"sources": [
+				{
+					"listedAs": "Anethum graveolena",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/dill"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Dracaena",
+				"Corn plant"
+			],
+			"containerMinL": 10,
+			"habit": "shrub",
+			"hazardLevel": "moderate",
+			"id": "dracaena",
+			"name": "Dracaena",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Dracaena spp.",
+			"sources": [
+				{
+					"listedAs": "Dracaena spp.",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/dracaena"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"affectedParts": [
+				"all parts",
+				"pollen"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Easter lily"
+			],
+			"containerMinL": 8,
+			"habit": "bulb",
+			"hazardLevel": "severe",
+			"id": "easter-lily",
+			"name": "Easter lily",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Lilium longiflorum",
+			"sources": [
+				{
+					"listedAs": "Lilium longiflorum",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/easter-lily"
+				},
+				{
+					"retrievedAt": "2026-10-12",
+					"sourceId": "fda-lilies",
+					"url": "https://www.fda.gov/animal-veterinary/animal-health-literacy/lovely-lilies-and-curious-cats-dangerous-combination"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				7,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"foliage"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"English ivy"
+			],
+			"containerMinL": 5,
+			"habit": "vine",
+			"hazardLevel": "moderate",
+			"id": "english-ivy",
+			"name": "English ivy",
+			"notes": "Also invasive in many US regions.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Hedera helix",
+			"sources": [
+				{
+					"listedAs": "Hedera helix",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/english-ivy"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "medium",
+			"zones": [
+				4,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"leaves",
+				"oil"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Eucalyptus"
+			],
+			"containerMinL": 30,
+			"habit": "tree",
+			"hazardLevel": "moderate",
+			"id": "eucalyptus",
+			"name": "Eucalyptus",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Eucalyptus spp.",
+			"sources": [
+				{
+					"listedAs": "Eucalyptus species",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/eucalyptus"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "medium",
+			"zones": [
+				8,
+				11
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Foxglove"
+			],
+			"containerMinL": 10,
+			"habit": "perennial",
+			"hazardLevel": "severe",
+			"id": "foxglove",
+			"name": "Foxglove",
+			"notes": "Cardiac glycosides.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Digitalis purpurea",
+			"sources": [
+				{
+					"listedAs": "Digitalis purpurea",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/foxglove"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "medium",
+			"zones": [
+				4,
+				9
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Friendship plant"
+			],
+			"containerMinL": 1,
+			"habit": "perennial",
+			"id": "friendship-plant",
+			"name": "Friendship plant",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Pilea involucrata",
+			"sources": [
+				{
+					"listedAs": "Pilea involucrata",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/friendship-plant"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Snapdragon"
+			],
+			"containerMinL": 3,
+			"habit": "annual",
+			"id": "garden-snapdragon",
+			"name": "Snapdragon",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Antirrhinum majus",
+			"sources": [
+				{
+					"listedAs": "Antirrhinum majus",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/garden-snapdragon"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Gardenia"
+			],
+			"containerMinL": 15,
+			"habit": "shrub",
+			"hazardLevel": "mild",
+			"id": "gardenia",
+			"name": "Gardenia",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Gardenia jasminoides",
+			"sources": [
+				{
+					"listedAs": "Gardenia jasminoides",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/gardenia"
+				}
+			],
+			"sun": [
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				8,
+				11
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Geranium (Pelargonium)"
+			],
+			"containerMinL": 4,
+			"habit": "annual",
+			"hazardLevel": "mild",
+			"id": "geranium",
+			"name": "Geranium (Pelargonium)",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Pelargonium spp.",
+			"sources": [
+				{
+					"listedAs": "Pelargonium species",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/geranium"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Gloxinia"
+			],
+			"containerMinL": 2,
+			"habit": "perennial",
+			"id": "gloxinia",
+			"name": "Gloxinia",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Sinningia speciosa",
+			"sources": [
+				{
+					"listedAs": "Sinningia speciosa",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/gloxinia"
+				}
+			],
+			"sun": [
+				"part"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Golden pothos",
+				"Devil’s ivy"
+			],
+			"containerMinL": 3,
+			"habit": "vine",
+			"hazardLevel": "moderate",
+			"id": "golden-pothos",
+			"name": "Golden pothos",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Epipremnum aureum",
+			"sources": [
+				{
+					"listedAs": "Epipremnum aureum",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/golden-pothos"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Hens and chicks (Echeveria)"
+			],
+			"containerMinL": 1,
+			"habit": "succulent",
+			"id": "hens-and-chickens",
+			"name": "Hens and chicks (Echeveria)",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Echeveria elegans",
+			"sources": [
+				{
+					"listedAs": "Echeveria elegans",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/hens-and-chickens"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "low",
+			"zones": [
+				9,
+				11
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Rose of Sharon"
+			],
+			"containerMinL": 25,
+			"habit": "shrub",
+			"id": "hibiscus",
+			"name": "Rose of Sharon",
+			"notes": "ASPCA’s listing covers Hibiscus syriacus; other hibiscus species were not reviewed.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Hibiscus syriacus",
+			"sources": [
+				{
+					"listedAs": "Hibiscus syriacus",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/hibiscus"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				5,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Hosta",
+				"Plantain lily"
+			],
+			"containerMinL": 8,
+			"habit": "perennial",
+			"hazardLevel": "moderate",
+			"id": "hosta",
+			"name": "Hosta",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Hosta spp.",
+			"sources": [
+				{
+					"listedAs": "Hosta plataginea",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/hosta"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "medium",
+			"zones": [
+				3,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"bulb",
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Hyacinth"
+			],
+			"containerMinL": 3,
+			"habit": "bulb",
+			"hazardLevel": "moderate",
+			"id": "hyacinth",
+			"name": "Hyacinth",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Hyacinthus orientalis",
+			"sources": [
+				{
+					"listedAs": "Hyacinthus orientalis",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/hyacinth"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				4,
+				8
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Hydrangea"
+			],
+			"containerMinL": 20,
+			"habit": "shrub",
+			"hazardLevel": "moderate",
+			"id": "hydrangea",
+			"name": "Hydrangea",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Hydrangea spp.",
+			"sources": [
+				{
+					"listedAs": "Hydrangea arborescens",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/hydrangea"
+				}
+			],
+			"sun": [
+				"part"
+			],
+			"water": "high",
+			"zones": [
+				3,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"sap",
+				"foliage"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Inch plant",
+				"Wandering dude"
+			],
+			"containerMinL": 3,
+			"habit": "perennial",
+			"hazardLevel": "mild",
+			"id": "inch-plant",
+			"name": "Inch plant",
+			"notes": "Mainly a skin irritant.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Tradescantia spp.",
+			"sources": [
+				{
+					"listedAs": "Tradescantia flumeninsis",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/inch-plant"
+				}
+			],
+			"sun": [
+				"part"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"affectedParts": [
+				"rhizome",
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Iris"
+			],
+			"containerMinL": 8,
+			"habit": "perennial",
+			"hazardLevel": "moderate",
+			"id": "iris",
+			"name": "Iris",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Iris spp.",
+			"sources": [
+				{
+					"listedAs": "Iris species",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/iris"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				3,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Jade plant"
+			],
+			"containerMinL": 4,
+			"habit": "succulent",
+			"hazardLevel": "moderate",
+			"id": "jade-plant",
+			"name": "Jade plant",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Crassula ovata",
+			"sources": [
+				{
+					"listedAs": "Crassula argentea",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/jade-plant"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "low",
+			"zones": null
+		},
+		{
+			"affectedParts": [
+				"all parts",
+				"pollen"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Japanese show lily"
+			],
+			"containerMinL": 10,
+			"habit": "bulb",
+			"hazardLevel": "severe",
+			"id": "japanese-show-lily",
+			"name": "Japanese show lily",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Lilium speciosum",
+			"sources": [
+				{
+					"listedAs": "Lilium speciosum",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/japanese-show-lily"
+				},
+				{
+					"retrievedAt": "2026-10-12",
+					"sourceId": "fda-lilies",
+					"url": "https://www.fda.gov/animal-veterinary/animal-health-literacy/lovely-lilies-and-curious-cats-dangerous-combination"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				5,
+				8
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Jasmine"
+			],
+			"containerMinL": 15,
+			"habit": "vine",
+			"id": "jasmine",
+			"name": "Jasmine",
+			"notes": "True jasmine (Jasminum) only. Carolina jessamine (Gelsemium) is a different, toxic plant.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Jasminum spp.",
+			"sources": [
+				{
+					"listedAs": "Jasminum species",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/jasmine"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				7,
+				10
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Kalanchoe",
+				"Mother-in-law plant"
+			],
+			"containerMinL": 2,
+			"habit": "succulent",
+			"hazardLevel": "severe",
+			"id": "kalanchoe",
+			"name": "Kalanchoe",
+			"notes": "Cardiac glycosides (bufadienolides).",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Kalanchoe spp.",
+			"sources": [
+				{
+					"listedAs": "Kalanchoe spp",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/kalanchoe"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "low",
+			"zones": null
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Kentia palm"
+			],
+			"containerMinL": 20,
+			"habit": "palm",
+			"id": "kentia-palm",
+			"name": "Kentia palm",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Howea forsteriana",
+			"sources": [
+				{
+					"listedAs": "Howea forsteriana",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/kentia-palm"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "medium",
+			"zones": [
+				9,
+				11
+			]
+		},
+		{
+			"affectedParts": [
+				"berries",
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Lantana"
+			],
+			"containerMinL": 10,
+			"habit": "shrub",
+			"hazardLevel": "moderate",
+			"id": "lantana",
+			"name": "Lantana",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Lantana camara",
+			"sources": [
+				{
+					"listedAs": "Lantana camara",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/lantana"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "low",
+			"zones": [
+				9,
+				11
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts",
+				"oil"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"English lavender"
+			],
+			"containerMinL": 8,
+			"habit": "shrub",
+			"hazardLevel": "mild",
+			"id": "lavender",
+			"name": "English lavender",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Lavandula angustifolia",
+			"sources": [
+				{
+					"listedAs": "Lavendula angustifolia",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/lavender"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "low",
+			"zones": [
+				5,
+				9
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Lemon balm"
+			],
+			"containerMinL": 5,
+			"habit": "perennial",
+			"id": "lemon-balm",
+			"name": "Lemon balm",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Melissa officinalis",
+			"sources": [
+				{
+					"listedAs": "Melissa officinalis",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/lemon-balm"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				4,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts",
+				"oil"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Lemongrass"
+			],
+			"containerMinL": 10,
+			"habit": "grass",
+			"hazardLevel": "mild",
+			"id": "lemon-grass",
+			"name": "Lemongrass",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Cymbopogon citratus",
+			"sources": [
+				{
+					"listedAs": "Cymbopogon citratus",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/lemon-grass"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "medium",
+			"zones": [
+				9,
+				11
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts",
+				"oil"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Lemon verbena"
+			],
+			"containerMinL": 10,
+			"habit": "shrub",
+			"hazardLevel": "mild",
+			"id": "lemon-verbena",
+			"name": "Lemon verbena",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Aloysia citrodora",
+			"sources": [
+				{
+					"listedAs": "Aloysia triphylla",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/lemon-verbena"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "medium",
+			"zones": [
+				8,
+				11
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts",
+				"pollen",
+				"vase water"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"True lilies"
+			],
+			"containerMinL": 10,
+			"habit": "bulb",
+			"hazardLevel": "severe",
+			"id": "lily",
+			"name": "True lilies",
+			"notes": "Even pollen groomed off fur can cause kidney failure. Keep every true lily away from cats, indoors and out.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Lilium spp.",
+			"sources": [
+				{
+					"listedAs": "Lilium species",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/lily"
+				},
+				{
+					"retrievedAt": "2026-10-12",
+					"sourceId": "fda-lilies",
+					"url": "https://www.fda.gov/animal-veterinary/animal-health-literacy/lovely-lilies-and-curious-cats-dangerous-combination"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				4,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Lily of the valley"
+			],
+			"containerMinL": 5,
+			"habit": "perennial",
+			"hazardLevel": "severe",
+			"id": "lily-valley",
+			"name": "Lily of the valley",
+			"notes": "Cardiac glycosides.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Convallaria majalis",
+			"sources": [
+				{
+					"listedAs": "Convallaria majalis",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/lily-valley"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "medium",
+			"zones": [
+				3,
+				8
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Cardinal flower",
+				"Lobelia"
+			],
+			"containerMinL": 5,
+			"habit": "perennial",
+			"hazardLevel": "moderate",
+			"id": "lobelia",
+			"name": "Cardinal flower",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Lobelia cardinalis",
+			"sources": [
+				{
+					"listedAs": "Lobelia cardinalis",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/lobelia"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "high",
+			"zones": [
+				3,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts",
+				"oil"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Mint",
+				"Spearmint",
+				"Peppermint"
+			],
+			"containerMinL": 5,
+			"habit": "perennial",
+			"hazardLevel": "mild",
+			"id": "mint",
+			"name": "Mint",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Mentha spp.",
+			"sources": [
+				{
+					"listedAs": "Mentha sp.",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/mint"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "high",
+			"zones": [
+				4,
+				9
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Money tree"
+			],
+			"containerMinL": 15,
+			"habit": "tree",
+			"id": "money-tree",
+			"name": "Money tree",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Pachira aquatica",
+			"sources": [
+				{
+					"listedAs": "Pachira aquatica",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/money-tree"
+				}
+			],
+			"sun": [
+				"part"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"affectedParts": [
+				"seeds",
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Morning glory"
+			],
+			"containerMinL": 8,
+			"habit": "vine",
+			"hazardLevel": "moderate",
+			"id": "morning-glory",
+			"name": "Morning glory",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Ipomoea spp.",
+			"sources": [
+				{
+					"listedAs": "Ipomoea spp",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/morning-glory"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"affectedParts": [
+				"berries",
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Heavenly bamboo",
+				"Nandina"
+			],
+			"containerMinL": 20,
+			"habit": "shrub",
+			"hazardLevel": "moderate",
+			"id": "nandina",
+			"name": "Heavenly bamboo",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Nandina domestica",
+			"sources": [
+				{
+					"listedAs": "Nandina domestica",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/nandina"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				6,
+				9
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Nasturtium"
+			],
+			"containerMinL": 4,
+			"habit": "annual",
+			"id": "nasturtium",
+			"name": "Nasturtium",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Tropaeolum majus",
+			"sources": [
+				{
+					"listedAs": "Tropaeolum majus",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/nasturtium"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Oleander"
+			],
+			"containerMinL": 30,
+			"habit": "shrub",
+			"hazardLevel": "severe",
+			"id": "oleander",
+			"name": "Oleander",
+			"notes": "Cardiac glycosides.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Nerium oleander",
+			"sources": [
+				{
+					"listedAs": "Nerium oleander",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/oleander"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "low",
+			"zones": [
+				8,
+				11
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts",
+				"oil"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Oregano"
+			],
+			"containerMinL": 4,
+			"habit": "perennial",
+			"hazardLevel": "mild",
+			"id": "oregano",
+			"name": "Oregano",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Origanum vulgare",
+			"sources": [
+				{
+					"listedAs": "Origanum vulgare hirtum",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/oregano"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "low",
+			"zones": [
+				5,
+				10
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Parlor palm"
+			],
+			"containerMinL": 8,
+			"habit": "palm",
+			"id": "parlor-palm",
+			"name": "Parlor palm",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Chamaedorea elegans",
+			"sources": [
+				{
+					"listedAs": "Chamaedorea elegans",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/parlor-palm"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "medium",
+			"zones": [
+				10,
+				11
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Parsley"
+			],
+			"containerMinL": 3,
+			"habit": "annual",
+			"hazardLevel": "mild",
+			"id": "parsley",
+			"name": "Parsley",
+			"notes": "Photosensitisation reported.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Petroselinum crispum",
+			"sources": [
+				{
+					"listedAs": "Petroselinum crispum",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/parsley"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Peace lily"
+			],
+			"containerMinL": 5,
+			"habit": "perennial",
+			"hazardLevel": "moderate",
+			"id": "peace-lily",
+			"name": "Peace lily",
+			"notes": "Not a true lily: oral irritation rather than kidney injury.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Spathiphyllum spp.",
+			"sources": [
+				{
+					"listedAs": "Spathiphyllum",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/peace-lily"
+				}
+			],
+			"sun": [
+				"shade",
+				"part"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Peruvian lily",
+				"Alstroemeria"
+			],
+			"containerMinL": 8,
+			"habit": "perennial",
+			"id": "peruvian-lily",
+			"name": "Peruvian lily",
+			"notes": "Not a true lily despite the name.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Alstroemeria spp.",
+			"sources": [
+				{
+					"listedAs": "Alstroemeria",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/peruvian-lily"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				7,
+				10
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Petunia"
+			],
+			"containerMinL": 3,
+			"habit": "annual",
+			"id": "petunia",
+			"name": "Petunia",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Petunia spp.",
+			"sources": [
+				{
+					"listedAs": "Petunia species",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/petunia"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Polka dot plant"
+			],
+			"containerMinL": 2,
+			"habit": "annual",
+			"id": "polka-dot-plant",
+			"name": "Polka dot plant",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Hypoestes phyllostachya",
+			"sources": [
+				{
+					"listedAs": "Hypoestes phyllostachya",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/polka-dot-plant"
+				}
+			],
+			"sun": [
+				"part"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Pot marigold",
+				"Calendula"
+			],
+			"containerMinL": 3,
+			"habit": "annual",
+			"id": "pot-marigold",
+			"name": "Pot marigold",
+			"notes": "Calendula only. French and African marigolds (Tagetes) are different plants.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Calendula officinalis",
+			"sources": [
+				{
+					"listedAs": "Calendula officinalis",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/pot-marigold"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Rattlesnake plant",
+				"Prayer plant"
+			],
+			"containerMinL": 4,
+			"habit": "perennial",
+			"id": "prayer-plant",
+			"name": "Rattlesnake plant",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Goeppertia insignis",
+			"sources": [
+				{
+					"listedAs": "Calathea insignis",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/prayer-plant"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "high",
+			"zones": null
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Rose"
+			],
+			"containerMinL": 20,
+			"habit": "shrub",
+			"id": "rose",
+			"name": "Rose",
+			"notes": "Thorns can injure eyes and paws in a small enclosure; choose thornless varieties.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Rosa spp.",
+			"sources": [
+				{
+					"listedAs": "Rosa Species",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/rose"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "medium",
+			"zones": [
+				4,
+				9
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Rosemary"
+			],
+			"containerMinL": 10,
+			"habit": "shrub",
+			"id": "rosemary",
+			"name": "Rosemary",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Salvia rosmarinus",
+			"sources": [
+				{
+					"listedAs": "Rosmarinus officinalis",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/rosemary"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "low",
+			"zones": [
+				8,
+				10
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Garden sage"
+			],
+			"containerMinL": 5,
+			"habit": "perennial",
+			"id": "sage",
+			"name": "Garden sage",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Salvia officinalis",
+			"sources": [
+				{
+					"listedAs": "Salvia officinalis",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/sage"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "low",
+			"zones": [
+				5,
+				8
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts",
+				"seeds"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Sago palm",
+				"Coontie"
+			],
+			"containerMinL": 20,
+			"habit": "palm",
+			"hazardLevel": "severe",
+			"id": "sago-palm",
+			"name": "Sago palm",
+			"notes": "Liver failure is reported; seeds are the most toxic part.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Cycas revoluta",
+			"sources": [
+				{
+					"listedAs": "Cycas revoluta, Zamia species",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/sago-palm"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "low",
+			"zones": [
+				9,
+				11
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Schefflera",
+				"Umbrella tree"
+			],
+			"containerMinL": 15,
+			"habit": "shrub",
+			"hazardLevel": "moderate",
+			"id": "schefflera",
+			"name": "Schefflera",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Heptapleurum actinophyllum",
+			"sources": [
+				{
+					"listedAs": "Schefflera",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/schefflera"
+				}
+			],
+			"sun": [
+				"part"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"catAttractant": true,
+			"catSafety": "insufficient-data",
+			"commonNames": [
+				"Silver vine"
+			],
+			"containerMinL": 20,
+			"habit": "vine",
+			"id": "silver-vine",
+			"name": "Silver vine",
+			"notes": "Not found in the reviewed toxicity source.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Actinidia polygama",
+			"sources": [
+				{
+					"listing": "Not listed",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				4,
+				8
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Snake plant",
+				"Mother-in-law’s tongue"
+			],
+			"containerMinL": 4,
+			"habit": "succulent",
+			"hazardLevel": "mild",
+			"id": "snake-plant",
+			"name": "Snake plant",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Dracaena trifasciata",
+			"sources": [
+				{
+					"listedAs": "Sansevieria trifasciata",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/snake-plant"
+				}
+			],
+			"sun": [
+				"full",
+				"part",
+				"shade"
+			],
+			"water": "low",
+			"zones": null
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Spider plant"
+			],
+			"containerMinL": 3,
+			"habit": "perennial",
+			"id": "spider-plant",
+			"name": "Spider plant",
+			"notes": "Cats often chew the leaves; mild stomach upset from eating plenty of any plant is common.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Chlorophytum comosum",
+			"sources": [
+				{
+					"listedAs": "Chlorophytum comosum",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/spider-plant"
+				}
+			],
+			"sun": [
+				"part",
+				"shade"
+			],
+			"water": "medium",
+			"zones": [
+				9,
+				11
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Star jasmine",
+				"Confederate jasmine"
+			],
+			"containerMinL": 15,
+			"habit": "vine",
+			"id": "star-jasmine",
+			"name": "Star jasmine",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Trachelospermum jasminoides",
+			"sources": [
+				{
+					"listedAs": "Trachelospermum jasminoides",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/star-jasmine"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				8,
+				10
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts",
+				"pollen"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Stargazer lily",
+				"Oriental lily"
+			],
+			"containerMinL": 10,
+			"habit": "bulb",
+			"hazardLevel": "severe",
+			"id": "stargazer-lily",
+			"name": "Stargazer lily",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Lilium (Oriental hybrids)",
+			"sources": [
+				{
+					"listedAs": "Lilium orientalis",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/stargazer-lily"
+				},
+				{
+					"retrievedAt": "2026-10-12",
+					"sourceId": "fda-lilies",
+					"url": "https://www.fda.gov/animal-veterinary/animal-health-literacy/lovely-lilies-and-curious-cats-dangerous-combination"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				5,
+				9
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Sunflower"
+			],
+			"containerMinL": 15,
+			"habit": "annual",
+			"id": "sunflower",
+			"name": "Sunflower",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Helianthus spp.",
+			"sources": [
+				{
+					"listedAs": "helianthus angustifolius",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/sunflower"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Swedish ivy"
+			],
+			"containerMinL": 3,
+			"habit": "perennial",
+			"id": "swedish-ivy",
+			"name": "Swedish ivy",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Plectranthus verticillatus",
+			"sources": [
+				{
+					"listedAs": "Plectranthus australis",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/swedish-ivy"
+				}
+			],
+			"sun": [
+				"part"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Common thyme"
+			],
+			"containerMinL": 3,
+			"habit": "perennial",
+			"id": "thyme",
+			"name": "Common thyme",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Thymus vulgaris",
+			"sources": [
+				{
+					"listedAs": "Thymus vulgaris",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/thyme"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "low",
+			"zones": [
+				5,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts",
+				"pollen"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Tiger lily"
+			],
+			"containerMinL": 10,
+			"habit": "bulb",
+			"hazardLevel": "severe",
+			"id": "tiger-lily",
+			"name": "Tiger lily",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Lilium lancifolium",
+			"sources": [
+				{
+					"listedAs": "Lilium tigrinum",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/tiger-lily"
+				},
+				{
+					"retrievedAt": "2026-10-12",
+					"sourceId": "fda-lilies",
+					"url": "https://www.fda.gov/animal-veterinary/animal-health-literacy/lovely-lilies-and-curious-cats-dangerous-combination"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				3,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"leaves",
+				"stems",
+				"green fruit"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Tomato (plant)"
+			],
+			"containerMinL": 20,
+			"habit": "annual",
+			"hazardLevel": "mild",
+			"id": "tomato-plant",
+			"name": "Tomato (plant)",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Solanum lycopersicum",
+			"sources": [
+				{
+					"listedAs": "Lycopersicon spp",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/tomato-plant"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "high",
+			"zones": null
+		},
+		{
+			"affectedParts": [
+				"bulb",
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Tulip"
+			],
+			"containerMinL": 4,
+			"habit": "bulb",
+			"hazardLevel": "moderate",
+			"id": "tulip",
+			"name": "Tulip",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Tulipa spp.",
+			"sources": [
+				{
+					"listedAs": "Tulipa spp.",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/tulip"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "medium",
+			"zones": [
+				3,
+				8
+			]
+		},
+		{
+			"catAttractant": true,
+			"catSafety": "insufficient-data",
+			"commonNames": [
+				"Valerian"
+			],
+			"containerMinL": 8,
+			"habit": "perennial",
+			"id": "valerian",
+			"name": "Valerian",
+			"notes": "Not found in the reviewed toxicity source.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Valeriana officinalis",
+			"sources": [
+				{
+					"listing": "Not listed",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				4,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"sap",
+				"leaves"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Weeping fig",
+				"Ficus"
+			],
+			"containerMinL": 20,
+			"habit": "tree",
+			"hazardLevel": "mild",
+			"id": "weeping-fig",
+			"name": "Weeping fig",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Ficus benjamina",
+			"sources": [
+				{
+					"listedAs": "Ficus sp.",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/weeping-fig"
+				}
+			],
+			"sun": [
+				"part"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"catAttractant": true,
+			"catSafety": "insufficient-data",
+			"commonNames": [
+				"Wheatgrass"
+			],
+			"containerMinL": 2,
+			"habit": "grass",
+			"id": "wheatgrass",
+			"name": "Wheatgrass",
+			"notes": "Not found in the reviewed toxicity source.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Triticum aestivum",
+			"sources": [
+				{
+					"listing": "Not listed",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": null
+		},
+		{
+			"affectedParts": [
+				"seeds",
+				"pods"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Wisteria"
+			],
+			"containerMinL": 40,
+			"habit": "vine",
+			"hazardLevel": "moderate",
+			"id": "wisteria",
+			"name": "Wisteria",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Wisteria spp.",
+			"sources": [
+				{
+					"listedAs": "Wisteria spp.",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/wisteria"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "medium",
+			"zones": [
+				5,
+				9
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts",
+				"pollen"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Wood lily"
+			],
+			"containerMinL": 8,
+			"habit": "bulb",
+			"hazardLevel": "severe",
+			"id": "wood-lily",
+			"name": "Wood lily",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Lilium philadelphicum",
+			"sources": [
+				{
+					"listedAs": "Lilium umbellatum",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/wood-lily"
+				},
+				{
+					"retrievedAt": "2026-10-12",
+					"sourceId": "fda-lilies",
+					"url": "https://www.fda.gov/animal-veterinary/animal-health-literacy/lovely-lilies-and-curious-cats-dangerous-combination"
+				}
+			],
+			"sun": [
+				"full",
+				"part"
+			],
+			"water": "medium",
+			"zones": [
+				3,
+				7
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Yew"
+			],
+			"containerMinL": 30,
+			"habit": "shrub",
+			"hazardLevel": "severe",
+			"id": "yew",
+			"name": "Yew",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Taxus spp.",
+			"sources": [
+				{
+					"listedAs": "Taxus spp.",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/yew"
+				}
+			],
+			"sun": [
+				"full",
+				"part",
+				"shade"
+			],
+			"water": "medium",
+			"zones": [
+				4,
+				7
+			]
+		},
+		{
+			"affectedParts": [
+				"all parts"
+			],
+			"catSafety": "known-hazard",
+			"commonNames": [
+				"Yucca"
+			],
+			"containerMinL": 15,
+			"habit": "succulent",
+			"hazardLevel": "mild",
+			"id": "yucca",
+			"name": "Yucca",
+			"notes": "Sharp leaf tips are an injury risk in tight spaces too.",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Yucca spp.",
+			"sources": [
+				{
+					"listedAs": "Yucca spp.",
+					"listing": "Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/yucca"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "low",
+			"zones": [
+				5,
+				11
+			]
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Zebra haworthia"
+			],
+			"containerMinL": 1,
+			"habit": "succulent",
+			"id": "zebra-haworthia",
+			"name": "Zebra haworthia",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Haworthiopsis fasciata",
+			"sources": [
+				{
+					"listedAs": "Haworthia fasciata",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/zebra-haworthia"
+				}
+			],
+			"sun": [
+				"part"
+			],
+			"water": "low",
+			"zones": null
+		},
+		{
+			"catSafety": "no-known-issue",
+			"commonNames": [
+				"Zinnia"
+			],
+			"containerMinL": 4,
+			"habit": "annual",
+			"id": "zinnia",
+			"name": "Zinnia",
+			"reviewedAt": "2026-10-12",
+			"scientificName": "Zinnia spp.",
+			"sources": [
+				{
+					"listedAs": "Zinnia species",
+					"listing": "Non-Toxic to Cats",
+					"retrievedAt": "2026-10-12",
+					"sourceId": "aspca-plants",
+					"url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/zinnia"
+				}
+			],
+			"sun": [
+				"full"
+			],
+			"water": "medium",
+			"zones": null
+		}
+	],
+	"updated": "2026-10-12"
+}

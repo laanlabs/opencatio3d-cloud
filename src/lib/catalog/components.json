@@ -1,0 +1,267 @@
+{
+	"catalogVersion": "oc-catalog@0.1",
+	"components": [
+		{
+			"category": "resource",
+			"defaults": {
+				"depth": 0.4,
+				"length": 0.5,
+				"mountHeight": 0
+			},
+			"id": "bed",
+			"materials": {
+				"kit": "kit-bed-outdoor"
+			},
+			"mount": "floor",
+			"name": "Outdoor cat bed",
+			"provides": [
+				"rest"
+			],
+			"ratedUse": "Raised off damp ground; washable cover.",
+			"recipe": "kit"
+		},
+		{
+			"category": "enrichment",
+			"defaults": {
+				"depth": 0.235,
+				"length": 1.2,
+				"mountHeight": 1.5
+			},
+			"id": "bridge",
+			"limits": {
+				"length": [
+					0.6,
+					2.4
+				],
+				"mountHeight": [
+					0.6,
+					2.4
+				]
+			},
+			"materials": {
+				"board": "board-1x10-cedar",
+				"bracket": "bracket-shelf",
+				"screw": "screw-ext-3in"
+			},
+			"mount": "span",
+			"name": "Bridge between walls",
+			"provides": [
+				"perch",
+				"route"
+			],
+			"ratedUse": "Spans side to side across the structure; a second route past other cats.",
+			"recipe": "board-bridge"
+		},
+		{
+			"category": "resource",
+			"defaults": {
+				"depth": 0.4,
+				"length": 0.4,
+				"mountHeight": 0
+			},
+			"id": "cubby",
+			"materials": {
+				"kit": "kit-cat-cube"
+			},
+			"mount": "floor",
+			"name": "Hideaway cube",
+			"provides": [
+				"hide",
+				"rest",
+				"perch"
+			],
+			"ratedUse": "A covered retreat; its roof counts as a low perch.",
+			"recipe": "kit"
+		},
+		{
+			"category": "resource",
+			"defaults": {
+				"depth": 0.35,
+				"length": 0.5,
+				"mountHeight": 1
+			},
+			"id": "hammock",
+			"materials": {
+				"kit": "kit-hammock"
+			},
+			"mount": "wall",
+			"name": "Wall hammock",
+			"provides": [
+				"perch",
+				"rest"
+			],
+			"ratedUse": "Mounted to frame members per the maker’s instructions.",
+			"recipe": "kit"
+		},
+		{
+			"category": "resource",
+			"defaults": {
+				"depth": 0.55,
+				"length": 0.8,
+				"mountHeight": 0
+			},
+			"id": "litter-annex",
+			"materials": {
+				"kit": "kit-litter-enclosure"
+			},
+			"mount": "floor",
+			"name": "Litter enclosure",
+			"provides": [
+				"litter"
+			],
+			"ratedUse": "Away from food and water; easy to reach for cleaning.",
+			"recipe": "kit"
+		},
+		{
+			"category": "planter",
+			"defaults": {
+				"depth": 0.4,
+				"length": 0.4,
+				"mountHeight": 0
+			},
+			"id": "planter-large",
+			"materials": {
+				"kit": "kit-planter-large"
+			},
+			"mount": "floor",
+			"name": "Large planter (16″)",
+			"provides": [
+				"planter"
+			],
+			"ratedUse": "Holds one to three plants.",
+			"recipe": "kit"
+		},
+		{
+			"category": "planter",
+			"defaults": {
+				"depth": 0.3,
+				"length": 0.3,
+				"mountHeight": 0
+			},
+			"id": "planter-small",
+			"materials": {
+				"kit": "kit-planter-small"
+			},
+			"mount": "floor",
+			"name": "Small planter (12″)",
+			"provides": [
+				"planter"
+			],
+			"ratedUse": "Holds one plant. Check every plant against the plant list before it goes in.",
+			"recipe": "kit"
+		},
+		{
+			"category": "enrichment",
+			"defaults": {
+				"depth": 0.235,
+				"length": 1,
+				"mountHeight": 0.6
+			},
+			"id": "ramp",
+			"limits": {
+				"length": [
+					0.6,
+					2
+				],
+				"mountHeight": [
+					0.2,
+					2
+				]
+			},
+			"materials": {
+				"board": "board-1x10-cedar",
+				"bracket": "bracket-shelf",
+				"cleat": "board-1x2-furring",
+				"screw": "screw-ext-3in"
+			},
+			"mount": "wall",
+			"name": "Ramp with cleats",
+			"provides": [
+				"ramp",
+				"route"
+			],
+			"ratedUse": "Rises from the floor (or a lower shelf) to `mountHeight`; slope kept under about 35° for senior cats. Cleats every 15 cm.",
+			"recipe": "board-ramp"
+		},
+		{
+			"category": "enrichment",
+			"defaults": {
+				"depth": 0.089,
+				"length": 0.089,
+				"mountHeight": 0.9
+			},
+			"id": "scratcher-post",
+			"limits": {
+				"mountHeight": [
+					0.5,
+					1.8
+				]
+			},
+			"materials": {
+				"bracket": "bracket-corner",
+				"post": "lumber-4x4-cedar",
+				"rope": "rope-sisal",
+				"screw": "screw-ext-3in"
+			},
+			"mount": "floor",
+			"name": "Sisal scratching post",
+			"provides": [
+				"scratch"
+			],
+			"ratedUse": "Tall enough for a full stretch; fixed to the frame so it cannot tip.",
+			"recipe": "post-scratcher"
+		},
+		{
+			"category": "enrichment",
+			"defaults": {
+				"depth": 0.235,
+				"length": 0.6,
+				"mountHeight": 0.9
+			},
+			"id": "shelf",
+			"limits": {
+				"length": [
+					0.3,
+					1.2
+				],
+				"mountHeight": [
+					0.2,
+					2.4
+				]
+			},
+			"materials": {
+				"board": "board-1x10-cedar",
+				"bracket": "bracket-shelf",
+				"screw": "screw-ext-3in"
+			},
+			"mount": "wall",
+			"name": "Wall shelf",
+			"provides": [
+				"perch",
+				"rest"
+			],
+			"ratedUse": "One cat jumping on and off. Brackets every 0.6 m and into frame members, never mesh only.",
+			"recipe": "board-shelf"
+		},
+		{
+			"category": "resource",
+			"defaults": {
+				"depth": 0.25,
+				"length": 0.25,
+				"mountHeight": 0
+			},
+			"id": "water-station",
+			"materials": {
+				"kit": "kit-water-bowl"
+			},
+			"mount": "floor",
+			"name": "Water bowl",
+			"provides": [
+				"water"
+			],
+			"ratedUse": "Shaded; refreshed daily; away from the litter area.",
+			"recipe": "kit"
+		}
+	],
+	"updated": "2026-10-12"
+}

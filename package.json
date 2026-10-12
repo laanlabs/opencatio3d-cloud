@@ -1,0 +1,33 @@
+{
+  "name": "opencatio3d-cloud",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "test": "vitest run",
+    "catalog": "node scripts/build-catalog.mjs",
+    "fixtures": "OC3D_WRITE_FIXTURES=1 vitest run tests/interop.test.ts tests/golden.test.ts",
+    "deploy": "npm run build && firebase deploy --only hosting",
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "idb-keyval": "^6.3.0",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^7.3.1",
+    "@tsconfig/svelte": "^5.0.8",
+    "@types/node": "^24.19.1",
+    "@types/three": "^0.186.0",
+    "svelte": "^5.57.1",
+    "svelte-check": "^4.7.6",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.2",
+    "vitest": "^5.0.3"
+  }
+}

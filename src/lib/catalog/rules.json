@@ -1,0 +1,887 @@
+{
+	"catalogVersion": "oc-catalog@0.1",
+	"rules": [
+		{
+			"acknowledgeable": false,
+			"domain": "ACC",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "Wind, a curious cat or a predator can open an unlatched door.",
+			"id": "CAT-ACC-001",
+			"remediation": "Choose a latch: a hasp or keyed latch for human doors, a slide bolt for hatches.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "blocker",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Door or hatch has no latch",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "ACC",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "A door left ajar for a moment is the most common way cats escape from catios.",
+			"id": "CAT-ACC-002",
+			"remediation": "Use self-closing spring hinges on human doors.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "advisory",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Door does not close by itself",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "ACC",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "A gravity latch on a door cats can push from inside may be nudged open.",
+			"id": "CAT-ACC-003",
+			"remediation": "Use a hasp, slide bolt or keyed latch, or a second latch at cat height.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Gravity latch on an outward-opening door",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "ACC",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "Walk-in catios need a door you can pass through with a bucket and tools (about 24″ × 60″ or larger).",
+			"id": "CAT-ACC-004",
+			"remediation": "Widen or heighten the door.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Door is small for cleaning access",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "ACC",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "Litter, water, plants and shelves all need regular cleaning; without a door or hatch you cannot reach them.",
+			"id": "CAT-ACC-005",
+			"remediation": "Add a human door or a cleaning hatch.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "No way in to clean",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "ACC",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "An attached catio is most used when cats can come and go from the house.",
+			"id": "CAT-ACC-006",
+			"remediation": "Add a window-access insert or a cat door through the wall, or connect a tunnel.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "advisory",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "No cat entrance from the house",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "BLD",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "Wide bays or tall 2×2 walls flex, letting mesh sag and fasteners pull out.",
+			"id": "CAT-BLD-001",
+			"remediation": "Keep posts within 1.2 m (4 ft) and use 2×3 or 2×4 for walls over 1.5 m.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Long spans for this frame",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "BLD",
+			"effectiveDate": "2026-10-12",
+			"evidence": "manufacturer-constraint",
+			"explanation": "Corrugated panels need slope to shed water; a flat solid roof ponds and leaks.",
+			"id": "CAT-BLD-002",
+			"remediation": "Give the roof at least 1:12 slope (1″ fall per foot) by lowering the front.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Solid roof is nearly flat",
+			"version": 1
+		},
+		{
+			"acknowledgeable": false,
+			"domain": "BLD",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "A frame member is longer than the longest lumber in the stock lengths, so it would need a splice.",
+			"id": "CAT-BLD-003",
+			"remediation": "Shorten the structure, add a post to split the span, or allow longer stock lengths.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "blocker",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Member longer than available stock",
+			"version": 1
+		},
+		{
+			"acknowledgeable": false,
+			"domain": "BLD",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "This structure type is shown for planning only; its attachment and framing need a site visit.",
+			"id": "CAT-BLD-004",
+			"remediation": "Use it to explore ideas and share them; ask a builder for a site-specific plan.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "blocker",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Concept-only design",
+			"version": 1
+		},
+		{
+			"acknowledgeable": false,
+			"domain": "BLD",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "One or more dimensions are outside the range this template is designed for.",
+			"id": "CAT-BLD-005",
+			"remediation": "Bring the dimension back within the shown limits, or split the design into two structures.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "blocker",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Outside supported sizes",
+			"version": 1
+		},
+		{
+			"acknowledgeable": false,
+			"domain": "BLD",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "A door, hatch or cat opening runs past the end of its wall, above the wall height, or into another opening.",
+			"id": "CAT-BLD-006",
+			"remediation": "Move or resize the opening.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "blocker",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Opening does not fit",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "BLD",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "A shelf, ramp or other item extends past its wall or above the structure.",
+			"id": "CAT-BLD-007",
+			"remediation": "Move it, shorten it or lower it.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Furnishing does not fit",
+			"version": 1
+		},
+		{
+			"acknowledgeable": false,
+			"domain": "DIM",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "Build outputs need measured, confirmed dimensions; typed guesses make wrong cut lists.",
+			"id": "CAT-DIM-001",
+			"remediation": "Measure the site, then confirm each key dimension in the Site workspace.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "blocker",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Dimensions not confirmed",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "DIM",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "The footprint overlaps something marked on the site (a tree, AC unit, hose bib or no-build zone).",
+			"id": "CAT-DIM-002",
+			"remediation": "Move or resize the structure, or remove the obstacle from the site if it is gone.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Overlaps an obstacle",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "ELEV",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "A box mounted off the ground puts its whole weight on brackets and wall fasteners.",
+			"id": "CAT-ELEV-001",
+			"remediation": "Fasten the ledger into studs or masonry (not siding only) and check the brackets’ rated load.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Raised structure",
+			"version": 1
+		},
+		{
+			"acknowledgeable": false,
+			"domain": "ELEV",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "Elevated installations involve fall hazards and structural attachment beyond these checks.",
+			"id": "CAT-ELEV-002",
+			"remediation": "Have the attachment and supports reviewed by a qualified professional, then record the review.",
+			"reviewable": true,
+			"reviewedAt": "2026-10-12",
+			"severity": "blocker",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Raised above about 1.8 m — professional review",
+			"version": 1
+		},
+		{
+			"acknowledgeable": false,
+			"domain": "ELEV",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "Structures over 20 m² or taller than 2.7 m may need a permit and engineered framing.",
+			"id": "CAT-ELEV-003",
+			"remediation": "Check with your building department and have the framing reviewed, then record the review.",
+			"reviewable": true,
+			"reviewedAt": "2026-10-12",
+			"severity": "blocker",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Large structure — professional review",
+			"version": 1
+		},
+		{
+			"acknowledgeable": false,
+			"domain": "ENC",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "Cats can squeeze through surprisingly small gaps; openings 2″ (50 mm) or wider on the short side let many cats out.",
+			"id": "CAT-ENC-001",
+			"remediation": "Choose a mesh with openings of 1″ × 2″ or smaller (1″ × 1″ is the common catio choice).",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "blocker",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Mesh openings are large enough to escape through",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "ENC",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "A kitten or small cat in the household can push through openings wider than about 1″.",
+			"id": "CAT-ENC-002",
+			"remediation": "Use ½″ × 1″ mesh, or add a band of smaller mesh along the lower walls.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Mesh is wider than kittens and small cats need",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "ENC",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "19-gauge and lighter wire holds cats in but is easier for raccoons and dogs to tear from outside.",
+			"id": "CAT-ENC-003",
+			"remediation": "Use 16-gauge or heavier welded wire where predators visit.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "advisory",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Light-gauge mesh",
+			"version": 1
+		},
+		{
+			"acknowledgeable": false,
+			"domain": "ENC",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "A window or door that is only partly inside the catio opens a gap straight to the outside.",
+			"id": "CAT-ENC-004",
+			"remediation": "Move or resize the catio so the opening is fully inside or fully outside it.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "blocker",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "A house opening straddles the catio edge",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "ENC",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "Neither end of the tunnel reaches a house opening or another structure, so cats cannot get in.",
+			"id": "CAT-ENC-005",
+			"remediation": "Extend the tunnel to a window, cat door or catio, or add a cat door at one end.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Tunnel has no entrance",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "ENC",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "A cat that rushes doors can slip past you while you step in to clean.",
+			"id": "CAT-ENC-006",
+			"remediation": "Add a vestibule (a small airlock with a second door) in front of the human door.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "advisory",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "No vestibule for an escape-prone cat",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "GND",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "Cats and predators can dig under a frame that sits on grass or soil.",
+			"id": "CAT-GND-001",
+			"remediation": "Add a mesh ground skirt (an apron laid flat outward and pinned) or set the frame on pavers.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "No dig barrier on soil",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "GND",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "Pavers alone may not hold a light frame in wind, and gaps open as it shifts.",
+			"id": "CAT-GND-002",
+			"remediation": "Add ground anchors at each corner post.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "advisory",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Freestanding frame is not anchored",
+			"version": 1
+		},
+		{
+			"acknowledgeable": false,
+			"domain": "HOME",
+			"effectiveDate": "2026-10-12",
+			"evidence": "authoritative-requirement",
+			"explanation": "Dryer exhaust is hot, full of lint and (for gas dryers) combustion gases; it must vent freely outdoors.",
+			"id": "CAT-HOME-001",
+			"remediation": "Move the catio or reroute the dryer vent outside the enclosure (have a professional do any vent work).",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "blocker",
+			"sources": [
+				"usfa-home-fires"
+			],
+			"title": "Dryer vent inside the catio",
+			"version": 1
+		},
+		{
+			"acknowledgeable": false,
+			"domain": "HOME",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "Utility workers need unobstructed access to gas and electric meters.",
+			"id": "CAT-HOME-002",
+			"remediation": "Keep meters outside the enclosure.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "blocker",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Utility meter inside the catio",
+			"version": 1
+		},
+		{
+			"acknowledgeable": false,
+			"domain": "HOME",
+			"effectiveDate": "2026-10-12",
+			"evidence": "authoritative-requirement",
+			"explanation": "A bedroom egress window must stay usable for escape and rescue; enclosing it can block that route.",
+			"id": "CAT-HOME-003",
+			"remediation": "Keep egress windows outside the catio, or have the design reviewed by your building department or a fire-safety professional.",
+			"reviewable": true,
+			"reviewedAt": "2026-10-12",
+			"severity": "blocker",
+			"sources": [
+				"icc-irc-2021"
+			],
+			"title": "Emergency escape window inside the catio",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "HOME",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "Bathroom, kitchen or appliance vents blow moist or fouled air into the enclosure.",
+			"id": "CAT-HOME-004",
+			"remediation": "Check what the vent serves; keep exhaust vents outside the catio.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Exhaust vent inside the catio",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "HOME",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "Roof runoff will soak the catio floor.",
+			"id": "CAT-HOME-005",
+			"remediation": "Redirect the downspout outside the enclosure.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "advisory",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Downspout inside the catio",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "HOME",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "The catio rises above the wall it attaches to, so the top ledger has nothing to fasten to.",
+			"id": "CAT-HOME-006",
+			"remediation": "Lower the catio or attach it to a taller part of the house.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Taller than the house wall",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "MAT",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "Galvanizing before welding leaves bare weld points that rust sooner.",
+			"id": "CAT-MAT-001",
+			"remediation": "Prefer galvanized-after-welding, PVC-coated or stainless mesh for long life.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "advisory",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Mesh galvanized before welding",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "MAT",
+			"effectiveDate": "2026-10-12",
+			"evidence": "authoritative-requirement",
+			"explanation": "Untreated wood in ground contact decays quickly, loosening the bottom plate and opening gaps.",
+			"id": "CAT-MAT-002",
+			"remediation": "Set the frame on pavers, or use lumber rated for ground contact (AWPA UC4A) for the bottom plates.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"awpa-standards",
+				"fpl-wood-handbook"
+			],
+			"title": "Untreated lumber touching the ground",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "MAT",
+			"effectiveDate": "2026-10-12",
+			"evidence": "professional-guidance",
+			"explanation": "Modern pressure-treated lumber (ACQ / copper azole) is widely used outdoors, but cats should not chew it.",
+			"id": "CAT-MAT-003",
+			"remediation": "Seal treated members inside the catio, or use cedar for parts cats can reach.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "advisory",
+			"sources": [
+				"epa-wood-preservatives"
+			],
+			"title": "Treated lumber within chewing reach",
+			"version": 1
+		},
+		{
+			"acknowledgeable": false,
+			"domain": "MAT",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "Every cut edge of welded wire leaves sharp wire ends.",
+			"id": "CAT-MAT-004",
+			"remediation": "File cut ends, fold them over or cover them with trim; wear gloves.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "info",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Cut mesh ends are sharp",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "MOB",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "Jumps of more than about 30 cm between levels are hard on stiff joints.",
+			"id": "CAT-MOB-001",
+			"remediation": "Add a ramp or intermediate shelves so each step is 30 cm or less.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Big step-ups for a senior or less-mobile cat",
+			"version": 1
+		},
+		{
+			"acknowledgeable": false,
+			"domain": "PLT",
+			"effectiveDate": "2026-10-12",
+			"evidence": "professional-guidance",
+			"explanation": "This plant is listed as toxic to cats, with organ damage or death reported (true lilies, sago palm, cardiac-glycoside plants…).",
+			"id": "CAT-PLT-001",
+			"remediation": "Remove it from the catio and the home. If a cat may have eaten any part, call your veterinarian or ASPCA Animal Poison Control.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "blocker",
+			"sources": [
+				"aspca-plants",
+				"aspca-apcc"
+			],
+			"title": "Plant can seriously harm cats",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "PLT",
+			"effectiveDate": "2026-10-12",
+			"evidence": "professional-guidance",
+			"explanation": "This plant is listed as toxic to cats, usually causing stomach upset or mouth irritation.",
+			"id": "CAT-PLT-002",
+			"remediation": "Swap it for a plant with no known issue, or keep it out of the catio.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"aspca-plants",
+				"aspca-apcc"
+			],
+			"title": "Plant is listed as toxic to cats",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "PLT",
+			"effectiveDate": "2026-10-12",
+			"evidence": "professional-guidance",
+			"explanation": "This plant was not found in the reviewed toxicity source, or sources disagree. Missing from a list is not proof of safety.",
+			"id": "CAT-PLT-003",
+			"remediation": "Keep it out of chewing reach, or ask your veterinarian before planting it in the catio.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"aspca-plants"
+			],
+			"title": "Plant safety is unknown",
+			"version": 1
+		},
+		{
+			"acknowledgeable": false,
+			"domain": "PLT",
+			"effectiveDate": "2026-10-12",
+			"evidence": "professional-guidance",
+			"explanation": "Toxicity lists cover common plants only, and individual cats can react to plants listed as non-toxic.",
+			"id": "CAT-PLT-004",
+			"remediation": "Watch for chewing and call your veterinarian about any symptoms.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "info",
+			"sources": [
+				"aspca-plants",
+				"aspca-apcc"
+			],
+			"title": "Plant lists are not exhaustive",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "WEL",
+			"effectiveDate": "2026-10-12",
+			"evidence": "professional-guidance",
+			"explanation": "Cats need a secure place to retreat and rest (AAFP/ISFM pillar 1).",
+			"id": "CAT-WEL-001",
+			"remediation": "Add a bed, hammock or hideaway cube.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "advisory",
+			"sources": [
+				"aafp-isfm-environment-2013",
+				"catvets-environment"
+			],
+			"title": "No resting or hiding place",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "WEL",
+			"effectiveDate": "2026-10-12",
+			"evidence": "professional-guidance",
+			"explanation": "Vertical space lets cats survey their territory and avoid each other.",
+			"id": "CAT-WEL-002",
+			"remediation": "Add shelves or a bridge at a second height.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "advisory",
+			"sources": [
+				"aafp-isfm-environment-2013",
+				"catvets-environment",
+				"osu-indoor-pet"
+			],
+			"title": "Fewer than two perch levels",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "WEL",
+			"effectiveDate": "2026-10-12",
+			"evidence": "professional-guidance",
+			"explanation": "With several cats, a single high spot becomes contested; a dead-end perch can trap a cat.",
+			"id": "CAT-WEL-003",
+			"remediation": "Add a second perch and a second route (a bridge or ramp) so cats can pass each other.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "advisory",
+			"sources": [
+				"aafp-isfm-environment-2013",
+				"catvets-environment",
+				"osu-indoor-pet"
+			],
+			"title": "One perch for several cats",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "WEL",
+			"effectiveDate": "2026-10-12",
+			"evidence": "professional-guidance",
+			"explanation": "Scratching is a normal behaviour that marks territory and keeps claws healthy.",
+			"id": "CAT-WEL-004",
+			"remediation": "Add a sisal scratching post.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "advisory",
+			"sources": [
+				"aafp-isfm-environment-2013",
+				"catvets-environment",
+				"osu-indoor-pet"
+			],
+			"title": "Nothing to scratch",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "WEL",
+			"effectiveDate": "2026-10-12",
+			"evidence": "professional-guidance",
+			"explanation": "Cats in a catio for more than a short visit need water, especially in warm weather.",
+			"id": "CAT-WEL-005",
+			"remediation": "Add a shaded water bowl.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "advisory",
+			"sources": [
+				"aafp-isfm-environment-2013",
+				"catvets-environment"
+			],
+			"title": "No water",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "WEL",
+			"effectiveDate": "2026-10-12",
+			"evidence": "professional-guidance",
+			"explanation": "Cats prefer food and water away from their toilet area (AAFP/ISFM pillar 2).",
+			"id": "CAT-WEL-006",
+			"remediation": "Keep at least 1 m between the litter enclosure and the water bowl.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "advisory",
+			"sources": [
+				"aafp-isfm-environment-2013",
+				"catvets-environment"
+			],
+			"title": "Litter next to water",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "WX",
+			"effectiveDate": "2026-10-12",
+			"evidence": "professional-guidance",
+			"explanation": "An all-mesh roof gives no shade; cats can overheat in summer sun.",
+			"id": "CAT-WX-001",
+			"remediation": "Add a partial or full solid cover, shade cloth, or place the catio in afternoon shade. Keep water available.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"nws-heat"
+			],
+			"title": "No shade in a hot climate",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "WX",
+			"effectiveDate": "2026-10-12",
+			"evidence": "professional-guidance",
+			"explanation": "Cats use a catio more when part of it stays dry and shaded.",
+			"id": "CAT-WX-002",
+			"remediation": "Cover part of the roof (a partial polycarbonate cover is cheap and bright).",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "advisory",
+			"sources": [
+				"aafp-isfm-environment-2013",
+				"catvets-environment"
+			],
+			"title": "No rain or sun cover",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "WX",
+			"effectiveDate": "2026-10-12",
+			"evidence": "product-best-practice",
+			"explanation": "Snow collects on mesh and solid roofs alike; heavy snow can sag or break light framing.",
+			"id": "CAT-WX-003",
+			"remediation": "Plan to clear snow, add rafters, or have the roof framing reviewed for your snow load.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"opencatio3d-practice"
+			],
+			"title": "Snow load on the roof",
+			"version": 1
+		},
+		{
+			"acknowledgeable": true,
+			"domain": "WX",
+			"effectiveDate": "2026-10-12",
+			"evidence": "professional-guidance",
+			"explanation": "Light enclosures and solid roof panels catch wind.",
+			"id": "CAT-WX-004",
+			"remediation": "Anchor the frame to the ground or deck at every corner and fasten roof panels at every purlin; consider professional review.",
+			"reviewable": false,
+			"reviewedAt": "2026-10-12",
+			"severity": "warning",
+			"sources": [
+				"nws-wind"
+			],
+			"title": "High-wind site",
+			"version": 1
+		}
+	],
+	"updated": "2026-10-12"
+}
