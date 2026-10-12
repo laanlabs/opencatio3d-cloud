@@ -47,7 +47,7 @@ export class Editor {
     this.project = $state.snapshot(p) as Project;
     this.cat = opts.catalog ?? defaultCatalog;
     this.readonly = !!opts.readonly;
-    this.workspace = (p.web?.workspace as Workspace) ?? (p.structures.length ? 'structure' : 'site');
+    this.workspace = (p.web?.workspace as Workspace) ?? 'structure';
     if (p.web?.view) this.view = p.web.view;
   }
 

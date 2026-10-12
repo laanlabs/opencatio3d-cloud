@@ -329,7 +329,7 @@
 			"domain": "ENC",
 			"effectiveDate": "2026-10-12",
 			"evidence": "product-best-practice",
-			"explanation": "A kitten or small cat in the household can push through openings wider than about 1″.",
+			"explanation": "Young kittens can squeeze through openings wider than about ¾″ on the short side.",
 			"id": "CAT-ENC-002",
 			"remediation": "Use ½″ × 1″ mesh, or add a band of smaller mesh along the lower walls.",
 			"reviewable": false,
@@ -338,7 +338,7 @@
 			"sources": [
 				"opencatio3d-practice"
 			],
-			"title": "Mesh is wider than kittens and small cats need",
+			"title": "Mesh is wider than kittens need",
 			"version": 1
 		},
 		{

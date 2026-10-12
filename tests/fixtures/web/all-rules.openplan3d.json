@@ -1,0 +1,753 @@
+{
+ "defaults": {
+  "ceilingHeight": 2.4,
+  "exteriorWallThickness": 0.2,
+  "interiorWallThickness": 0.12
+ },
+ "doors": [],
+ "floors": [],
+ "objects": [
+  {
+   "attributes": {
+    "opencatio3dKind": "lean-to",
+    "opencatio3dRole": "structure",
+    "structureId": "2cb16364-ec07-4d21-aa5d-6b5287825337"
+   },
+   "category": {
+    "greenhouse": {}
+   },
+   "dimensions": [
+    3.2,
+    2.6,
+    1.219
+   ],
+   "identifier": "2cb16364-ec07-4d21-aa5d-6b5287825337",
+   "story": 0,
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1.9,
+    1.3,
+    0.6095,
+    1
+   ]
+  },
+  {
+   "attributes": {
+    "opencatio3dKind": "freestanding",
+    "opencatio3dRole": "structure",
+    "structureId": "2db164f7-eb07-4b8e-ab5d-6ce5868251a4"
+   },
+   "category": {
+    "greenhouse": {}
+   },
+   "dimensions": [
+    6.5,
+    3,
+    4
+   ],
+   "identifier": "2db164f7-eb07-4b8e-ab5d-6ce5868251a4",
+   "story": 0,
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    10.25,
+    1.5,
+    5,
+    1
+   ]
+  },
+  {
+   "attributes": {
+    "opencatio3dKind": "tunnel",
+    "opencatio3dRole": "structure",
+    "segment": 0,
+    "structureId": "2eb1668a-ea07-49fb-a85d-682c8982565d"
+   },
+   "category": {
+    "greenhouse_small": {}
+   },
+   "dimensions": [
+    3.048,
+    0.457,
+    0.457
+   ],
+   "identifier": "2e512376-4fcb-4041-85d8-678c42e29377",
+   "story": 0,
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    5.524,
+    0.2285,
+    12,
+    1
+   ]
+  },
+  {
+   "attributes": {
+    "opencatio3dKind": "window-box",
+    "opencatio3dRole": "structure",
+    "structureId": "2fb1681d-e907-4868-a95d-69bf888254ca"
+   },
+   "category": {
+    "greenhouse_small": {}
+   },
+   "dimensions": [
+    0.914,
+    0.762,
+    0.457
+   ],
+   "identifier": "2fb1681d-e907-4868-a95d-69bf888254ca",
+   "story": 0,
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    7,
+    2.381,
+    0.2285,
+    1
+   ]
+  },
+  {
+   "attributes": {
+    "opencatio3dKind": "balcony-concept",
+    "opencatio3dRole": "structure",
+    "structureId": "28b15d18-f007-436d-a65d-650683824ceb"
+   },
+   "category": {
+    "greenhouse": {}
+   },
+   "dimensions": [
+    2.4,
+    2.2,
+    1.2
+   ],
+   "identifier": "28b15d18-f007-436d-a65d-650683824ceb",
+   "story": 0,
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1.2,
+    4.1,
+    9.6,
+    1
+   ]
+  }
+ ],
+ "opencatio3d": {
+  "alternatives": [],
+  "assumptions": {
+   "fastenerOverage": 0.1,
+   "kerf": 0.003,
+   "stockLengths": [],
+   "wasteFactor": 0.1
+  },
+  "building": null,
+  "captureSource": "template",
+  "catalogVersion": "oc-catalog@0.1",
+  "cats": [
+   {
+    "ageClass": "kitten",
+    "climber": true,
+    "escapeRisk": "high",
+    "id": "738b78cb-04b0-4c7a-9859-f52944ec5b40",
+    "mobility": "full",
+    "name": "Kit",
+    "size": "medium"
+   },
+   {
+    "ageClass": "senior",
+    "climber": true,
+    "escapeRisk": "medium",
+    "id": "728b7738-05b0-4e0d-9759-f39645ec5cd3",
+    "mobility": "limited",
+    "name": "Gran",
+    "size": "small"
+   }
+  ],
+  "createdAt": "2026-10-12T12:00:00.000Z",
+  "currency": "USD",
+  "lengthUnit": "m",
+  "name": "All rules",
+  "observations": [],
+  "overrides": [],
+  "plants": [
+   {
+    "furnishingId": "41fdf6e0-7579-4e43-a346-15caa5f1f7d5",
+    "id": "a8c9cca4-f44f-434d-9139-495ac02bdfa3",
+    "plantId": "lily",
+    "structureId": "2cb16364-ec07-4d21-aa5d-6b5287825337"
+   },
+   {
+    "furnishingId": "41fdf6e0-7579-4e43-a346-15caa5f1f7d5",
+    "id": "a9c9ce37-f34f-41ba-9239-4aedbf2bde10",
+    "plantId": "catnip",
+    "structureId": "2cb16364-ec07-4d21-aa5d-6b5287825337"
+   },
+   {
+    "furnishingId": "41fdf6e0-7579-4e43-a346-15caa5f1f7d5",
+    "id": "aac9cfca-f24f-4027-8f39-4634c22be2c9",
+    "plantId": "cat-grass-oat",
+    "structureId": "2cb16364-ec07-4d21-aa5d-6b5287825337"
+   },
+   {
+    "id": "abc9d15d-f14f-4e94-9039-47c7c12be136",
+    "plantId": "not-a-plant",
+    "structureId": "2cb16364-ec07-4d21-aa5d-6b5287825337"
+   }
+  ],
+  "producer": "web",
+  "projectId": "cd948234-0f17-488b-a945-750a9fc467d1",
+  "region": {
+   "climate": {
+    "hot": true,
+    "rainy": true,
+    "snowLoad": "heavy",
+    "wind": "high"
+   },
+   "country": "US"
+  },
+  "schema": "opencatio3d/project@0.1",
+  "site": {
+   "ground": "soil",
+   "measurements": [],
+   "northDeg": 0,
+   "obstacles": [
+    {
+     "depth": 2,
+     "height": 5,
+     "id": "034e243b-b562-4f88-bf2b-aa1d6b033b12",
+     "kind": "tree",
+     "rotation": 0,
+     "width": 2,
+     "x": 9,
+     "y": 4
+    }
+   ],
+   "walls": [
+    {
+     "a": [
+      0,
+      0
+     ],
+     "b": [
+      12,
+      0
+     ],
+     "height": 2.4,
+     "id": "0e80fc89-bda3-4066-8351-390bb1171088",
+     "openings": [
+      {
+       "egress": true,
+       "height": 1.2,
+       "id": "b0f68e46-b610-4183-8a34-85fc60b12fb1",
+       "kind": "window",
+       "name": "Bedroom",
+       "offset": 0.5,
+       "sill": 0.8,
+       "width": 1.2
+      },
+      {
+       "height": 0.15,
+       "id": "b1f68fd9-b510-4ff0-8b34-878f5fb12e1e",
+       "kind": "dryer-vent",
+       "offset": 2.2,
+       "sill": 0.4,
+       "width": 0.15
+      },
+      {
+       "height": 0.45,
+       "id": "aef68b20-b810-44a9-8c34-89225eb12c8b",
+       "kind": "meter",
+       "offset": 2.6,
+       "sill": 1,
+       "width": 0.35
+      },
+      {
+       "height": 0.25,
+       "id": "aff68cb3-b710-4316-8d34-8ab55db12af8",
+       "kind": "vent",
+       "offset": 3.1,
+       "sill": 0.3,
+       "width": 0.25
+      },
+      {
+       "height": 2.4,
+       "id": "b4f69492-ba10-47cf-8634-7fb064b135fd",
+       "kind": "downspout",
+       "offset": 1.3,
+       "sill": 0,
+       "width": 0.1
+      },
+      {
+       "height": 1,
+       "id": "b5f69625-b910-463c-8734-814363b1346a",
+       "kind": "window",
+       "offset": 6.5,
+       "sill": 1.6,
+       "width": 1
+      },
+      {
+       "height": 1,
+       "id": "b2f6916c-bc10-4af5-8834-82d662b132d7",
+       "kind": "window",
+       "name": "Straddled window",
+       "offset": 3.3,
+       "sill": 0.8,
+       "width": 0.8
+      }
+     ]
+    }
+   ]
+  },
+  "structures": [
+   {
+    "base": {
+     "kind": "none"
+    },
+    "depth": 1.219,
+    "frame": {
+     "materialId": "lumber-2x3-spf",
+     "maxPostSpacing": 1.5,
+     "profile": "wood-2x3",
+     "railSpacing": 0.9
+    },
+    "furnishings": [
+     {
+      "componentId": "shelf",
+      "id": "45fdfd2c-7979-448f-9f46-0f7ea1f1f189",
+      "length": 0.6,
+      "mountHeight": 1.6,
+      "offset": 0.1,
+      "side": "left"
+     },
+     {
+      "componentId": "litter-annex",
+      "id": "46fdfebf-7879-42fc-a046-1111a0f1eff6",
+      "mountHeight": 0,
+      "offset": 1.2,
+      "side": "front"
+     },
+     {
+      "componentId": "water-station",
+      "id": "47fe0052-7b79-47b5-9d46-0c589ff1ee63",
+      "mountHeight": 0,
+      "offset": 2.1,
+      "side": "front"
+     },
+     {
+      "componentId": "shelf",
+      "id": "48fe01e5-7a79-4622-9e46-0deb9ef1ecd0",
+      "length": 2,
+      "mountHeight": 1,
+      "offset": 1,
+      "side": "right"
+     },
+     {
+      "componentId": "planter-small",
+      "id": "41fdf6e0-7579-4e43-a346-15caa5f1f7d5",
+      "mountHeight": 0,
+      "offset": 0.8,
+      "side": "left"
+     }
+    ],
+    "height": 2.6,
+    "hostOpeningId": "b0f68e46-b610-4183-8a34-85fc60b12fb1",
+    "hostWallId": "0e80fc89-bda3-4066-8351-390bb1171088",
+    "id": "2cb16364-ec07-4d21-aa5d-6b5287825337",
+    "lowHeight": 2.6,
+    "mesh": {
+     "materialId": "mesh-2x4-14ga-fence-48"
+    },
+    "name": "Attached lean-to",
+    "openings": [
+     {
+      "height": 1.4,
+      "hinge": "left",
+      "id": "5becd6ad-838a-4d6e-9534-b69fac034a68",
+      "kind": "human-door",
+      "latch": "gravity",
+      "offset": 0.5,
+      "selfClosing": false,
+      "side": "front",
+      "swing": "out",
+      "width": 0.5
+     },
+     {
+      "height": 0.3,
+      "id": "5aecd51a-848a-4f01-9434-b50cad034bfb",
+      "kind": "cleaning-hatch",
+      "latch": null,
+      "offset": 0.2,
+      "side": "right",
+      "sill": 0.2,
+      "width": 0.4
+     },
+     {
+      "height": 0.3,
+      "id": "59ecd387-818a-4a48-9734-b9c5ae034d8e",
+      "kind": "cat-door",
+      "offset": 2.9,
+      "side": "front",
+      "sill": 0.1,
+      "width": 0.6
+     }
+    ],
+    "roof": {
+     "kind": "polycarbonate",
+     "materialId": "roof-polycarb-corrugated"
+    },
+    "rotation": 0,
+    "template": "lean-to",
+    "width": 3.2,
+    "x": 0.3,
+    "y": 0
+   },
+   {
+    "base": {
+     "kind": "ground-skirt",
+     "skirtDepth": 0.3
+    },
+    "depth": 4,
+    "frame": {
+     "materialId": "lumber-2x2-cedar",
+     "maxPostSpacing": 1.2,
+     "profile": "wood-2x2",
+     "railSpacing": 0.9
+    },
+    "furnishings": [],
+    "height": 3,
+    "id": "2db164f7-eb07-4b8e-ab5d-6ce5868251a4",
+    "lowHeight": 3,
+    "mesh": {
+     "materialId": "mesh-hwcloth-19ga-36"
+    },
+    "name": "Freestanding catio",
+    "openings": [],
+    "roof": {
+     "kind": "mesh"
+    },
+    "rotation": 0,
+    "template": "freestanding",
+    "width": 6.5,
+    "x": 7,
+    "y": 3
+   },
+   {
+    "base": {
+     "kind": "pavers"
+    },
+    "depth": 3.048,
+    "frame": {
+     "materialId": "lumber-2x2-cedar",
+     "maxPostSpacing": 0.9,
+     "profile": "wood-2x2",
+     "railSpacing": 0.9
+    },
+    "furnishings": [],
+    "height": 0.457,
+    "id": "2eb1668a-ea07-49fb-a85d-682c8982565d",
+    "mesh": {
+     "materialId": "mesh-1x2-16ga-gbw-48"
+    },
+    "name": "Tunnel run",
+    "openings": [],
+    "path": [
+     [
+      0,
+      0
+     ],
+     [
+      3.048,
+      0
+     ]
+    ],
+    "roof": {
+     "kind": "mesh"
+    },
+    "rotation": 0,
+    "template": "tunnel",
+    "width": 0.457,
+    "x": 4,
+    "y": 12
+   },
+   {
+    "base": {
+     "kind": "raised-floor"
+    },
+    "depth": 0.457,
+    "elevation": 2,
+    "frame": {
+     "materialId": "lumber-2x2-cedar",
+     "maxPostSpacing": 0.9,
+     "profile": "wood-2x2",
+     "railSpacing": 0.6
+    },
+    "furnishings": [
+     {
+      "componentId": "shelf",
+      "id": "4ce3a0ab-f26b-4820-9e45-71d1e2f28f36",
+      "length": 0.36,
+      "mountHeight": 0.35,
+      "offset": 0.05,
+      "side": "left"
+     }
+    ],
+    "height": 0.762,
+    "hostOpeningId": "b5f69625-b910-463c-8734-814363b1346a",
+    "hostWallId": "0e80fc89-bda3-4066-8351-390bb1171088",
+    "id": "2fb1681d-e907-4868-a95d-69bf888254ca",
+    "lowHeight": 0.66,
+    "mesh": {
+     "materialId": "mesh-1x1-16ga-gaw-36"
+    },
+    "name": "Window box",
+    "openings": [
+     {
+      "height": 0.0119999999999999,
+      "id": "56f4f98a-0881-4111-882f-88e0f9087827",
+      "kind": "window-access",
+      "offset": 0,
+      "side": "back",
+      "sill": 0.7500000000000001,
+      "width": 0.914
+     },
+     {
+      "height": 0.35,
+      "hinge": "left",
+      "id": "57f4fb1d-0781-4f7e-892f-8a73f8087694",
+      "kind": "cleaning-hatch",
+      "latch": "slide-bolt",
+      "offset": 0.2,
+      "side": "front",
+      "sill": 0.1,
+      "swing": "out",
+      "width": 0.5
+     }
+    ],
+    "roof": {
+     "kind": "polycarbonate",
+     "materialId": "roof-polycarb-corrugated"
+    },
+    "rotation": 0,
+    "template": "window-box",
+    "width": 0.914,
+    "x": 6.543,
+    "y": 0
+   },
+   {
+    "base": {
+     "kind": "deck"
+    },
+    "depth": 1.2,
+    "elevation": 3,
+    "frame": {
+     "materialId": "lumber-2x3-pt",
+     "maxPostSpacing": 1.2,
+     "profile": "wood-2x3",
+     "railSpacing": 0.9
+    },
+    "furnishings": [],
+    "height": 2.2,
+    "id": "28b15d18-f007-436d-a65d-650683824ceb",
+    "lowHeight": 2.2,
+    "mesh": {
+     "materialId": "mesh-pvc-1x1-14ga-48"
+    },
+    "name": "Balcony",
+    "openings": [],
+    "roof": {
+     "kind": "mesh"
+    },
+    "rotation": 0,
+    "template": "balcony-concept",
+    "width": 2.4,
+    "x": 0,
+    "y": 9
+   }
+  ],
+  "units": "imperial",
+  "updatedAt": "2026-10-12T12:00:00.000Z",
+  "web": {}
+ },
+ "openings": [],
+ "openplanHandoffVersion": 1,
+ "openplanPrepared": true,
+ "planNotes": "Created with OpenCatio3D. Catios are shown as boxes; the full design is in the opencatio3d block. Planning guidance only — confirm dimensions on site.",
+ "sections": [],
+ "stories": [
+  {
+   "index": 0,
+   "name": "Ground Floor"
+  }
+ ],
+ "version": 2,
+ "walls": [
+  {
+   "dimensions": [
+    12,
+    2.4,
+    0.2
+   ],
+   "identifier": "0e80fc89-bda3-4066-8351-390bb1171088",
+   "story": 0,
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    6,
+    1.2,
+    -0.1,
+    1
+   ]
+  }
+ ],
+ "windows": [
+  {
+   "dimensions": [
+    1.2,
+    1.2,
+    0.2
+   ],
+   "identifier": "b0f68e46-b610-4183-8a34-85fc60b12fb1",
+   "parentIdentifier": "0e80fc89-bda3-4066-8351-390bb1171088",
+   "sillHeight": 0.8,
+   "story": 0,
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1.1,
+    1.4,
+    -0.1,
+    1
+   ]
+  },
+  {
+   "dimensions": [
+    1,
+    1,
+    0.2
+   ],
+   "identifier": "b5f69625-b910-463c-8734-814363b1346a",
+   "parentIdentifier": "0e80fc89-bda3-4066-8351-390bb1171088",
+   "sillHeight": 1.6,
+   "story": 0,
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    7,
+    2.1,
+    -0.1,
+    1
+   ]
+  },
+  {
+   "dimensions": [
+    0.8,
+    1,
+    0.2
+   ],
+   "identifier": "b2f6916c-bc10-4af5-8834-82d662b132d7",
+   "parentIdentifier": "0e80fc89-bda3-4066-8351-390bb1171088",
+   "sillHeight": 0.8,
+   "story": 0,
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    3.7,
+    1.3,
+    -0.1,
+    1
+   ]
+  }
+ ]
+}

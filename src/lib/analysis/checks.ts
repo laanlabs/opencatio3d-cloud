@@ -34,8 +34,8 @@ const SOLID_ROOFS = new Set(['corrugated', 'polycarbonate', 'partial']);
 const PERCH_TOP: Record<string, number> = { cubby: 0.4 };
 /** Mesh openings whose short side is at least this let cats through (CAT-ENC-001). */
 export const ESCAPE_OPENING = 0.05;
-/** Mesh openings wider than this are too big for kittens and small cats (CAT-ENC-002). */
-export const KITTEN_OPENING = 0.026;
+/** Mesh openings wider than this (short side) are too big for kittens (CAT-ENC-002). */
+export const KITTEN_OPENING = 0.02;
 
 /** Local (u, v) centre of a furnishing on the floor plan of its structure. */
 export function furnishingCentre(s: Structure, f: Furnishing, len: number): Vec2 {
@@ -85,7 +85,7 @@ export function runChecks(p: Project, cat: Catalog, a?: Assembly): Finding[] {
   const climate = p.region?.climate;
   const ground = p.site.ground;
   const cats = p.cats ?? [];
-  const smallCats = cats.some((c) => c.ageClass === 'kitten' || c.size === 'small');
+  const kittens = cats.some((c) => c.ageClass === 'kitten');
   const escapeProne = cats.some((c) => c.escapeRisk === 'high');
   const lessMobile = cats.some((c) => c.ageClass === 'senior' || c.mobility !== 'full');
 
@@ -114,7 +114,7 @@ export function runChecks(p: Project, cat: Catalog, a?: Assembly): Finding[] {
     const mesh = meshMaterial(s, cat);
     const short = Math.min(...(mesh.opening ?? [0.0254, 0.0254]));
     if (short >= ESCAPE_OPENING - 1e-9) emit('CAT-ENC-001', [s.id], `${name}: ${mesh.name}.`);
-    else if (short > KITTEN_OPENING && smallCats) emit('CAT-ENC-002', [s.id], `${name}: ${mesh.name}.`);
+    else if (short > KITTEN_OPENING && kittens) emit('CAT-ENC-002', [s.id], `${name}: ${mesh.name}.`);
     if ((mesh.gauge ?? 16) >= 19) emit('CAT-ENC-003', [s.id], `${name}:`);
     if (mesh.coating === 'galvanized-before-welding') emit('CAT-MAT-001', [s.id], `${name}:`);
 

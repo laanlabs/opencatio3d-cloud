@@ -1,0 +1,3341 @@
+{
+ "bom": [
+  {
+   "high": 708.4,
+   "key": "lumber-2x2-cedar@2.438",
+   "low": 429.44,
+   "qty": 88
+  },
+  {
+   "high": 660,
+   "key": "mesh-1x1-16ga-gaw-36",
+   "low": 420,
+   "qty": 6
+  },
+  {
+   "high": 192,
+   "key": "bracket-corner",
+   "low": 96,
+   "qty": 96
+  },
+  {
+   "high": 276,
+   "key": "screw-ext-1in-washer",
+   "low": 184,
+   "qty": 23
+  },
+  {
+   "high": 96,
+   "key": "screw-ext-3in",
+   "low": 66,
+   "qty": 6
+  },
+  {
+   "high": 322,
+   "key": "washer-fender-1in",
+   "low": 184,
+   "qty": 23
+  },
+  {
+   "high": 500,
+   "key": "paver-16in",
+   "low": 300,
+   "qty": 100
+  },
+  {
+   "high": 175,
+   "key": "sand-leveling",
+   "low": 125,
+   "qty": 25
+  }
+ ],
+ "catalogVersion": "oc-catalog@0.1",
+ "cost": {
+  "high": 2930,
+  "low": 1804
+ },
+ "cuts": {
+  "kerf": 0.003,
+  "materials": [
+   {
+    "bins": [
+     {
+      "cuts": [
+       "016cd148-4be4-435b-bcbc-7192962df9d5"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "026cd2db-4ae4-41c8-bdbc-7325952df842"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "046cd601-4ce4-44ee-bbbc-6fff932df51c"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "253c5b14-f811-404f-aff4-96461a88df49"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "263c5ca7-f710-4ebc-b0f4-97d91988ddb6"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "273c5e3a-fa11-4375-adf4-93201888dc23"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "283c5fcd-f911-41e2-aef4-94b31788da90"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "394cd00c-0ea3-41bb-9be4-214e59274f65"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "3a4cd19f-0da3-4028-9ce4-22e158274dd2"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "3b4cd332-10a3-44e1-99e4-1e2857274c3f"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "3c4cd4c5-0fa3-434e-9ae4-1fbb56274aac"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "402d49a7-ac88-461c-bffb-fc59338a13ee"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "412d4b3a-af88-4ad5-bcfb-f7a0328a125b"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "422d4ccd-ae88-4942-bdfb-f933318a10c8"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "47fbb574-1b68-476b-afdd-756a9cf30de9"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "49fbb89a-1d68-4a91-addd-72449af30ac3"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "4afbba2d-1c68-48fe-aedd-73d799f30930"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "7f77d874-b20a-438f-a96c-db0a089bbc9d"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "8077da07-b10a-41fc-aa6c-dc9d079bbb0a"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "8177db9a-b40a-46b5-a76c-d7e4069bb977"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "8e7b271f-11bc-46d0-b1ae-1ee199893812"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "8f7b28b2-14bc-4b89-aeae-1a289889367f"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "907b2a45-13bc-49f6-afae-1bbb978934ec"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "9a111e70-b4b4-4da3-9634-1f766aab9a31"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "9c112196-b6b4-40c9-9434-1c5068ab970b"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "9d112329-b5b4-4f36-9534-1de367ab9578"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "ad3e7bc8-5d66-4683-a7f2-759254cc0f95"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "ae3e7d5b-5c66-44f0-a8f2-772553cc0e02"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "af3e7eee-5f66-49a9-a5f2-726c52cc0c6f"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "b03e8081-5e66-4816-a6f2-73ff51cc0adc"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "b6ec2dc0-fc6c-401f-9e44-c39ac1992f81"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "b7ec2f53-fb6c-4e8c-9f44-c52dc0992dee"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "b8ec30e6-fe6c-4345-9c44-c074bf992c5b"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "b9ec3279-fd6c-41b2-9d44-c207be992ac8"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "c6936868-2bbb-4a97-baca-06ae6cbb1295"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "c79369fb-2abb-4904-bbca-08416bbb1102"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "c8936b8e-2dbb-4dbd-b8ca-03886abb0f6f"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "d0dd1ac0-b1e3-477f-ad4c-281afb623a89"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "d1dd1c53-b0e3-45ec-ae4c-29adfa6238f6"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "d3dd1f79-b2e3-4912-ac4c-2687f86235d0"
+      ],
+      "offcut": 0.438,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "002c03a4-50fe-4ca5-af9f-a4c6901a4107",
+       "13279e45-3e03-4204-b23e-925ba8043c12"
+      ],
+      "offcut": 0.635,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "142e6a67-e9be-4b54-ba7e-81653d902572",
+       "23628269-0784-479c-8ae9-44836594f67e"
+      ],
+      "offcut": 0.635,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "2d6accf0-5e21-4c7b-b344-8fd6265ed681",
+       "3c6d9363-bbba-49b8-9c71-d8796b46982e"
+      ],
+      "offcut": 0.635,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "3d197449-d2d1-4aae-85a4-dc13542f2738",
+       "424b9758-d5c9-42dd-8faf-04ce602fd273"
+      ],
+      "offcut": 0.635,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "45638772-fd58-46b5-80cf-9bc40c5b0867",
+       "5c028938-9c25-43e3-ba76-3d9e35461249"
+      ],
+      "offcut": 0.635,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "6a7224ff-b8fc-47ec-b0c2-6e5dfcc3d62a",
+       "7319fa2e-9cd1-44c9-bcab-81a8349a3163"
+      ],
+      "offcut": 0.635,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "73ef510b-adfd-4d16-baa4-93959009ee90",
+       "89b3ef77-c6db-4762-b516-bd611c1279f4"
+      ],
+      "offcut": 0.635,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "8a071ad4-73e5-4ae7-8c21-fa2295cd2435",
+       "8b7e6202-b16b-4557-b1d4-e8d02fad7855"
+      ],
+      "offcut": 0.635,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "9da08635-a51b-47f2-b439-92178233b8d4",
+       "9f5deefc-c741-469d-b784-160efc7d841f"
+      ],
+      "offcut": 0.635,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "b1f31873-0e7c-4fde-b0e8-808df0885158",
+       "b2a08c59-f9df-47e8-8774-9f5fd5b91bce"
+      ],
+      "offcut": 0.635,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "b7583c7e-d9aa-4e53-a027-994cd19f3c69",
+       "d2277208-f076-47b9-8b7a-2a0ad0f35b83"
+      ],
+      "offcut": 0.635,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "e1dd8707-d84b-4456-a9a3-6155ae68bda4",
+       "f9c78212-d99a-4dab-9608-62f4c1645845"
+      ],
+      "offcut": 0.635,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "020f78e5-c031-4d6e-95c5-100bd49345a4",
+       "0749b665-8c05-4daa-ba89-c46bbd7a2e78"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "0ff24953-c57e-4fa8-82e1-9f21ec1b740e",
+       "11ad40e5-2cd9-4770-b012-0eeb51254106"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "140f953b-aa30-4acc-a3c5-2615da934f16",
+       "17a711d8-deb5-4c35-9712-aceaeb4ca067"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "18ca7eee-adb7-4323-a242-896829db2d8d",
+       "1949d2bb-8e05-40d0-8889-da75cb7a4482"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "19604085-fa52-4f0a-a70f-0a7bd08bef20",
+       "1ad93cb8-9909-4fd1-9d1d-726a3cbe0d03"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "1eef2795-589d-4316-8f72-84572799d810",
+       "25043e7e-246b-402f-a6f8-30b4b6b39295"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "25a727e2-d0b5-462b-9912-b010d14c7779",
+       "279bb877-513a-45fa-8b69-0399d5e041fc"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "28d952c2-a309-4f8f-9f1d-75903abe09dd",
+       "2ec02904-12f8-4e15-b1f2-caaec826c4af"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "2f044e3c-1a6b-4071-8cf8-07c6a8b37c8b",
+       "32b37120-618f-4e2b-861c-e7dab738be85"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "34c03276-04f8-480b-9bf2-a80cbe26b4f1",
+       "36bac7a4-2de6-44db-8ec3-339e9fe7f6e5"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "37c030a6-6e06-4519-aa90-1b10f5992ecb",
+       "3c591c6f-04df-4ae8-9256-34e16eb0bb82"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "3cbad116-1be6-4885-98c3-435cb1e8133b",
+       "3dc84712-c364-40cf-9c14-8484ca580c41"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "3deb3071-39cc-4a96-9d74-72a34a446788",
+       "464c3cff-56f2-4074-9dea-5859cbccf09e"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "47eb402f-33cc-4124-9b74-6f7d38444b32",
+       "4b6f9004-9216-4433-a4c2-d9a21f3adb29"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "4c5259b6-7fac-4675-9034-835c6418c77b",
+       "516f9976-b016-436d-96c2-c398193ad1b7"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "548f8aca-2a1c-42c1-a08c-df2cda7e2fa3",
+       "568f8df0-141b-401f-b68d-01ced87e2c7d"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "57c0b0cb-3ff2-4d00-b4b1-2c29d598aea6",
+       "5c4c5fa1-3cf2-4786-b7ea-8147d5cd005c"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "5f31bfdd-14ae-4ec0-b48c-505f04659cc2",
+       "6131c303-32ae-4dfa-8a8c-7301f66586b8"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "61387a51-52aa-4238-b885-bdb3d66a127a",
+       "62b73671-4d5d-4a62-87c5-60835d906294"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "6b388a0f-60aa-4842-9685-ecedb869e340",
+       "7598f706-f65c-4c5b-8b65-ecc0ed398ae5"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "877a8f93-8c2f-42e8-8f09-a6dd7567699a",
+       "8b93ab4f-7599-4c92-a522-9a11ab591074"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "935fdc11-b9af-4e6a-b1ee-d9ab72cdd1ec",
+       "9a6bcd32-357f-41ad-a2fd-0a74e5c3be2f"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "9d5febcf-bbaf-4190-bfee-efb588cdf48e",
+       "9eb13097-9766-47a6-9086-d3adbaa2494c"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "a4b13a09-b166-4094-b286-a473d0a26bee",
+       "a57abecd-7a2f-4692-9109-aa0357673a60"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "ac6be988-177f-4273-88fc-e186dbc3ae71",
+       "af0b0ee4-2f35-435f-8231-de4e0f5ff1e1"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "b220ecbf-e7d1-4550-8c86-72e9cd6f3ae2",
+       "b98ebc60-5523-45f3-9065-7de243533ccd"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "be8bb6db-ad69-4c86-a1ef-0335d0952bf0",
+       "bfb7e494-248e-4b73-a152-b9b2008fb471"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "c8210f61-e5d1-422a-8686-6977bf6f24d8",
+       "cd27328b-6c91-47f6-b75e-01c10a90983c"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "cfccc674-269c-47c1-805a-8922671ff54f",
+       "d0d83d82-1ea6-4851-b2e4-0eb8da319a6f"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "d4f553ec-760a-489b-81a0-ea7a31385a11",
+       "d78eeb9a-7324-452d-8265-67d825530d93"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "d9ba0fa6-059c-4481-9a5b-2638eef896ab",
+       "db274895-6690-4e84-a15d-df1f0090887e"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "dcdd9940-9702-455d-86df-37d246c4d40f",
+       "e29a6af1-66d5-43bc-afc7-addb104c7c76"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "e33b93ea-d8af-43d9-9bf5-d85048317b17",
+       "eaf5768e-640a-4c45-a3a0-bb403b3869cf"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "ec9a7aaf-5cd5-43fe-9dc7-91850a4c7304",
+       "eecbc241-079d-4bf4-a545-721f19549112"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "f3ba3894-ef9c-41df-a85b-3c42fcf8acb5",
+       "f508e1f0-497e-4665-9126-27d69a1800db"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "f6acfbff-1243-46c4-b7b6-42ed5e5c76b2",
+       "faddc87a-9902-4883-98df-54283cc4c451"
+      ],
+      "offcut": 0.787,
+      "stock": 2.438
+     }
+    ],
+    "materialId": "lumber-2x2-cedar",
+    "overlong": []
+   }
+  ]
+ },
+ "findings": [
+  {
+   "ruleId": "CAT-GND-002",
+   "severity": "advisory",
+   "status": "open",
+   "targetIds": [
+    "0ac9d4c4-9ee0-4007-9ba9-a27e377cf311"
+   ]
+  },
+  {
+   "ruleId": "CAT-MAT-004",
+   "severity": "info",
+   "status": "open",
+   "targetIds": []
+  }
+ ],
+ "parts": [
+  {
+   "id": "faddc87a-9902-4883-98df-54283cc4c451",
+   "key": "hoop0:post-l",
+   "kind": "member",
+   "label": "A5",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "dcdd9940-9702-455d-86df-37d246c4d40f",
+   "key": "hoop0:post-r",
+   "kind": "member",
+   "label": "A6",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "5c028938-9c25-43e3-ba76-3d9e35461249",
+   "key": "hoop0:top",
+   "kind": "member",
+   "label": "A7",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "7598f706-f65c-4c5b-8b65-ecc0ed398ae5",
+   "key": "hoop0:bottom",
+   "kind": "member",
+   "label": "A4",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "ec9a7aaf-5cd5-43fe-9dc7-91850a4c7304",
+   "key": "hoop1:post-l",
+   "kind": "member",
+   "label": "A49",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "e29a6af1-66d5-43bc-afc7-addb104c7c76",
+   "key": "hoop1:post-r",
+   "kind": "member",
+   "label": "A50",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "142e6a67-e9be-4b54-ba7e-81653d902572",
+   "key": "hoop1:top",
+   "kind": "member",
+   "label": "A51",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "8b93ab4f-7599-4c92-a522-9a11ab591074",
+   "key": "hoop1:bottom",
+   "kind": "member",
+   "label": "A48",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "2ec02904-12f8-4e15-b1f2-caaec826c4af",
+   "key": "hoop2:post-l",
+   "kind": "member",
+   "label": "A69",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "34c03276-04f8-480b-9bf2-a80cbe26b4f1",
+   "key": "hoop2:post-r",
+   "kind": "member",
+   "label": "A70",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "45638772-fd58-46b5-80cf-9bc40c5b0867",
+   "key": "hoop2:top",
+   "kind": "member",
+   "label": "A71",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "cfccc674-269c-47c1-805a-8922671ff54f",
+   "key": "hoop2:bottom",
+   "kind": "member",
+   "label": "A68",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "61387a51-52aa-4238-b885-bdb3d66a127a",
+   "key": "hoop3:post-l",
+   "kind": "member",
+   "label": "A73",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "6b388a0f-60aa-4842-9685-ecedb869e340",
+   "key": "hoop3:post-r",
+   "kind": "member",
+   "label": "A74",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "3d197449-d2d1-4aae-85a4-dc13542f2738",
+   "key": "hoop3:top",
+   "kind": "member",
+   "label": "A75",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "11ad40e5-2cd9-4770-b012-0eeb51254106",
+   "key": "hoop3:bottom",
+   "kind": "member",
+   "label": "A72",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "25043e7e-246b-402f-a6f8-30b4b6b39295",
+   "key": "hoop4:post-l",
+   "kind": "member",
+   "label": "A77",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "2f044e3c-1a6b-4071-8cf8-07c6a8b37c8b",
+   "key": "hoop4:post-r",
+   "kind": "member",
+   "label": "A78",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "8a071ad4-73e5-4ae7-8c21-fa2295cd2435",
+   "key": "hoop4:top",
+   "kind": "member",
+   "label": "A79",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "3dc84712-c364-40cf-9c14-8484ca580c41",
+   "key": "hoop4:bottom",
+   "kind": "member",
+   "label": "A76",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "6131c303-32ae-4dfa-8a8c-7301f66586b8",
+   "key": "hoop5:post-l",
+   "kind": "member",
+   "label": "A81",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "5f31bfdd-14ae-4ec0-b48c-505f04659cc2",
+   "key": "hoop5:post-r",
+   "kind": "member",
+   "label": "A82",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "3c6d9363-bbba-49b8-9c71-d8796b46982e",
+   "key": "hoop5:top",
+   "kind": "member",
+   "label": "A83",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "be8bb6db-ad69-4c86-a1ef-0335d0952bf0",
+   "key": "hoop5:bottom",
+   "kind": "member",
+   "label": "A80",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "1ad93cb8-9909-4fd1-9d1d-726a3cbe0d03",
+   "key": "hoop6:post-l",
+   "kind": "member",
+   "label": "A85",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "28d952c2-a309-4f8f-9f1d-75903abe09dd",
+   "key": "hoop6:post-r",
+   "kind": "member",
+   "label": "A86",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "7319fa2e-9cd1-44c9-bcab-81a8349a3163",
+   "key": "hoop6:top",
+   "kind": "member",
+   "label": "A87",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "f508e1f0-497e-4665-9126-27d69a1800db",
+   "key": "hoop6:bottom",
+   "kind": "member",
+   "label": "A84",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "db274895-6690-4e84-a15d-df1f0090887e",
+   "key": "hoop7:post-l",
+   "kind": "member",
+   "label": "A89",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "cd27328b-6c91-47f6-b75e-01c10a90983c",
+   "key": "hoop7:post-r",
+   "kind": "member",
+   "label": "A90",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "9da08635-a51b-47f2-b439-92178233b8d4",
+   "key": "hoop7:top",
+   "kind": "member",
+   "label": "A91",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "eecbc241-079d-4bf4-a545-721f19549112",
+   "key": "hoop7:bottom",
+   "kind": "member",
+   "label": "A88",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "25a727e2-d0b5-462b-9912-b010d14c7779",
+   "key": "hoop8:post-l",
+   "kind": "member",
+   "label": "A93",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "17a711d8-deb5-4c35-9712-aceaeb4ca067",
+   "key": "hoop8:post-r",
+   "kind": "member",
+   "label": "A94",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "2d6accf0-5e21-4c7b-b344-8fd6265ed681",
+   "key": "hoop8:top",
+   "kind": "member",
+   "label": "A95",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "18ca7eee-adb7-4323-a242-896829db2d8d",
+   "key": "hoop8:bottom",
+   "kind": "member",
+   "label": "A92",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "9eb13097-9766-47a6-9086-d3adbaa2494c",
+   "key": "hoop9:post-l",
+   "kind": "member",
+   "label": "A97",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "a4b13a09-b166-4094-b286-a473d0a26bee",
+   "key": "hoop9:post-r",
+   "kind": "member",
+   "label": "A98",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "6a7224ff-b8fc-47ec-b0c2-6e5dfcc3d62a",
+   "key": "hoop9:top",
+   "kind": "member",
+   "label": "A99",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "279bb877-513a-45fa-8b69-0399d5e041fc",
+   "key": "hoop9:bottom",
+   "kind": "member",
+   "label": "A96",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "877a8f93-8c2f-42e8-8f09-a6dd7567699a",
+   "key": "hoop10:post-l",
+   "kind": "member",
+   "label": "A9",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "a57abecd-7a2f-4692-9109-aa0357673a60",
+   "key": "hoop10:post-r",
+   "kind": "member",
+   "label": "A10",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "b1f31873-0e7c-4fde-b0e8-808df0885158",
+   "key": "hoop10:top",
+   "kind": "member",
+   "label": "A11",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "57c0b0cb-3ff2-4d00-b4b1-2c29d598aea6",
+   "key": "hoop10:bottom",
+   "kind": "member",
+   "label": "A8",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "eaf5768e-640a-4c45-a3a0-bb403b3869cf",
+   "key": "hoop11:post-l",
+   "kind": "member",
+   "label": "A13",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "d4f553ec-760a-489b-81a0-ea7a31385a11",
+   "key": "hoop11:post-r",
+   "kind": "member",
+   "label": "A14",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "002c03a4-50fe-4ca5-af9f-a4c6901a4107",
+   "key": "hoop11:top",
+   "kind": "member",
+   "label": "A15",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "d0d83d82-1ea6-4851-b2e4-0eb8da319a6f",
+   "key": "hoop11:bottom",
+   "kind": "member",
+   "label": "A12",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "020f78e5-c031-4d6e-95c5-100bd49345a4",
+   "key": "hoop12:post-l",
+   "kind": "member",
+   "label": "A17",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "140f953b-aa30-4acc-a3c5-2615da934f16",
+   "key": "hoop12:post-r",
+   "kind": "member",
+   "label": "A18",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "13279e45-3e03-4204-b23e-925ba8043c12",
+   "key": "hoop12:top",
+   "kind": "member",
+   "label": "A19",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "62b73671-4d5d-4a62-87c5-60835d906294",
+   "key": "hoop12:bottom",
+   "kind": "member",
+   "label": "A16",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "ac6be988-177f-4273-88fc-e186dbc3ae71",
+   "key": "hoop13:post-l",
+   "kind": "member",
+   "label": "A21",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "9a6bcd32-357f-41ad-a2fd-0a74e5c3be2f",
+   "key": "hoop13:post-r",
+   "kind": "member",
+   "label": "A22",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "b7583c7e-d9aa-4e53-a027-994cd19f3c69",
+   "key": "hoop13:top",
+   "kind": "member",
+   "label": "A23",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "32b37120-618f-4e2b-861c-e7dab738be85",
+   "key": "hoop13:bottom",
+   "kind": "member",
+   "label": "A20",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "464c3cff-56f2-4074-9dea-5859cbccf09e",
+   "key": "hoop14:post-l",
+   "kind": "member",
+   "label": "A25",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "5c4c5fa1-3cf2-4786-b7ea-8147d5cd005c",
+   "key": "hoop14:post-r",
+   "kind": "member",
+   "label": "A26",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "89b3ef77-c6db-4762-b516-bd611c1279f4",
+   "key": "hoop14:top",
+   "kind": "member",
+   "label": "A27",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "f6acfbff-1243-46c4-b7b6-42ed5e5c76b2",
+   "key": "hoop14:bottom",
+   "kind": "member",
+   "label": "A24",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "548f8aca-2a1c-42c1-a08c-df2cda7e2fa3",
+   "key": "hoop15:post-l",
+   "kind": "member",
+   "label": "A29",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "568f8df0-141b-401f-b68d-01ced87e2c7d",
+   "key": "hoop15:post-r",
+   "kind": "member",
+   "label": "A30",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "d2277208-f076-47b9-8b7a-2a0ad0f35b83",
+   "key": "hoop15:top",
+   "kind": "member",
+   "label": "A31",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "4c5259b6-7fac-4675-9034-835c6418c77b",
+   "key": "hoop15:bottom",
+   "kind": "member",
+   "label": "A28",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "c8210f61-e5d1-422a-8686-6977bf6f24d8",
+   "key": "hoop16:post-l",
+   "kind": "member",
+   "label": "A33",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "b220ecbf-e7d1-4550-8c86-72e9cd6f3ae2",
+   "key": "hoop16:post-r",
+   "kind": "member",
+   "label": "A34",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "b2a08c59-f9df-47e8-8774-9f5fd5b91bce",
+   "key": "hoop16:top",
+   "kind": "member",
+   "label": "A35",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "1eef2795-589d-4316-8f72-84572799d810",
+   "key": "hoop16:bottom",
+   "kind": "member",
+   "label": "A32",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "f3ba3894-ef9c-41df-a85b-3c42fcf8acb5",
+   "key": "hoop17:post-l",
+   "kind": "member",
+   "label": "A37",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "d9ba0fa6-059c-4481-9a5b-2638eef896ab",
+   "key": "hoop17:post-r",
+   "kind": "member",
+   "label": "A38",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "8b7e6202-b16b-4557-b1d4-e8d02fad7855",
+   "key": "hoop17:top",
+   "kind": "member",
+   "label": "A39",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "af0b0ee4-2f35-435f-8231-de4e0f5ff1e1",
+   "key": "hoop17:bottom",
+   "kind": "member",
+   "label": "A36",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "1949d2bb-8e05-40d0-8889-da75cb7a4482",
+   "key": "hoop18:post-l",
+   "kind": "member",
+   "label": "A41",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "0749b665-8c05-4daa-ba89-c46bbd7a2e78",
+   "key": "hoop18:post-r",
+   "kind": "member",
+   "label": "A42",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "73ef510b-adfd-4d16-baa4-93959009ee90",
+   "key": "hoop18:top",
+   "kind": "member",
+   "label": "A43",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "0ff24953-c57e-4fa8-82e1-9f21ec1b740e",
+   "key": "hoop18:bottom",
+   "kind": "member",
+   "label": "A40",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "516f9976-b016-436d-96c2-c398193ad1b7",
+   "key": "hoop19:post-l",
+   "kind": "member",
+   "label": "A45",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "4b6f9004-9216-4433-a4c2-d9a21f3adb29",
+   "key": "hoop19:post-r",
+   "kind": "member",
+   "label": "A46",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "9f5deefc-c741-469d-b784-160efc7d841f",
+   "key": "hoop19:top",
+   "kind": "member",
+   "label": "A47",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "e33b93ea-d8af-43d9-9bf5-d85048317b17",
+   "key": "hoop19:bottom",
+   "kind": "member",
+   "label": "A44",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "d78eeb9a-7324-452d-8265-67d825530d93",
+   "key": "hoop20:post-l",
+   "kind": "member",
+   "label": "A53",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "b98ebc60-5523-45f3-9065-7de243533ccd",
+   "key": "hoop20:post-r",
+   "kind": "member",
+   "label": "A54",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "424b9758-d5c9-42dd-8faf-04ce602fd273",
+   "key": "hoop20:top",
+   "kind": "member",
+   "label": "A55",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "37c030a6-6e06-4519-aa90-1b10f5992ecb",
+   "key": "hoop20:bottom",
+   "kind": "member",
+   "label": "A52",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "9d5febcf-bbaf-4190-bfee-efb588cdf48e",
+   "key": "hoop21:post-l",
+   "kind": "member",
+   "label": "A57",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "935fdc11-b9af-4e6a-b1ee-d9ab72cdd1ec",
+   "key": "hoop21:post-r",
+   "kind": "member",
+   "label": "A58",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "e1dd8707-d84b-4456-a9a3-6155ae68bda4",
+   "key": "hoop21:top",
+   "kind": "member",
+   "label": "A59",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "3c591c6f-04df-4ae8-9256-34e16eb0bb82",
+   "key": "hoop21:bottom",
+   "kind": "member",
+   "label": "A56",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "36bac7a4-2de6-44db-8ec3-339e9fe7f6e5",
+   "key": "hoop22:post-l",
+   "kind": "member",
+   "label": "A61",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "3cbad116-1be6-4885-98c3-435cb1e8133b",
+   "key": "hoop22:post-r",
+   "kind": "member",
+   "label": "A62",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "f9c78212-d99a-4dab-9608-62f4c1645845",
+   "key": "hoop22:top",
+   "kind": "member",
+   "label": "A63",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "bfb7e494-248e-4b73-a152-b9b2008fb471",
+   "key": "hoop22:bottom",
+   "kind": "member",
+   "label": "A60",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "3deb3071-39cc-4a96-9d74-72a34a446788",
+   "key": "hoop23:post-l",
+   "kind": "member",
+   "label": "A65",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "47eb402f-33cc-4124-9b74-6f7d38444b32",
+   "key": "hoop23:post-r",
+   "kind": "member",
+   "label": "A66",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-post",
+   "step": "walls"
+  },
+  {
+   "id": "23628269-0784-479c-8ae9-44836594f67e",
+   "key": "hoop23:top",
+   "kind": "member",
+   "label": "A67",
+   "length": 0.9,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "19604085-fa52-4f0a-a70f-0a7bd08bef20",
+   "key": "hoop23:bottom",
+   "kind": "member",
+   "label": "A64",
+   "length": 0.824,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "hoop-bar",
+   "step": "walls"
+  },
+  {
+   "id": "b7ec2f53-fb6c-4e8c-9f44-c52dc0992dee",
+   "key": "seg0:rail-tl:p0",
+   "kind": "member",
+   "label": "A108",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "b6ec2dc0-fc6c-401f-9e44-c39ac1992f81",
+   "key": "seg0:rail-tl:p1",
+   "kind": "member",
+   "label": "A109",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "b9ec3279-fd6c-41b2-9d44-c207be992ac8",
+   "key": "seg0:rail-tl:p2",
+   "kind": "member",
+   "label": "A110",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "b8ec30e6-fe6c-4345-9c44-c074bf992c5b",
+   "key": "seg0:rail-tl:p3",
+   "kind": "member",
+   "label": "A111",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "283c5fcd-f911-41e2-aef4-94b31788da90",
+   "key": "seg0:rail-tr:p0",
+   "kind": "member",
+   "label": "A112",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "273c5e3a-fa11-4375-adf4-93201888dc23",
+   "key": "seg0:rail-tr:p1",
+   "kind": "member",
+   "label": "A113",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "263c5ca7-f710-4ebc-b0f4-97d91988ddb6",
+   "key": "seg0:rail-tr:p2",
+   "kind": "member",
+   "label": "A114",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "253c5b14-f811-404f-aff4-96461a88df49",
+   "key": "seg0:rail-tr:p3",
+   "kind": "member",
+   "label": "A115",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "3c4cd4c5-0fa3-434e-9ae4-1fbb56274aac",
+   "key": "seg0:rail-bl:p0",
+   "kind": "member",
+   "label": "A100",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "3b4cd332-10a3-44e1-99e4-1e2857274c3f",
+   "key": "seg0:rail-bl:p1",
+   "kind": "member",
+   "label": "A101",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "3a4cd19f-0da3-4028-9ce4-22e158274dd2",
+   "key": "seg0:rail-bl:p2",
+   "kind": "member",
+   "label": "A102",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "394cd00c-0ea3-41bb-9be4-214e59274f65",
+   "key": "seg0:rail-bl:p3",
+   "kind": "member",
+   "label": "A103",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "ae3e7d5b-5c66-44f0-a8f2-772553cc0e02",
+   "key": "seg0:rail-br:p0",
+   "kind": "member",
+   "label": "A104",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "ad3e7bc8-5d66-4683-a7f2-759254cc0f95",
+   "key": "seg0:rail-br:p1",
+   "kind": "member",
+   "label": "A105",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "b03e8081-5e66-4816-a6f2-73ff51cc0adc",
+   "key": "seg0:rail-br:p2",
+   "kind": "member",
+   "label": "A106",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "af3e7eee-5f66-49a9-a5f2-726c52cc0c6f",
+   "key": "seg0:rail-br:p3",
+   "kind": "member",
+   "label": "A107",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "height": 0.925,
+   "id": "c023f6ae-e5d5-413b-a228-5bd4ad9c3101",
+   "key": "seg0:bay0:side-l:0",
+   "kind": "panel",
+   "label": "A148",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "245cbcac-543b-4ae5-8f35-78c6e4d6919f",
+   "key": "seg0:bay0:side-r:0",
+   "kind": "panel",
+   "label": "A149",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "33830d2b-25a1-4f20-a82c-7f350d9e91b2",
+   "key": "seg0:bay0:top:0",
+   "kind": "panel",
+   "label": "A150",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "9b6265f3-f04e-4396-a5b9-3d71031438a4",
+   "key": "seg0:bay1:side-l:0",
+   "kind": "panel",
+   "label": "A151",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "f883562d-60b6-4f04-bf7e-ff2f13e9eb36",
+   "key": "seg0:bay1:side-r:0",
+   "kind": "panel",
+   "label": "A152",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "428614a8-2499-4f23-b011-b2e2857e47c5",
+   "key": "seg0:bay1:top:0",
+   "kind": "panel",
+   "label": "A153",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "c6778544-4677-4e29-a217-58bee21107d3",
+   "key": "seg0:bay2:side-l:0",
+   "kind": "panel",
+   "label": "A154",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "560f39d6-cef7-4cf7-a3c5-871c3f31f80d",
+   "key": "seg0:bay2:side-r:0",
+   "kind": "panel",
+   "label": "A155",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "26630ae5-2605-466a-b241-cdfb77e28988",
+   "key": "seg0:bay2:top:0",
+   "kind": "panel",
+   "label": "A156",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "cd07a821-b859-474c-897e-62c3e463200e",
+   "key": "seg0:bay3:side-l:0",
+   "kind": "panel",
+   "label": "A157",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "044208bf-d2e4-464e-8929-ea9dc9d8510c",
+   "key": "seg0:bay3:side-r:0",
+   "kind": "panel",
+   "label": "A158",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "ecb1a852-e39f-4f1d-844f-88f890280e8b",
+   "key": "seg0:bay3:top:0",
+   "kind": "panel",
+   "label": "A159",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "5728e4f2-30d6-40cf-a14b-c7f8d8841925",
+   "key": "seg0:bay4:side-l:0",
+   "kind": "panel",
+   "label": "A160",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "b22083f8-1710-4f11-8654-28f26a1e0f7b",
+   "key": "seg0:bay4:side-r:0",
+   "kind": "panel",
+   "label": "A161",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "bc76b4c7-ec69-450c-84dc-5bf119649dfe",
+   "key": "seg0:bay4:top:0",
+   "kind": "panel",
+   "label": "A162",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "51965c27-30db-44ba-a8a9-51954d85df88",
+   "key": "seg0:bay5:side-l:0",
+   "kind": "panel",
+   "label": "A163",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "e54de7b9-5802-4470-9ccd-df8bd3dc6d22",
+   "key": "seg0:bay5:side-r:0",
+   "kind": "panel",
+   "label": "A164",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "d3165954-8cc1-4a7f-a954-04aea22e2481",
+   "key": "seg0:bay5:top:0",
+   "kind": "panel",
+   "label": "A165",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "ab8c92a8-1434-4d0d-991e-b9c2cb328087",
+   "key": "seg0:bay6:side-l:0",
+   "kind": "panel",
+   "label": "A166",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "332054c2-b713-4cd3-918a-f7a85eea0c19",
+   "key": "seg0:bay6:side-r:0",
+   "kind": "panel",
+   "label": "A167",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "9bcb24a1-1696-4236-a705-1b9747cadb34",
+   "key": "seg0:bay6:top:0",
+   "kind": "panel",
+   "label": "A168",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "73ca48c5-ebc5-4650-9161-3e77baa580d2",
+   "key": "seg0:bay7:side-l:0",
+   "kind": "panel",
+   "label": "A169",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "05643f1b-c5dc-4b1a-88e1-5fa996d98ad8",
+   "key": "seg0:bay7:side-r:0",
+   "kind": "panel",
+   "label": "A170",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "50eff69e-4fbf-4479-bdbe-26e4862890a7",
+   "key": "seg0:bay7:top:0",
+   "kind": "panel",
+   "label": "A171",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "11905c26-03b5-43a3-83db-55ec1eb87699",
+   "key": "seg0:bay8:side-l:0",
+   "kind": "panel",
+   "label": "A172",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "648408b4-c360-4b7d-9fa2-8fee8b00eb07",
+   "key": "seg0:bay8:side-r:0",
+   "kind": "panel",
+   "label": "A173",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "height": 0.925,
+   "id": "2b3c62b3-5398-4658-9599-b63de205385a",
+   "key": "seg0:bay8:top:0",
+   "kind": "panel",
+   "label": "A174",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.914
+  },
+  {
+   "id": "9c112196-b6b4-40c9-9434-1c5068ab970b",
+   "key": "seg1:rail-tl:p0",
+   "kind": "member",
+   "label": "A122",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "9d112329-b5b4-4f36-9534-1de367ab9578",
+   "key": "seg1:rail-tl:p1",
+   "kind": "member",
+   "label": "A123",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "9a111e70-b4b4-4da3-9634-1f766aab9a31",
+   "key": "seg1:rail-tl:p2",
+   "kind": "member",
+   "label": "A124",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "c6936868-2bbb-4a97-baca-06ae6cbb1295",
+   "key": "seg1:rail-tr:p0",
+   "kind": "member",
+   "label": "A125",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "c79369fb-2abb-4904-bbca-08416bbb1102",
+   "key": "seg1:rail-tr:p1",
+   "kind": "member",
+   "label": "A126",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "c8936b8e-2dbb-4dbd-b8ca-03886abb0f6f",
+   "key": "seg1:rail-tr:p2",
+   "kind": "member",
+   "label": "A127",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "7f77d874-b20a-438f-a96c-db0a089bbc9d",
+   "key": "seg1:rail-bl:p0",
+   "kind": "member",
+   "label": "A116",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "8077da07-b10a-41fc-aa6c-dc9d079bbb0a",
+   "key": "seg1:rail-bl:p1",
+   "kind": "member",
+   "label": "A117",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "8177db9a-b40a-46b5-a76c-d7e4069bb977",
+   "key": "seg1:rail-bl:p2",
+   "kind": "member",
+   "label": "A118",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "49fbb89a-1d68-4a91-addd-72449af30ac3",
+   "key": "seg1:rail-br:p0",
+   "kind": "member",
+   "label": "A119",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "4afbba2d-1c68-48fe-aedd-73d799f30930",
+   "key": "seg1:rail-br:p1",
+   "kind": "member",
+   "label": "A120",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "47fbb574-1b68-476b-afdd-756a9cf30de9",
+   "key": "seg1:rail-br:p2",
+   "kind": "member",
+   "label": "A121",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "height": 0.925,
+   "id": "cbc71449-20ed-4848-af9f-bbc73be43146",
+   "key": "seg1:bay0:side-l:0",
+   "kind": "panel",
+   "label": "A175",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "5446f317-a743-45e2-8357-47590ed71454",
+   "key": "seg1:bay0:side-r:0",
+   "kind": "panel",
+   "label": "A176",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "7815eb0a-3ad3-47c1-9ac5-fef454b8ccd3",
+   "key": "seg1:bay0:top:0",
+   "kind": "panel",
+   "label": "A177",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "d921646c-0148-4ce5-81a3-5512929f55ab",
+   "key": "seg1:bay1:side-l:0",
+   "kind": "panel",
+   "label": "A178",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "74e89e6e-92e2-433b-9dd7-5f189e7ac7b5",
+   "key": "seg1:bay1:side-r:0",
+   "kind": "panel",
+   "label": "A179",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "b6f451bd-c4fc-4d3e-9e1b-0267e632d950",
+   "key": "seg1:bay1:top:0",
+   "kind": "panel",
+   "label": "A180",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "eb23bddb-8e0c-4992-b4de-e865995a4a7c",
+   "key": "seg1:bay2:side-l:0",
+   "kind": "panel",
+   "label": "A181",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "5989c785-6a40-4398-8678-debb18ea1a1e",
+   "key": "seg1:bay2:side-r:0",
+   "kind": "panel",
+   "label": "A182",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "a3f094c0-31c0-4fe7-b157-0fbefc09978d",
+   "key": "seg1:bay2:top:0",
+   "kind": "panel",
+   "label": "A183",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "76db5e36-3c09-4047-9483-b3c89e69d959",
+   "key": "seg1:bay3:side-l:0",
+   "kind": "panel",
+   "label": "A184",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "6605aba4-cfc0-4bd9-9ada-41620ab24dc7",
+   "key": "seg1:bay3:side-r:0",
+   "kind": "panel",
+   "label": "A185",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "77e78843-6e6b-4c74-a72e-3a419099679a",
+   "key": "seg1:bay3:top:0",
+   "kind": "panel",
+   "label": "A186",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "88de922d-3a9a-4664-9f36-801318b7c96a",
+   "key": "seg1:bay4:side-l:0",
+   "kind": "panel",
+   "label": "A187",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "2bbda1f3-4b70-48f6-bc57-704da26920c0",
+   "key": "seg1:bay4:side-r:0",
+   "kind": "panel",
+   "label": "A188",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "0fee89d6-c56b-4e05-9069-7348b59d05ef",
+   "key": "seg1:bay4:top:0",
+   "kind": "panel",
+   "label": "A189",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "f89422f0-8068-4bc1-aa31-7e4ed263d77f",
+   "key": "seg1:bay5:side-l:0",
+   "kind": "panel",
+   "label": "A190",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "d16d633a-b7a2-4c5f-8fa6-af4c9b2976e1",
+   "key": "seg1:bay5:side-r:0",
+   "kind": "panel",
+   "label": "A191",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "f6d4d619-8cf7-4ff2-bbdb-6f4b81ffc2bc",
+   "key": "seg1:bay5:top:0",
+   "kind": "panel",
+   "label": "A192",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "e2f41def-f69b-42ce-b3ff-0741bd3b5100",
+   "key": "seg1:bay6:side-l:0",
+   "kind": "panel",
+   "label": "A193",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "c92e5c31-dc10-43cc-ab39-67df3389f9aa",
+   "key": "seg1:bay6:side-r:0",
+   "kind": "panel",
+   "label": "A194",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "937f36ac-0f80-4ccb-b951-f27268292ce9",
+   "key": "seg1:bay6:top:0",
+   "kind": "panel",
+   "label": "A195",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "id": "422d4ccd-ae88-4942-bdfb-f933318a10c8",
+   "key": "seg2:rail-tl:p0",
+   "kind": "member",
+   "label": "A134",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "412d4b3a-af88-4ad5-bcfb-f7a0328a125b",
+   "key": "seg2:rail-tl:p1",
+   "kind": "member",
+   "label": "A135",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "402d49a7-ac88-461c-bffb-fc59338a13ee",
+   "key": "seg2:rail-tl:p2",
+   "kind": "member",
+   "label": "A136",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "d1dd1c53-b0e3-45ec-ae4c-29adfa6238f6",
+   "key": "seg2:rail-tr:p0",
+   "kind": "member",
+   "label": "A137",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "d0dd1ac0-b1e3-477f-ad4c-281afb623a89",
+   "key": "seg2:rail-tr:p1",
+   "kind": "member",
+   "label": "A138",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "d3dd1f79-b2e3-4912-ac4c-2687f86235d0",
+   "key": "seg2:rail-tr:p2",
+   "kind": "member",
+   "label": "A139",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "026cd2db-4ae4-41c8-bdbc-7325952df842",
+   "key": "seg2:rail-bl:p0",
+   "kind": "member",
+   "label": "A128",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "016cd148-4be4-435b-bcbc-7192962df9d5",
+   "key": "seg2:rail-bl:p1",
+   "kind": "member",
+   "label": "A129",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "046cd601-4ce4-44ee-bbbc-6fff932df51c",
+   "key": "seg2:rail-bl:p2",
+   "kind": "member",
+   "label": "A130",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "907b2a45-13bc-49f6-afae-1bbb978934ec",
+   "key": "seg2:rail-br:p0",
+   "kind": "member",
+   "label": "A131",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "8f7b28b2-14bc-4b89-aeae-1a289889367f",
+   "key": "seg2:rail-br:p1",
+   "kind": "member",
+   "label": "A132",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "id": "8e7b271f-11bc-46d0-b1ae-1ee199893812",
+   "key": "seg2:rail-br:p2",
+   "kind": "member",
+   "label": "A133",
+   "length": 2,
+   "materialId": "lumber-2x2-cedar",
+   "qty": 1,
+   "role": "tunnel-rail",
+   "step": "walls"
+  },
+  {
+   "height": 0.925,
+   "id": "50438e74-508a-4e2d-9082-1b8e99824eff",
+   "key": "seg2:bay0:side-l:0",
+   "kind": "panel",
+   "label": "A196",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "fd4fe1e6-f369-4df3-b5f7-4c8c6247ee61",
+   "key": "seg2:bay0:side-r:0",
+   "kind": "panel",
+   "label": "A197",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "7b3e63d5-f947-4dd6-a84c-510b94f8f93c",
+   "key": "seg2:bay0:top:0",
+   "kind": "panel",
+   "label": "A198",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "5f053611-c03f-4ef0-8e30-0353dfd640ea",
+   "key": "seg2:bay1:side-l:0",
+   "kind": "panel",
+   "label": "A199",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "78caf7cf-9918-4f3a-ab50-f38d69879840",
+   "key": "seg2:bay1:side-r:0",
+   "kind": "panel",
+   "label": "A200",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "aeb40c02-e02d-4a19-9006-cc08c8963c6f",
+   "key": "seg2:bay1:top:0",
+   "kind": "panel",
+   "label": "A201",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "ac8c555e-aa9f-49ef-af33-34244bc765bd",
+   "key": "seg2:bay2:side-l:0",
+   "kind": "panel",
+   "label": "A202",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "2cfc85bc-90d9-4831-8008-e6b68c1bdde3",
+   "key": "seg2:bay2:side-r:0",
+   "kind": "panel",
+   "label": "A203",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "2fa6291b-7cd8-4aac-9da2-8a453bc3d526",
+   "key": "seg2:bay2:top:0",
+   "kind": "panel",
+   "label": "A204",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "e6715ae3-7f14-4b5a-99bb-2c818459c880",
+   "key": "seg2:bay3:side-l:0",
+   "kind": "panel",
+   "label": "A205",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "a61ce2bd-a4fd-4690-90f5-8d1ffaa8712a",
+   "key": "seg2:bay3:side-r:0",
+   "kind": "panel",
+   "label": "A206",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "30ad5918-aede-4e1f-a5c2-d4327b226369",
+   "key": "seg2:bay3:top:0",
+   "kind": "panel",
+   "label": "A207",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "b503df18-9372-4049-a6c4-7c5259bdcd2b",
+   "key": "seg2:bay4:side-l:0",
+   "kind": "panel",
+   "label": "A208",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "d8cfd512-1bf2-4f17-82f8-865865993f35",
+   "key": "seg2:bay4:side-r:0",
+   "kind": "panel",
+   "label": "A209",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "5c362891-616e-4f0a-9e4c-d327f92c0fd0",
+   "key": "seg2:bay4:top:0",
+   "kind": "panel",
+   "label": "A210",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "e6a0b7b5-a0cc-406c-b751-7c070302a8c6",
+   "key": "seg2:bay5:side-l:0",
+   "kind": "panel",
+   "label": "A211",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "dac545ab-3c94-4a6e-8b09-0799d5f58bd4",
+   "key": "seg2:bay5:side-r:0",
+   "kind": "panel",
+   "label": "A212",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "2624b14e-a04d-45bd-9fef-1db467b20353",
+   "key": "seg2:bay5:top:0",
+   "kind": "panel",
+   "label": "A213",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "bbd082e2-b2cf-49db-b9a4-db08658850d9",
+   "key": "seg2:bay6:side-l:0",
+   "kind": "panel",
+   "label": "A214",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "3579f548-2135-4385-bffb-68a2d1d0c547",
+   "key": "seg2:bay6:side-r:0",
+   "kind": "panel",
+   "label": "A215",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "51e5bc37-8d49-48c0-ba52-6701a3929e1a",
+   "key": "seg2:bay6:top:0",
+   "kind": "panel",
+   "label": "A216",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.882
+  },
+  {
+   "height": 0.925,
+   "id": "bc6cd966-796c-4f9f-92b1-a2104b99b9a9",
+   "key": "corner1:side:0",
+   "kind": "panel",
+   "label": "A140",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.783
+  },
+  {
+   "height": 0.925,
+   "id": "f045c26c-483d-479b-b206-68ba2d0e78d9",
+   "key": "corner1:top:0",
+   "kind": "panel",
+   "label": "A141",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.783
+  },
+  {
+   "height": 0.925,
+   "id": "fb6c84a9-7e6e-4848-8482-84e70c9a0e66",
+   "key": "corner2:side:0",
+   "kind": "panel",
+   "label": "A142",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.783
+  },
+  {
+   "height": 0.925,
+   "id": "539b61d9-c74b-4a82-b09a-d173c9b8d96c",
+   "key": "corner2:top:0",
+   "kind": "panel",
+   "label": "A143",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.783
+  },
+  {
+   "height": 0.925,
+   "id": "30dc7afc-6ead-4dad-b784-ae8e259e947f",
+   "key": "end-start:mesh:0",
+   "kind": "panel",
+   "label": "A146",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.475
+  },
+  {
+   "height": 0.925,
+   "id": "31dc7c8f-6dad-4c1a-b884-b021249e92ec",
+   "key": "end-start:mesh:1",
+   "kind": "panel",
+   "label": "A147",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.475
+  },
+  {
+   "height": 0.925,
+   "id": "db8f9753-ef16-493a-a9ff-1269e9650d00",
+   "key": "end-end:mesh:0",
+   "kind": "panel",
+   "label": "A144",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.475
+  },
+  {
+   "height": 0.925,
+   "id": "da8f95c0-f016-4acd-a8ff-10d6ea650e93",
+   "key": "end-end:mesh:1",
+   "kind": "panel",
+   "label": "A145",
+   "materialId": "mesh-1x1-16ga-gaw-36",
+   "qty": 1,
+   "role": "mesh-tunnel",
+   "rollLength": 0.925,
+   "step": "mesh",
+   "width": 0.475
+  },
+  {
+   "id": "3aa7125b-b899-4804-84c9-8ff97adb7d8a",
+   "key": "base:pavers",
+   "kind": "base",
+   "label": "A1",
+   "materialId": "paver-16in",
+   "qty": 100,
+   "role": "paver",
+   "step": "base"
+  },
+  {
+   "id": "3152e82c-ade2-4717-a9e2-ff262e49f109",
+   "key": "base:sand",
+   "kind": "base",
+   "label": "A2",
+   "materialId": "sand-leveling",
+   "qty": 25,
+   "role": "sand",
+   "step": "base"
+  },
+  {
+   "id": "25c9eaeb-73eb-4a94-a95a-ab3d48d225ee",
+   "key": "fasten:frame-screws",
+   "kind": "connector",
+   "materialId": "screw-ext-3in",
+   "qty": 544,
+   "role": "frame-screw",
+   "step": "walls"
+  },
+  {
+   "id": "45f25cbb-e157-477a-b1cb-20ad43ee8d3c",
+   "key": "fasten:corner-brackets",
+   "kind": "hardware",
+   "label": "A3",
+   "materialId": "bracket-corner",
+   "qty": 96,
+   "role": "corner-bracket",
+   "step": "walls"
+  },
+  {
+   "id": "91a494e3-5e9e-466a-8969-b5e505f9aecc",
+   "key": "fasten:mesh-screws",
+   "kind": "connector",
+   "materialId": "screw-ext-1in-washer",
+   "qty": 2040,
+   "role": "mesh-screw",
+   "step": "mesh"
+  },
+  {
+   "id": "2298ff9b-57ff-49e4-9bbe-72cd497f5c36",
+   "key": "fasten:mesh-washers",
+   "kind": "connector",
+   "materialId": "washer-fender-1in",
+   "qty": 2040,
+   "role": "mesh-washer",
+   "step": "mesh"
+  }
+ ],
+ "steps": [
+  {
+   "key": "base",
+   "order": 1,
+   "parts": 2,
+   "structureId": "0ac9d4c4-9ee0-4007-9ba9-a27e377cf311"
+  },
+  {
+   "key": "walls",
+   "order": 2,
+   "parts": 138,
+   "structureId": "0ac9d4c4-9ee0-4007-9ba9-a27e377cf311"
+  },
+  {
+   "key": "mesh",
+   "order": 3,
+   "parts": 79,
+   "structureId": "0ac9d4c4-9ee0-4007-9ba9-a27e377cf311"
+  },
+  {
+   "key": "inspect",
+   "order": 4,
+   "parts": 0,
+   "structureId": "0ac9d4c4-9ee0-4007-9ba9-a27e377cf311"
+  }
+ ],
+ "structures": [
+  {
+   "conceptOnly": false,
+   "id": "0ac9d4c4-9ee0-4007-9ba9-a27e377cf311",
+   "letter": "A",
+   "name": "Tunnel run",
+   "skippedFurnishings": [],
+   "skippedOpenings": [],
+   "unsupported": []
+  }
+ ]
+}

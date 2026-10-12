@@ -1,0 +1,313 @@
+{
+ "defaults": {
+  "ceilingHeight": 2.4,
+  "exteriorWallThickness": 0.2,
+  "interiorWallThickness": 0.12
+ },
+ "doors": [
+  {
+   "dimensions": [
+    0.9,
+    2.03,
+    0.2
+   ],
+   "identifier": "a8948ba7-0510-41f4-b03c-7bb134c43f16",
+   "parentIdentifier": "a1ca0ed3-bdb0-4e2a-8409-37b160f08e90",
+   "story": 0,
+   "style": "single",
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    6.95,
+    1.015,
+    -0.1,
+    1
+   ]
+  }
+ ],
+ "floors": [],
+ "objects": [
+  {
+   "attributes": {
+    "opencatio3dKind": "porch-infill",
+    "opencatio3dRole": "structure",
+    "structureId": "d77166ea-08d7-40b5-8b7f-1c3c149ade6f"
+   },
+   "category": {
+    "greenhouse": {}
+   },
+   "dimensions": [
+    3,
+    2.4,
+    2
+   ],
+   "identifier": "d77166ea-08d7-40b5-8b7f-1c3c149ade6f",
+   "story": 0,
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    2.65,
+    1.2,
+    1,
+    1
+   ]
+  }
+ ],
+ "opencatio3d": {
+  "alternatives": [],
+  "assumptions": {
+   "fastenerOverage": 0.1,
+   "kerf": 0.003,
+   "stockLengths": [],
+   "wasteFactor": 0.1
+  },
+  "building": null,
+  "captureSource": "template",
+  "catalogVersion": "oc-catalog@0.1",
+  "cats": [
+   {
+    "ageClass": "adult",
+    "climber": true,
+    "escapeRisk": "medium",
+    "id": "1fac2f81-5347-4496-aa15-976325f400b8",
+    "mobility": "full",
+    "name": "My cat",
+    "size": "medium"
+   }
+  ],
+  "createdAt": "2026-10-12T12:00:00.000Z",
+  "currency": "USD",
+  "lengthUnit": "m",
+  "name": "porch-infill default",
+  "observations": [],
+  "overrides": [],
+  "plants": [],
+  "producer": "web",
+  "projectId": "12e9cc52-1616-41cf-ac17-473c2470a059",
+  "region": {
+   "climate": {
+    "hot": false,
+    "rainy": false,
+    "snowLoad": "none",
+    "wind": "normal"
+   },
+   "country": "US"
+  },
+  "schema": "opencatio3d/project@0.1",
+  "site": {
+   "ground": "grass",
+   "measurements": [
+    {
+     "confirmed": true,
+     "field": "width",
+     "id": "538a2f04-0c96-4fab-8f8e-2d12a0c74771",
+     "source": "tape",
+     "targetId": "d77166ea-08d7-40b5-8b7f-1c3c149ade6f",
+     "value": 3
+    },
+    {
+     "confirmed": true,
+     "field": "depth",
+     "id": "548a3097-0b96-4e18-908e-2ea59fc745de",
+     "source": "tape",
+     "targetId": "d77166ea-08d7-40b5-8b7f-1c3c149ade6f",
+     "value": 2
+    },
+    {
+     "confirmed": true,
+     "field": "height",
+     "id": "558a322a-0e96-42d1-8d8e-29ec9ec7444b",
+     "source": "tape",
+     "targetId": "d77166ea-08d7-40b5-8b7f-1c3c149ade6f",
+     "value": 2.4
+    }
+   ],
+   "northDeg": 0,
+   "obstacles": [],
+   "walls": [
+    {
+     "a": [
+      0,
+      0
+     ],
+     "b": [
+      10,
+      0
+     ],
+     "height": 2.7,
+     "id": "a1ca0ed3-bdb0-4e2a-8409-37b160f08e90",
+     "openings": [
+      {
+       "height": 1.2,
+       "id": "a7948a14-0610-4387-af3c-7a1e35c440a9",
+       "kind": "window",
+       "name": "Living room window",
+       "offset": 2.2,
+       "sill": 0.9,
+       "width": 0.9
+      },
+      {
+       "height": 2.03,
+       "id": "a8948ba7-0510-41f4-b03c-7bb134c43f16",
+       "kind": "door",
+       "name": "Back door",
+       "offset": 6.5,
+       "sill": 0,
+       "width": 0.9
+      }
+     ]
+    }
+   ]
+  },
+  "structures": [
+   {
+    "base": {
+     "kind": "deck"
+    },
+    "depth": 2,
+    "frame": {
+     "materialId": "lumber-2x4-pt",
+     "maxPostSpacing": 1.2,
+     "profile": "wood-2x4",
+     "railSpacing": 0.9
+    },
+    "furnishings": [
+     {
+      "componentId": "shelf",
+      "id": "bb1d6cd6-a096-4043-bb50-29a434d4b1e1",
+      "length": 0.8,
+      "mountHeight": 1,
+      "offset": 0.4,
+      "side": "left"
+     }
+    ],
+    "height": 2.4,
+    "hostOpeningId": "a7948a14-0610-4387-af3c-7a1e35c440a9",
+    "hostWallId": "a1ca0ed3-bdb0-4e2a-8409-37b160f08e90",
+    "id": "d77166ea-08d7-40b5-8b7f-1c3c149ade6f",
+    "lowHeight": 2.4,
+    "mesh": {
+     "materialId": "mesh-1x1-16ga-gaw-48"
+    },
+    "name": "Porch infill",
+    "openings": [
+     {
+      "height": 2,
+      "hinge": "left",
+      "id": "51341f47-2a80-4032-b166-a9b59ebdff70",
+      "kind": "human-door",
+      "latch": "keyed",
+      "offset": 1.1,
+      "selfClosing": true,
+      "side": "front",
+      "swing": "out",
+      "width": 0.81
+     }
+    ],
+    "roof": {
+     "kind": "mesh"
+    },
+    "rotation": 0,
+    "template": "porch-infill",
+    "width": 3,
+    "x": 1.1500000000000004,
+    "y": 0
+   }
+  ],
+  "units": "imperial",
+  "updatedAt": "2026-10-12T12:00:00.000Z",
+  "web": {}
+ },
+ "openings": [],
+ "openplanHandoffVersion": 1,
+ "openplanPrepared": true,
+ "planNotes": "Created with OpenCatio3D. Catios are shown as boxes; the full design is in the opencatio3d block. Planning guidance only — confirm dimensions on site.",
+ "sections": [],
+ "stories": [
+  {
+   "index": 0,
+   "name": "Ground Floor"
+  }
+ ],
+ "version": 2,
+ "walls": [
+  {
+   "dimensions": [
+    10,
+    2.7,
+    0.2
+   ],
+   "identifier": "a1ca0ed3-bdb0-4e2a-8409-37b160f08e90",
+   "story": 0,
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    5,
+    1.35,
+    -0.1,
+    1
+   ]
+  }
+ ],
+ "windows": [
+  {
+   "dimensions": [
+    0.9,
+    1.2,
+    0.2
+   ],
+   "identifier": "a7948a14-0610-4387-af3c-7a1e35c440a9",
+   "parentIdentifier": "a1ca0ed3-bdb0-4e2a-8409-37b160f08e90",
+   "sillHeight": 0.9,
+   "story": 0,
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    2.65,
+    1.5,
+    -0.1,
+    1
+   ]
+  }
+ ]
+}

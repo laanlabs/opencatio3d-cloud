@@ -1,0 +1,1152 @@
+{
+ "bom": [
+  {
+   "high": 22.5,
+   "key": "board-1x10-cedar@1.829",
+   "low": 13.53,
+   "qty": 1
+  },
+  {
+   "high": 8.79,
+   "key": "board-1x2-furring@2.438",
+   "low": 4.38,
+   "qty": 3
+  },
+  {
+   "high": 58.48,
+   "key": "lumber-2x3-pt@2.438",
+   "low": 39.04,
+   "qty": 8
+  },
+  {
+   "high": 100.54,
+   "key": "lumber-2x3-pt@3.048",
+   "low": 67.1,
+   "qty": 11
+  },
+  {
+   "high": 39.01,
+   "key": "lumber-4x4-cedar@2.438",
+   "low": 24.38,
+   "qty": 1
+  },
+  {
+   "high": 140,
+   "key": "mesh-1x1-16ga-gaw-48",
+   "low": 90,
+   "qty": 1
+  },
+  {
+   "high": 160,
+   "key": "roof-polycarb-corrugated",
+   "low": 100,
+   "qty": 4
+  },
+  {
+   "high": 28,
+   "key": "bracket-corner",
+   "low": 14,
+   "qty": 14
+  },
+  {
+   "high": 32,
+   "key": "bracket-shelf",
+   "low": 16,
+   "qty": 4
+  },
+  {
+   "high": 8,
+   "key": "handle-pull",
+   "low": 4,
+   "qty": 1
+  },
+  {
+   "high": 42,
+   "key": "hinge-spring-4in",
+   "low": 24,
+   "qty": 3
+  },
+  {
+   "high": 9,
+   "key": "latch-hasp",
+   "low": 5,
+   "qty": 1
+  },
+  {
+   "high": 48,
+   "key": "screw-ext-1in-washer",
+   "low": 32,
+   "qty": 4
+  },
+  {
+   "high": 32,
+   "key": "screw-ext-3in",
+   "low": 22,
+   "qty": 2
+  },
+  {
+   "high": 22,
+   "key": "screw-roofing",
+   "low": 14,
+   "qty": 1
+  },
+  {
+   "high": 45,
+   "key": "screw-structural-5in",
+   "low": 30,
+   "qty": 1
+  },
+  {
+   "high": 56,
+   "key": "washer-fender-1in",
+   "low": 32,
+   "qty": 4
+  },
+  {
+   "high": 60,
+   "key": "paver-16in",
+   "low": 36,
+   "qty": 12
+  },
+  {
+   "high": 21,
+   "key": "sand-leveling",
+   "low": 15,
+   "qty": 3
+  },
+  {
+   "high": 75,
+   "key": "rope-sisal",
+   "low": 45,
+   "qty": 3
+  },
+  {
+   "high": 60,
+   "key": "kit-bed-outdoor",
+   "low": 25,
+   "qty": 1
+  },
+  {
+   "high": 25,
+   "key": "kit-water-bowl",
+   "low": 10,
+   "qty": 1
+  },
+  {
+   "high": 200,
+   "key": "kit-window-insert",
+   "low": 90,
+   "qty": 1
+  }
+ ],
+ "catalogVersion": "oc-catalog@0.1",
+ "cost": {
+  "high": 1293,
+  "low": 752
+ },
+ "cuts": {
+  "kerf": 0.003,
+  "materials": [
+   {
+    "bins": [
+     {
+      "cuts": [
+       "4e4531e4-626d-4d1f-a045-5a064256f0a9",
+       "ba08261e-b264-4b91-b6cc-1354d76f8e8f"
+      ],
+      "offcut": 0.626,
+      "stock": 1.829
+     }
+    ],
+    "materialId": "board-1x10-cedar",
+    "overlong": []
+   },
+   {
+    "bins": [
+     {
+      "cuts": [
+       "e38f4835-e642-4826-8099-3daf493d73d8"
+      ],
+      "offcut": 0,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "13c84a50-11db-46a3-a14a-dc163909f3b1"
+      ],
+      "offcut": 0.304,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "ef64da1f-d3e0-4e4e-98a0-db1dbc9aefc4"
+      ],
+      "offcut": 0.304,
+      "stock": 2.438
+     }
+    ],
+    "materialId": "board-1x2-furring",
+    "overlong": []
+   },
+   {
+    "bins": [
+     {
+      "cuts": [
+       "42f1b6f9-783b-4afa-ad05-930727f05640"
+      ],
+      "offcut": 0,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "64d36ac4-ef29-478d-b787-f93659e23607"
+      ],
+      "offcut": 0,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "65d36c57-ee29-45fa-b887-fac958e23474"
+      ],
+      "offcut": 0,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "67d36f7d-ec29-42d4-b687-f7a35ae2379a"
+      ],
+      "offcut": 0,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "8c69d20c-1d37-4eef-8b8f-27d6db402fb1"
+      ],
+      "offcut": 0,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "b8f8b2b5-0e6d-4aac-8978-a06f8cb5551e"
+      ],
+      "offcut": 0,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "fc47d89a-d954-4d87-b865-1168703de75d"
+      ],
+      "offcut": 0,
+      "stock": 2.438
+     },
+     {
+      "cuts": [
+       "b52a61a5-fc53-49e8-81b2-eb9f6f4b504a",
+       "8bc69685-34a6-4022-8956-d24bb58b5578"
+      ],
+      "offcut": 0.285,
+      "stock": 3.048
+     },
+     {
+      "cuts": [
+       "efd6e85a-d19f-4865-99cf-30c4925819c7",
+       "56794c3b-507a-420e-b38b-4301f761fd4c"
+      ],
+      "offcut": 0.337,
+      "stock": 3.048
+     },
+     {
+      "cuts": [
+       "159a629c-5d5d-4199-97bd-576ad8a57a9f",
+       "51406533-ec24-461e-9674-9d3539fdfbe8"
+      ],
+      "offcut": 0.069,
+      "stock": 3.048
+     },
+     {
+      "cuts": [
+       "8b4505ef-cb50-4e5c-a51f-045d7d2dc222",
+       "524066c6-eb24-448b-9374-987c3cfe00a1"
+      ],
+      "offcut": 0.069,
+      "stock": 3.048
+     },
+     {
+      "cuts": [
+       "0f4a3652-2976-4519-8ac4-c760eeb1310f",
+       "13b7d0dc-6f48-47b9-b743-ba9624e19773"
+      ],
+      "offcut": 0.127,
+      "stock": 3.048
+     },
+     {
+      "cuts": [
+       "214a52a8-4377-4e07-a8c4-f69ae4b12151",
+       "48acb9f9-c1ed-4f8a-954a-7a1bfce553ac"
+      ],
+      "offcut": 0.127,
+      "stock": 3.048
+     },
+     {
+      "cuts": [
+       "7714772a-cca5-4bd3-9a89-20046542316d",
+       "7c0c324a-953a-4675-830c-0428e06ce5cb"
+      ],
+      "offcut": 0.163,
+      "stock": 3.048
+     },
+     {
+      "cuts": [
+       "ddd9d17f-edf7-4006-95b9-9a9d15fcccd4",
+       "dbdb93b5-f9c7-4fdc-a0a1-6a43078de0ba"
+      ],
+      "offcut": 0.163,
+      "stock": 3.048
+     },
+     {
+      "cuts": [
+       "c9360b26-9ac5-45a1-815f-f16cab76e887",
+       "83bb2314-6e2b-48e5-a306-94da8eeba5db"
+      ],
+      "offcut": 0.353,
+      "stock": 3.048
+     },
+     {
+      "cuts": [
+       "e3363414-84c5-42ff-9760-140e9176bf99",
+       "9c53260b-f1ca-47d4-b8f8-89c1527aacd2"
+      ],
+      "offcut": 0.353,
+      "stock": 3.048
+     },
+     {
+      "cuts": [
+       "bd5ba593-848c-43b0-97ce-398d32646152",
+       "adda455d-2415-438c-9ae3-3ddf50056cce",
+       "c3abd459-2b79-4ed0-a13b-fcd781673ee6"
+      ],
+      "offcut": 0.076,
+      "stock": 3.048
+     },
+     {
+      "cuts": [
+       "d5abf0af-2179-4f12-af3c-12e193675b3c"
+      ],
+      "offcut": 1.816,
+      "stock": 2.438
+     }
+    ],
+    "materialId": "lumber-2x3-pt",
+    "overlong": []
+   },
+   {
+    "bins": [
+     {
+      "cuts": [
+       "0b1abed6-ba9b-4c5f-b591-2b0c49f3446d"
+      ],
+      "offcut": 1.538,
+      "stock": 2.438
+     }
+    ],
+    "materialId": "lumber-4x4-cedar",
+    "overlong": []
+   }
+  ]
+ },
+ "findings": [
+  {
+   "ruleId": "CAT-MAT-003",
+   "severity": "advisory",
+   "status": "open",
+   "targetIds": [
+    "2e4fa771-5ba6-45b4-b923-1b7b81a70f9e"
+   ]
+  },
+  {
+   "ruleId": "CAT-MAT-004",
+   "severity": "info",
+   "status": "open",
+   "targetIds": []
+  }
+ ],
+ "parts": [
+  {
+   "id": "fc47d89a-d954-4d87-b865-1168703de75d",
+   "key": "front:plate-bottom",
+   "kind": "member",
+   "label": "A9",
+   "length": 2.438,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "plate",
+   "step": "walls"
+  },
+  {
+   "id": "8c69d20c-1d37-4eef-8b8f-27d6db402fb1",
+   "key": "front:plate-top",
+   "kind": "member",
+   "label": "A10",
+   "length": 2.438,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "plate",
+   "step": "walls"
+  },
+  {
+   "id": "7714772a-cca5-4bd3-9a89-20046542316d",
+   "key": "front:stud:start",
+   "kind": "member",
+   "label": "A12",
+   "length": 1.701,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "stud",
+   "step": "walls"
+  },
+  {
+   "id": "0f4a3652-2976-4519-8ac4-c760eeb1310f",
+   "key": "front:jamb:f9bfabde-d40a-425d-a984-240ccb71f4eb:l",
+   "kind": "member",
+   "label": "A7",
+   "length": 1.701,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "jamb",
+   "step": "walls"
+  },
+  {
+   "id": "214a52a8-4377-4e07-a8c4-f69ae4b12151",
+   "key": "front:jamb:f9bfabde-d40a-425d-a984-240ccb71f4eb:r",
+   "kind": "member",
+   "label": "A8",
+   "length": 1.701,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "jamb",
+   "step": "walls"
+  },
+  {
+   "id": "ddd9d17f-edf7-4006-95b9-9a9d15fcccd4",
+   "key": "front:stud:end",
+   "kind": "member",
+   "label": "A11",
+   "length": 1.701,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "stud",
+   "step": "walls"
+  },
+  {
+   "id": "56794c3b-507a-420e-b38b-4301f761fd4c",
+   "key": "front:bay0:rail1",
+   "kind": "member",
+   "label": "A4",
+   "length": 0.71,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "rail",
+   "step": "walls"
+  },
+  {
+   "height": 1.854,
+   "id": "b49a2f97-754e-4444-8b6e-9e75feb0b18a",
+   "key": "front:bay0:mesh:0",
+   "kind": "panel",
+   "label": "A43",
+   "materialId": "mesh-1x1-16ga-gaw-48",
+   "qty": 1,
+   "role": "mesh-wall",
+   "rollLength": 1.854,
+   "step": "mesh",
+   "width": 0.799
+  },
+  {
+   "id": "8bc69685-34a6-4022-8956-d24bb58b5578",
+   "key": "front:header:f9bfabde-d40a-425d-a984-240ccb71f4eb",
+   "kind": "member",
+   "label": "A6",
+   "length": 0.762,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "header",
+   "step": "walls"
+  },
+  {
+   "height": 0.203,
+   "id": "3a571782-7466-4e2d-9adf-1ce480b07af7",
+   "key": "front:bay1:mesh-above:0",
+   "kind": "panel",
+   "label": "A44",
+   "materialId": "mesh-1x1-16ga-gaw-48",
+   "qty": 1,
+   "role": "mesh-wall",
+   "rollLength": 0.203,
+   "step": "mesh",
+   "width": 0.851
+  },
+  {
+   "id": "adda455d-2415-438c-9ae3-3ddf50056cce",
+   "key": "front:bay2:rail1",
+   "kind": "member",
+   "label": "A5",
+   "length": 0.71,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "rail",
+   "step": "walls"
+  },
+  {
+   "height": 1.854,
+   "id": "a9451281-ca23-494a-bbb7-e3fbbccea884",
+   "key": "front:bay2:mesh:0",
+   "kind": "panel",
+   "label": "A45",
+   "materialId": "mesh-1x1-16ga-gaw-48",
+   "qty": 1,
+   "role": "mesh-wall",
+   "rollLength": 1.854,
+   "step": "mesh",
+   "width": 0.799
+  },
+  {
+   "id": "7c0c324a-953a-4675-830c-0428e06ce5cb",
+   "key": "left:plate-bottom",
+   "kind": "member",
+   "label": "A14",
+   "length": 1.181,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "plate",
+   "step": "walls"
+  },
+  {
+   "id": "13b7d0dc-6f48-47b9-b743-ba9624e19773",
+   "key": "left:plate-top",
+   "kind": "member",
+   "label": "A15",
+   "length": 1.217,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "plate",
+   "step": "walls"
+  },
+  {
+   "id": "efd6e85a-d19f-4865-99cf-30c4925819c7",
+   "key": "left:stud:start",
+   "kind": "member",
+   "label": "A17",
+   "length": 1.998,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "stud",
+   "step": "walls"
+  },
+  {
+   "id": "8b4505ef-cb50-4e5c-a51f-045d7d2dc222",
+   "key": "left:stud:end",
+   "kind": "member",
+   "label": "A16",
+   "length": 1.719,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "stud",
+   "step": "walls"
+  },
+  {
+   "id": "9c53260b-f1ca-47d4-b8f8-89c1527aacd2",
+   "key": "left:bay0:rail1",
+   "kind": "member",
+   "label": "A13",
+   "length": 1.053,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "rail",
+   "step": "walls"
+  },
+  {
+   "height": 2.151,
+   "id": "408a60e7-33ed-41d2-9674-feb5736dd3e8",
+   "key": "left:bay0:mesh:0",
+   "kind": "panel",
+   "label": "A46",
+   "materialId": "mesh-1x1-16ga-gaw-48",
+   "qty": 1,
+   "role": "mesh-wall",
+   "rollLength": 2.151,
+   "step": "mesh",
+   "width": 1.142
+  },
+  {
+   "id": "dbdb93b5-f9c7-4fdc-a0a1-6a43078de0ba",
+   "key": "right:plate-bottom",
+   "kind": "member",
+   "label": "A19",
+   "length": 1.181,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "plate",
+   "step": "walls"
+  },
+  {
+   "id": "48acb9f9-c1ed-4f8a-954a-7a1bfce553ac",
+   "key": "right:plate-top",
+   "kind": "member",
+   "label": "A20",
+   "length": 1.217,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "plate",
+   "step": "walls"
+  },
+  {
+   "id": "b52a61a5-fc53-49e8-81b2-eb9f6f4b504a",
+   "key": "right:stud:start",
+   "kind": "member",
+   "label": "A22",
+   "length": 1.998,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "stud",
+   "step": "walls"
+  },
+  {
+   "id": "159a629c-5d5d-4199-97bd-576ad8a57a9f",
+   "key": "right:stud:end",
+   "kind": "member",
+   "label": "A21",
+   "length": 1.719,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "stud",
+   "step": "walls"
+  },
+  {
+   "id": "83bb2314-6e2b-48e5-a306-94da8eeba5db",
+   "key": "right:bay0:rail1",
+   "kind": "member",
+   "label": "A18",
+   "length": 1.053,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "rail",
+   "step": "walls"
+  },
+  {
+   "height": 2.151,
+   "id": "d95e6a92-c39a-4909-ac52-3a109921d937",
+   "key": "right:bay0:mesh:0",
+   "kind": "panel",
+   "label": "A47",
+   "materialId": "mesh-1x1-16ga-gaw-48",
+   "qty": 1,
+   "role": "mesh-wall",
+   "rollLength": 2.151,
+   "step": "mesh",
+   "width": 1.142
+  },
+  {
+   "id": "524066c6-eb24-448b-9374-987c3cfe00a1",
+   "key": "roof:rafter1",
+   "kind": "member",
+   "label": "A31",
+   "length": 1.257,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "rafter",
+   "step": "roof-frame"
+  },
+  {
+   "id": "51406533-ec24-461e-9674-9d3539fdfbe8",
+   "key": "roof:rafter2",
+   "kind": "member",
+   "label": "A32",
+   "length": 1.257,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "rafter",
+   "step": "roof-frame"
+  },
+  {
+   "height": 1.282,
+   "id": "0f069a28-c099-46e5-9013-fc026edc4987",
+   "key": "roof:bay0:mesh:0",
+   "kind": "panel",
+   "label": "A48",
+   "materialId": "mesh-1x1-16ga-gaw-48",
+   "qty": 1,
+   "role": "mesh-roof",
+   "rollLength": 1.282,
+   "step": "mesh",
+   "width": 0.838
+  },
+  {
+   "height": 1.282,
+   "id": "e94b45d9-1907-42c4-ab39-9983729a16a6",
+   "key": "roof:bay1:mesh:0",
+   "kind": "panel",
+   "label": "A49",
+   "materialId": "mesh-1x1-16ga-gaw-48",
+   "qty": 1,
+   "role": "mesh-roof",
+   "rollLength": 1.282,
+   "step": "mesh",
+   "width": 0.838
+  },
+  {
+   "height": 1.282,
+   "id": "50fd8fce-160f-4cab-ad51-5f3c683b3f71",
+   "key": "roof:bay2:mesh:0",
+   "kind": "panel",
+   "label": "A50",
+   "materialId": "mesh-1x1-16ga-gaw-48",
+   "qty": 1,
+   "role": "mesh-roof",
+   "rollLength": 1.282,
+   "step": "mesh",
+   "width": 0.838
+  },
+  {
+   "id": "65d36c57-ee29-45fa-b887-fac958e23474",
+   "key": "roof:purlin0",
+   "kind": "member",
+   "label": "A28",
+   "length": 2.438,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "purlin",
+   "step": "roof-frame"
+  },
+  {
+   "id": "64d36ac4-ef29-478d-b787-f93659e23607",
+   "key": "roof:purlin1",
+   "kind": "member",
+   "label": "A29",
+   "length": 2.438,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "purlin",
+   "step": "roof-frame"
+  },
+  {
+   "id": "67d36f7d-ec29-42d4-b687-f7a35ae2379a",
+   "key": "roof:purlin2",
+   "kind": "member",
+   "label": "A30",
+   "length": 2.438,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "purlin",
+   "step": "roof-frame"
+  },
+  {
+   "id": "13b11ca7-e4cd-43cc-b0e6-8f4d73cd3eaa",
+   "key": "roof:sheets",
+   "kind": "panel",
+   "label": "A51",
+   "materialId": "roof-polycarb-corrugated",
+   "qty": 4,
+   "role": "roof-sheet",
+   "step": "roof-cover"
+  },
+  {
+   "id": "ccaa353e-258c-4041-b430-61f872f64aab",
+   "key": "roof:screws",
+   "kind": "connector",
+   "materialId": "screw-roofing",
+   "qty": 36,
+   "role": "roof-screw",
+   "step": "roof-cover"
+  },
+  {
+   "id": "a04f9a73-6ba7-49c0-95ce-5dcd8e9d697a",
+   "key": "base:pavers",
+   "kind": "base",
+   "label": "A1",
+   "materialId": "paver-16in",
+   "qty": 12,
+   "role": "paver",
+   "step": "base"
+  },
+  {
+   "id": "c60cad34-e5d0-4013-b13a-4e5a7096cdd9",
+   "key": "base:sand",
+   "kind": "base",
+   "label": "A2",
+   "materialId": "sand-leveling",
+   "qty": 3,
+   "role": "sand",
+   "step": "base"
+  },
+  {
+   "id": "42f1b6f9-783b-4afa-ad05-930727f05640",
+   "key": "attach:ledger-top",
+   "kind": "member",
+   "label": "A24",
+   "length": 2.438,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "ledger",
+   "step": "attach"
+  },
+  {
+   "id": "b8f8b2b5-0e6d-4aac-8978-a06f8cb5551e",
+   "key": "attach:ledger-bottom",
+   "kind": "member",
+   "label": "A23",
+   "length": 2.438,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "ledger",
+   "step": "attach"
+  },
+  {
+   "id": "1c0cfe07-65d3-4e36-82a7-198180e45640",
+   "key": "attach:ledger-screws",
+   "kind": "connector",
+   "materialId": "screw-structural-5in",
+   "qty": 16,
+   "role": "ledger-screw",
+   "step": "attach"
+  },
+  {
+   "id": "ef64da1f-d3e0-4e4e-98a0-db1dbc9aefc4",
+   "key": "attach:seal-left",
+   "kind": "member",
+   "label": "A25",
+   "length": 2.134,
+   "materialId": "board-1x2-furring",
+   "qty": 1,
+   "role": "seal",
+   "step": "attach"
+  },
+  {
+   "id": "13c84a50-11db-46a3-a14a-dc163909f3b1",
+   "key": "attach:seal-right",
+   "kind": "member",
+   "label": "A26",
+   "length": 2.134,
+   "materialId": "board-1x2-furring",
+   "qty": 1,
+   "role": "seal",
+   "step": "attach"
+  },
+  {
+   "id": "e38f4835-e642-4826-8099-3daf493d73d8",
+   "key": "attach:seal-top",
+   "kind": "member",
+   "label": "A27",
+   "length": 2.438,
+   "materialId": "board-1x2-furring",
+   "qty": 1,
+   "role": "seal",
+   "step": "attach"
+  },
+  {
+   "id": "e3363414-84c5-42ff-9760-140e9176bf99",
+   "key": "front:human-door:f9bfabde-d40a-425d-a984-240ccb71f4eb:stile-l",
+   "kind": "member",
+   "label": "A41",
+   "length": 1.639,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "door-stile",
+   "step": "openings"
+  },
+  {
+   "id": "c9360b26-9ac5-45a1-815f-f16cab76e887",
+   "key": "front:human-door:f9bfabde-d40a-425d-a984-240ccb71f4eb:stile-r",
+   "kind": "member",
+   "label": "A42",
+   "length": 1.639,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "door-stile",
+   "step": "openings"
+  },
+  {
+   "id": "d5abf0af-2179-4f12-af3c-12e193675b3c",
+   "key": "front:human-door:f9bfabde-d40a-425d-a984-240ccb71f4eb:rail-b",
+   "kind": "member",
+   "label": "A39",
+   "length": 0.622,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "door-rail",
+   "step": "openings"
+  },
+  {
+   "id": "c3abd459-2b79-4ed0-a13b-fcd781673ee6",
+   "key": "front:human-door:f9bfabde-d40a-425d-a984-240ccb71f4eb:rail-t",
+   "kind": "member",
+   "label": "A40",
+   "length": 0.622,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "door-rail",
+   "step": "openings"
+  },
+  {
+   "id": "bd5ba593-848c-43b0-97ce-398d32646152",
+   "key": "front:human-door:f9bfabde-d40a-425d-a984-240ccb71f4eb:brace",
+   "kind": "member",
+   "label": "A34",
+   "length": 1.634,
+   "materialId": "lumber-2x3-pt",
+   "qty": 1,
+   "role": "door-brace",
+   "step": "openings"
+  },
+  {
+   "height": 1.664,
+   "id": "670d561f-4184-405e-8105-1551d619dba0",
+   "key": "front:human-door:f9bfabde-d40a-425d-a984-240ccb71f4eb:mesh:0",
+   "kind": "panel",
+   "label": "A38",
+   "materialId": "mesh-1x1-16ga-gaw-48",
+   "qty": 1,
+   "role": "mesh-door",
+   "rollLength": 1.664,
+   "step": "openings",
+   "width": 0.775
+  },
+  {
+   "id": "8c20abdc-18a1-4de5-a683-d0da6f40e243",
+   "key": "front:human-door:f9bfabde-d40a-425d-a984-240ccb71f4eb:hinges",
+   "kind": "hardware",
+   "label": "A36",
+   "materialId": "hinge-spring-4in",
+   "qty": 3,
+   "role": "hinge",
+   "step": "openings"
+  },
+  {
+   "id": "10784fe2-80c1-42b5-b230-88fc57fabd1f",
+   "key": "front:human-door:f9bfabde-d40a-425d-a984-240ccb71f4eb:latch",
+   "kind": "hardware",
+   "label": "A37",
+   "materialId": "latch-hasp",
+   "qty": 1,
+   "role": "latch",
+   "step": "openings"
+  },
+  {
+   "id": "a6b811ae-4db3-426b-a004-9d84d543e539",
+   "key": "front:human-door:f9bfabde-d40a-425d-a984-240ccb71f4eb:handle",
+   "kind": "hardware",
+   "label": "A35",
+   "materialId": "handle-pull",
+   "qty": 1,
+   "role": "handle",
+   "step": "openings"
+  },
+  {
+   "id": "f836db43-b2f2-44fc-808f-a531b132c74a",
+   "key": "back:window-access:fabfad71-d30a-40ca-aa84-259fca71f358:kit",
+   "kind": "kit",
+   "label": "A33",
+   "materialId": "kit-window-insert",
+   "qty": 1,
+   "role": "window-insert",
+   "step": "openings"
+  },
+  {
+   "id": "ba08261e-b264-4b91-b6cc-1354d76f8e8f",
+   "key": "furn:efae52ff-3e1b-425c-bf72-fd8dd5834dca:board",
+   "kind": "member",
+   "label": "A55",
+   "length": 0.6,
+   "materialId": "board-1x10-cedar",
+   "qty": 1,
+   "role": "shelf-board",
+   "step": "furnish"
+  },
+  {
+   "id": "a7df0a0f-57ba-4502-96fd-1ab9e47ec88c",
+   "key": "furn:efae52ff-3e1b-425c-bf72-fd8dd5834dca:brackets",
+   "kind": "hardware",
+   "label": "A56",
+   "materialId": "bracket-shelf",
+   "qty": 2,
+   "role": "bracket",
+   "step": "furnish"
+  },
+  {
+   "id": "4e4531e4-626d-4d1f-a045-5a064256f0a9",
+   "key": "furn:eeae516c-3f1b-43ef-be72-fbfad6834f5d:board",
+   "kind": "member",
+   "label": "A53",
+   "length": 0.6,
+   "materialId": "board-1x10-cedar",
+   "qty": 1,
+   "role": "shelf-board",
+   "step": "furnish"
+  },
+  {
+   "id": "8d1571a9-ecd8-49bc-bf5d-4c87d2eab36a",
+   "key": "furn:eeae516c-3f1b-43ef-be72-fbfad6834f5d:brackets",
+   "kind": "hardware",
+   "label": "A54",
+   "materialId": "bracket-shelf",
+   "qty": 2,
+   "role": "bracket",
+   "step": "furnish"
+  },
+  {
+   "id": "0b1abed6-ba9b-4c5f-b591-2b0c49f3446d",
+   "key": "furn:f1ae5625-401b-4582-bd72-fa67d3834aa4:post",
+   "kind": "member",
+   "label": "A59",
+   "length": 0.9,
+   "materialId": "lumber-4x4-cedar",
+   "qty": 1,
+   "role": "scratch-post",
+   "step": "furnish"
+  },
+  {
+   "id": "4754d348-b336-4da5-94f8-628ea1dec143",
+   "key": "furn:f1ae5625-401b-4582-bd72-fa67d3834aa4:rope",
+   "kind": "kit",
+   "label": "A60",
+   "length": 33.75,
+   "materialId": "rope-sisal",
+   "qty": 1,
+   "role": "sisal",
+   "step": "furnish"
+  },
+  {
+   "id": "2f52d7e9-cf33-4e78-b96d-0e93b21dcfc2",
+   "key": "furn:f1ae5625-401b-4582-bd72-fa67d3834aa4:brackets",
+   "kind": "hardware",
+   "label": "A58",
+   "materialId": "bracket-corner",
+   "qty": 2,
+   "role": "bracket",
+   "step": "furnish"
+  },
+  {
+   "id": "35f510ab-7d52-4b24-acd8-58c1a22cf8d2",
+   "key": "furn:f0ae5492-411b-4715-bc72-f8d4d4834c37:kit",
+   "kind": "kit",
+   "label": "A57",
+   "materialId": "kit-bed-outdoor",
+   "qty": 1,
+   "role": "bed",
+   "step": "furnish"
+  },
+  {
+   "id": "c971fdd2-551a-48c1-b626-f2bca32b853b",
+   "key": "furn:ebae4cb3-3a1b-4c10-bb72-f741d183477e:kit",
+   "kind": "kit",
+   "label": "A52",
+   "materialId": "kit-water-bowl",
+   "qty": 1,
+   "role": "water-station",
+   "step": "furnish"
+  },
+  {
+   "id": "9f7c9e93-6c5b-4a48-b69d-7999bb193d9e",
+   "key": "fasten:frame-screws",
+   "kind": "connector",
+   "materialId": "screw-ext-3in",
+   "qty": 140,
+   "role": "frame-screw",
+   "step": "walls"
+  },
+  {
+   "id": "e9320113-be25-42f6-9ca2-4ea15115d60c",
+   "key": "fasten:corner-brackets",
+   "kind": "hardware",
+   "label": "A3",
+   "materialId": "bracket-corner",
+   "qty": 12,
+   "role": "corner-bracket",
+   "step": "walls"
+  },
+  {
+   "id": "5f6cf70b-0c97-471e-a066-e00188b3405c",
+   "key": "fasten:mesh-screws",
+   "kind": "connector",
+   "materialId": "screw-ext-1in-washer",
+   "qty": 338,
+   "role": "mesh-screw",
+   "step": "mesh"
+  },
+  {
+   "id": "d5bcfb63-c254-4070-a8f5-0751f4897866",
+   "key": "fasten:mesh-washers",
+   "kind": "connector",
+   "materialId": "washer-fender-1in",
+   "qty": 310,
+   "role": "mesh-washer",
+   "step": "mesh"
+  }
+ ],
+ "steps": [
+  {
+   "key": "base",
+   "order": 1,
+   "parts": 2,
+   "structureId": "2e4fa771-5ba6-45b4-b923-1b7b81a70f9e"
+  },
+  {
+   "key": "walls",
+   "order": 2,
+   "parts": 21,
+   "structureId": "2e4fa771-5ba6-45b4-b923-1b7b81a70f9e"
+  },
+  {
+   "key": "attach",
+   "order": 3,
+   "parts": 6,
+   "structureId": "2e4fa771-5ba6-45b4-b923-1b7b81a70f9e"
+  },
+  {
+   "key": "roof-frame",
+   "order": 4,
+   "parts": 5,
+   "structureId": "2e4fa771-5ba6-45b4-b923-1b7b81a70f9e"
+  },
+  {
+   "key": "openings",
+   "order": 5,
+   "parts": 10,
+   "structureId": "2e4fa771-5ba6-45b4-b923-1b7b81a70f9e"
+  },
+  {
+   "key": "mesh",
+   "order": 6,
+   "parts": 10,
+   "structureId": "2e4fa771-5ba6-45b4-b923-1b7b81a70f9e"
+  },
+  {
+   "key": "roof-cover",
+   "order": 7,
+   "parts": 2,
+   "structureId": "2e4fa771-5ba6-45b4-b923-1b7b81a70f9e"
+  },
+  {
+   "key": "furnish",
+   "order": 8,
+   "parts": 9,
+   "structureId": "2e4fa771-5ba6-45b4-b923-1b7b81a70f9e"
+  },
+  {
+   "key": "inspect",
+   "order": 9,
+   "parts": 0,
+   "structureId": "2e4fa771-5ba6-45b4-b923-1b7b81a70f9e"
+  }
+ ],
+ "structures": [
+  {
+   "conceptOnly": false,
+   "id": "2e4fa771-5ba6-45b4-b923-1b7b81a70f9e",
+   "letter": "A",
+   "name": "Attached lean-to",
+   "skippedFurnishings": [],
+   "skippedOpenings": [],
+   "unsupported": []
+  }
+ ]
+}

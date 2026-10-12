@@ -1,0 +1,303 @@
+{
+ "defaults": {
+  "ceilingHeight": 2.4,
+  "exteriorWallThickness": 0.2,
+  "interiorWallThickness": 0.12
+ },
+ "doors": [],
+ "floors": [],
+ "objects": [
+  {
+   "attributes": {
+    "opencatio3dKind": "window-box",
+    "opencatio3dRole": "structure",
+    "structureId": "841f6a9f-ec5e-45a6-bb3e-164dd8e97904"
+   },
+   "category": {
+    "greenhouse_small": {}
+   },
+   "dimensions": [
+    0.914,
+    0.762,
+    0.457
+   ],
+   "identifier": "841f6a9f-ec5e-45a6-bb3e-164dd8e97904",
+   "story": 0,
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    2.955,
+    1.231,
+    0.2285,
+    1
+   ]
+  }
+ ],
+ "opencatio3d": {
+  "alternatives": [],
+  "assumptions": {
+   "fastenerOverage": 0.1,
+   "kerf": 0.003,
+   "stockLengths": [],
+   "wasteFactor": 0.1
+  },
+  "building": null,
+  "captureSource": "sample",
+  "catalogVersion": "oc-catalog@0.1",
+  "cats": [
+   {
+    "ageClass": "adult",
+    "climber": true,
+    "escapeRisk": "medium",
+    "id": "757132c8-4bcd-493b-8bcb-28ca3a0ffa2d",
+    "mobility": "full",
+    "name": "Mochi",
+    "size": "small"
+   }
+  ],
+  "createdAt": "2026-10-12T12:00:00.000Z",
+  "currency": "USD",
+  "lengthUnit": "m",
+  "name": "Window box",
+  "observations": [],
+  "overrides": [],
+  "plants": [],
+  "producer": "web",
+  "projectId": "25d1c688-afcc-46d1-a8a7-fade3f9ec5ff",
+  "region": {
+   "climate": {
+    "hot": false,
+    "rainy": false,
+    "snowLoad": "light",
+    "wind": "normal"
+   },
+   "country": "US",
+   "state": "NY"
+  },
+  "schema": "opencatio3d/project@0.1",
+  "site": {
+   "ground": "grass",
+   "measurements": [
+    {
+     "confirmed": true,
+     "field": "width",
+     "id": "f3ea5268-cefc-4865-b022-7836ce15069b",
+     "source": "tape",
+     "targetId": "841f6a9f-ec5e-45a6-bb3e-164dd8e97904",
+     "value": 0.914
+    },
+    {
+     "confirmed": true,
+     "field": "depth",
+     "id": "f4ea53fb-cdfc-46d2-b122-79c9cd150508",
+     "source": "tape",
+     "targetId": "841f6a9f-ec5e-45a6-bb3e-164dd8e97904",
+     "value": 0.457
+    },
+    {
+     "confirmed": true,
+     "field": "height",
+     "id": "f5ea558e-ccfc-453f-ae22-7510d01509c1",
+     "source": "tape",
+     "targetId": "841f6a9f-ec5e-45a6-bb3e-164dd8e97904",
+     "value": 0.762
+    },
+    {
+     "confirmed": true,
+     "field": "elevation",
+     "id": "f6ea5721-cbfc-43ac-af22-76a3cf15082e",
+     "source": "tape",
+     "targetId": "841f6a9f-ec5e-45a6-bb3e-164dd8e97904",
+     "value": 0.85
+    }
+   ],
+   "northDeg": 0,
+   "obstacles": [],
+   "walls": [
+    {
+     "a": [
+      0,
+      0
+     ],
+     "b": [
+      6,
+      0
+     ],
+     "height": 2.7,
+     "id": "0986a6e6-93f3-46c9-b74f-2ed8e58c323b",
+     "openings": [
+      {
+       "height": 1.1,
+       "id": "c8e22c51-f2a8-45b6-bcf6-ea275fea24fc",
+       "kind": "window",
+       "name": "Kitchen window",
+       "offset": 2.6,
+       "sill": 0.9,
+       "width": 0.71
+      }
+     ]
+    }
+   ]
+  },
+  "structures": [
+   {
+    "base": {
+     "kind": "raised-floor"
+    },
+    "depth": 0.457,
+    "elevation": 0.85,
+    "frame": {
+     "materialId": "lumber-2x2-cedar",
+     "maxPostSpacing": 0.9,
+     "profile": "wood-2x2",
+     "railSpacing": 0.6
+    },
+    "furnishings": [
+     {
+      "componentId": "shelf",
+      "id": "30dad4ac-0d61-4f0b-9f57-5846b3d6da85",
+      "length": 0.36,
+      "mountHeight": 0.35,
+      "offset": 0.05,
+      "side": "left"
+     },
+     {
+      "componentId": "bed",
+      "id": "31dad63f-0c61-4d78-a057-59d9b2d6d8f2",
+      "mountHeight": 0,
+      "offset": 0.35,
+      "side": "front"
+     }
+    ],
+    "height": 0.762,
+    "hostOpeningId": "c8e22c51-f2a8-45b6-bcf6-ea275fea24fc",
+    "hostWallId": "0986a6e6-93f3-46c9-b74f-2ed8e58c323b",
+    "id": "841f6a9f-ec5e-45a6-bb3e-164dd8e97904",
+    "lowHeight": 0.66,
+    "mesh": {
+     "materialId": "mesh-1x1-16ga-gaw-36"
+    },
+    "name": "Window box",
+    "openings": [
+     {
+      "height": 0.712,
+      "id": "de80ae37-df03-4b3e-9346-eef52dc67bf4",
+      "kind": "window-access",
+      "offset": 0.10199999999999987,
+      "side": "back",
+      "sill": 0.050000000000000044,
+      "width": 0.71
+     },
+     {
+      "height": 0.35,
+      "hinge": "left",
+      "id": "dd80aca4-e003-4cd1-9246-ed622ec67d87",
+      "kind": "cleaning-hatch",
+      "latch": "slide-bolt",
+      "offset": 0.2,
+      "side": "front",
+      "sill": 0.1,
+      "swing": "out",
+      "width": 0.5
+     }
+    ],
+    "roof": {
+     "kind": "polycarbonate",
+     "materialId": "roof-polycarb-corrugated"
+    },
+    "rotation": 0,
+    "template": "window-box",
+    "width": 0.914,
+    "x": 2.498,
+    "y": 0
+   }
+  ],
+  "units": "imperial",
+  "updatedAt": "2026-10-12T12:00:00.000Z",
+  "web": {
+   "sampleId": "window-box"
+  }
+ },
+ "openings": [],
+ "openplanHandoffVersion": 1,
+ "openplanPrepared": true,
+ "planNotes": "Created with OpenCatio3D. Catios are shown as boxes; the full design is in the opencatio3d block. Planning guidance only — confirm dimensions on site.",
+ "sections": [],
+ "stories": [
+  {
+   "index": 0,
+   "name": "Ground Floor"
+  }
+ ],
+ "version": 2,
+ "walls": [
+  {
+   "dimensions": [
+    6,
+    2.7,
+    0.2
+   ],
+   "identifier": "0986a6e6-93f3-46c9-b74f-2ed8e58c323b",
+   "story": 0,
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    3,
+    1.35,
+    -0.1,
+    1
+   ]
+  }
+ ],
+ "windows": [
+  {
+   "dimensions": [
+    0.71,
+    1.1,
+    0.2
+   ],
+   "identifier": "c8e22c51-f2a8-45b6-bcf6-ea275fea24fc",
+   "parentIdentifier": "0986a6e6-93f3-46c9-b74f-2ed8e58c323b",
+   "sillHeight": 0.9,
+   "story": 0,
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    2.955,
+    1.45,
+    -0.1,
+    1
+   ]
+  }
+ ]
+}

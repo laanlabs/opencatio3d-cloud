@@ -1,0 +1,292 @@
+{
+ "defaults": {
+  "ceilingHeight": 2.4,
+  "exteriorWallThickness": 0.2,
+  "interiorWallThickness": 0.12
+ },
+ "doors": [
+  {
+   "dimensions": [
+    0.9,
+    2.03,
+    0.2
+   ],
+   "identifier": "f1e27b79-a591-4784-a799-4583f59584a6",
+   "parentIdentifier": "8b7c78a9-682c-4fda-91bd-5bef04a61040",
+   "story": 0,
+   "style": "single",
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    6.95,
+    1.015,
+    -0.1,
+    1
+   ]
+  }
+ ],
+ "floors": [],
+ "objects": [
+  {
+   "attributes": {
+    "opencatio3dKind": "balcony-concept",
+    "opencatio3dRole": "structure",
+    "structureId": "6a2b5c84-8cc6-4345-be73-0d46645df27f"
+   },
+   "category": {
+    "greenhouse": {}
+   },
+   "dimensions": [
+    2.4,
+    2.2,
+    1.2
+   ],
+   "identifier": "6a2b5c84-8cc6-4345-be73-0d46645df27f",
+   "story": 0,
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    2.65,
+    4.1,
+    0.6,
+    1
+   ]
+  }
+ ],
+ "opencatio3d": {
+  "alternatives": [],
+  "assumptions": {
+   "fastenerOverage": 0.1,
+   "kerf": 0.003,
+   "stockLengths": [],
+   "wasteFactor": 0.1
+  },
+  "building": null,
+  "captureSource": "template",
+  "catalogVersion": "oc-catalog@0.1",
+  "cats": [
+   {
+    "ageClass": "adult",
+    "climber": true,
+    "escapeRisk": "medium",
+    "id": "4993426b-a904-4326-a165-88a554e31788",
+    "mobility": "full",
+    "name": "My cat",
+    "size": "medium"
+   }
+  ],
+  "createdAt": "2026-10-12T12:00:00.000Z",
+  "currency": "USD",
+  "lengthUnit": "m",
+  "name": "balcony-concept default",
+  "observations": [],
+  "overrides": [],
+  "plants": [],
+  "producer": "web",
+  "projectId": "b5439b54-9cc2-4adf-9e7f-2e0ea7ba54a9",
+  "region": {
+   "climate": {
+    "hot": false,
+    "rainy": false,
+    "snowLoad": "none",
+    "wind": "normal"
+   },
+   "country": "US"
+  },
+  "schema": "opencatio3d/project@0.1",
+  "site": {
+   "ground": "grass",
+   "measurements": [
+    {
+     "confirmed": true,
+     "field": "width",
+     "id": "ee12946a-90d5-441b-8a9f-7648703b7321",
+     "source": "tape",
+     "targetId": "6a2b5c84-8cc6-4345-be73-0d46645df27f",
+     "value": 2.4
+    },
+    {
+     "confirmed": true,
+     "field": "depth",
+     "id": "ef1295fd-8fd5-4288-8b9f-77db6f3b718e",
+     "source": "tape",
+     "targetId": "6a2b5c84-8cc6-4345-be73-0d46645df27f",
+     "value": 1.2
+    },
+    {
+     "confirmed": true,
+     "field": "height",
+     "id": "ec129144-92d5-4741-8c9f-796e6e3b6ffb",
+     "source": "tape",
+     "targetId": "6a2b5c84-8cc6-4345-be73-0d46645df27f",
+     "value": 2.2
+    }
+   ],
+   "northDeg": 0,
+   "obstacles": [],
+   "walls": [
+    {
+     "a": [
+      0,
+      0
+     ],
+     "b": [
+      10,
+      0
+     ],
+     "height": 2.7,
+     "id": "8b7c78a9-682c-4fda-91bd-5bef04a61040",
+     "openings": [
+      {
+       "height": 1.2,
+       "id": "f0e279e6-a691-4917-a699-43f0f6958639",
+       "kind": "window",
+       "name": "Living room window",
+       "offset": 2.2,
+       "sill": 0.9,
+       "width": 0.9
+      },
+      {
+       "height": 2.03,
+       "id": "f1e27b79-a591-4784-a799-4583f59584a6",
+       "kind": "door",
+       "name": "Back door",
+       "offset": 6.5,
+       "sill": 0,
+       "width": 0.9
+      }
+     ]
+    }
+   ]
+  },
+  "structures": [
+   {
+    "base": {
+     "kind": "deck"
+    },
+    "depth": 1.2,
+    "elevation": 3,
+    "frame": {
+     "materialId": "lumber-2x3-pt",
+     "maxPostSpacing": 1.2,
+     "profile": "wood-2x3",
+     "railSpacing": 0.9
+    },
+    "furnishings": [],
+    "height": 2.2,
+    "hostOpeningId": "f0e279e6-a691-4917-a699-43f0f6958639",
+    "hostWallId": "8b7c78a9-682c-4fda-91bd-5bef04a61040",
+    "id": "6a2b5c84-8cc6-4345-be73-0d46645df27f",
+    "lowHeight": 2.2,
+    "mesh": {
+     "materialId": "mesh-pvc-1x1-14ga-48"
+    },
+    "name": "Balcony",
+    "openings": [],
+    "roof": {
+     "kind": "mesh"
+    },
+    "rotation": 0,
+    "template": "balcony-concept",
+    "width": 2.4,
+    "x": 1.4500000000000004,
+    "y": 0
+   }
+  ],
+  "units": "imperial",
+  "updatedAt": "2026-10-12T12:00:00.000Z",
+  "web": {}
+ },
+ "openings": [],
+ "openplanHandoffVersion": 1,
+ "openplanPrepared": true,
+ "planNotes": "Created with OpenCatio3D. Catios are shown as boxes; the full design is in the opencatio3d block. Planning guidance only — confirm dimensions on site.",
+ "sections": [],
+ "stories": [
+  {
+   "index": 0,
+   "name": "Ground Floor"
+  }
+ ],
+ "version": 2,
+ "walls": [
+  {
+   "dimensions": [
+    10,
+    2.7,
+    0.2
+   ],
+   "identifier": "8b7c78a9-682c-4fda-91bd-5bef04a61040",
+   "story": 0,
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    5,
+    1.35,
+    -0.1,
+    1
+   ]
+  }
+ ],
+ "windows": [
+  {
+   "dimensions": [
+    0.9,
+    1.2,
+    0.2
+   ],
+   "identifier": "f0e279e6-a691-4917-a699-43f0f6958639",
+   "parentIdentifier": "8b7c78a9-682c-4fda-91bd-5bef04a61040",
+   "sillHeight": 0.9,
+   "story": 0,
+   "transform": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    2.65,
+    1.5,
+    -0.1,
+    1
+   ]
+  }
+ ]
+}
