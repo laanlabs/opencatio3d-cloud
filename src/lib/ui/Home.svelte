@@ -164,7 +164,7 @@
 
   <footer>
     <p>OpenCatio3D gives planning guidance, not certification. Checks report what the current rules detect; local codes, HOA or landlord rules, structural and veterinary questions need the right professional.</p>
-    <p><a href="https://opencatio3d.com/privacy">Privacy</a> · <a href="https://opencatio3d.com/terms">Terms</a> · <a href="https://opencatio3d.com/docs/methodology">How the checks work</a></p>
+    <p><a href="https://opencatio3d.com/privacy">Privacy</a> · <a href="https://opencatio3d.com/terms">Terms</a> · <a href="https://opencatio3d.com/trust#methodology">How the checks work</a></p>
   </footer>
 </div>
 
