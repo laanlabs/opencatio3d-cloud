@@ -38,7 +38,7 @@
     {@const pc = pieceFor(f.componentId)}
     <div class="head">
       <span class="ico" aria-hidden="true">{pc?.icon ?? '▪'}</span>
-      <div><h3>{comp.name}</h3><p class="muted small">{pc?.blurb ?? comp.ratedUse}</p></div>
+      <div><h2>{comp.name}</h2><p class="muted small">{pc?.blurb ?? comp.ratedUse}</p></div>
     </div>
     {#if !furnishingFits(s, f, catalog)}<p class="bad small" role="alert">This doesn’t fit here, so it won’t be built. Move it, lower it, or make the catio bigger.</p>{/if}
     {#if f.side !== 'span'}
@@ -64,7 +64,7 @@
       </fieldset>
     {/if}
     {#if comp.category === 'planter'}
-      <h4>Plants</h4>
+      <h3>Plants</h3>
       {#if plants.length}
         <ul class="plants">
           {#each plants as pl (pl.id)}
@@ -76,7 +76,7 @@
     {/if}
     <button class="btn danger" onclick={() => game.remove(f.id)}>Remove {comp.name.toLowerCase()}</button>
   {:else if o}
-    <div class="head"><span class="ico" aria-hidden="true">🚪</span><div><h3>{OPEN_NAME[o.kind]}</h3><p class="muted small">On the {o.side} wall, {fmtLen(o.width, units, true)} wide.</p></div></div>
+    <div class="head"><span class="ico" aria-hidden="true">🚪</span><div><h2>{OPEN_NAME[o.kind]}</h2><p class="muted small">On the {o.side} wall, {fmtLen(o.width, units, true)} wide.</p></div></div>
     {#if o.kind !== 'window-access' && o.kind !== 'vestibule'}
       <label class="field">Position along the wall <span class="val">{fmtLen(o.offset, units, true)}</span>
         <input type="range" min="0" max={Math.max(0, sideLength(o.side, s.width, s.depth) - o.width)} step={step} value={o.offset} oninput={(e) => game.setOpening(o.id, { offset: +e.currentTarget.value })} />
@@ -98,7 +98,7 @@
     {/if}
     <button class="btn danger" onclick={() => game.remove(o.id)}>Remove {OPEN_NAME[o.kind].toLowerCase()}</button>
   {:else}
-    <div class="head"><span class="ico" aria-hidden="true">🏠</span><div><h3>{t.name}</h3><p class="muted small">{t.summary}</p></div></div>
+    <div class="head"><span class="ico" aria-hidden="true">🏠</span><div><h2>{t.name}</h2><p class="muted small">{t.summary}</p></div></div>
     {#each SIZES as sz}
       {@const lim = t.limits[sz.field]}
       {#if lim}
@@ -120,8 +120,8 @@
   .insp { display: flex; flex-direction: column; gap: 10px; }
   .head { display: flex; gap: 10px; align-items: flex-start; }
   .ico { font-size: 26px; line-height: 1; }
-  h3 { margin: 0; font-size: 15px; }
-  h4 { margin: 4px 0 0; font-size: 13px; }
+  h2 { margin: 0; font-size: 15px; }
+  h3 { margin: 4px 0 0; font-size: 13px; }
   .small { font-size: 12px; margin: 2px 0 0; }
   .bad { color: var(--blocker); background: #fbe7e5; padding: 6px 8px; border-radius: 8px; }
   .val { float: right; color: var(--ink); font-weight: 700; }

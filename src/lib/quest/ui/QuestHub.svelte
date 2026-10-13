@@ -101,7 +101,8 @@
   .diff { font-weight: 700; color: var(--muted); }
   .stars { color: var(--sun); font-weight: 700; letter-spacing: 1px; }
   .badges { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; }
-  .badges li { display: grid; grid-template-columns: 28px 1fr; gap: 0 6px; padding: 10px; border-radius: 12px; border: 1px dashed var(--border); font-size: 13px; opacity: .7; }
+  .badges li { display: grid; grid-template-columns: 28px 1fr; gap: 0 6px; padding: 10px; border-radius: 12px; border: 1px dashed var(--border); font-size: 13px; }
+  .badges li:not(.got) span:first-child { opacity: .5; filter: grayscale(1); }
   .badges li.got { opacity: 1; border-style: solid; background: var(--panel); }
   .badges li span:first-child { grid-row: span 2; font-size: 20px; }
   .fine { margin-top: 28px; font-size: 12px; color: var(--muted); max-width: 52em; }

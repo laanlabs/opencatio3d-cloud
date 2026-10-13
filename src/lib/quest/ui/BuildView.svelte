@@ -78,11 +78,11 @@
 
 <svelte:window onpointermove={windowMove} onpointerup={windowUp} onpointercancel={() => (ghost = null)} onkeydown={onKey} />
 
-<div class="build">
+<main class="build">
   <header class="bar">
     <button class="btn small" onclick={onback} aria-label="Back to Catio Quest">←</button>
     <div class="title">
-      <strong>{sc.title}</strong>
+      <h1>{sc.title}</h1>
       <span class="cats">{#each sc.cats as c (c.id)}<CatFace coat={c.coat} size={22} label={c.name} />{/each}</span>
     </div>
     <button class="btn small" onclick={() => game.undo()} disabled={!game.undoCount} aria-label="Undo">↶ Undo</button>
@@ -151,13 +151,13 @@
       <div class="row"><button class="btn" onclick={() => (confirmRestart = false)}>Keep building</button><button class="btn primary" onclick={() => { confirmRestart = false; game.restart(); }}>Start over</button></div>
     </div>
   {/if}
-</div>
+</main>
 
 <style>
   .build { height: 100vh; height: 100dvh; display: flex; flex-direction: column; background: var(--bg); }
   .bar { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--panel); border-bottom: 1px solid var(--border); }
   .title { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; }
-  .title strong { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 15px; }
+  .title h1 { margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 15px; }
   .cats { display: inline-flex; gap: 2px; }
   .meters { display: flex; align-items: center; gap: 10px; padding: 8px 12px; flex-wrap: wrap; border-bottom: 1px solid var(--border); background: var(--panel); }
   .meter { display: flex; flex-direction: column; gap: 3px; min-width: 160px; }
