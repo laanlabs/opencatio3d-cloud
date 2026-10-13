@@ -16,6 +16,13 @@
 
   let category = $state<PieceCategory>('perches');
   let board = $state<ReturnType<typeof Board>>();
+  let dragged = false;
+  let tabs = $state<HTMLElement>();
+  // On phones the category tabs scroll sideways; keep the selected one in view.
+  $effect(() => {
+    void category;
+    tabs?.querySelector('.chip.on')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  });
   let ghost = $state<{ piece: Piece; x: number; y: number; moved: boolean; x0: number; y0: number } | null>(null);
   let showIssues = $state(false);
   let confirmRestart = $state(false);
@@ -50,13 +57,16 @@
     const g = ghost;
     ghost = null;
     if (!g.moved || g.piece.action.kind !== 'furnishing') return;
+    // A drag that ends over its own button still fires a click; don't add the piece twice.
+    dragged = true;
+    setTimeout(() => (dragged = false), 0);
     const spot = board?.dropAt(e.clientX, e.clientY, g.piece.action.componentId);
     if (!spot) return;
     const id = game.apply(g.piece);
     if (id) game.moveFurnishing(id, spot);
   }
   function tap(p: Piece) {
-    if (ghost?.moved) return;
+    if (ghost?.moved || dragged) return;
     game.apply(p);
   }
 
@@ -66,7 +76,7 @@
   }
 </script>
 
-<svelte:window onpointermove={windowMove} onpointerup={windowUp} onkeydown={onKey} />
+<svelte:window onpointermove={windowMove} onpointerup={windowUp} onpointercancel={() => (ghost = null)} onkeydown={onKey} />
 
 <div class="build">
   <header class="bar">
@@ -104,7 +114,7 @@
 
   <div class="main">
     <section class="tray" aria-label="Pieces">
-      <div class="cats-tabs" role="tablist" aria-label="Piece categories">
+      <div class="cats-tabs" bind:this={tabs} role="tablist" aria-label="Piece categories">
         {#each CATEGORIES as c}
           <button role="tab" class="chip" class:on={category === c} aria-selected={category === c} onclick={() => (category = c)}>{CATEGORY_LABEL[c]}</button>
         {/each}
@@ -165,7 +175,7 @@
   .tray { border-right: 1px solid var(--border); background: var(--panel); display: flex; flex-direction: column; min-height: 0; }
   .cats-tabs { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px; border-bottom: 1px solid var(--border); }
   .pieces { overflow: auto; padding: 10px; display: grid; grid-template-columns: 1fr; gap: 6px; align-content: start; }
-  .piece { display: grid; grid-template-columns: 34px 1fr auto; grid-template-rows: auto auto; gap: 0 8px; text-align: left; border: 1px solid var(--border); border-radius: 12px; background: var(--paper); padding: 8px; cursor: grab; color: var(--ink); touch-action: none; min-height: 44px; }
+  .piece { display: grid; grid-template-columns: 34px 1fr auto; grid-template-rows: auto auto; gap: 0 8px; text-align: left; border: 1px solid var(--border); border-radius: 12px; background: var(--paper); padding: 8px; cursor: grab; color: var(--ink); touch-action: pan-y; min-height: 44px; }
   .piece:hover { border-color: var(--dusk); }
   .piece.active { border-color: var(--leaf); background: #eef5ef; }
   .pi { grid-row: span 2; font-size: 24px; align-self: center; text-align: center; }
@@ -182,11 +192,16 @@
   .confirm { position: fixed; inset: auto 16px 16px auto; background: var(--panel); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); padding: 14px; z-index: 60; max-width: 320px; }
   .confirm p { margin: 0 0 10px; }
   @media (max-width: 900px) {
-    .main { grid-template-columns: 1fr; grid-template-rows: minmax(260px, 46vh) auto auto; overflow: auto; }
+    /* Phones: the board on top and the tray as one swipeable strip right under it, so a piece can be dragged up
+       onto the board without scrolling. Swiping sideways scrolls the strip; dragging up places the piece. */
+    .main { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(200px, 42vh) max-content auto; overflow: auto; }
     .stage { order: 0; padding: 8px; }
     .tray { order: 1; border-right: 0; border-top: 1px solid var(--border); }
     .side { order: 2; border-left: 0; border-top: 1px solid var(--border); }
-    .pieces { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    .cats-tabs { flex-wrap: nowrap; overflow-x: auto; padding: 8px 10px; scrollbar-width: none; }
+    .cats-tabs .chip { flex: none; }
+    .pieces { display: flex; flex: none; overflow-x: auto; overflow-y: hidden; padding: 8px 10px; scroll-snap-type: x proximity; }
+    .piece { flex: 0 0 148px; scroll-snap-align: start; touch-action: pan-x; }
     .pb { display: none; }
     .go { margin-left: 0; width: 100%; }
     .track { width: 120px; }
