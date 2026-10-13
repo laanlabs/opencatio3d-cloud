@@ -19,6 +19,8 @@
   const loadImport = () => import('./lib/ui/ImportView.svelte');
   // Catio Quest (the game) is its own chunk too.
   const loadQuest = () => import('./lib/quest/ui/QuestApp.svelte');
+  // Catio Prowl (be the cat) likewise.
+  const loadProwl = () => import('./lib/prowl/ui/ProwlApp.svelte');
 
   type Route =
     | { name: 'home' }
@@ -27,6 +29,7 @@
     | { name: 'view'; project: Project }
     | { name: 'import'; version: string; payload: string }
     | { name: 'quest'; arg: string }
+    | { name: 'prowl'; arg: string }
     | { name: 'loading' }
     | { name: 'missing'; message: string };
 
@@ -73,6 +76,7 @@
         return finish(mine, { name: 'home' });
       }
       if (head === 'quest') return finish(mine, { name: 'quest', arg: rest[0] ?? '' });
+      if (head === 'prowl') return finish(mine, { name: 'prowl', arg: rest.join('/') });
       if (head === 'import' && rest.length >= 2) return finish(mine, { name: 'import', version: rest[0], payload: rest.slice(1).join('/') });
       if (head === 'view' && rest.length >= 2) {
         try {
@@ -96,9 +100,9 @@
     if (mine !== seq) return; // a newer navigation won
     route = r;
     key++;
-    const screens: Record<string, Screen> = { home: 'home', editor: 'editor', view: 'view', print: 'print', import: 'import', missing: 'missing', quest: 'quest' };
+    const screens: Record<string, Screen> = { home: 'home', editor: 'editor', view: 'view', print: 'print', import: 'import', missing: 'missing', quest: 'quest', prowl: 'prowl' };
     if (screens[r.name]) trackScreen(screens[r.name]);
-    document.title = 'project' in r ? `${r.project.name} — OpenCatio3D` : r.name === 'quest' ? 'Catio Quest — build their dream catio · OpenCatio3D' : 'OpenCatio3D — design a safe, buildable catio in 3D';
+    document.title = 'project' in r ? `${r.project.name} — OpenCatio3D` : r.name === 'quest' ? 'Catio Quest — build their dream catio · OpenCatio3D' : r.name === 'prowl' ? 'Catio Prowl — a day in the life of your cat · OpenCatio3D' : 'OpenCatio3D — design a safe, buildable catio in 3D';
   }
 
   function downloadProject(p: Project) {
@@ -157,6 +161,18 @@
       {/await}
       {#snippet failed()}
         <div class="missing"><h2>Catio Quest hit a snag</h2><p>Something went wrong loading the game. Your saved catios are not affected.</p><a class="btn primary" href="#/quest">Back to Catio Quest</a></div>
+      {/snippet}
+    </svelte:boundary>
+  {:else if route.name === 'prowl'}
+    {@const r = route}
+    <svelte:boundary>
+      {#await loadProwl()}
+        <p class="loading muted">Loading Catio Prowl…</p>
+      {:then { default: ProwlApp }}
+        <ProwlApp arg={r.arg} />
+      {/await}
+      {#snippet failed()}
+        <div class="missing"><h2>Catio Prowl hit a snag</h2><p>Something went wrong loading the game. Your saved catios are not affected.</p><a class="btn primary" href="#/prowl">Back to Catio Prowl</a></div>
       {/snippet}
     </svelte:boundary>
   {:else if route.name === 'print'}

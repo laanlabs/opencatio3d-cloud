@@ -65,14 +65,24 @@ function wireMaterial(opening: [number, number], w: number, h: number, pvc: bool
 
 const v3 = (p: [number, number, number]) => new THREE.Vector3(p[0], p[1], p[2]);
 
-function barMesh(g: Extract<Geom, { type: 'bar' }>, mat: THREE.Material): THREE.Mesh {
+/** Boards that cats walk on: drawn lying flat (thickness `size[0]` facing up) whichever way they run. */
+const FLAT_ROLES = new Set(['shelf-board', 'ramp-board', 'bridge-board', 'ramp-cleat']);
+
+function barMesh(g: Extract<Geom, { type: 'bar' }>, mat: THREE.Material, flat = false): THREE.Mesh {
   const a = v3(g.a), b = v3(g.b);
   const len = a.distanceTo(b);
   const geo = new THREE.BoxGeometry(g.size[1], len, g.size[0]);
   const m = new THREE.Mesh(geo, mat);
   m.position.copy(a).add(b).multiplyScalar(0.5);
   const dir = b.clone().sub(a).normalize();
-  m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir);
+  const up = new THREE.Vector3(0, 1, 0);
+  const thick = up.clone().addScaledVector(dir, -up.dot(dir));
+  if (flat && thick.lengthSq() > 1e-6) {
+    // Box axes: X = width, Y = along the bar, Z = thickness (pointing as near to up as the bar allows).
+    thick.normalize();
+    const width = new THREE.Vector3().crossVectors(dir, thick);
+    m.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(width, dir, thick));
+  } else m.quaternion.setFromUnitVectors(up, dir);
   m.castShadow = true;
   m.receiveShadow = true;
   return m;
@@ -110,7 +120,7 @@ export function buildStructure(s: Structure, parts: Part[], cat: Catalog, opts: 
     const hl = opts.highlightOwner && p.ownerId === opts.highlightOwner;
     if (p.geom.type === 'bar') {
       const color = hl ? '#e8a93a' : m?.kind === 'lumber' ? WOOD[m.species ?? 'spf'] ?? WOOD.spf : '#999';
-      obj = barMesh(p.geom, std(color));
+      obj = barMesh(p.geom, std(color), FLAT_ROLES.has(p.role));
     } else if (p.geom.type === 'quad') {
       if (m?.kind === 'mesh') {
         obj = quadMesh(p.geom, wireMaterial((m.opening ?? [0.0254, 0.0254]) as [number, number], p.width ?? 1, p.height ?? 1, m.coating === 'pvc-coated'), 1, 1);

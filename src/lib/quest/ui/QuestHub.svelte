@@ -19,7 +19,7 @@
 <div class="hub">
   <header class="top">
     <a href="#/" class="brand" aria-label="OpenCatio3D planner"><Logo word /></a>
-    <a class="btn small" href="#/">Open the planner</a>
+    <span class="links"><a class="btn small" href="#/prowl">Play Catio Prowl</a> <a class="btn small" href="#/">Open the planner</a></span>
   </header>
   <main>
     <section class="intro">

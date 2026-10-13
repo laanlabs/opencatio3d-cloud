@@ -76,6 +76,14 @@
   </div>
 </section>
 
+{#if !editor.readonly && editor.project.structures.some((x) => x.template !== 'tunnel')}
+  <section>
+    <h3>Explore it as your cat</h3>
+    <p class="muted small">Walk, leap and nap around this catio in Catio Prowl, the free game.</p>
+    <div class="row"><a class="btn small" href="#/prowl/p/{editor.project.id}">Play in Catio Prowl</a></div>
+  </section>
+{/if}
+
 {#if !editor.readonly}
   <section>
     <h3>Design options</h3>

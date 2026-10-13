@@ -44,6 +44,16 @@ Sibling repos (not public yet): `opencatio3d-www` (website; owns the shared cata
   lost. Result cards are drawn on a canvas; progress stays in localStorage; "Continue in OpenCatio3D"
   copies the layout into the library as a concept (dimensions unconfirmed). No purchases, accounts or chat.
 
+- **Catio Prowl (`#/prowl`):** a free third-person game where you are the cat. A furnished room joins the
+  catio through the open window it is built over (catio-only for freestanding designs). The catio's shelves,
+  ramps, bridges, beds and posts are walkable surfaces taken from the generator's own parts
+  (`prowl/world.ts`); the cat is kept inside the room, the window passage and the catio's inside volume, so it
+  can never reach the yard. "Context" leaps show a ring where the cat will land, and the arc is checked
+  against walls, furniture, boards and the roof (`prowl/physics.ts`). A day's to-do list (`prowl/game.ts`):
+  knock things off the counter, find toy mice, scratch, drink, sniff the plants (with their real cat-safety
+  status), watch a visiting bird from the catio and nap in a sunbeam. Keyboard, mouse and touch controls;
+  works on any catio in your library (`#/prowl/p/<id>`). No purchases, accounts or chat.
+
 ## Develop
 
 Node 22 or newer.
@@ -74,6 +84,7 @@ checkout exists at `../../openplan/openPlan3D-cloud` (or `OPENPLAN3D_DIR`); othe
 | `#/print/<id>` | the build package |
 | `#/import/v1/<payload>` · `#/view/v1/<payload>` | transfer from iOS · read-only share |
 | `#/quest` · `#/quest/<scenario>` · `#/quest/daily` | Catio Quest: the hub, a scenario, today's daily challenge |
+| `#/prowl` · `#/prowl/<sample>` · `#/prowl/p/<id>` | Catio Prowl: the hub, a sample home and catio, one of your own catios |
 
 ## Layout
 
@@ -89,6 +100,8 @@ src/lib/scene/                 three.js builders, SVG drawings (plan, elevations
 src/lib/ui/                    Home, EditorView, PlanView, Viewer3D, workspace panels, PrintView, ImportView
 src/lib/quest/                 Catio Quest: scenarios, daily, pieces, design edits, nav graph, sim, scores, convert, card, render
 src/lib/quest/ui/              QuestApp (stages), hub, intro, build board + inspector, 3D explore view, results
+src/lib/prowl/                 Catio Prowl: world (surfaces, volumes, room), physics (walk, leap), game (tasks, bird), render, sound
+src/lib/prowl/ui/              ProwlApp, hub (pick a cat and a space), play view (controls, to-do list, end card)
 tests/                         vitest suites + fixtures/web (parity with iOS)
 ```
 

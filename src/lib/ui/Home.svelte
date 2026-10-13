@@ -124,11 +124,18 @@
       </p>
     </section>
 
-    <a class="quest" href="#/quest">
-      <span class="q-ico" aria-hidden="true">🐾</span>
-      <span class="q-body"><strong>Catio Quest — the game</strong><span>Build a catio for a household of cats, then let them explore. Seven scenarios and a daily challenge. Free, no account.</span></span>
-      <span class="q-go">Play →</span>
-    </a>
+    <div class="games">
+      <a class="quest" href="#/quest">
+        <span class="q-ico" aria-hidden="true">🐾</span>
+        <span class="q-body"><strong>Catio Quest — the game</strong><span>Build a catio for a household of cats, then let them explore. Seven scenarios and a daily challenge. Free, no account.</span></span>
+        <span class="q-go">Play →</span>
+      </a>
+      <a class="quest" href="#/prowl">
+        <span class="q-ico" aria-hidden="true">🐈</span>
+        <span class="q-body"><strong>Catio Prowl — be the cat</strong><span>Explore a home and its catio as a cat: leap, knock things off the counter, watch the birds, nap in the sun. Try it in your own catio designs.</span></span>
+        <span class="q-go">Play →</span>
+      </a>
+    </div>
 
     <section aria-labelledby="samples-h">
       <h2 id="samples-h">Explore a sample</h2>
@@ -204,7 +211,8 @@
   .tcard span, .scard span { font-size: 13px; color: var(--body); }
   .more { font-size: 13px; color: var(--muted); }
   .link { border: 0; background: none; padding: 0; color: var(--cedar); text-decoration: underline; cursor: pointer; font-size: 13px; }
-  .quest { display: flex; align-items: center; gap: 14px; margin-top: 28px; padding: 14px 16px; border-radius: 16px; background: var(--dusk); color: #fff; text-decoration: none; }
+  .games { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-top: 28px; }
+  .quest { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 16px; background: var(--dusk); color: #fff; text-decoration: none; }
   .quest:hover { background: var(--dusk-dark); }
   .q-ico { font-size: 30px; }
   .q-body { flex: 1; display: flex; flex-direction: column; gap: 3px; }

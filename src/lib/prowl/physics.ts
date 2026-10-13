@@ -1,0 +1,288 @@
+// Catio Prowl movement: a cat-sized cylinder that walks on surfaces, steps up small heights, falls off
+// edges and is kept inside the world's volumes. Leaps are "context" leaps (as in third-person cat games):
+// the ledge the cat faces is found ahead of time and shown, and one key or tap carries the cat there
+// along an arc that is checked against walls, solid furniture and boards. No browser APIs: tested in node.
+import type { Vec2, Vec3 } from '../model/types';
+import type { Rect, Surface, Volume, World } from './world';
+
+export const R = 0.11; // body radius
+export const HEAD = 0.26; // standing height (solid furniture)
+export const CROUCH = 0.2; // headroom a cat needs under a roof or ceiling: cats crouch
+export const STEP = 0.14; // walks up this without a leap
+export const MAX_UP = 1.6;
+export const MAX_REACH = 1.9;
+const G = 9.8;
+
+export interface Leap { from: Vec3; to: Vec3; t: number; T: number; up: boolean; apex: number; surfaceId: string }
+export interface CatState {
+  p: Vec3;
+  v: Vec2;
+  vy: number;
+  heading: number;
+  ground: boolean;
+  surfaceId: string | null;
+  leap: Leap | null;
+}
+export interface MoveInput { move: Vec2; sneak?: boolean; jump?: boolean }
+export interface LeapTarget { p: Vec3; surface: Surface; kind: 'up' | 'down' | 'across'; apex: number }
+export type StepEvent = { type: 'leap'; target: LeapTarget } | { type: 'hop' } | { type: 'land'; drop: number; surfaceId: string | null };
+
+// ---------- geometry ----------
+
+/** Point in an oriented rectangle, shrunk by `margin` (negative grows it). */
+export function inRect(r: Rect, x: number, z: number, margin = 0): boolean {
+  const dx = x - r.c[0], dz = z - r.c[1];
+  const c = Math.cos(r.yaw), s = Math.sin(r.yaw);
+  const lx = dx * c + dz * s, lz = -dx * s + dz * c;
+  return Math.abs(lx) <= r.h[0] - margin && Math.abs(lz) <= r.h[1] - margin;
+}
+
+/** Clamp a point into an oriented rectangle shrunk by `margin` (to its centre if it is too small). */
+export function clampInto(r: Rect, x: number, z: number, margin: number): Vec2 {
+  const dx = x - r.c[0], dz = z - r.c[1];
+  const c = Math.cos(r.yaw), s = Math.sin(r.yaw);
+  let lx = dx * c + dz * s, lz = -dx * s + dz * c;
+  const mx = Math.max(0, r.h[0] - margin), mz = Math.max(0, r.h[1] - margin);
+  lx = Math.max(-mx, Math.min(mx, lx));
+  lz = Math.max(-mz, Math.min(mz, lz));
+  return [r.c[0] + lx * c - lz * s, r.c[1] + lx * s + lz * c];
+}
+
+export function topAt(s: Surface, x: number, z: number): number {
+  if (s.low === undefined) return s.top;
+  const lx = (x - s.c[0]) * Math.cos(s.yaw) + (z - s.c[1]) * Math.sin(s.yaw);
+  const t = Math.max(0, Math.min(1, (lx + s.h[0]) / (2 * s.h[0])));
+  return s.low + (s.top - s.low) * t;
+}
+
+function inPoly(poly: Vec2[], x: number, z: number): boolean {
+  let inside = false;
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    const [xi, zi] = poly[i], [xj, zj] = poly[j];
+    if ((zi > z) !== (zj > z) && x < ((xj - xi) * (z - zi)) / (zj - zi) + xi) inside = !inside;
+  }
+  return inside;
+}
+
+export const ceilAt = (v: Volume, x: number, z: number) => v.ceil[0] + v.ceil[1] * x + v.ceil[2] * z;
+
+/** Ceiling over a body at (x, y, z): the lowest of the highest ceilings over its centre and edges. */
+export function headroom(w: World, x: number, y: number, z: number, rad = R): number {
+  const pts: Vec2[] = [[x, z], [x + rad, z], [x - rad, z], [x, z + rad], [x, z - rad]];
+  let low = Infinity;
+  for (const [px, pz] of pts) {
+    let hi = -Infinity;
+    for (const v of w.volumes) if (y >= v.y0 - 0.03 && inPoly(v.poly, px, pz)) hi = Math.max(hi, ceilAt(v, px, pz));
+    if (hi > -Infinity) low = Math.min(low, hi);
+  }
+  return low;
+}
+
+/** A point inside some volume, clear of its floor and ceiling and outside solid furniture (for the camera). */
+export function openAir(w: World, x: number, y: number, z: number, pad = 0.04, wide = false): boolean {
+  if (!(wide ? w.cameraVolumes : w.volumes).some((v) => inPoly(v.poly, x, z) && y > v.y0 + pad && y < ceilAt(v, x, z) - pad)) return false;
+  return !w.surfaces.some((s) => s.solid && y < s.top + pad && y > s.bottom - pad && inRect(s, x, z, -pad));
+}
+
+/** Whether a body standing at (x, y, z) with radius `rad` fits inside the union of volumes. */
+export function contained(w: World, x: number, y: number, z: number, rad = R, height = CROUCH): boolean {
+  const pts: Vec2[] = rad > 0 ? [[x, z], [x + rad, z], [x - rad, z], [x, z + rad], [x, z - rad]] : [[x, z]];
+  return pts.every(([px, pz]) => w.volumes.some((v) => y >= v.y0 - 0.03 && inPoly(v.poly, px, pz) && y + height <= ceilAt(v, px, pz) + 1e-6));
+}
+
+/** Highest surface top under (x, z) that is at or below `maxY`. */
+export function groundAt(w: World, x: number, z: number, maxY: number): { y: number; surface: Surface | null } {
+  let y = -Infinity;
+  let surface: Surface | null = null;
+  for (const s of w.surfaces) {
+    if (!inRect(s, x, z)) continue;
+    const t = topAt(s, x, z);
+    if (t <= maxY + 1e-6 && t > y) { y = t; surface = s; }
+  }
+  return { y, surface };
+}
+
+/** Solid furniture taller than a step in the way of a body at (x, y, z). */
+export function blocked(w: World, x: number, z: number, y: number, rad = R): boolean {
+  return w.surfaces.some((s) => s.solid && s.top > y + STEP && s.bottom < y + HEAD && inRect(s, x, z, -rad));
+}
+
+const canStand = (w: World, x: number, z: number, y: number) => contained(w, x, y, z) && !blocked(w, x, z, y);
+
+// ---------- leaps ----------
+
+/** Position along a leap at k ∈ [0, 1]: up-leaps rise first and travel late, so they clear the edge they land on. */
+export function leapPos(l: Pick<Leap, 'from' | 'to' | 'up' | 'apex'>, k: number): Vec3 {
+  const { from, to, up } = l;
+  const e = up ? Math.pow(k, 2.2) : k;
+  const top = l.apex;
+  const kr = up ? 0.62 : 0.28;
+  const y = k < kr ? from[1] + (top - from[1]) * Math.sin((k / kr) * (Math.PI / 2)) : top + (to[1] - top) * Math.pow((k - kr) / (1 - kr), 2);
+  return [from[0] + (to[0] - from[0]) * e, y, from[2] + (to[2] - from[2]) * e];
+}
+
+function pathClear(w: World, from: Vec3, to: Vec3, up: boolean, apex: number, target: Surface, current: string | null): boolean {
+  for (let k = 0.1; k < 0.95; k += 0.1) {
+    const q = leapPos({ from, to, up, apex }, k);
+    if (!contained(w, q[0], q[1], q[2], R * 0.7, CROUCH * 0.9)) return false;
+    for (const s of w.surfaces) {
+      if (s.id === target.id || s.id === current) continue;
+      if (s.solid) {
+        if (q[1] < s.top - 0.03 && q[1] + HEAD * 0.8 > s.bottom && inRect(s, q[0], q[2], -0.04)) return false;
+      } else if (s.kind !== 'floor' && inRect(s, q[0], q[2], -0.02)) {
+        const t = topAt(s, q[0], q[2]);
+        if (q[1] < t - 0.01 && q[1] + HEAD > t - 0.05) return false; // a board through the body
+      }
+    }
+  }
+  return true;
+}
+
+/** The ledge the cat would leap to, facing `heading`: nearest upward ledge first, then across a gap, then down. */
+export function leapTarget(w: World, st: CatState): LeapTarget | null {
+  if (!st.ground || st.leap) return null;
+  const [x, y, z] = st.p;
+  const fx = Math.sin(st.heading), fz = Math.cos(st.heading);
+  const rx = fz, rz = -fx;
+  let best = null as { t: LeapTarget; score: number } | null;
+  for (let d = 0.3; d <= MAX_REACH + 1e-9; d += 0.1) {
+    for (const lat of [0, -0.16, 0.16]) {
+      const px = x + fx * d + rx * lat, pz = z + fz * d + rz * lat;
+      for (const s of w.surfaces) {
+        if (s.kind === 'post' || s.low !== undefined || !inRect(s, px, pz, 0.04)) continue;
+        const ty = topAt(s, px, pz);
+        if (s.id === st.surfaceId && Math.abs(ty - y) < 0.05) continue;
+        const dy = ty - y;
+        if (dy > MAX_UP || dy < -3) continue;
+        let kind: LeapTarget['kind'] = dy > 0.2 ? 'up' : dy < -0.35 ? 'down' : 'across';
+        if (kind === 'across') {
+          // Only a leap if there is a drop in between; otherwise the cat can just walk there.
+          const mx = (x + px) / 2, mz = (z + pz) / 2;
+          if (groundAt(w, mx, mz, y + STEP).y > y - 0.3) continue;
+        }
+        if (kind !== 'up' && d < 0.45) continue;
+        const [lx, lz] = clampInto(s, px, pz, Math.min(0.12, Math.min(s.h[0], s.h[1]) * 0.6));
+        const ly = topAt(s, lx, lz);
+        if (groundAt(w, lx, lz, ly + 0.01).surface?.id !== s.id) continue; // something else sits on top there
+        if (!canStand(w, lx, lz, ly)) continue;
+        const up = ly > y + 0.05;
+        // Arc height: a little above the higher end, lowered to fit under a catio roof.
+        const hi = Math.max(y, ly);
+        let room = Infinity;
+        for (let f = 0; f <= 1.001; f += 0.25) room = Math.min(room, headroom(w, x + (lx - x) * f, hi, z + (lz - z) * f, R * 0.7));
+        const apex = Math.min(hi + (up ? 0.2 : 0.16), room - CROUCH * 0.9 - 0.01);
+        if (apex < hi + 0.02) continue;
+        if (!pathClear(w, [x, y, z], [lx, ly, lz], up, apex, s, st.surfaceId)) continue;
+        const score = (kind === 'up' ? 0 : kind === 'across' ? 3 : 6) + d - (kind === 'up' ? 0.15 * dy : 0) + Math.abs(lat);
+        if (!best || score < best.score) best = { t: { p: [lx, ly, lz], surface: s, kind, apex }, score };
+      }
+    }
+    if (best && best.t.kind === 'up' && d > Math.hypot(best.t.p[0] - x, best.t.p[2] - z) + 0.3) break;
+  }
+  return best?.t ?? null;
+}
+
+export function startLeap(st: CatState, t: LeapTarget) {
+  const from: Vec3 = [...st.p];
+  const dist = Math.hypot(t.p[0] - from[0], t.p[2] - from[2]);
+  st.leap = { from, to: t.p, t: 0, T: 0.32 + 0.12 * dist + 0.1 * Math.abs(t.p[1] - from[1]), up: t.p[1] > from[1] + 0.05, apex: t.apex, surfaceId: t.surface.id };
+  st.ground = false;
+  st.v = [0, 0];
+  if (dist > 0.05) st.heading = Math.atan2(t.p[0] - from[0], t.p[2] - from[2]);
+}
+
+// ---------- stepping ----------
+
+export function newCat(p: Vec3, heading: number, w: World): CatState {
+  const g = groundAt(w, p[0], p[2], p[1] + STEP);
+  return { p: [p[0], g.surface ? g.y : p[1], p[2]], v: [0, 0], vy: 0, heading, ground: true, surfaceId: g.surface?.id ?? null, leap: null };
+}
+
+function turnToward(a: number, b: number, max: number) {
+  let d = b - a;
+  while (d > Math.PI) d -= 2 * Math.PI;
+  while (d < -Math.PI) d += 2 * Math.PI;
+  return a + Math.max(-max, Math.min(max, d));
+}
+
+/** Advance the cat by dt seconds. Returns what happened (leaps, hops, landings). */
+export function step(w: World, st: CatState, input: MoveInput, dt: number): StepEvent[] {
+  const ev: StepEvent[] = [];
+  if (st.leap) {
+    const l = st.leap;
+    l.t += dt;
+    const k = Math.min(1, l.t / l.T);
+    st.p = leapPos(l, k);
+    if (k >= 1) {
+      st.p = [...l.to];
+      st.leap = null;
+      st.ground = true;
+      st.vy = 0;
+      st.surfaceId = l.surfaceId;
+      ev.push({ type: 'land', drop: Math.max(0, l.from[1] - l.to[1]), surfaceId: l.surfaceId });
+    }
+    return ev;
+  }
+
+  // Leap or hop.
+  if (input.jump && st.ground) {
+    const t = leapTarget(w, st);
+    if (t) { startLeap(st, t); ev.push({ type: 'leap', target: t }); return ev; }
+    st.ground = false;
+    st.vy = 2.4;
+    ev.push({ type: 'hop' });
+  }
+
+  // Walk.
+  const [mx, mz] = input.move;
+  const mag = Math.min(1, Math.hypot(mx, mz));
+  const speed = input.sneak ? 0.65 : 1.7;
+  const tv: Vec2 = mag > 0.02 ? [(mx / Math.hypot(mx, mz)) * mag * speed, (mz / Math.hypot(mx, mz)) * mag * speed] : [0, 0];
+  const acc = Math.min(1, (st.ground ? 12 : 3) * dt);
+  st.v = [st.v[0] + (tv[0] - st.v[0]) * acc, st.v[1] + (tv[1] - st.v[1]) * acc];
+  if (mag > 0.05) st.heading = turnToward(st.heading, Math.atan2(mx, mz), 10 * dt);
+  let [x, y, z] = st.p;
+  const dx = st.v[0] * dt, dz = st.v[1] * dt;
+  if (dx || dz) {
+    if (canStand(w, x + dx, z + dz, y)) { x += dx; z += dz; }
+    else if (dx && canStand(w, x + dx, z, y)) { x += dx; st.v[1] = 0; }
+    else if (dz && canStand(w, x, z + dz, y)) { z += dz; st.v[0] = 0; }
+    else st.v = [0, 0];
+  }
+
+  // Up and down.
+  if (st.ground) {
+    const g = groundAt(w, x, z, y + STEP);
+    if (!g.surface || g.y < y - 0.03) { st.ground = false; st.vy = 0; }
+    else if (g.y > y && !canStand(w, x, z, g.y)) { x = st.p[0]; z = st.p[2]; st.v = [0, 0]; }
+    else { y = g.y; st.surfaceId = g.surface.id; }
+  }
+  if (!st.ground) {
+    const before = y;
+    st.vy -= G * dt;
+    y += st.vy * dt;
+    const room = headroom(w, x, before, z);
+    if (Number.isFinite(room) && y + CROUCH > room) { y = Math.max(before, room - CROUCH); st.vy = Math.min(0, st.vy); }
+    const g = groundAt(w, x, z, Math.max(before, y) + 0.02);
+    if (g.surface && y <= g.y) {
+      ev.push({ type: 'land', drop: Math.max(0, (st.p[1] ?? before) - g.y), surfaceId: g.surface.id });
+      y = g.y;
+      st.ground = true;
+      st.vy = 0;
+      st.surfaceId = g.surface.id;
+    } else if (!g.surface) {
+      // Nothing below (should not happen inside the volumes): stand where we are.
+      st.ground = true;
+      st.vy = 0;
+    }
+  }
+  st.p = [x, y, z];
+  return ev;
+}
+
+/** Which volume region the cat is in (the catio wins where volumes overlap at the window). */
+export function regionAt(w: World, p: Vec3): 'home' | 'catio' | null {
+  const inside = w.volumes.filter((v) => inPoly(v.poly, p[0], p[2]) && p[1] >= v.y0 - 0.03);
+  if (inside.some((v) => v.region === 'catio')) return 'catio';
+  return inside.length ? 'home' : null;
+}
