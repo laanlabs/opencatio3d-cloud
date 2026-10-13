@@ -11,6 +11,7 @@
   import Board from './Board.svelte';
   import Inspector from './Inspector.svelte';
   import CatFace from './CatFace.svelte';
+  import { onMount, tick } from 'svelte';
 
   let { game, units, onexplore, onback }: { game: QuestGame; units: Units; onexplore: () => void; onback: () => void } = $props();
 
@@ -26,6 +27,18 @@
   let ghost = $state<{ piece: Piece; x: number; y: number; moved: boolean; x0: number; y0: number } | null>(null);
   let showIssues = $state(false);
   let confirmRestart = $state(false);
+  let heading: HTMLHeadingElement;
+  let restartBtn: HTMLButtonElement;
+  let keepBtn = $state<HTMLButtonElement>();
+  onMount(() => heading?.focus());
+  // Keyboard users land in the dialog and return to "Start over" when it closes.
+  $effect(() => { keepBtn?.focus(); });
+  async function closeRestart(restart: boolean) {
+    confirmRestart = false;
+    if (restart) game.restart();
+    await tick();
+    restartBtn?.focus();
+  }
 
   const sc = $derived(game.sc);
   const s = $derived(game.structure);
@@ -72,7 +85,7 @@
 
   function onKey(e: KeyboardEvent) {
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); game.undo(); }
-    if (e.key === 'Escape') { if (showIssues) showIssues = false; else game.selected = null; }
+    if (e.key === 'Escape') { if (confirmRestart) closeRestart(false); else if (showIssues) showIssues = false; else game.selected = null; }
   }
 </script>
 
@@ -82,11 +95,11 @@
   <header class="bar">
     <button class="btn small" onclick={onback} aria-label="Back to Catio Quest">←</button>
     <div class="title">
-      <h1>{sc.title}</h1>
+      <h1 bind:this={heading} tabindex="-1">{sc.title}</h1>
       <span class="cats">{#each sc.cats as c (c.id)}<CatFace coat={c.coat} size={22} label={c.name} />{/each}</span>
     </div>
     <button class="btn small" onclick={() => game.undo()} disabled={!game.undoCount} aria-label="Undo">↶ Undo</button>
-    <button class="btn small" onclick={() => (confirmRestart = true)}>Start over</button>
+    <button class="btn small" bind:this={restartBtn} onclick={() => (confirmRestart = true)}>Start over</button>
   </header>
 
   <div class="meters">
@@ -148,7 +161,7 @@
   {#if confirmRestart}
     <div class="confirm" role="alertdialog" aria-label="Start over?">
       <p>Start over from the original catio? Your changes here will be lost.</p>
-      <div class="row"><button class="btn" onclick={() => (confirmRestart = false)}>Keep building</button><button class="btn primary" onclick={() => { confirmRestart = false; game.restart(); }}>Start over</button></div>
+      <div class="row"><button class="btn" bind:this={keepBtn} onclick={() => closeRestart(false)}>Keep building</button><button class="btn primary" onclick={() => closeRestart(true)}>Start over</button></div>
     </div>
   {/if}
 </main>
@@ -157,7 +170,7 @@
   .build { height: 100vh; height: 100dvh; display: flex; flex-direction: column; background: var(--bg); }
   .bar { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--panel); border-bottom: 1px solid var(--border); }
   .title { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; }
-  .title h1 { margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 15px; }
+  .title h1 { outline: none; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 15px; }
   .cats { display: inline-flex; gap: 2px; }
   .meters { display: flex; align-items: center; gap: 10px; padding: 8px 12px; flex-wrap: wrap; border-bottom: 1px solid var(--border); background: var(--panel); }
   .meter { display: flex; flex-direction: column; gap: 3px; min-width: 160px; }

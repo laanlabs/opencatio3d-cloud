@@ -66,7 +66,9 @@
   }
   let cleanup = () => {};
 
+  let heading: HTMLHeadingElement;
   onMount(() => {
+    heading?.focus();
     if (!reduce) start3d();
     return () => { cancelAnimationFrame(raf); cleanup(); scene?.dispose(); scene = undefined; };
   });
@@ -79,7 +81,7 @@
 <main class="sim">
   <header class="bar">
     <button class="btn small" onclick={onback}>← Back to building</button>
-    <h1 class="ttl">Let them explore · {game.sc.title}</h1>
+    <h1 class="ttl" bind:this={heading} tabindex="-1">Let them explore · {game.sc.title}</h1>
     <button class="btn primary" onclick={skip}>See the results →</button>
   </header>
 
@@ -130,7 +132,7 @@
 <style>
   .sim { height: 100vh; height: 100dvh; display: flex; flex-direction: column; background: var(--bg); }
   .bar { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--panel); border-bottom: 1px solid var(--border); }
-  .ttl { margin: 0; font-size: 15px; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ttl { outline: none; margin: 0; font-size: 15px; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .body { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 340px; }
   .viewport { position: relative; overflow: hidden; background: #d9e4ec; touch-action: none; }
   .viewport.hidden { display: none; }

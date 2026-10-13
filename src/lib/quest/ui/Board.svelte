@@ -102,7 +102,16 @@
     const comp = catalog.component(f.componentId);
     if (!comp) return;
     const step = e.shiftKey ? 0.3 : 0.1;
-    if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); game.remove(f.id); return; }
+    if (e.key === 'Delete' || e.key === 'Backspace') {
+      e.preventDefault();
+      // Keep keyboard focus on the board: the next piece if there is one, else the board itself.
+      const items = [...svg.querySelectorAll<SVGGElement>('g.item')];
+      const i = items.indexOf(e.currentTarget as SVGGElement);
+      const next = items[i + 1] ?? items[i - 1];
+      game.remove(f.id);
+      (next ?? svg).focus();
+      return;
+    }
     if (e.key === 'PageUp' || e.key === 'PageDown') {
       if (comp.mount === 'floor' && comp.recipe !== 'post-scratcher') return;
       e.preventDefault();
@@ -151,7 +160,7 @@
 
 <div class="wrap" bind:clientWidth={cw} bind:clientHeight={ch}>
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-<svg bind:this={svg} {viewBox} class="board" data-board role="application" aria-label="Catio plan, {fmtLen(s.width, units, true)} wide and {fmtLen(s.depth, units, true)} deep. Select a piece, then use the arrow keys to move it, Page Up and Page Down to raise or lower it, Delete to remove it." onpointermove={move} onpointerup={up} onpointercancel={() => (drag = null)} onpointerdown={(e) => { if (e.target === svg || (e.target as Element).classList.contains('floor')) game.selected = null; }}>
+<svg bind:this={svg} {viewBox} class="board" data-board tabindex="-1" role="application" aria-label="Catio plan, {fmtLen(s.width, units, true)} wide and {fmtLen(s.depth, units, true)} deep. Select a piece, then use the arrow keys to move it, Page Up and Page Down to raise or lower it, Delete to remove it." onpointermove={move} onpointerup={up} onpointercancel={() => (drag = null)} onpointerdown={(e) => { if (e.target === svg || (e.target as Element).classList.contains('floor')) game.selected = null; }}>
   <defs>
     <pattern id="q-mesh" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M0 0H10M0 0V10" stroke="#8a929b" stroke-width="1" /></pattern>
     <pattern id="q-pavers" width="40" height="40" patternUnits="userSpaceOnUse"><rect width="40" height="40" fill="#d9d3c7" /><path d="M0 0H40M0 0V40" stroke="#c4bcae" stroke-width="2" /></pattern>
