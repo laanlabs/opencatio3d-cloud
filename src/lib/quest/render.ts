@@ -58,6 +58,13 @@ function makeCat(id: string, coat: string, small: boolean): CatRig {
   return { id, root, body, head, tail, legs, heading: 0, anchor: new THREE.Object3D() };
 }
 
+/** Curl the tail forward along the right flank, inside the torso's footprint. Settled cats face into the catio with their backs to the wall,
+ *  so a tail held out behind would poke through the mesh and read as an escape. `tilt` undoes the body's pitch. */
+function curl(tail: THREE.Mesh, tilt: number, swish: number) {
+  tail.position.set(0.06, 0.06, -0.12);
+  tail.rotation.set(1.5 - tilt, 0, swish * 0.05);
+}
+
 /** Pose the rig for a moment. `phase` drives walk cycles and idle motion. */
 function pose(rig: CatRig, p: Pose, phase: number, k: number) {
   const { body, head, tail, legs } = rig;
@@ -66,7 +73,9 @@ function pose(rig: CatRig, p: Pose, phase: number, k: number) {
   body.scale.set(1, 1, 1);
   head.position.set(0, 0.25, 0.16);
   head.rotation.set(0, 0, 0);
+  tail.position.set(0, 0.2, -0.15);
   tail.rotation.set(-0.9, 0, Math.sin(phase * 0.7) * 0.25);
+  const swish = Math.sin(phase * 0.7);
   legs.forEach((l) => { l.visible = true; l.rotation.set(0, 0, 0); });
   rig.root.visible = !(p === 'gone' || p === 'inside' || p === 'hide');
   switch (p) {
@@ -90,7 +99,7 @@ function pose(rig: CatRig, p: Pose, phase: number, k: number) {
       head.rotation.x = 0.45;
       head.rotation.y = p === 'lookout' ? Math.sin(phase * 0.8) * 0.6 : 0;
       legs[2].visible = legs[3].visible = false;
-      tail.rotation.set(-0.2, 0, 0.6);
+      curl(tail, -0.55, swish);
       break;
     }
     case 'loaf': {
@@ -98,7 +107,7 @@ function pose(rig: CatRig, p: Pose, phase: number, k: number) {
       body.position.y = -0.04;
       legs.forEach((l) => (l.visible = false));
       head.position.set(0, 0.2, 0.15);
-      tail.rotation.set(-1.45, 0, 0.8);
+      curl(tail, 0, swish);
       break;
     }
     case 'sleep': {
@@ -108,7 +117,7 @@ function pose(rig: CatRig, p: Pose, phase: number, k: number) {
       legs.forEach((l) => (l.visible = false));
       head.position.set(0.06, 0.15, 0.12);
       head.rotation.set(0.5, 0.6, 0.3);
-      tail.rotation.set(-1.5, 0, 1.4);
+      curl(tail, 0, 0);
       body.scale.y = 0.6 + Math.sin(phase * 1.5) * 0.02;
       break;
     }
@@ -117,7 +126,7 @@ function pose(rig: CatRig, p: Pose, phase: number, k: number) {
       body.position.y = p === 'scratch' ? 0.05 : 0;
       const sw = Math.sin(phase * 10) * 0.5;
       legs[0].rotation.x = -1.4 + sw; legs[1].rotation.x = -1.4 - sw;
-      tail.rotation.x = -0.5;
+      tail.rotation.x = p === 'scratch' ? 0.9 : -0.15;
       break;
     }
     case 'drink': case 'sniff': case 'toilet': {
@@ -125,6 +134,7 @@ function pose(rig: CatRig, p: Pose, phase: number, k: number) {
       head.position.set(0, 0.17, 0.2);
       head.rotation.x = 0.7 + Math.sin(phase * 4) * 0.08;
       if (p === 'toilet') { body.scale.y = 0.85; legs.forEach((l) => (l.visible = false)); }
+      curl(tail, p === 'toilet' ? -0.25 : 0.2, swish);
       break;
     }
     case 'play': {
@@ -132,13 +142,14 @@ function pose(rig: CatRig, p: Pose, phase: number, k: number) {
       body.position.y = b * 0.08;
       body.rotation.x = -0.25 * b;
       legs[0].rotation.x = -0.8 * b; legs[1].rotation.x = -0.8 * b;
-      tail.rotation.x = -1.3;
+      tail.rotation.x = -0.15;
       break;
     }
     case 'groom': {
       body.rotation.x = -0.5;
       head.rotation.set(0.5 + Math.sin(phase * 3) * 0.2, 0.7, 0);
       legs[2].visible = legs[3].visible = false;
+      curl(tail, -0.5, swish);
       break;
     }
   }
