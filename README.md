@@ -1,11 +1,19 @@
 # OpenCatio3D — web planner
 
-Design a safe, buildable catio around your home — in 3D. This is the browser planner at
-**app.opencatio3d.com**: Svelte 5 + Vite + three.js, local-first (projects live in IndexedDB), served
-as a static SPA from Firebase App Hosting (project `opencatio3d`).
+[![CI](https://github.com/laanlabs/opencatio3d-cloud/actions/workflows/ci.yml/badge.svg)](https://github.com/laanlabs/opencatio3d-cloud/actions/workflows/ci.yml)
+[![MIT licence](https://img.shields.io/badge/licence-MIT-blue.svg)](LICENSE)
 
-Sibling repos: `opencatio3d-www` (marketing site; owns the shared `catalog/`) and `opencatio3d-ios`
-(iPhone, iPad and Mac app). The interchange and generator contract is
+Design a safe, buildable catio around your home — in 3D. Free, with no accounts and no paid plans.
+
+- **Planner:** https://app.opencatio3d.com
+- **Catio Quest (the game):** https://app.opencatio3d.com/#/quest
+- **Website:** https://opencatio3d.com
+
+Svelte 5 + Vite + three.js, local-first (projects live in IndexedDB in your browser; a plan leaves it only
+when you export, share a link or choose Open in OpenPlan3D), served as a static SPA from Firebase App Hosting.
+
+Sibling repos (not public yet): `opencatio3d-www` (website; owns the shared catalog) and
+`opencatio3d-ios` (iPhone, iPad and Mac app). The interchange and generator contract is
 [`docs/EXPORT_FORMAT.md`](docs/EXPORT_FORMAT.md).
 
 ## What it does
@@ -38,15 +46,20 @@ Sibling repos: `opencatio3d-www` (marketing site; owns the shared `catalog/`) an
 
 ## Develop
 
+Node 22 or newer.
+
 ```sh
 npm install
-npm run catalog   # copy ../opencatio3d-www/catalog/data/*.json into src/lib/catalog/
 npm run dev       # http://localhost:5173
 npm test          # vitest: generator, checks, interchange, io, editor, parity fixtures
 npm run check     # svelte-check
 npm run build     # dist/
 npm run fixtures  # regenerate tests/fixtures/web after an intended generator/check change
+npm run catalog   # maintainers: refresh src/lib/catalog/*.json from ../opencatio3d-www/catalog/data
 ```
+
+The catalog JSON (materials, components, templates, plants, rules, sources) is committed, so a plain
+clone builds and tests without the website repo.
 
 `tests/openplan.test.ts` runs every fixture case through OpenPlan3D's real importer when a sibling
 checkout exists at `../../openplan/openPlan3D-cloud` (or `OPENPLAN3D_DIR`); otherwise it is skipped.
@@ -79,10 +92,18 @@ src/lib/quest/ui/              QuestApp (stages), hub, intro, build board + insp
 tests/                         vitest suites + fixtures/web (parity with iOS)
 ```
 
+## Contributing
+
+Issues and pull requests are welcome. CI runs `npm run check`, `npm test` and `npm run build` on every
+pull request. If you change the generator or the checks on purpose, regenerate the fixtures
+(`npm run fixtures`) and commit them with the change. The iOS app is held to the same fixtures, so
+mention any change to `docs/EXPORT_FORMAT.md` in the pull request. Keep the safety wording: the checks
+report "No issue detected by the current rules", never "safe".
+
 ## Deploy
 
-App Hosting runs `node server.mjs` (serves `dist/`, SPA fallback, immutable `/assets/**`). The backend is
-not created yet: connect this repo to an App Hosting backend in project `opencatio3d` and map
-`app.opencatio3d.com`. Analytics stays off until `GA_MEASUREMENT_ID` in `src/lib/analytics.ts` is set.
+Firebase App Hosting (project `opencatio3d`, backend `opencatio3d-cloud`, us-east4) builds and rolls out
+every push to `main`; it runs `node server.mjs` (serves `dist/`, SPA fallback, immutable `/assets/**`)
+at app.opencatio3d.com. Analytics stays off until `GA_MEASUREMENT_ID` in `src/lib/analytics.ts` is set.
 
 MIT licensed © 2026 theLodgeStudio. Planning guidance, not certification.

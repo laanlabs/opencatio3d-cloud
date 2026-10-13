@@ -12,7 +12,6 @@
     "test": "vitest run",
     "catalog": "node scripts/build-catalog.mjs",
     "fixtures": "OC3D_WRITE_FIXTURES=1 vitest run tests/interop.test.ts tests/golden.test.ts",
-    "deploy": "npm run build && firebase deploy --only hosting",
     "start": "node server.mjs"
   },
   "dependencies": {
