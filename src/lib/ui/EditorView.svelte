@@ -55,6 +55,13 @@
   ];
   const VIEWS: { id: ViewMode; name: string }[] = [{ id: '2d', name: 'Plan' }, { id: '3d', name: '3D' }, { id: 'split', name: 'Split' }];
 
+  // Placing happens in the plan: when a tool is picked, show the plan and, on phones, get the sheet out of the way.
+  $effect(() => {
+    if (!editor.placing) return;
+    if (editor.view === '3d') editor.setView(narrow ? '2d' : 'split');
+    if (narrow) sheet = false;
+  });
+
   function pick(w: Workspace) {
     editor.setWorkspace(w);
     if (narrow) sheet = true;
@@ -201,7 +208,7 @@
       {#if editor.view !== '2d'}<div class="pane"><Viewer3D {editor} bind:this={viewer} compact={editor.view === 'split'} /></div>{/if}
       {#if !p.structures.length && !editor.readonly && !editor.placing}
         <div class="empty">
-          <p><strong>Start with a structure.</strong> Choose one in Structure, then click in the plan — attached catios snap to the house wall and window.</p>
+          <p><strong>Start with a structure.</strong> Choose one in Structure, then place it in the plan — attached catios snap to the house wall and window.</p>
           <button class="btn primary small" onclick={() => { pick('structure'); editor.placing = { kind: 'structure', template: 'lean-to' }; }}>Place a lean-to</button>
         </div>
       {/if}

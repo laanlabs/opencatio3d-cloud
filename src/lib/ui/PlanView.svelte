@@ -276,7 +276,7 @@
   </div>
   {#if editor.placing}
     <p class="hint" role="status">
-      {editor.placing.kind === 'wall' ? (wallStart ? 'Click the other end of the wall' : 'Click where the wall starts') : 'Click in the plan to place it'} — <button class="link" onpointerdown={(e) => e.stopPropagation()} onclick={() => { editor.placing = null; wallStart = null; }}>cancel</button>
+      {editor.placing.kind === 'wall' ? (wallStart ? 'Now pick the other end of the wall' : 'Pick where the wall starts') : 'Pick a spot in the plan to place it'} — <button class="link" onpointerdown={(e) => e.stopPropagation()} onclick={() => { editor.placing = null; wallStart = null; }}>cancel</button>
     </p>
   {/if}
 </div>

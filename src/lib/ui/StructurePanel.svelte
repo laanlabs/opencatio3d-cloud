@@ -46,7 +46,7 @@
       <button class="btn small" disabled={editor.readonly} onclick={() => (editor.placing = { kind: 'structure', template: id })} title={tt.summary}>{tt.name.replace(' (concept)', '')}{tt.conceptOnly ? ' ·concept' : ''}</button>
     {/each}
   </div>
-  <p class="muted small">Pick one, then click in the plan. Attached types snap to the nearest house wall and window.</p>
+  <p class="muted small">Pick one, then place it in the plan. Attached types snap to the nearest house wall and window.</p>
 </section>
 
 {#if p.structures.length > 1}
