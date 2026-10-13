@@ -1,7 +1,8 @@
 <script lang="ts">
   // 2D plan (SVG, metres): house walls with their openings, obstacles, structures with posts, doors and
   // furnishings, and dimension lines on the selection. Drag to pan, wheel or pinch to zoom, drag a
-  // structure or obstacle to move it (attached structures slide along their wall).
+  // structure or obstacle to move it (attached structures slide along their wall). While placing, a keyboard
+  // marker (arrow keys, Enter) places things without a pointer.
   import { onMount } from 'svelte';
   import type { Editor } from './editor.svelte';
   import type { Project, Structure, Vec2 } from '../model/types';
@@ -53,17 +54,7 @@
       return;
     }
     const at = toPlanPt(e);
-    const placing = editor.placing;
-    if (placing && !editor.readonly) {
-      if (placing.kind === 'structure') editor.addStructure(placing.template, at);
-      else if (placing.kind === 'obstacle') editor.addObstacle(placing.obstacle, at);
-      else if (placing.kind === 'wall') {
-        const snapped: Vec2 = [snapTo(at[0], minor), snapTo(at[1], minor)];
-        if (!wallStart) wallStart = snapped;
-        else { editor.addWall(wallStart, snapped); wallStart = null; editor.placing = null; }
-      }
-      return;
-    }
+    if (editor.placing && !editor.readonly) { placeAt(at); return; }
     const t = (e.target as Element).closest('[data-kind]') as HTMLElement | SVGElement | null;
     const kind = t?.getAttribute('data-kind');
     const id = t?.getAttribute('data-id') ?? '';
@@ -117,6 +108,47 @@
   }
 
   let hover = $state<Vec2 | null>(null);
+
+  function placeAt(at: Vec2) {
+    const placing = editor.placing;
+    if (!placing) return;
+    if (placing.kind === 'structure') editor.addStructure(placing.template, at);
+    else if (placing.kind === 'obstacle') editor.addObstacle(placing.obstacle, at);
+    else if (placing.kind === 'wall') {
+      const snapped: Vec2 = [snapTo(at[0], minor), snapTo(at[1], minor)];
+      if (!wallStart) wallStart = snapped;
+      else { editor.addWall(wallStart, snapped); wallStart = null; editor.placing = null; }
+    }
+  }
+
+  // Keyboard placing: picking a tool puts a marker in the middle of the view and focus on the plan.
+  let marker = $state<Vec2 | null>(null);
+  let keyed = $state(false);
+  $effect(() => {
+    if (!editor.placing || editor.readonly) { marker = null; keyed = false; return; }
+    marker = [snapTo(cx, minor), snapTo(cy, minor)];
+    host.focus({ preventScroll: true });
+  });
+
+  function key(e: KeyboardEvent) {
+    if (!editor.placing || !marker || editor.readonly || e.target !== host) return;
+    const f = (e.shiftKey ? 4 : 1) * minor;
+    const d: Record<string, Vec2> = { ArrowLeft: [-f, 0], ArrowRight: [f, 0], ArrowUp: [0, -f], ArrowDown: [0, f] };
+    if (d[e.key]) {
+      e.preventDefault();
+      keyed = true;
+      marker = [marker[0] + d[e.key][0], marker[1] + d[e.key][1]];
+      hover = marker;
+      // Keep the marker in view.
+      const mx = w / scale / 2 - 1, my = h / scale / 2 - 1;
+      if (Math.abs(marker[0] - cx) > mx) cx = marker[0] - Math.sign(marker[0] - cx) * mx;
+      if (Math.abs(marker[1] - cy) > my) cy = marker[1] - Math.sign(marker[1] - cy) * my;
+    } else if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      keyed = true;
+      placeAt(marker);
+    }
+  }
 
   function wheel(e: WheelEvent) {
     e.preventDefault();
@@ -190,10 +222,12 @@
   const selId = $derived(editor.selection?.kind === 'structure' ? editor.selection.id : editor.selection?.structureId);
 </script>
 
+<!-- role="application" takes keys for the placing marker; svelte does not count it as interactive -->
+<!-- svelte-ignore a11y_no_noninteractive_tabindex, a11y_no_noninteractive_element_interactions -->
 <div
   class="plan" class:placing={!!editor.placing} bind:this={host}
-  onpointerdown={down} onpointermove={move} onpointerup={up} onpointercancel={up}
-  role="application" aria-label="Plan view. Drag to pan, scroll to zoom, select and drag a catio to move it."
+  onpointerdown={down} onpointermove={(e) => { keyed = false; move(e); }} onpointerup={up} onpointercancel={up} onkeydown={key}
+  tabindex="0" role="application" aria-label="Plan view. Drag to pan, scroll to zoom, select and drag a catio to move it. When placing, move the marker with the arrow keys and press Enter."
 >
   <svg viewBox={vb} width={w} height={h}>
     <g class="grid">
@@ -268,6 +302,13 @@
     {/each}
 
     {#if wallStart && hover}<line x1={wallStart[0]} y1={wallStart[1]} x2={hover[0]} y2={hover[1]} stroke="var(--house)" stroke-width="0.2" opacity=".5" />{/if}
+    {#if marker && keyed}
+      <g class="marker" pointer-events="none" stroke-width={2 * px}>
+        <circle cx={marker[0]} cy={marker[1]} r={10 * px} fill="none" />
+        <line x1={marker[0] - 16 * px} y1={marker[1]} x2={marker[0] + 16 * px} y2={marker[1]} />
+        <line x1={marker[0]} y1={marker[1] - 16 * px} x2={marker[0]} y2={marker[1] + 16 * px} />
+      </g>
+    {/if}
   </svg>
   <div class="zoom" onpointerdown={(e) => e.stopPropagation()} role="toolbar" aria-label="Plan zoom" tabindex="-1">
     <button class="chip" onclick={() => (scale = Math.min(400, scale * 1.25))} aria-label="Zoom in">+</button>
@@ -276,7 +317,7 @@
   </div>
   {#if editor.placing}
     <p class="hint" role="status">
-      {editor.placing.kind === 'wall' ? (wallStart ? 'Now pick the other end of the wall' : 'Pick where the wall starts') : 'Pick a spot in the plan to place it'} — <button class="link" onpointerdown={(e) => e.stopPropagation()} onclick={() => { editor.placing = null; wallStart = null; }}>cancel</button>
+      {editor.placing.kind === 'wall' ? (wallStart ? 'Now pick the other end of the wall' : 'Pick where the wall starts') : 'Pick a spot in the plan to place it'}{keyed ? ' (arrow keys move, Enter places)' : ''} — <button class="link" onpointerdown={(e) => e.stopPropagation()} onclick={() => { editor.placing = null; wallStart = null; }}>cancel</button>
     </p>
   {/if}
 </div>
@@ -284,6 +325,8 @@
 <style>
   .plan { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--plan-bg); touch-action: none; user-select: none; cursor: grab; }
   .plan.placing { cursor: crosshair; }
+  .plan:focus-visible { outline: 2px solid var(--sun); outline-offset: -2px; }
+  .marker { stroke: var(--sun); }
   svg { display: block; }
   .house { fill: var(--house); }
   .indoor { fill: var(--house-fill); }
