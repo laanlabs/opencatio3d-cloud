@@ -27,6 +27,14 @@ Sibling repos: `opencatio3d-www` (marketing site; owns the shared `catalog/`) an
   3D PNG, GLB, view-only share links, links into the iOS app, and Open in OpenPlan3D.
 - **Cats & plants:** household cats (age, mobility, size, door dashing) drive the welfare checks; the
   plant list carries ASPCA-checked safety status with source links.
+- **Catio Quest (`#/quest`):** a free browser game on the same model. Seven scenarios and a daily
+  challenge (seeded from the UTC date); 39 tray pieces from the real catalog; six cat personalities. The
+  layout is a real project, so the generator, catalog and checks run on it unchanged. "Let them explore"
+  runs a deterministic, seeded simulation (`quest/sim.ts`): cats move on a navigation graph built from the
+  furnishings (`quest/nav.ts`), limited by their jump reach, chasing needs; weather, a bird, cleaning time
+  and escape tests happen on a fixed timeline. Seven 0–100 scores (`quest/score.ts`) explain every point
+  lost. Result cards are drawn on a canvas; progress stays in localStorage; "Continue in OpenCatio3D"
+  copies the layout into the library as a concept (dimensions unconfirmed). No purchases, accounts or chat.
 
 ## Develop
 
@@ -52,11 +60,12 @@ checkout exists at `../../openplan/openPlan3D-cloud` (or `OPENPLAN3D_DIR`); othe
 | `#/p/<id>?ws=checks` | a saved project on a workspace (`site`, `structure`, `access`, `enrichment`, `materials`, `checks`, `output`) |
 | `#/print/<id>` | the build package |
 | `#/import/v1/<payload>` · `#/view/v1/<payload>` | transfer from iOS · read-only share |
+| `#/quest` · `#/quest/<scenario>` · `#/quest/daily` | Catio Quest: the hub, a scenario, today's daily challenge |
 
 ## Layout
 
 ```
-src/App.svelte                 hash router; editor, print and import load on demand
+src/App.svelte                 hash router; editor, print, import and Catio Quest load on demand
 src/lib/model/                 types (project@0.1), geometry, units
 src/lib/catalog/               catalog.ts + JSON copied from opencatio3d-www
 src/lib/generate/              parts.ts (constants), structure.ts (recipes), assembly.ts (labels, cut plan, BOM, cost, steps)
@@ -65,6 +74,8 @@ src/lib/site/                  templates (factories, attach to wall), samples
 src/lib/io/                    openplan (interchange), validate, storage, transfer, routes, csv, handoff, download
 src/lib/scene/                 three.js builders, SVG drawings (plan, elevations), bounds
 src/lib/ui/                    Home, EditorView, PlanView, Viewer3D, workspace panels, PrintView, ImportView
+src/lib/quest/                 Catio Quest: scenarios, daily, pieces, design edits, nav graph, sim, scores, convert, card, render
+src/lib/quest/ui/              QuestApp (stages), hub, intro, build board + inspector, 3D explore view, results
 tests/                         vitest suites + fixtures/web (parity with iOS)
 ```
 

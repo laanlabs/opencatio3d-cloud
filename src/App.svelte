@@ -17,6 +17,8 @@
   const loadEditor = () => import('./lib/ui/EditorView.svelte');
   const loadPrint = () => import('./lib/ui/PrintView.svelte');
   const loadImport = () => import('./lib/ui/ImportView.svelte');
+  // Catio Quest (the game) is its own chunk too.
+  const loadQuest = () => import('./lib/quest/ui/QuestApp.svelte');
 
   type Route =
     | { name: 'home' }
@@ -24,6 +26,7 @@
     | { name: 'print'; project: Project }
     | { name: 'view'; project: Project }
     | { name: 'import'; version: string; payload: string }
+    | { name: 'quest'; arg: string }
     | { name: 'loading' }
     | { name: 'missing'; message: string };
 
@@ -69,6 +72,7 @@
         history.replaceState(null, '', '#/');
         return finish(mine, { name: 'home' });
       }
+      if (head === 'quest') return finish(mine, { name: 'quest', arg: rest[0] ?? '' });
       if (head === 'import' && rest.length >= 2) return finish(mine, { name: 'import', version: rest[0], payload: rest.slice(1).join('/') });
       if (head === 'view' && rest.length >= 2) {
         try {
@@ -92,9 +96,9 @@
     if (mine !== seq) return; // a newer navigation won
     route = r;
     key++;
-    const screens: Record<string, Screen> = { home: 'home', editor: 'editor', view: 'view', print: 'print', import: 'import', missing: 'missing' };
+    const screens: Record<string, Screen> = { home: 'home', editor: 'editor', view: 'view', print: 'print', import: 'import', missing: 'missing', quest: 'quest' };
     if (screens[r.name]) trackScreen(screens[r.name]);
-    document.title = 'project' in r ? `${r.project.name} — OpenCatio3D` : 'OpenCatio3D — design a safe, buildable catio in 3D';
+    document.title = 'project' in r ? `${r.project.name} — OpenCatio3D` : r.name === 'quest' ? 'Catio Quest — build their dream catio · OpenCatio3D' : 'OpenCatio3D — design a safe, buildable catio in 3D';
   }
 
   function downloadProject(p: Project) {
@@ -143,6 +147,18 @@
     {:then { default: ImportView }}
       <ImportView version={r.version} payload={r.payload} />
     {/await}
+  {:else if route.name === 'quest'}
+    {@const r = route}
+    <svelte:boundary>
+      {#await loadQuest()}
+        <p class="loading muted">Loading Catio Quest…</p>
+      {:then { default: QuestApp }}
+        <QuestApp arg={r.arg} />
+      {/await}
+      {#snippet failed()}
+        <div class="missing"><h2>Catio Quest hit a snag</h2><p>Something went wrong loading the game. Your saved catios are not affected.</p><a class="btn primary" href="#/quest">Back to Catio Quest</a></div>
+      {/snippet}
+    </svelte:boundary>
   {:else if route.name === 'print'}
     {@const r = route}
     <svelte:boundary>

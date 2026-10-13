@@ -124,6 +124,12 @@
       </p>
     </section>
 
+    <a class="quest" href="#/quest">
+      <span class="q-ico" aria-hidden="true">🐾</span>
+      <span class="q-body"><strong>Catio Quest — the game</strong><span>Build a catio for a household of cats, then let them explore. Seven scenarios and a daily challenge. Free, no account.</span></span>
+      <span class="q-go">Play →</span>
+    </a>
+
     <section aria-labelledby="samples-h">
       <h2 id="samples-h">Explore a sample</h2>
       <div class="samples">
@@ -198,6 +204,12 @@
   .tcard span, .scard span { font-size: 13px; color: var(--body); }
   .more { font-size: 13px; color: var(--muted); }
   .link { border: 0; background: none; padding: 0; color: var(--cedar); text-decoration: underline; cursor: pointer; font-size: 13px; }
+  .quest { display: flex; align-items: center; gap: 14px; margin-top: 28px; padding: 14px 16px; border-radius: 16px; background: var(--dusk); color: #fff; text-decoration: none; }
+  .quest:hover { background: var(--dusk-dark); }
+  .q-ico { font-size: 30px; }
+  .q-body { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+  .q-body span { font-size: 13px; color: #dfe6ef; }
+  .q-go { font-weight: 800; color: var(--sun); white-space: nowrap; }
   .samples { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
   .scard { display: flex; flex-direction: column; gap: 6px; padding: 10px; border: 1px solid var(--border); border-radius: 14px; background: var(--panel); text-decoration: none; color: var(--ink); }
   .scard:hover { border-color: var(--dusk); box-shadow: var(--shadow); }
