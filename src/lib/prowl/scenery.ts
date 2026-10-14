@@ -107,7 +107,15 @@ function yardFrame(p: Project, w: World): Frame {
 function keepOut(p: Project, w: World): [Vec2, number][] {
   const out: [Vec2, number][] = [];
   for (const s of p.structures) {
-    if (s.template === 'tunnel') for (const q of s.path ?? []) out.push([toPlan(s, q[0], q[1]), s.width / 2 + 0.3]);
+    if (s.template === 'tunnel') {
+      // Along every segment, not just at the bends.
+      const path = s.path ?? [];
+      for (let i = 0; i < path.length; i++) {
+        const a = path[i], b = path[Math.min(i + 1, path.length - 1)];
+        const n = Math.max(1, Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / 0.5));
+        for (let k = 0; k < (i < path.length - 1 ? n : 1); k++) out.push([toPlan(s, a[0] + ((b[0] - a[0]) * k) / n, a[1] + ((b[1] - a[1]) * k) / n), s.width / 2 + 0.3]);
+      }
+    }
     else out.push([toPlan(s, s.width / 2, s.depth / 2), Math.hypot(s.width, s.depth) / 2 + 0.3]);
   }
   for (const ob of p.site.obstacles ?? []) out.push([[ob.x, ob.y], Math.max(ob.width, ob.depth) / 2 + 0.5]);
@@ -296,6 +304,25 @@ function roofPrism(len: number, depth: number, rise: number, eave: number, m: TH
     t.rotation.y = Math.PI / 2;
     t.position.set((s * (len - 0.6)) / 2, eave, 0);
     g.add(t);
+  }
+  return g;
+}
+
+/** Pavers along the floor of paved tunnels and their window chute. */
+export function buildTunnelFloors(w: World): THREE.Group {
+  const g = new THREE.Group();
+  const paved = w.tunnels.filter((t) => t.paved).map((t) => `tunnel:${t.id}:seg`);
+  if (!paved.length) return g;
+  const m = std({ map: tex.pavers(), roughness: 0.95 });
+  for (const s of w.surfaces) {
+    const chute = s.id === 'chute-floor';
+    if (!chute && !paved.some((k) => s.id.startsWith(k))) continue;
+    const mesh = new THREE.Mesh(scaleUV(new THREE.PlaneGeometry(2 * s.h[0], 2 * s.h[1]), (2 * s.h[0]) / 0.8, (2 * s.h[1]) / 0.8), m);
+    mesh.rotation.order = 'YXZ';
+    mesh.rotation.set(-Math.PI / 2, -s.yaw, 0);
+    mesh.position.set(s.c[0], chute ? 0.004 : 0.006, s.c[1]);
+    mesh.receiveShadow = true;
+    g.add(mesh);
   }
   return g;
 }

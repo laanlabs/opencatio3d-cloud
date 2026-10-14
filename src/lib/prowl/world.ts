@@ -1,8 +1,9 @@
 // Catio Prowl's world: what a cat can stand on and where it may go, built from a planner project.
 // The catio comes from the generator's own parts (so shelves, ramps, beds and posts are exactly where the
 // 3D view draws them); when the catio is attached over a window, a furnished room is added behind that
-// house wall and the open window joins the two. The cat is kept inside "volumes" (the room, the window
-// passage and the catio's inside), so it can never reach the yard: that is what a catio is for.
+// house wall and the open window joins the two. A tunnel run from a house window to the catio's cat flap
+// works the same way (see tunnel.ts). The cat is kept inside "volumes" (the room, the window passage, any
+// tunnel and the catio's inside), so it can never reach the yard: that is what a catio is for.
 // World: plan x → X, plan y → Z, y up (as the planner's 3D view).
 import type { Catalog } from '../catalog/catalog';
 import type { HostWall, Project, Structure, Vec2, Vec3 } from '../model/types';
@@ -12,8 +13,9 @@ import type { Part } from '../generate/parts';
 import { rad, toPlan, wallDir, wallNormal } from '../model/geometry';
 import { frameMaterial, layoutFor } from '../generate/structure';
 import { mainStructure } from '../quest/design';
+import { type Flap, type TunnelRun, linkTunnels, windowAt, windowChute } from './tunnel';
 
-export type Region = 'home' | 'catio';
+export type Region = 'home' | 'catio' | 'tunnel';
 export type SurfaceKind = 'floor' | 'sill' | 'furniture' | 'shelf' | 'ramp' | 'bridge' | 'hammock' | 'bed' | 'kit' | 'post';
 
 /** An oriented box: centre (x, z), half extents along its local axes, yaw (local x = (cos yaw, sin yaw)). */
@@ -70,6 +72,11 @@ export interface World {
   decor: Decor[];
   /** The room's extent along the host wall (including its side walls) and its depth behind it. */
   roomSpan?: { a0: number; a1: number; depth: number };
+  /** Tunnel runs the cat can use, the cat flaps it pushes through, and planner parts the game replaces or adds. */
+  tunnels: TunnelRun[];
+  flaps: Flap[];
+  hiddenParts: string[];
+  extraParts: Part[];
   start: { p: Vec3; heading: number };
   catio: { structureId: string; volumeId: string; floor: number; perchTop: number; perchId: string | null; birdPerch: Vec3; centre: Vec3; elevated: boolean };
   sillId: string | null;
@@ -91,6 +98,10 @@ export function buildWorld(p: Project, a: Assembly, cat: Catalog): World | null 
   const walls: WallSpec[] = [];
   const sunbeams: Rect[] = [];
   const decor: Decor[] = [];
+  const flaps: Flap[] = [];
+  const hiddenParts: string[] = [];
+  const extraParts: Part[] = [];
+  const tunnelCams: Volume[] = [];
   let roomSpan: World['roomSpan'];
 
   // ---------- the catio ----------
@@ -182,16 +193,34 @@ export function buildWorld(p: Project, a: Assembly, cat: Catalog): World | null 
     birdPerch: [bp[0], elev + Math.min(Math.max(Hf, 1.2), 1.8), bp[1]], centre: [centreXZ[0], floorY, centreXZ[1]], elevated: elev > 0.3
   };
 
+  // ---------- tunnels to the catio's cat flaps ----------
+  const links = linkTunnels(p.structures.filter((x) => x.template === 'tunnel'), a.parts, { s, W, D, elev, floorY, margin, depth: fm.actual?.[0] ?? 0.038, parts }, cat);
+  for (const l of links) {
+    volumes.push(...l.volumes);
+    surfaces.push(...l.surfaces);
+    tunnelCams.push(...l.cameraVolumes);
+    flaps.push(l.flap);
+    hiddenParts.push(...l.hidden);
+  }
+
   // ---------- the home behind the window ----------
-  const wall = s.hostWallId ? p.site.walls.find((w) => w.id === s.hostWallId) : undefined;
+  let wall = s.hostWallId ? p.site.walls.find((w) => w.id === s.hostWallId) : undefined;
   const access = s.openings.find((o) => o.kind === 'window-access');
-  const gate = wall && access ? wall.openings.find((o) => o.id === s.hostOpeningId) ?? nearestWindow(wall, s) : undefined;
+  let gate = wall && access ? wall.openings.find((o) => o.id === s.hostOpeningId) ?? nearestWindow(wall, s) : undefined;
+  // No window into the catio itself: a tunnel whose far end reaches a house window leads home instead.
+  let via: { link: (typeof links)[number] } | null = null;
+  if (!(wall && gate && layout.houseBack)) {
+    for (const link of links) {
+      const w = windowAt(p.site.walls, link.far.P);
+      if (w) { via = { link }; wall = w.wall; gate = w.gate; break; }
+    }
+  }
   let home = false;
   let sillId: string | null = null;
   let start: World['start'];
   let room: World['room'];
 
-  if (wall && gate && layout.houseBack) {
+  if (wall && gate && (layout.houseBack || via)) {
     home = true;
     const d = wallDir(wall), n = wallNormal(wall), m: Vec2 = [-n[0], -n[1]];
     const L = Math.hypot(wall.b[0] - wall.a[0], wall.b[1] - wall.a[1]);
@@ -200,7 +229,7 @@ export function buildWorld(p: Project, a: Assembly, cat: Catalog): World | null 
     const WP = (A: number, B: number): Vec2 => [wall.a[0] + d[0] * A + m[0] * B, wall.a[1] + d[1] * A + m[1] * B];
     const RW = Math.min(ROOM_W, Math.max(4.6, L));
     const gc = gate.offset + gate.width / 2;
-    const A0 = Math.max(Math.min(gc - RW / 2, L - RW), Math.min(0, gc - RW / 2));
+    const A0 = Math.max(Math.min(gc - RW / 2, Math.max(0, L - RW)), Math.min(0, L - RW));
     const RD = ROOM_D;
     const B0 = WALL_T;
     // Room coordinates: X along the wall from A0, Y into the room from the wall's inner face.
@@ -224,11 +253,20 @@ export function buildWorld(p: Project, a: Assembly, cat: Catalog): World | null 
     const sill = gate.sill;
     const pa0 = gate.offset + 0.02, pa1 = gate.offset + gate.width - 0.02;
     const passage = (B0p: number, B1p: number) => [WP(pa0, B0p), WP(pa1, B0p), WP(pa1, B1p), WP(pa0, B1p)];
-    volumes.push({ id: 'window', region: 'home', poly: passage(-(margin + 0.25), B0 + 0.3), y0: Math.min(sill, floorY) - 0.02, ceil: [sill + gate.height, 0, 0] });
+    volumes.push({ id: 'window', region: 'home', poly: passage(-((via ? 0 : margin) + 0.25), B0 + 0.3), y0: Math.min(sill, via ? 0 : floorY) - 0.02, ceil: [sill + gate.height, 0, 0] });
     const sillRect = (B0s: number, B1s: number): Rect => ({ c: WP((gate.offset + gate.offset + gate.width) / 2, (B0s + B1s) / 2), h: [gate.width / 2 + 0.04, (B1s - B0s) / 2], yaw: wyaw });
     sillId = 'sill';
     surfaces.push({ id: 'sill', kind: 'sill', label: 'the window sill', region: 'home', ...sillRect(0, B0 + 0.16), top: sill, bottom: 0, solid: true, color: '#f4efe6' });
-    if (sill > floorY + 0.05) surfaces.push({ id: 'sill-out', kind: 'sill', label: 'the window ledge', region: 'catio', ...sillRect(-0.24, 0), top: sill, bottom: sill - 0.04, solid: false });
+    if (sill > (via ? 0 : floorY) + 0.05) surfaces.push({ id: 'sill-out', kind: 'sill', label: 'the window ledge', region: via ? 'tunnel' : 'catio', ...sillRect(-0.24, 0), top: sill, bottom: sill - 0.04, solid: false });
+    // Through a tunnel: a mesh chute drops from the window ledge to the tunnel floor.
+    if (via) {
+      const ch = windowChute(via.link, wall, gate, a.parts, cat);
+      volumes.push(ch.volume);
+      surfaces.push(ch.floor);
+      tunnelCams.push(ch.cameraVolume);
+      extraParts.push(...ch.parts);
+      hiddenParts.push(...ch.hidden);
+    }
 
     // House walls: the host wall with the open window, and the room's other three walls.
     const holes = [{ a0: gate.offset, a1: gate.offset + gate.width, y0: sill, y1: sill + gate.height }];
@@ -341,17 +379,21 @@ export function buildWorld(p: Project, a: Assembly, cat: Catalog): World | null 
     for (const x of perches.filter((q) => q !== perch).sort((q, w) => w.top - q.top).slice(0, 2)) toys.push({ id: `toy-${x.id}`, p: [x.c[0], x.top, x.c[1]], where: `on ${x.label}` });
   }
 
+  // A toy mouse halfway along each tunnel.
+  for (const l of links) toys.push({ id: `toy-tunnel:${l.t.id}`, p: l.run.mid, where: `halfway along ${links.length > 1 ? l.run.label.toLowerCase() : 'the tunnel'}` });
+
   // A bed or hammock standing in the sun is a sunny nap too.
   for (const sp of spots) if (sp.kind === 'nap' && !sp.area && !sp.sunny) sp.sunny = sunbeams.some((b) => inside(b, sp.p[0], sp.p[2]));
 
   // The camera may look in through the mesh from outside the catio, but never from above its roof.
   const out = 1.4;
-  const cameraVolumes = [...volumes.filter((v) => v.id !== 'catio'), { ...catioVol, id: 'catio-view', poly: [local(margin - out, openBack ? v0 : v0 - out), local(W - margin + out, openBack ? v0 : v0 - out), local(W - margin + out, v1 + out), local(margin - out, v1 + out)], y0: Math.min(floorY, 0) }];
+  const cameraVolumes = [...volumes.filter((v) => v.id !== 'catio'), ...tunnelCams, { ...catioVol, id: 'catio-view', poly: [local(margin - out, openBack ? v0 : v0 - out), local(W - margin + out, openBack ? v0 : v0 - out), local(W - margin + out, v1 + out), local(margin - out, v1 + out)], y0: Math.min(floorY, 0) }];
 
   return {
     id: p.web?.sampleId ? `sample:${p.web.sampleId}` : p.id,
     name: p.name,
     home, surfaces, volumes, cameraVolumes, spots, items, toys, walls, room, sunbeams, decor, roomSpan, start, catio,
+    tunnels: links.map((l) => l.run), flaps, hiddenParts, extraParts,
     sillId, hostWallId: home ? wall!.id : null, gatewayOpeningId: home ? gate!.id : null
   };
 }

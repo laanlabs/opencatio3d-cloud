@@ -3,7 +3,7 @@
 // the ledge the cat faces is found ahead of time and shown, and one key or tap carries the cat there
 // along an arc that is checked against walls, solid furniture and boards. No browser APIs: tested in node.
 import type { Vec2, Vec3 } from '../model/types';
-import type { Rect, Surface, Volume, World } from './world';
+import type { Rect, Region, Surface, Volume, World } from './world';
 
 export const R = 0.11; // body radius
 export const HEAD = 0.26; // standing height (solid furniture)
@@ -245,9 +245,22 @@ export function step(w: World, st: CatState, input: MoveInput, dt: number): Step
   const dx = st.v[0] * dt, dz = st.v[1] * dt;
   if (dx || dz) {
     if (canStand(w, x + dx, z + dz, y)) { x += dx; z += dz; }
-    else if (dx && canStand(w, x + dx, z, y)) { x += dx; st.v[1] = 0; }
-    else if (dz && canStand(w, x, z + dz, y)) { z += dz; st.v[0] = 0; }
-    else st.v = [0, 0];
+    // Slide along an axis only when that is a real part of the move (not a sliver that stops the cat dead).
+    else if (Math.abs(dx) > 0.3 * Math.hypot(dx, dz) && canStand(w, x + dx, z, y)) { x += dx; st.v[1] = 0; }
+    else if (Math.abs(dz) > 0.3 * Math.hypot(dx, dz) && canStand(w, x, z + dz, y)) { z += dz; st.v[0] = 0; }
+    else {
+      // Slide along a wall at an angle (tunnels, cat flaps and walls that are not square to the axes).
+      const slide = [0.5, -0.5, 1.0, -1.0].map((a) => { const c = Math.cos(a), sn = Math.sin(a); return [(dx * c - dz * sn) * c, (dx * sn + dz * c) * c] as Vec2; }).find(([rx, rz]) => canStand(w, x + rx, z + rz, y));
+      if (slide) { x += slide[0]; z += slide[1]; }
+      else {
+        // Line up with an opening just to one side (a tunnel mouth, a cat flap) and go through.
+        const m = Math.hypot(dx, dz), fx = dx / m, fz = dz / m;
+        let shift = 0;
+        for (let k = 0.01; k <= 0.12 + 1e-9 && !shift; k += 0.01) for (const sg of [1, -1]) if (canStand(w, x - fz * k * sg + fx * 0.03, z + fx * k * sg + fz * 0.03, y)) { shift = k * sg; break; }
+        const lat = Math.sign(shift) * Math.min(Math.abs(shift), m);
+        if (lat && canStand(w, x - fz * lat, z + fx * lat, y)) { x -= fz * lat; z += fx * lat; } else st.v = [0, 0];
+      }
+    }
   }
 
   // Up and down.
@@ -280,9 +293,10 @@ export function step(w: World, st: CatState, input: MoveInput, dt: number): Step
   return ev;
 }
 
-/** Which volume region the cat is in (the catio wins where volumes overlap at the window). */
-export function regionAt(w: World, p: Vec3): 'home' | 'catio' | null {
+/** Which volume region the cat is in (the catio wins where volumes overlap at the window or the cat flap, then a tunnel). */
+export function regionAt(w: World, p: Vec3): Region | null {
   const inside = w.volumes.filter((v) => inPoly(v.poly, p[0], p[2]) && p[1] >= v.y0 - 0.03);
   if (inside.some((v) => v.region === 'catio')) return 'catio';
+  if (inside.some((v) => v.region === 'tunnel')) return 'tunnel';
   return inside.length ? 'home' : null;
 }

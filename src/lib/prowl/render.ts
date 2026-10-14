@@ -14,7 +14,8 @@ import type { Prowl } from './game';
 import { STEP, groundAt, openAir } from './physics';
 import type { Rect, WallSpec, World } from './world';
 import { type CatBusy, makeCatModel } from './catmodel';
-import { ROOF_LAYER, buildHouseShell, buildInterior, buildSky, buildYard, houseWall, mergeStatics, sunDirection } from './scenery';
+import { ROOF_LAYER, buildHouseShell, buildInterior, buildSky, buildTunnelFloors, buildYard, houseWall, mergeStatics, sunDirection } from './scenery';
+import type { Flap } from './tunnel';
 import { blob } from './textures';
 
 export interface CameraInput { orbit: [number, number]; zoom: number; recenter?: boolean }
@@ -101,6 +102,50 @@ function makeBird(): { g: THREE.Group; wings: THREE.Mesh[] } {
   return { g, wings: [w1, w2] };
 }
 
+/** A cat flap in its frame, hinged at the top: it swings away from a cat pushing through and settles back. */
+function makeFlap(f: Flap) {
+  const group = new THREE.Group();
+  group.position.set(...f.c);
+  group.rotation.y = -Math.atan2(f.along[1], f.along[0]);
+  const frame = std('#3b3b3b', { roughness: 0.6 });
+  const t = 0.03;
+  for (const [w, h, x, y] of [[f.w + 2 * t, t, 0, f.h + t / 2], [f.w + 2 * t, t, 0, -t / 2], [t, f.h, -f.w / 2 - t / 2, f.h / 2], [t, f.h, f.w / 2 + t / 2, f.h / 2]] as const) {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.06), frame);
+    m.position.set(x, y, 0);
+    m.castShadow = true;
+    group.add(m);
+  }
+  const hinge = new THREE.Group();
+  hinge.position.y = f.h;
+  const pane = new THREE.Mesh(new THREE.BoxGeometry(f.w - 0.01, f.h - 0.01, 0.006), std('#5a6670', { transparent: true, opacity: 0.55, roughness: 0.15, metalness: 0.1 }));
+  pane.position.y = -f.h / 2;
+  hinge.add(pane);
+  group.add(hinge);
+  const along = new THREE.Vector2(f.along[0], f.along[1]), normal = new THREE.Vector2(-f.along[1], f.along[0]);
+  // Which way the flap's +z faces in the plan (the side it swings away from when turned by +angle).
+  group.updateMatrixWorld();
+  const z = new THREE.Vector3(0, 0, 1).applyQuaternion(group.quaternion);
+  if (z.x * normal.x + z.z * normal.y < 0) normal.multiplyScalar(-1);
+  let angle = 0, vel = 0, side = 0;
+  return {
+    group,
+    update(dt: number, cat: Vec3) {
+      const dx = cat[0] - f.c[0], dz = cat[2] - f.c[2];
+      const sd = dx * normal.x + dz * normal.y, lat = dx * along.x + dz * along.y;
+      const near = Math.abs(lat) < f.w / 2 + 0.08 && Math.abs(sd) < 0.32 && cat[1] < f.c[1] + f.h;
+      if (!near) side = 0;
+      else if (!side) side = sd > 0 ? 1 : -1;
+      const goal = near ? side * 1.2 * Math.min(1, (0.32 - Math.abs(sd)) / 0.14 + (Math.sign(sd) !== side ? 1 : 0)) : 0;
+      if (dt >= 1) angle = goal; // reduced motion: no swinging
+      else {
+        vel += ((goal - angle) * 90 - vel * 9) * dt;
+        angle = Math.max(-1.4, Math.min(1.4, angle + vel * dt));
+      }
+      hinge.rotation.x = angle;
+    }
+  };
+}
+
 export function createProwlScene(host: HTMLElement, p: Project, a: Assembly, world: World, cat: Catalog, opts: { coat: string; reduceMotion: boolean }): ProwlScene {
   // Phones and small tablets: fewer pixels and a smaller shadow map.
   const small = typeof matchMedia !== 'undefined' && (matchMedia('(pointer: coarse)').matches || Math.min(screen.width, screen.height) < 700);
@@ -147,10 +192,14 @@ export function createProwlScene(host: HTMLElement, p: Project, a: Assembly, wor
   const site = world.home ? { ...p, site: { ...p.site, walls: p.site.walls.filter((w) => w.id !== world.hostWallId) } } : p;
   outdoor.add(buildHouse(site));
   outdoor.add(buildHouseShell(p, world));
+  // The planner's parts, less those the game replaces (window inserts it opens, cat-flap kits it swings, tunnel
+  // pieces inside a window chute), plus the chute.
+  const hidden = new Set(world.hiddenParts);
   for (const st of p.structures) {
-    const parts = a.parts.filter((x) => x.structureId === st.id && !(st.id === world.catio.structureId && x.role === 'window-insert' && world.home));
-    outdoor.add(buildStructure(st, parts, cat));
+    const parts = a.parts.filter((x) => x.structureId === st.id && !hidden.has(x.id) && !(st.id === world.catio.structureId && x.role === 'window-insert' && world.home));
+    outdoor.add(buildStructure(st, [...parts, ...world.extraParts.filter((x) => x.structureId === st.id)], cat));
   }
+  outdoor.add(buildTunnelFloors(world));
   statics.add(mergeStatics(outdoor));
 
   // The room: walls (which fade, with what hangs on them), then floor, ceiling, furniture and decor.
@@ -202,6 +251,7 @@ export function createProwlScene(host: HTMLElement, p: Project, a: Assembly, wor
   dynamic.add(shadowBlob);
   const itemMeshes = new Map(world.items.map((it) => { const m = makeItem(it.shape, it.color, it.size); dynamic.add(m); return [it.id, m]; }));
   const toyMeshes = new Map(world.toys.map((t) => { const m = makeMouse(); m.position.set(...t.p); m.rotation.y = (t.id.length * 1.7) % 6.28; dynamic.add(m); return [t.id, m]; }));
+  const flaps = world.flaps.map((f) => { const m = makeFlap(f); dynamic.add(m.group); return m; });
   const bird = makeBird();
   dynamic.add(bird.g);
   const marker = new THREE.Mesh(new THREE.RingGeometry(0.09, 0.13, 28), new THREE.MeshBasicMaterial({ color: '#e8a93a', transparent: true, opacity: 0.9, depthWrite: false, side: THREE.DoubleSide }));
@@ -316,6 +366,7 @@ export function createProwlScene(host: HTMLElement, p: Project, a: Assembly, wor
         m.visible = !game.progress.toys.includes(id);
         if (m.visible && !opts.reduceMotion) m.rotation.y += dt * 0.6;
       }
+      for (const f of flaps) f.update(opts.reduceMotion ? 1 : dt, c.p);
       // Bird.
       const b = game.bird;
       bird.g.visible = b.here || b.leaving > 0;

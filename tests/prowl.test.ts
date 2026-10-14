@@ -56,11 +56,10 @@ function samplePoints(s: Surface): [number, number][] {
   const out: [number, number][] = [];
   const c = Math.cos(s.yaw), sn = Math.sin(s.yaw);
   const nx = Math.max(1, Math.ceil((2 * s.h[0]) / 0.25)), nz = Math.max(1, Math.ceil((2 * s.h[1]) / 0.25));
-  for (let i = 0; i < nx; i++) for (let j = 0; j < nz; j++) {
-    const lx = nx === 1 ? 0 : -s.h[0] + 0.04 + ((2 * s.h[0] - 0.08) * i) / (nx - 1);
-    const lz = nz === 1 ? 0 : -s.h[1] + 0.04 + ((2 * s.h[1] - 0.08) * j) / (nz - 1);
-    out.push([s.c[0] + lx * c - lz * sn, s.c[1] + lx * sn + lz * c]);
-  }
+  // A grid, plus the centre lines (a tunnel or a cat flap is only a little wider than the cat).
+  const xs = Array.from({ length: nx }, (_, i) => (nx === 1 ? 0 : -s.h[0] + 0.04 + ((2 * s.h[0] - 0.08) * i) / (nx - 1)));
+  const zs = Array.from({ length: nz }, (_, j) => (nz === 1 ? 0 : -s.h[1] + 0.04 + ((2 * s.h[1] - 0.08) * j) / (nz - 1)));
+  for (const lx of [...xs, 0]) for (const lz of [...zs, 0]) out.push([s.c[0] + lx * c - lz * sn, s.c[1] + lx * sn + lz * c]);
   return out;
 }
 
@@ -68,10 +67,14 @@ function samplePoints(s: Surface): [number, number][] {
 const surfaceUnder = (w: World, x: number, y: number, z: number) => groundAt(w, x, z, y + 0.02).surface?.id;
 
 describe('Catio Prowl worlds', () => {
-  it('builds a home + catio for catios over a window, and a catio-only world otherwise', () => {
+  it('builds a home + catio for catios over a window or reached by a tunnel from one, and a catio-only world otherwise', () => {
     expect(sample('lean-to-window').home).toBe(true);
     expect(sample('window-box').home).toBe(true);
-    expect(sample('garden-retreat').home).toBe(false);
+    expect(sample('garden-retreat').home).toBe(true);
+    const lone = buildSample('garden-retreat', catalog)!;
+    lone.structures = lone.structures.filter((s) => s.template !== 'tunnel');
+    expect(worldOf(lone).home).toBe(false);
+    expect(worldOf(lone).tunnels).toEqual([]);
     for (const id of SAMPLE_IDS) {
       const w = sample(id);
       const c = newCat(w.start.p, w.start.heading, w);
@@ -167,7 +170,8 @@ describe('Catio Prowl game', () => {
   it('lists the day’s tasks for the space', () => {
     const ids = tasksFor(sample('lean-to-window')).map((t) => t.id);
     expect(ids).toEqual(['sill', 'catio', 'perch', 'bird', 'knock', 'scratch', 'toys', 'drink', 'sniff', 'nap']);
-    expect(tasksFor(sample('garden-retreat')).map((t) => t.id)).not.toContain('knock');
+    expect(tasksFor(sample('garden-retreat')).map((t) => t.id).slice(0, 3)).toEqual(['sill', 'tunnel', 'catio']);
+    expect(tasksFor(sample('window-box')).map((t) => t.id)).not.toContain('tunnel');
   });
 
   it('knocks a mug off the coffee table and counts it', () => {
@@ -202,3 +206,55 @@ describe('Catio Prowl game', () => {
     expect(g.progress.done).toContain('perch');
   });
 });
+
+describe('Catio Prowl tunnels', () => {
+  it('joins the laundry window to the garden catio: chute, tunnel and cat flap', () => {
+    const w = sample('garden-retreat');
+    expect(w.tunnels).toHaveLength(1);
+    expect(w.tunnels[0].length).toBeCloseTo(3.6, 3);
+    expect(w.flaps).toHaveLength(1);
+    expect(w.surfaces.some((s) => s.id === 'chute-floor')).toBe(true);
+    expect(w.toys.some((t) => t.where === 'halfway along the tunnel')).toBe(true);
+    // The planner's cat-door kit and the tunnel's end panel over it give way to the game's flap; the chute is drawn.
+    const p = buildSample('garden-retreat', catalog)!;
+    const a = generate(p, catalog);
+    const hidden = a.parts.filter((x) => w.hiddenParts.includes(x.id));
+    expect(hidden.some((x) => x.role === 'cat-door')).toBe(true);
+    expect(hidden.some((x) => x.key.startsWith('end-end:mesh'))).toBe(true);
+    expect(w.extraParts.some((x) => x.key === 'prowl:chute:top')).toBe(true);
+  });
+
+  it('runs from the window chute through the tunnel and the cat flap into the catio, and back', () => {
+    const w = sample('garden-retreat');
+    const g = new Prowl(w, catalog, true);
+    const chute = w.surfaces.find((s) => s.id === 'chute-floor')!;
+    g.cat.p = [chute.c[0], 0, chute.c[1] - 0.05];
+    g.cat.surfaceId = chute.id;
+    g.cat.heading = 0;
+    g.update(1 / 60, { move: [0, 0] });
+    for (let i = 0; i < 60 * 5; i++) g.update(1 / 60, { move: [0.15, 1] }); // a little off-centre: it slides along
+    expect(g.progress.done).toContain('tunnel');
+    expect(g.progress.done).toContain('catio');
+    expect(g.progress.toys.some((t) => t.startsWith('toy-tunnel'))).toBe(true);
+    // From inside the catio, in front of the flap: back to the chute, then a leap up to the window.
+    const f = w.flaps[0];
+    g.cat.p = [f.c[0] + 0.06, w.catio.floor, f.c[2] + 0.45];
+    g.cat.surfaceId = 'catio-floor';
+    for (let i = 0; i < 60 * 5; i++) g.update(1 / 60, { move: [0, -1] });
+    expect(g.cat.surfaceId === 'chute-floor' || g.cat.surfaceId?.startsWith('tunnel:')).toBe(true);
+    // In the middle of the chute (not right under the outside ledge), facing the window.
+    g.cat.p = [chute.c[0], 0, chute.c[1]];
+    g.cat.heading = Math.PI; // the house is toward −z
+    g.update(1 / 60, { move: [0, 0] });
+    expect(['sill', 'sill-out']).toContain(g.target?.surface.id);
+  });
+
+  it('keeps the tunnel to its own end when the catio has no cat door there', () => {
+    const p = buildSample('garden-retreat', catalog)!;
+    p.structures[0].openings = p.structures[0].openings.filter((o) => o.kind !== 'cat-door');
+    const w = worldOf(p);
+    expect(w.tunnels).toEqual([]);
+    expect(w.home).toBe(false);
+  });
+});
+

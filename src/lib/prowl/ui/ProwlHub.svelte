@@ -10,7 +10,7 @@
   const SPACES = [
     { id: 'lean-to-window', title: 'Living room and lean-to catio', blurb: 'A furnished living room — window seat, cat tree, sofa, kitchen counter, a wardrobe to climb — and through the window, an 8 × 4 ft lean-to with shelves, a ramp and planters.', icon: '🛋️' },
     { id: 'window-box', title: 'Kitchen window box', blurb: 'A home with a 3 ft window box off the kitchen: a sunny shelf and a bed with a view.', icon: '🪟' },
-    { id: 'garden-retreat', title: 'Garden catio', blurb: 'A walk-in catio in the yard: a high bridge, a hammock, a ramp, a hideaway cube and a scratching post.', icon: '🌳' }
+    { id: 'garden-retreat', title: 'Garden catio and tunnel', blurb: 'Out of the window, down the chute and along a 12 ft mesh tunnel, then through the cat flap into a walk-in garden catio: a high bridge, a hammock, a ramp and a scratching post.', icon: '🌳' }
   ];
 
   let cat = $state(readCat());

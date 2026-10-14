@@ -5,9 +5,9 @@ import type { Catalog } from '../catalog/catalog';
 import type { Vec2, Vec3 } from '../model/types';
 import type { Pose } from '../quest/sim';
 import { type CatState, type LeapTarget, type MoveInput, HEAD, groundAt, inRect, leapTarget, newCat, regionAt, step } from './physics';
-import type { Item, Spot, World } from './world';
+import type { Item, Region, Spot, World } from './world';
 
-export type TaskId = 'sill' | 'catio' | 'perch' | 'bird' | 'knock' | 'scratch' | 'toys' | 'drink' | 'sniff' | 'nap';
+export type TaskId = 'sill' | 'tunnel' | 'catio' | 'perch' | 'bird' | 'knock' | 'scratch' | 'toys' | 'drink' | 'sniff' | 'nap';
 export interface Task { id: TaskId; title: string; goal: number }
 export interface Progress { done: TaskId[]; toys: string[]; knocked: string[]; sniffed: string[]; finishedAt?: string }
 
@@ -25,6 +25,7 @@ const BIRD_FIRST = 18, BIRD_STAY = 22, BIRD_AWAY = 30;
 export function tasksFor(w: World): Task[] {
   const t: Task[] = [];
   if (w.home) t.push({ id: 'sill', title: 'Hop up to the window', goal: 1 });
+  if (w.tunnels.length) t.push({ id: 'tunnel', title: w.tunnels.length > 1 ? 'Run the length of a tunnel' : 'Run the length of the tunnel', goal: 1 });
   if (w.home) t.push({ id: 'catio', title: 'Go out into the catio', goal: 1 });
   if (w.catio.perchId) t.push({ id: 'perch', title: 'Reach the highest perch in the catio', goal: 1 });
   t.push({ id: 'bird', title: 'Watch a bird from the catio', goal: 1 });
@@ -79,7 +80,10 @@ export class Prowl {
   bird = { here: false, next: BIRD_FIRST, leaving: 0 };
   finished = false;
   private catalog: Catalog;
-  private lastRegion: 'home' | 'catio' | null = null;
+  private lastRegion: Region | null = null;
+  /** The tunnel end the cat came in by (tunnel index, end index), until it reaches the other end. */
+  private tunnelFrom: [number, number] | null = null;
+  private tunnelSaid = -100;
 
   constructor(world: World, catalog: Catalog, fresh = false) {
     this.world = world;
@@ -174,6 +178,7 @@ export class Prowl {
     const region = regionAt(this.world, c.p);
     if (region === 'catio' && this.lastRegion !== 'catio' && this.world.home) this.say('Out in the catio. Fresh air, and no way out.', 'good');
     if (region === 'catio') this.complete('catio');
+    this.checkTunnel(region);
     this.lastRegion = region;
     if (this.world.catio.perchId && sid === this.world.catio.perchId) this.complete('perch');
     for (const t of this.world.toys) {
@@ -186,6 +191,29 @@ export class Prowl {
         this.save();
       }
     }
+  }
+
+  /** Running a tunnel: in at one end, out at the other. */
+  private checkTunnel(region: Region | null) {
+    const c = this.cat;
+    const near = (q: Vec3) => Math.hypot(q[0] - c.p[0], q[2] - c.p[2]);
+    if (region === 'tunnel' && this.lastRegion !== 'tunnel') {
+      let best: [number, number] | null = null, bd = Infinity;
+      this.world.tunnels.forEach((t, i) => t.ends.forEach((e, j) => { const d = near(e); if (d < bd) { bd = d; best = [i, j]; } }));
+      if (best && bd < 1.2) this.tunnelFrom = best;
+      if (this.time - this.tunnelSaid > 30) {
+        this.tunnelSaid = this.time;
+        this.say(this.lastRegion === 'catio' ? 'Back into the tunnel. Home is at the other end.' : 'Into the tunnel. Low, narrow, and all yours.', 'info');
+      }
+    }
+    if (!this.tunnelFrom) return;
+    const [i, j] = this.tunnelFrom;
+    const t = this.world.tunnels[i];
+    if (near(t.ends[1 - j]) < 0.6) {
+      this.tunnelFrom = null;
+      if (!this.progress.done.includes('tunnel')) this.say(`Ran all ${t.length.toFixed(1)} m of the tunnel.`, 'good');
+      this.complete('tunnel');
+    } else if (region !== 'tunnel' && near(t.ends[j]) < 1.2) this.tunnelFrom = null;
   }
 
   private lookout(): boolean {
