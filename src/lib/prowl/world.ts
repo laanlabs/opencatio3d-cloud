@@ -44,6 +44,8 @@ export interface Spot { id: string; kind: SpotKind; label: string; p: Vec3; r: n
 export type ItemShape = 'mug' | 'glass' | 'book' | 'pot' | 'box' | 'remote' | 'vase';
 export interface Item { id: string; label: string; shape: ItemShape; color: string; p: Vec3; size: Vec3 }
 export interface Toy { id: string; p: Vec3; where: string }
+/** Things drawn in the room that the game ignores (or that stand in a solid surface of the same id). */
+export interface Decor { kind: 'lamp' | 'plant' | 'picture' | 'curtain' | 'pendant' | 'clock'; p: Vec3; yaw: number; w?: number; h?: number; variant?: number }
 
 /** A wall to draw: the face line from `a` along `dir` for `length`; the body is `thickness` deep toward `-normal`.
  *  The host wall's normal points outdoors (its body is indoors); the room walls' normals point into the room. Holes are in wall coordinates. */
@@ -65,6 +67,9 @@ export interface World {
   /** Room floor rectangle (drawn as a wooden floor). */
   room?: Rect & { height: number };
   sunbeams: Rect[];
+  decor: Decor[];
+  /** The room's extent along the host wall (including its side walls) and its depth behind it. */
+  roomSpan?: { a0: number; a1: number; depth: number };
   start: { p: Vec3; heading: number };
   catio: { structureId: string; volumeId: string; floor: number; perchTop: number; perchId: string | null; birdPerch: Vec3; centre: Vec3; elevated: boolean };
   sillId: string | null;
@@ -85,6 +90,8 @@ export function buildWorld(p: Project, a: Assembly, cat: Catalog): World | null 
   const toys: Toy[] = [];
   const walls: WallSpec[] = [];
   const sunbeams: Rect[] = [];
+  const decor: Decor[] = [];
+  let roomSpan: World['roomSpan'];
 
   // ---------- the catio ----------
   const r = rad(s.rotation);
@@ -291,9 +298,39 @@ export function buildWorld(p: Project, a: Assembly, cat: Catalog): World | null 
     toys.push({ id: 'toy-wardrobe', p: at(0.31, 3.2, 2.12), where: 'on top of the wardrobe' });
     toys.push({ id: 'toy-coffee', p: at(RW / 2 + 0.1, 2.12, 0), where: 'under the coffee table' });
     toys.push({ id: 'toy-sofa', p: at(RW / 2 - 0.4, 3.9, 0), where: 'behind the sofa' });
+    // Decor: a floor lamp and a big potted plant (solid, so the cat walks round them), pictures, curtains, a pendant light.
+    const yawIn = Math.atan2(m[0], m[1]); // facing into the room from the host wall
+    const facing = (x: number, y: number) => { const q = WP(A0 + X(x), B0 + y); const c0 = WP(A0 + RW / 2, B0 + RD / 2); return Math.atan2(c0[0] - q[0], c0[1] - q[1]); };
+    const lx = RW - 0.32, ly = Math.min(RD - 1.5, 2.2);
+    surfaces.push({ id: 'lamp', kind: 'post', label: 'the floor lamp', region: 'home', ...rr(lx - 0.13, lx + 0.13, ly - 0.13, ly + 0.13), top: 1.55, bottom: 0, solid: true });
+    decor.push({ kind: 'lamp', p: at(lx, ly, 0), yaw: 0 });
+    const px = RW - 0.38, py = RD - 0.38;
+    surfaces.push({ id: 'plant', kind: 'post', label: 'the potted plant', region: 'home', ...rr(px - 0.2, px + 0.2, py - 0.2, py + 0.2), top: 0.42, bottom: 0, solid: true });
+    decor.push({ kind: 'plant', p: at(px, py, 0), yaw: 0 });
+    // Pictures: over the low cabinet on the side wall, on the far side wall, and over the kitchen counter a clock.
+    decor.push({ kind: 'picture', p: at(0.005, 1.42, 1.45), yaw: facing(0.005, 1.42), w: 0.62, h: 0.46, variant: 0 });
+    decor.push({ kind: 'picture', p: at(RW - 0.005, 3.4, 1.5), yaw: facing(RW - 0.005, 3.4), w: 0.8, h: 0.6, variant: 2 });
+    decor.push({ kind: 'picture', p: at(RW - 0.005, 1.4, 1.45), yaw: facing(RW - 0.005, 1.4), w: 0.5, h: 0.4, variant: 1 });
+    decor.push({ kind: 'clock', p: at(Math.min(1.4, kx1 / 2), RD - 0.005, 1.75), yaw: yawIn + Math.PI, w: 0.3 });
+    // Curtains either side of the open window, on the room side of the wall.
+    for (const side of [-1, 1]) decor.push({ kind: 'curtain', p: at(wwx + side * (half + 0.14), 0.07, 0), yaw: yawIn, w: 0.26, h: sill + gate.height + 0.15 });
+    decor.push({ kind: 'pendant', p: at(RW / 2, 2.2, H), yaw: 0 });
+    roomSpan = { a0: A0 - T, a1: A0 + RW + T, depth: B0 + RD + T };
     start = { p: at(wwx, 1.27, 0.12), heading: Math.atan2(-m[0], -m[1]) };
   } else {
-    start = { p: [centreXZ[0], floorY, centreXZ[1]], heading: 0 };
+    // No room: start at one end of the catio's long side, looking out through the mesh, so the camera
+    // behind the cat has the length of the catio to sit in.
+    const alongU = W >= D;
+    const fwd: Vec2 = alongU ? [Math.cos(r), Math.sin(r)] : [-Math.sin(r), Math.cos(r)];
+    const heading = Math.atan2(fwd[0], fwd[1]);
+    const len = alongU ? W : D, lo = alongU ? margin : v0, hi = alongU ? W - margin : v1;
+    const clear = (q: Vec2) => !surfaces.some((x) => x.solid && x.region === 'catio' && inside({ ...x, h: [x.h[0] + 0.16, x.h[1] + 0.16] }, q[0], q[1]));
+    let at: Vec2 = centreXZ;
+    for (let k = hi - 0.4; k > lo + len * 0.4; k -= 0.1) {
+      const q = alongU ? local(k, D / 2) : local(W / 2, k);
+      if (clear(q)) { at = q; break; }
+    }
+    start = { p: [at[0], floorY, at[1]], heading: at === centreXZ ? 0 : heading };
   }
 
   // A toy mouse up high in the catio and one in a far corner of its floor.
@@ -314,7 +351,7 @@ export function buildWorld(p: Project, a: Assembly, cat: Catalog): World | null 
   return {
     id: p.web?.sampleId ? `sample:${p.web.sampleId}` : p.id,
     name: p.name,
-    home, surfaces, volumes, cameraVolumes, spots, items, toys, walls, room, sunbeams, start, catio,
+    home, surfaces, volumes, cameraVolumes, spots, items, toys, walls, room, sunbeams, decor, roomSpan, start, catio,
     sillId, hostWallId: home ? wall!.id : null, gatewayOpeningId: home ? gate!.id : null
   };
 }

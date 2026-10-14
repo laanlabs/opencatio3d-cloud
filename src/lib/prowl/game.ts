@@ -16,7 +16,7 @@ export type Action =
   | { kind: 'knock'; item: ItemState; label: string }
   | { kind: 'watch'; label: string }
   | { kind: 'spot'; spot: Spot; label: string };
-export type Busy = { kind: 'scratch' | 'sofa' | 'drink' | 'eat' | 'sniff' | 'watch' | 'nap' | 'meow'; t: number; T: number; spot?: Spot };
+export type Busy = { kind: 'scratch' | 'sofa' | 'drink' | 'eat' | 'sniff' | 'watch' | 'nap' | 'swipe'; t: number; T: number; spot?: Spot };
 export type Message = { text: string; tone: 'info' | 'good' | 'task' | 'warn'; sound?: 'meow' | 'crash' | 'chirp' | 'ding' | 'purr' | 'thud' };
 
 const KEY = 'oc3d-prowl-progress-v1';
@@ -72,6 +72,9 @@ export class Prowl {
   target: LeapTarget | null = null;
   action: Action | null = null;
   idle = 0;
+  /** Sneaking (for the 3D view's posture) and when the cat last meowed (for its mouth). */
+  sneak = false;
+  meowAt = -10;
   messages: Message[] = [];
   bird = { here: false, next: BIRD_FIRST, leaving: 0 };
   finished = false;
@@ -143,6 +146,7 @@ export class Prowl {
   update(dt: number, input: MoveInput) {
     dt = Math.max(0, Math.min(dt, 0.05));
     this.time += dt;
+    this.sneak = !!input.sneak;
     this.updateBird(dt);
     this.updateItems(dt);
     if (this.busy) {
@@ -232,7 +236,7 @@ export class Prowl {
       it.spin = 6 + Math.random() * 4;
       it.state = 'falling';
       it.fromY = it.p[1];
-      this.busy = { kind: 'meow', t: 0, T: 0.35 };
+      this.busy = { kind: 'swipe', t: 0, T: 0.35 };
       return;
     }
     if (a.kind === 'watch') {
@@ -250,7 +254,8 @@ export class Prowl {
   }
 
   meow() {
-    if (this.busy && this.busy.kind !== 'meow') return;
+    if (this.busy && this.busy.kind !== 'swipe') return;
+    this.meowAt = this.time;
     this.say('Meow!', 'info', 'meow');
     if (this.bird.here) {
       const bp = this.world.catio.birdPerch;

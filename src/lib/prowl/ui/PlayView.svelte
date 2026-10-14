@@ -272,9 +272,9 @@
   .nowebgl { position: absolute; top: 40%; left: 0; right: 0; text-align: center; }
   .bar { position: absolute; top: 0; left: 0; right: 0; display: flex; align-items: center; gap: 8px; padding: max(8px, env(safe-area-inset-top)) 12px 8px; background: linear-gradient(rgba(24, 36, 58, .55), rgba(24, 36, 58, 0)); color: #fff; pointer-events: none; }
   .bar > * { pointer-events: auto; }
-  .title { flex: 1; min-width: 0; display: flex; flex-direction: column; text-shadow: 0 1px 2px rgba(0, 0, 0, .4); }
+  .title { flex: 0 1 auto; margin-right: auto; min-width: 0; display: flex; flex-direction: column; padding: 4px 12px; border-radius: 12px; background: rgba(24, 36, 58, .82); }
   .title strong { font-size: 15px; }
-  .where { font-size: 12px; opacity: .92; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .where { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .todo { position: absolute; top: 56px; left: 12px; width: min(300px, calc(100% - 24px)); max-height: calc(100% - 180px); overflow: auto; background: rgba(255, 255, 255, .94); border-radius: 14px; padding: 10px 12px; box-shadow: var(--shadow); }
   .todo h2 { font-size: 14px; margin: 0 0 6px; }
   .todo ul { list-style: none; margin: 0; padding: 0; }
