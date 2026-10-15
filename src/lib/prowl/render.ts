@@ -1,8 +1,9 @@
 // three.js for Catio Prowl: the catio and house walls from the planner (drawn from the generated parts),
 // the game's scenery around them (sky, yard, the outside of the house, the furnished room — see
 // scenery.ts), the player's cat (catmodel.ts), toy mice, the things that can be knocked off, a visiting
-// bird and the leap marker. A third-person camera follows the cat; walls between the camera and the cat
-// fade out, and the ceiling lifts off when the camera rises above it. Loaded only on #/prowl.
+// bird and the leap marker. A third-person camera follows the cat; the room's walls between the camera and
+// the cat fade out, everything else in the way is cut away around the cat, a silhouette shows where it is
+// still hidden, and the ceiling lifts off when the camera rises above it. Loaded only on #/prowl.
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import type { Catalog } from '../catalog/catalog';
@@ -11,7 +12,7 @@ import type { Assembly } from '../generate/assembly';
 import { buildHouse, buildStructure, disposeGroup } from '../scene/build';
 import { mat } from '../quest/catrig';
 import type { Prowl } from './game';
-import { STEP, groundAt, openAir } from './physics';
+import { STEP, groundAt, inFurnitureAt, inRect, inVolumes } from './physics';
 import type { Rect, WallSpec, World } from './world';
 import { type CatBusy, makeCatModel } from './catmodel';
 import { ROOF_LAYER, buildHouseShell, buildInterior, buildSky, buildTunnelFloors, buildYard, houseWall, mergeStatics, sunDirection } from './scenery';
@@ -30,6 +31,59 @@ export interface ProwlScene {
 }
 
 const std = (color: string, extra: THREE.MeshStandardMaterialParameters = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.85, ...extra });
+
+/** Layer of the cat's main pieces, drawn a second time as a silhouette where something hides them. */
+const SILHOUETTE_LAYER = 5;
+
+/** Where the cut-away is: the camera, the cat's chest, the cat's paws and how much to cut (0–1). */
+interface Cutaway { cam: { value: THREE.Vector3 }; cat: { value: THREE.Vector3 }; feet: { value: number }; on: { value: number } }
+
+/** Cut a see-through window, a dithered cone from the camera to the cat, through every material under
+ *  `root` (merged scenery included: no extra draw calls, shadows unchanged). Fragments within 0.3 m of the
+ *  cat and at or below its paws are kept, so it never loses the ground it stands on or the ledge by it. */
+function cutaway(root: THREE.Object3D, u: Cutaway) {
+  const done = new Set<THREE.Material>();
+  root.traverse((o) => {
+    const m = (o as THREE.Mesh).material;
+    if (!m) return;
+    for (const x of Array.isArray(m) ? m : [m]) {
+      if (done.has(x) || (x as THREE.ShaderMaterial).isShaderMaterial) continue;
+      done.add(x);
+      const prev = x.onBeforeCompile;
+      x.onBeforeCompile = (shader, renderer) => {
+        prev.call(x, shader, renderer);
+        if (!shader.vertexShader.includes('#include <project_vertex>') || !shader.fragmentShader.includes('void main() {')) return;
+        Object.assign(shader.uniforms, { uCutCam: u.cam, uCutCat: u.cat, uCutFeet: u.feet, uCutOn: u.on });
+        shader.vertexShader = 'varying vec3 vCutWorld;\n' + shader.vertexShader.replace('#include <project_vertex>', `#include <project_vertex>
+  #ifdef USE_INSTANCING
+    vCutWorld = (modelMatrix * instanceMatrix * vec4(transformed, 1.0)).xyz;
+  #else
+    vCutWorld = (modelMatrix * vec4(transformed, 1.0)).xyz;
+  #endif`);
+        shader.fragmentShader = `varying vec3 vCutWorld;
+uniform vec3 uCutCam, uCutCat;
+uniform float uCutFeet, uCutOn;
+void cutAway() {
+  if (uCutOn < 0.01 || vCutWorld.y < uCutFeet + 0.03) return;
+  vec3 ab = uCutCat - uCutCam;
+  float L = length(ab);
+  if (L < 0.5) return;
+  vec3 dir = ab / L;
+  float t = dot(vCutWorld - uCutCam, dir);
+  if (t < 0.02 || t > L - 0.3) return;
+  // A cone that is a constant size on screen: 0.34 m wide at the cat.
+  float r = 0.34 * t / L;
+  float d = length(vCutWorld - uCutCam - dir * t);
+  float k = (1.0 - smoothstep(r * 0.55, r, d)) * smoothstep(L - 0.3, L - 0.55, t) * uCutOn;
+  float n = fract(52.9829189 * fract(dot(gl_FragCoord.xy, vec2(0.06711056, 0.00583715))));
+  if (n < k * 0.93) discard;
+}
+` + shader.fragmentShader.replace('void main() {', 'void main() {\n  cutAway();');
+      };
+      x.needsUpdate = true;
+    }
+  });
+}
 
 function flatAt(r: Rect, y: number, material: THREE.Material): THREE.Mesh {
   const m = new THREE.Mesh(new THREE.PlaneGeometry(2 * r.h[0], 2 * r.h[1]), material);
@@ -149,7 +203,7 @@ function makeFlap(f: Flap) {
 export function createProwlScene(host: HTMLElement, p: Project, a: Assembly, world: World, cat: Catalog, opts: { coat: string; reduceMotion: boolean }): ProwlScene {
   // Phones and small tablets: fewer pixels and a smaller shadow map.
   const small = typeof matchMedia !== 'undefined' && (matchMedia('(pointer: coarse)').matches || Math.min(screen.width, screen.height) < 700);
-  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  const renderer = new THREE.WebGLRenderer({ antialias: true, stencil: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, small ? 1.5 : 2));
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFShadowMap;
@@ -230,6 +284,10 @@ export function createProwlScene(host: HTMLElement, p: Project, a: Assembly, wor
   post.position.set(bp[0], bp[1] / 2, bp[2]);
   post.castShadow = true;
   statics.add(post);
+  // Whatever stands between the camera and the cat (a wall, the catio's framing and roof, a tunnel's mesh,
+  // furniture) is cut away around it.
+  const cut: Cutaway = { cam: { value: new THREE.Vector3() }, cat: { value: new THREE.Vector3() }, feet: { value: 0 }, on: { value: 1 } };
+  cutaway(statics, cut);
 
   // Light: the sun shines in through the open window onto the room's sunbeam, over the middle of the play area.
   const mid = new THREE.Vector3(...world.catio.centre);
@@ -245,6 +303,21 @@ export function createProwlScene(host: HTMLElement, p: Project, a: Assembly, wor
   scene.add(dynamic);
   const kitty = makeCatModel(opts.coat);
   dynamic.add(kitty.root);
+  // Where the cat is still hidden (behind a post, a box, the catio's roof), a soft silhouette shows through:
+  // the cat marks its visible pixels in the stencil buffer, and its main pieces are drawn again only where
+  // they are behind something and not already showing.
+  const silhouette = new THREE.MeshBasicMaterial({
+    color: '#ffcf86', transparent: true, opacity: 0.42, depthWrite: false, depthFunc: THREE.GreaterDepth, fog: false,
+    stencilWrite: true, stencilRef: 1, stencilFunc: THREE.NotEqualStencilFunc, stencilZPass: THREE.ReplaceStencilOp
+  });
+  kitty.root.traverse((o) => {
+    const m = o as THREE.Mesh;
+    if (!m.isMesh) return;
+    for (const x of Array.isArray(m.material) ? m.material : [m.material]) Object.assign(x, { stencilWrite: true, stencilRef: 1, stencilFunc: THREE.AlwaysStencilFunc, stencilZPass: THREE.ReplaceStencilOp });
+    // Only the big pieces (torso, head, legs, tail): a few extra draw calls.
+    if (!m.geometry.boundingSphere) m.geometry.computeBoundingSphere();
+    if (m.castShadow && m.geometry.boundingSphere!.radius >= 0.045) m.layers.enable(SILHOUETTE_LAYER);
+  });
   const shadowBlob = new THREE.Mesh(new THREE.PlaneGeometry(0.34, 0.5), new THREE.MeshBasicMaterial({ map: blob(), transparent: true, depthWrite: false, opacity: 0.55 }));
   shadowBlob.rotation.order = 'YXZ';
   shadowBlob.renderOrder = 3;
@@ -266,16 +339,18 @@ export function createProwlScene(host: HTMLElement, p: Project, a: Assembly, wor
   const target = new THREE.Vector3(world.start.p[0], world.start.p[1] + 0.25, world.start.p[2]);
   const tmp = new THREE.Vector3();
 
-  // Close in, the camera stays in the open air of the room or catio (pulled in before a wall, roof or
-  // furniture); zoomed far out it floats free, dollhouse style, and walls in the way fade.
+  // Close in, the camera stays in the open air of the room or catio (pulled in before a wall or roof; it
+  // looks past furniture, which is cut away, but never sits inside it); zoomed far out it floats free,
+  // dollhouse style, and whatever is between it and the cat is cut away.
   const FREE = 2.6;
   const want = new THREE.Vector3();
   const reach = (p: number, wide: boolean) => {
     const dx = -Math.sin(yaw) * Math.cos(p), dy = Math.sin(p), dz = -Math.cos(yaw) * Math.cos(p);
     let d = 0.3;
     for (let s = 0.3; s <= dist + 1e-6; s += 0.05) {
-      if (!openAir(world, target.x + dx * s, target.y + dy * s, target.z + dz * s, 0.04, wide)) break;
-      d = s;
+      const x = target.x + dx * s, y = target.y + dy * s, z = target.z + dz * s;
+      if (!inVolumes(world, x, y, z, 0.06, wide)) break;
+      if (!inFurnitureAt(world, x, y, z, 0.08)) d = s;
     }
     return { d, dx, dy, dz };
   };
@@ -295,10 +370,15 @@ export function createProwlScene(host: HTMLElement, p: Project, a: Assembly, wor
       r = best;
     }
     want.set(target.x + r.dx * r.d, target.y + r.dy * r.d, target.z + r.dz * r.d);
-    camera.position.lerp(want, opts.reduceMotion ? 1 : Math.min(1, dt * 10));
+    // Ease out, but pull in fast: a camera lagging behind a wall or a roof sees the back of it.
+    const closer = want.distanceTo(target) < camera.position.distanceTo(target) - 0.05;
+    camera.position.lerp(want, opts.reduceMotion ? 1 : Math.min(1, dt * (closer ? 30 : 10)));
     camera.lookAt(target);
   }
   placeCamera();
+  if (typeof location !== 'undefined' && location.search.includes('prowl-debug')) {
+    (window as unknown as { __prowlCam: unknown }).__prowlCam = { set(y: number, p: number, d: number) { yaw = y; pitch = p; dist = d; lastOrbit = time + 1e6; }, get: () => ({ yaw, pitch, dist, pos: camera.position.toArray() }) };
+  }
 
   function fadeWalls(dt: number, catPos: THREE.Vector3) {
     const cam = camera.position;
@@ -338,9 +418,18 @@ export function createProwlScene(host: HTMLElement, p: Project, a: Assembly, wor
       const look = game.target ? toLocal(game.target.p) : birdNear ? toLocal([bp[0], bp[1] + 0.06, bp[2]]) : null;
       let frontDy = 0, backDy = 0;
       if (c.ground && !c.leap) {
-        const g1 = groundAt(world, c.p[0] + sh * 0.12, c.p[2] + ch * 0.12, c.p[1] + STEP), g2 = groundAt(world, c.p[0] - sh * 0.12, c.p[2] - ch * 0.12, c.p[1] + STEP);
-        frontDy = g1.surface ? Math.max(-0.06, Math.min(0.1, g1.y - c.p[1])) : 0;
-        backDy = g2.surface ? Math.max(-0.06, Math.min(0.1, g2.y - c.p[1])) : 0;
+        // Paws follow the ground under them, but only up onto what they are really on: a ramp or a step
+        // well under the paws, not the edge of a box the cat has its nose against.
+        const paws = (k: number) => {
+          const x = c.p[0] + sh * k, z = c.p[2] + ch * k;
+          const g = groundAt(world, x, z, c.p[1] + STEP);
+          if (!g.surface) return 0;
+          const up = g.y > c.p[1] + 0.005 && g.surface.id !== c.surfaceId;
+          if (up && g.surface.kind !== 'ramp' && !inRect(g.surface, x, z, 0.05)) return 0;
+          return Math.max(-0.06, Math.min(0.1, g.y - c.p[1]));
+        };
+        frontDy = paws(0.12);
+        backDy = paws(-0.12);
       }
       const busy = game.busy ? (game.busy.kind as CatBusy) : null;
       kitty.update(opts.reduceMotion ? Math.min(dt, 0.02) : dt, {
@@ -406,7 +495,21 @@ export function createProwlScene(host: HTMLElement, p: Project, a: Assembly, wor
         else camera.layers.disable(ROOF_LAYER);
       }
       interior?.update(opts.reduceMotion ? 0 : time, camera.position);
+      cut.cam.value.copy(camera.position);
+      cut.cat.value.set(c.p[0], c.p[1] + 0.2, c.p[2]);
+      cut.feet.value = Number.isFinite(under) ? Math.min(c.p[1], under) : c.p[1];
       renderer.render(scene, camera);
+      // The silhouette pass: the cat's main pieces, where they are hidden.
+      const mask = camera.layers.mask;
+      renderer.autoClear = false;
+      renderer.shadowMap.autoUpdate = false;
+      camera.layers.set(SILHOUETTE_LAYER);
+      scene.overrideMaterial = silhouette;
+      renderer.render(scene, camera);
+      scene.overrideMaterial = null;
+      camera.layers.mask = mask;
+      renderer.shadowMap.autoUpdate = true;
+      renderer.autoClear = true;
     },
     resize(w, h) { renderer.setSize(w, h); camera.aspect = w / h; camera.fov = w < h ? 68 : 55; camera.updateProjectionMatrix(); },
     screenOf(p) {
@@ -418,6 +521,7 @@ export function createProwlScene(host: HTMLElement, p: Project, a: Assembly, wor
       disposeGroup(statics);
       disposeGroup(dynamic);
       kitty.dispose();
+      silhouette.dispose();
       envRT.dispose();
       renderer.dispose();
       renderer.forceContextLoss();

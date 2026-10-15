@@ -13,7 +13,7 @@ export const MAX_UP = 1.6;
 export const MAX_REACH = 1.9;
 const G = 9.8;
 
-export interface Leap { from: Vec3; to: Vec3; t: number; T: number; up: boolean; apex: number; surfaceId: string }
+export interface Leap { from: Vec3; to: Vec3; t: number; T: number; up: boolean; apex: number; surfaceId: string; h0?: number; h1?: number }
 export interface CatState {
   p: Vec3;
   v: Vec2;
@@ -78,10 +78,17 @@ export function headroom(w: World, x: number, y: number, z: number, rad = R): nu
   return low;
 }
 
+/** A point inside some volume, clear of its floor and ceiling (for the camera: walls, mesh and roofs). */
+export const inVolumes = (w: World, x: number, y: number, z: number, pad = 0.04, wide = false) =>
+  (wide ? w.cameraVolumes : w.volumes).some((v) => inPoly(v.poly, x, z) && y > v.y0 + pad && y < ceilAt(v, x, z) - pad);
+
+/** A point inside solid furniture (grown by `pad`). */
+export const inFurnitureAt = (w: World, x: number, y: number, z: number, pad = 0.04) =>
+  w.surfaces.some((s) => s.solid && y < s.top + pad && y > s.bottom - pad && inRect(s, x, z, -pad));
+
 /** A point inside some volume, clear of its floor and ceiling and outside solid furniture (for the camera). */
 export function openAir(w: World, x: number, y: number, z: number, pad = 0.04, wide = false): boolean {
-  if (!(wide ? w.cameraVolumes : w.volumes).some((v) => inPoly(v.poly, x, z) && y > v.y0 + pad && y < ceilAt(v, x, z) - pad)) return false;
-  return !w.surfaces.some((s) => s.solid && y < s.top + pad && y > s.bottom - pad && inRect(s, x, z, -pad));
+  return inVolumes(w, x, y, z, pad, wide) && !inFurnitureAt(w, x, y, z, pad);
 }
 
 /** Whether a body standing at (x, y, z) with radius `rad` fits inside the union of volumes. */
@@ -108,6 +115,49 @@ export function blocked(w: World, x: number, z: number, y: number, rad = R): boo
 }
 
 const canStand = (w: World, x: number, z: number, y: number) => contained(w, x, y, z) && !blocked(w, x, z, y);
+
+/** The cat's body beyond the centre cylinder, as circles along its heading: nose, chest and hips
+ *  (forward distance from the centre, radius). The tail is left out: it bends out of the way. */
+export const BODY: readonly [number, number][] = [[0.25, 0.035], [0.13, 0.06], [-0.15, 0.06]];
+
+/** Plan points of the body samples for a cat at (x, z) facing `heading`. */
+export function bodyPoints(x: number, z: number, heading: number): [number, number, number][] {
+  const fx = Math.sin(heading), fz = Math.cos(heading);
+  return BODY.map(([d, r]) => [x + fx * d, z + fz * d, r]);
+}
+
+/** Whether the nose, chest and hips are inside the volumes (walls, mesh, roofs). */
+export const wallsClear = (w: World, x: number, z: number, y: number, heading: number) =>
+  bodyPoints(x, z, heading).every(([px, pz, r]) => contained(w, px, y, pz, r, CROUCH * 0.75));
+
+/** Which of the nose, chest and hips (bits 1, 2, 4) are in solid furniture. */
+export const inFurniture = (w: World, x: number, z: number, y: number, heading: number) =>
+  bodyPoints(x, z, heading).reduce((m, [px, pz, r], i) => (blocked(w, px, pz, y, r) ? m | (1 << i) : m), 0);
+
+/** Whether the nose, chest and hips are clear of solid furniture and inside the volumes. */
+export const bodyClear = (w: World, x: number, z: number, y: number, heading: number) => wallsClear(w, x, z, y, heading) && !inFurniture(w, x, z, y, heading);
+
+/** A cat standing there, centre and body. */
+export const fits = (w: World, x: number, z: number, y: number, heading: number) => canStand(w, x, z, y) && bodyClear(w, x, z, y, heading);
+
+/** Push a standing cat whose body pokes into something (after a turn or a landing) back out: the nearest
+ *  spot within 15 cm, on the same surface, where it fits. Null when there is none (a tight tunnel). */
+export function unpoke(w: World, st: CatState, onGround = true, reach = 0.15): Vec2 | null {
+  const [x, y, z] = st.p;
+  if (bodyClear(w, x, z, y, st.heading)) return null;
+  const fx = Math.sin(st.heading), fz = Math.cos(st.heading);
+  for (let k = 0.02; k <= reach + 1e-9; k += 0.02) {
+    for (const [ax, az] of [[-fx, -fz], [fx, fz], [fz, -fx], [-fz, fx], [-fx + fz, -fz - fx], [-fx - fz, -fz + fx]] as Vec2[]) {
+      const m = Math.hypot(ax, az);
+      const qx = x + (ax / m) * k, qz = z + (az / m) * k;
+      if (!fits(w, qx, qz, y, st.heading)) continue;
+      if (!onGround) return [qx, qz];
+      const g = groundAt(w, qx, qz, y + 0.01);
+      if (g.surface && Math.abs(g.y - y) < 0.01) return [qx, qz];
+    }
+  }
+  return null;
+}
 
 // ---------- leaps ----------
 
@@ -182,13 +232,21 @@ export function leapTarget(w: World, st: CatState): LeapTarget | null {
   return best?.t ?? null;
 }
 
-export function startLeap(st: CatState, t: LeapTarget) {
+/** The heading nearest `h` in which a cat standing at p fits nose to hips (it lands turned along a narrow
+ *  shelf or a window seat rather than with its nose in the wall); `h` itself when none does. */
+export function landingHeading(w: World, p: Vec3, h: number): number {
+  for (let k = 0; k <= 9; k++) for (const sg of k ? [1, -1] : [1]) if (bodyClear(w, p[0], p[2], p[1], h + sg * k * 0.35)) return h + sg * k * 0.35;
+  return h;
+}
+
+export function startLeap(st: CatState, t: LeapTarget, w?: World) {
   const from: Vec3 = [...st.p];
   const dist = Math.hypot(t.p[0] - from[0], t.p[2] - from[2]);
-  st.leap = { from, to: t.p, t: 0, T: 0.32 + 0.12 * dist + 0.1 * Math.abs(t.p[1] - from[1]), up: t.p[1] > from[1] + 0.05, apex: t.apex, surfaceId: t.surface.id };
+  if (dist > 0.05) st.heading = Math.atan2(t.p[0] - from[0], t.p[2] - from[2]);
+  const h1 = w ? landingHeading(w, t.p, st.heading) : st.heading;
+  st.leap = { from, to: t.p, t: 0, T: 0.32 + 0.12 * dist + 0.1 * Math.abs(t.p[1] - from[1]), up: t.p[1] > from[1] + 0.05, apex: t.apex, surfaceId: t.surface.id, h0: st.heading, h1 };
   st.ground = false;
   st.v = [0, 0];
-  if (dist > 0.05) st.heading = Math.atan2(t.p[0] - from[0], t.p[2] - from[2]);
 }
 
 // ---------- stepping ----------
@@ -205,6 +263,25 @@ function turnToward(a: number, b: number, max: number) {
   return a + Math.max(-max, Math.min(max, d));
 }
 
+/** Turn a cat toward `goal` by up to `max`. On the ground it does not swing its nose or hips into furniture:
+ *  it steps back to make room, turns the other way round, or stops turning. In the air it just turns. */
+function turn(w: World, st: CatState, goal: number, max: number) {
+  const nh = turnToward(st.heading, goal, max);
+  if (!st.ground) { st.heading = nh; return; }
+  const [x, y, z] = st.p;
+  const now = inFurniture(w, x, z, y, st.heading);
+  if (!(inFurniture(w, x, z, y, nh) & ~now)) { st.heading = nh; return; }
+  const out = unpoke(w, { ...st, heading: nh });
+  if (out) { st.heading = nh; st.p = [out[0], y, out[1]]; return; }
+  // The other way round, toward a heading it can take here.
+  if (inFurniture(w, x, z, y, goal) & ~now) return;
+  let d = goal - st.heading;
+  while (d > Math.PI) d -= 2 * Math.PI;
+  while (d < -Math.PI) d += 2 * Math.PI;
+  const lh = st.heading - Math.sign(d || 1) * max;
+  if (!(inFurniture(w, x, z, y, lh) & ~now)) st.heading = lh;
+}
+
 /** Advance the cat by dt seconds. Returns what happened (leaps, hops, landings). */
 export function step(w: World, st: CatState, input: MoveInput, dt: number): StepEvent[] {
   const ev: StepEvent[] = [];
@@ -213,6 +290,8 @@ export function step(w: World, st: CatState, input: MoveInput, dt: number): Step
     l.t += dt;
     const k = Math.min(1, l.t / l.T);
     st.p = leapPos(l, k);
+    // Turn in the air to the landing heading, mostly in the second half.
+    if (l.h0 !== undefined && l.h1 !== undefined) { const e = Math.max(0, Math.min(1, (k - 0.3) / 0.6)); st.heading = l.h0 + (l.h1 - l.h0) * e * e * (3 - 2 * e); }
     if (k >= 1) {
       st.p = [...l.to];
       st.leap = null;
@@ -227,7 +306,7 @@ export function step(w: World, st: CatState, input: MoveInput, dt: number): Step
   // Leap or hop.
   if (input.jump && st.ground) {
     const t = leapTarget(w, st);
-    if (t) { startLeap(st, t); ev.push({ type: 'leap', target: t }); return ev; }
+    if (t) { startLeap(st, t, w); ev.push({ type: 'leap', target: t }); return ev; }
     st.ground = false;
     st.vy = 2.4;
     ev.push({ type: 'hop' });
@@ -240,25 +319,35 @@ export function step(w: World, st: CatState, input: MoveInput, dt: number): Step
   const tv: Vec2 = mag > 0.02 ? [(mx / Math.hypot(mx, mz)) * mag * speed, (mz / Math.hypot(mx, mz)) * mag * speed] : [0, 0];
   const acc = Math.min(1, (st.ground ? 12 : 3) * dt);
   st.v = [st.v[0] + (tv[0] - st.v[0]) * acc, st.v[1] + (tv[1] - st.v[1]) * acc];
-  if (mag > 0.05) st.heading = turnToward(st.heading, Math.atan2(mx, mz), 10 * dt);
+  if (mag > 0.05) turn(w, st, Math.atan2(mx, mz), 10 * dt);
+  // A turn (or a landing) can leave the nose or hips in a wall or furniture: step back out.
+  if (st.ground) { const out = unpoke(w, st); if (out) st.p = [out[0], st.p[1], out[1]]; }
   let [x, y, z] = st.p;
   const dx = st.v[0] * dt, dz = st.v[1] * dt;
   if (dx || dz) {
-    if (canStand(w, x + dx, z + dz, y)) { x += dx; z += dz; }
+    // The whole body has to fit, nose to hips, so the cat stops with its nose at a face. Where it does not fit
+    // already (turning round in a tunnel) only the centre is checked, so it can always walk out.
+    const hd = st.heading;
+    const wallsOk = !st.ground || wallsClear(w, x, z, y, hd);
+    const stuckIn = st.ground ? inFurniture(w, x, z, y, hd) : 0;
+    const ok = (qx: number, qz: number, h = hd) => canStand(w, qx, qz, y) && (!wallsOk || wallsClear(w, qx, qz, y, h)) && (inFurniture(w, qx, qz, y, h) & ~stuckIn) === 0;
+    // The cat turns along the wall it slides on.
+    const along = (rx: number, rz: number) => turnToward(hd, Math.atan2(rx, rz), 6 * dt);
+    if (ok(x + dx, z + dz)) { x += dx; z += dz; }
     // Slide along an axis only when that is a real part of the move (not a sliver that stops the cat dead).
-    else if (Math.abs(dx) > 0.3 * Math.hypot(dx, dz) && canStand(w, x + dx, z, y)) { x += dx; st.v[1] = 0; }
-    else if (Math.abs(dz) > 0.3 * Math.hypot(dx, dz) && canStand(w, x, z + dz, y)) { z += dz; st.v[0] = 0; }
+    else if (Math.abs(dx) > 0.3 * Math.hypot(dx, dz) && ok(x + dx, z, along(dx, 0))) { x += dx; st.v[1] = 0; st.heading = along(dx, 0); }
+    else if (Math.abs(dz) > 0.3 * Math.hypot(dx, dz) && ok(x, z + dz, along(0, dz))) { z += dz; st.v[0] = 0; st.heading = along(0, dz); }
     else {
       // Slide along a wall at an angle (tunnels, cat flaps and walls that are not square to the axes).
-      const slide = [0.5, -0.5, 1.0, -1.0].map((a) => { const c = Math.cos(a), sn = Math.sin(a); return [(dx * c - dz * sn) * c, (dx * sn + dz * c) * c] as Vec2; }).find(([rx, rz]) => canStand(w, x + rx, z + rz, y));
-      if (slide) { x += slide[0]; z += slide[1]; }
+      const slide = [0.5, -0.5, 1.0, -1.0].map((a) => { const c = Math.cos(a), sn = Math.sin(a); return [(dx * c - dz * sn) * c, (dx * sn + dz * c) * c] as Vec2; }).find(([rx, rz]) => ok(x + rx, z + rz, along(rx, rz)));
+      if (slide) { x += slide[0]; z += slide[1]; st.heading = along(slide[0], slide[1]); }
       else {
         // Line up with an opening just to one side (a tunnel mouth, a cat flap) and go through.
         const m = Math.hypot(dx, dz), fx = dx / m, fz = dz / m;
         let shift = 0;
-        for (let k = 0.01; k <= 0.12 + 1e-9 && !shift; k += 0.01) for (const sg of [1, -1]) if (canStand(w, x - fz * k * sg + fx * 0.03, z + fx * k * sg + fz * 0.03, y)) { shift = k * sg; break; }
+        for (let k = 0.01; k <= 0.12 + 1e-9 && !shift; k += 0.01) for (const sg of [1, -1]) if (ok(x - fz * k * sg + fx * 0.03, z + fx * k * sg + fz * 0.03)) { shift = k * sg; break; }
         const lat = Math.sign(shift) * Math.min(Math.abs(shift), m);
-        if (lat && canStand(w, x - fz * lat, z + fx * lat, y)) { x -= fz * lat; z += fx * lat; } else st.v = [0, 0];
+        if (lat && ok(x - fz * lat, z + fx * lat)) { x -= fz * lat; z += fx * lat; } else st.v = [0, 0];
       }
     }
   }
@@ -276,6 +365,8 @@ export function step(w: World, st: CatState, input: MoveInput, dt: number): Step
     y += st.vy * dt;
     const room = headroom(w, x, before, z);
     if (Number.isFinite(room) && y + CROUCH > room) { y = Math.max(before, room - CROUCH); st.vy = Math.min(0, st.vy); }
+    // Dropping off an edge with the front still over it: slide clear as it falls rather than land inside it.
+    if (inFurniture(w, x, z, y, st.heading)) { const out = unpoke(w, { ...st, p: [x, y, z] }, false, 0.3); if (out) [x, z] = out; }
     const g = groundAt(w, x, z, Math.max(before, y) + 0.02);
     if (g.surface && y <= g.y) {
       ev.push({ type: 'land', drop: Math.max(0, (st.p[1] ?? before) - g.y), surfaceId: g.surface.id });

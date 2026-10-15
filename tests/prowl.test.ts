@@ -7,7 +7,7 @@ import type { Project, TemplateId } from '../src/lib/model/types';
 import { TEMPLATE_IDS } from '../src/lib/model/types';
 import { buildSample } from '../src/lib/site/samples';
 import { buildWorld, type Surface, type World } from '../src/lib/prowl/world';
-import { HEAD, R, STEP, contained, groundAt, blocked, inRect, leapTarget, newCat, step, type CatState } from '../src/lib/prowl/physics';
+import { HEAD, R, STEP, bodyPoints, contained, groundAt, blocked, inRect, leapTarget, newCat, step, type CatState } from '../src/lib/prowl/physics';
 import { Prowl, tasksFor } from '../src/lib/prowl/game';
 import { templateCase } from './helpers';
 
@@ -262,6 +262,7 @@ describe('Catio Prowl tunnels', () => {
     g.cat.p = [chute.c[0], 0, chute.c[1] + 0.12];
     g.cat.surfaceId = chute.id;
     g.cat.heading = Math.PI; // the house is toward −z
+    g.cat.v = [0, 0];
     g.update(1 / 60, { move: [0, 0] });
     expect(['riser-step', 'sill', 'sill-out']).toContain(g.target?.surface.id);
     const step = w.surfaces.find((s) => s.id === 'riser-step')!;
@@ -277,6 +278,102 @@ describe('Catio Prowl tunnels', () => {
     const w = worldOf(p);
     expect(w.tunnels).toEqual([]);
     expect(w.home).toBe(false);
+  });
+});
+
+describe('Catio Prowl body collision', () => {
+  /** A body sample (nose, chest, hips) inside solid furniture the cat is not standing on. */
+  const inSolid = (w: World, st: CatState) => bodyPoints(st.p[0], st.p[2], st.heading).find(([x, z]) => blocked(w, x, z, st.p[1], 0));
+  /** A body sample outside the walls (a mesh wall, a house wall). */
+  const outside = (w: World, st: CatState) => bodyPoints(st.p[0], st.p[2], st.heading).find(([x, z]) => !contained(w, x, st.p[1], z, 0, 0.1));
+  const walkAt = (w: World, from: [number, number, number], heading: number, secs: number, each?: (st: CatState) => void) => {
+    const st = newCat(from, heading, w);
+    for (let i = 0; i < secs * 60; i++) {
+      step(w, st, { move: [Math.sin(heading), Math.cos(heading)] }, 1 / 60);
+      each?.(st);
+    }
+    return st;
+  };
+
+  it('stops with the nose at the face of low solid furniture, not inside it', () => {
+    let walks = 0;
+    for (const id of SAMPLE_IDS) {
+      const w = sample(id);
+      const floor = w.surfaces.find((s) => s.id === 'catio-floor')!;
+      const boxes = w.surfaces.filter((s) => s.solid && s.region === 'catio' && s.top > floor.top + STEP && s.kind !== 'post');
+      for (const b of boxes) {
+        for (let k = 0; k < 8; k++) {
+          const a = (k / 8) * Math.PI * 2;
+          const reach = Math.max(b.h[0], b.h[1]) + 0.5;
+          const from: [number, number, number] = [b.c[0] + Math.sin(a) * reach, floor.top, b.c[1] + Math.cos(a) * reach];
+          if (!inRect(floor, from[0], from[2], 0.12) || !contained(w, from[0], from[1], from[2]) || blocked(w, from[0], from[2], from[1])) continue;
+          const st0 = newCat(from, a + Math.PI, w);
+          if (st0.surfaceId !== floor.id || inSolid(w, st0) || outside(w, st0)) continue;
+          walks++;
+          walkAt(w, from, a + Math.PI, 2.5, (st) => {
+            if (st.surfaceId !== floor.id || !st.ground) return;
+            expect(inSolid(w, st), `${id}: ${b.label} from ${k}`).toBeUndefined();
+          });
+        }
+      }
+    }
+    expect(walks).toBeGreaterThan(5);
+  });
+
+  it('keeps the whole body inside the catio mesh and the house walls when walking straight at them', () => {
+    for (const id of SAMPLE_IDS) {
+      const w = sample(id);
+      for (const f of [w.surfaces.find((s) => s.id === 'catio-floor')!, w.surfaces.find((s) => s.id === 'room-floor')]) {
+        if (!f) continue;
+        for (let k = 0; k < 12; k++) {
+          const a = (k / 12) * Math.PI * 2;
+          const st0 = newCat([f.c[0], f.top, f.c[1]], a, w);
+          if (inSolid(w, st0) || outside(w, st0) || blocked(w, f.c[0], f.c[1], f.top)) continue;
+          walkAt(w, [f.c[0], f.top, f.c[1]], a, 4, (st) => {
+            if (!st.ground || st.leap) return;
+            expect(outside(w, st), `${id} ${f.id} heading ${k}`).toBeUndefined();
+            expect(inSolid(w, st), `${id} ${f.id} heading ${k}`).toBeUndefined();
+          });
+        }
+      }
+    }
+  });
+
+  it('steps back out when a turn swings the nose into furniture', () => {
+    const w = sample('garden-retreat');
+    const box = w.surfaces.find((s) => s.label === 'the litter annex')!;
+    const floor = w.surfaces.find((s) => s.id === 'catio-floor')!;
+    let turns = 0;
+    for (let k = 0; k < 8; k++) {
+      const a = (k / 8) * Math.PI * 2;
+      // Beside the box, facing along its side: then turn to face it.
+      const reach = Math.max(box.h[0], box.h[1]) + 0.15;
+      const x = box.c[0] + Math.sin(a) * reach, z = box.c[1] + Math.cos(a) * reach;
+      if (!inRect(floor, x, z, 0.15) || blocked(w, x, z, 0)) continue;
+      turns++;
+      const st = newCat([x, 0, z], a + Math.PI / 2, w);
+      for (let i = 0; i < 30; i++) step(w, st, { move: [Math.sin(a + Math.PI) * 0.06, Math.cos(a + Math.PI) * 0.06] }, 1 / 60);
+      expect(inSolid(w, st), `side ${k}`).toBeUndefined();
+    }
+    expect(turns).toBeGreaterThan(0);
+  });
+
+  it('never ends up with the body inside furniture on a random prowl', () => {
+    for (const [id, seed] of SAMPLE_IDS.flatMap((id) => [7, 11, 23].map((s) => [id, s] as const))) {
+      const w = sample(id);
+      const r = rng(seed);
+      const st = newCat(w.start.p, w.start.heading, w);
+      let move: [number, number] = [0, 1];
+      let walked = 0;
+      for (let i = 0; i < 60 * 40; i++) {
+        if (i % 45 === 0) { const a = r() * Math.PI * 2; move = [Math.sin(a), Math.cos(a)]; }
+        const [x0, , z0] = st.p;
+        step(w, st, { move, jump: i % 200 === 199 }, 1 / 60);
+        walked += Math.hypot(st.p[0] - x0, st.p[2] - z0);
+        if (st.ground && !st.leap && i > 60) expect(inSolid(w, st), `${id} frame ${i}`).toBeUndefined();
+      }
+      expect(walked, `${id} seed ${seed}: it keeps moving`).toBeGreaterThan(8);
+    }
   });
 });
 

@@ -342,7 +342,9 @@ export function makeCatModel(coat: string): CatModel {
       const [lx, ly, lz] = d.look;
       const hy = 0.27;
       p.headYaw = clamp(Math.atan2(lx, Math.max(0.05, lz)), -maxYaw, maxYaw);
-      p.headPitch = clamp(-Math.atan2(ly - hy, Math.hypot(lx, lz)), -0.6, 0.7) - p.neck * 0.3;
+      // From the head (about 0.22 m ahead of the paws' centre), not from the centre: a ledge right in
+      // front is looked at with a lift of the chin, not by throwing the head back.
+      p.headPitch = clamp(-Math.atan2(ly - hy, Math.max(0.25, Math.hypot(lx, lz - 0.22))), -0.5, 0.7) - p.neck * 0.3;
     };
     if (d.leap) {
       const kk = d.leap.k;
