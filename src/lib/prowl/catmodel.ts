@@ -139,7 +139,7 @@ const REST: Feet = [[0.118, 0], [0.118, 0], [-0.118, 0], [-0.118, 0]];
 const params = (o: Partial<Params>): Params => ({
   bodyY: 0.19, pitch: 0, roll: 0, spinePitch: 0, spineYaw: 0, neck: 0, headPitch: 0, headYaw: 0, headRoll: 0,
   tailBase: -0.75, tailSide: 0, tailBend: 0.05, tailTip: 0.25, tailCurl: 0, tailSway: 0.12,
-  ears: 0, eyes: 1, jaw: 0, gait: 0, stretch: 1, hock: -0.28, feet: REST.map((f) => [...f] as [number, number]), ...o
+  ears: 0, eyes: 0.9, jaw: 0, gait: 0, stretch: 1, hock: -0.28, feet: REST.map((f) => [...f] as [number, number]), ...o
 });
 
 export function makeCatModel(coat: string): CatModel {
@@ -194,7 +194,7 @@ export function makeCatModel(coat: string): CatModel {
     e.rotation.set(0, s * 0.45, -s * 0.14); // almond eyes, tilted up at the outer corner
     // A dark rim (cats' "eyeliner"), the iris set into it, and the pupil flush with the iris.
     const lid = mesh(new THREE.SphereGeometry(0.0146, 16, 12), rim, false);
-    lid.scale.set(1.1, 0.88, 0.36);
+    lid.scale.set(1.09, 0.85, 0.36);
     lid.position.z = -0.0008;
     const ball = mesh(new THREE.SphereGeometry(0.0136, 18, 14), iris, false);
     ball.scale.set(1.04, 0.82, 0.42);
