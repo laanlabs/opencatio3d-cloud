@@ -59,9 +59,9 @@ function build(rig: Rig, bones: THREE.Object3D[]): Built {
 
   // Torso: a deep chest, a tucked waist and a round rump, and the root of the tail.
   const torso = [
-    add(ellipsoid(W(body, 0, -0.004, 0.083), [0.05, 0.072, 0.1]), chest, 'torso'),
-    add(ellipsoid(W(body, 0, 0.006, -0.02), [0.047, 0.057, 0.11]), body, 'torso'),
-    add(ellipsoid(W(body, 0, 0.008, -0.122), [0.055, 0.062, 0.082]), body, 'torso'),
+    add(ellipsoid(W(body, 0, -0.004, 0.083), [0.056, 0.072, 0.1]), chest, 'torso'),
+    add(ellipsoid(W(body, 0, 0.006, -0.02), [0.053, 0.057, 0.11]), body, 'torso'),
+    add(ellipsoid(W(body, 0, 0.008, -0.122), [0.06, 0.062, 0.082]), body, 'torso'),
     add(cone(W(body, 0, 0.022, -0.168), W(body, 0, 0.03, -0.205), 0.028, 0.016), body, 'torso')
   ];
   const neckP = add(cone(W(body, 0, 0.012, 0.118), W(head, 0, -0.008, -0.018), 0.045, 0.036), neck, 'neck');
@@ -83,7 +83,7 @@ function build(rig: Rig, bones: THREE.Object3D[]): Built {
       ids.push(add(cone(W(L.j[1]), W(L.paw, 0, 0.012, 0), 0.0172, 0.0125), L.j[1], 'leg', s));
     } else {
       ids.push(add(cone(W(L.hip, -s * 0.008, 0.008, 0.006), W(L.j[1], 0, 0.012, 0), 0.041, 0.02), L.j[0], 'leg', s));
-      ids.push(add(ellipsoid(W(L.hip, -s * 0.004, -0.03, 0.006), [0.03, 0.045, 0.04]), L.j[0], 'leg', s)); // the haunch
+      ids.push(add(ellipsoid(W(L.hip, 0, -0.028, 0.006), [0.036, 0.048, 0.043]), L.j[0], 'leg', s)); // the haunch
       ids.push(add(cone(W(L.j[1]), W(L.j[2]), 0.019, 0.0125), L.j[1], 'leg', s));
       ids.push(add(cone(W(L.j[2]), W(L.paw, 0, 0.01, 0), 0.0115, 0.0105), L.j[2], 'leg', s));
     }
