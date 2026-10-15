@@ -18,7 +18,7 @@ interface GaWindow extends Window {
 }
 
 /** Screens the planner reports. */
-export type Screen = 'home' | 'editor' | 'view' | 'print' | 'import' | 'missing' | 'quest' | 'prowl';
+export type Screen = 'home' | 'editor' | 'view' | 'print' | 'build' | 'import' | 'missing' | 'quest' | 'prowl';
 
 export const analyticsEnabled = () => GA_MEASUREMENT_ID !== '';
 

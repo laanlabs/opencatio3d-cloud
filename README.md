@@ -30,6 +30,9 @@ Sibling repos (not public yet): `opencatio3d-www` (website; owns the shared cata
   acknowledged; reviewable blockers take a recorded professional review. Wording follows the safety plan:
   "No issue detected by the current rules", never "safe".
 - **Outputs:** cost range, shopping list, FFD cut plan, assembly steps, printable build package
+- **Build mode (`#/build/<id>`):** the assembly steps one at a time — each step's labelled parts and fixings, a 3D
+  view that grows as steps are done (this step in yellow), and checks to tick before a step counts as done.
+  Progress saves with the catio in `web.build` (`build/progress.ts`) and is flagged if the design changes later
   (cover sheet with assumptions/limitations/reviewer fields, plan, elevations, schedules, findings,
   maintenance checklist) — watermarked "concept" until no blockers remain. CSV, project JSON, plan PNG,
   3D PNG, GLB, view-only share links, links into the iOS app, and Open in OpenPlan3D.
@@ -82,6 +85,7 @@ checkout exists at `../../openplan/openPlan3D-cloud` (or `OPENPLAN3D_DIR`); othe
 | `#/sample/<id>` | your copy of a sample: `lean-to-window`, `garden-retreat`, `window-box` |
 | `#/p/<id>?ws=checks` | a saved project on a workspace (`site`, `structure`, `access`, `enrichment`, `materials`, `checks`, `output`) |
 | `#/print/<id>` | the build package |
+| `#/build/<id>` | Build mode: step-by-step assembly with progress |
 | `#/import/v1/<payload>` · `#/view/v1/<payload>` | transfer from iOS · read-only share |
 | `#/quest` · `#/quest/<scenario>` · `#/quest/daily` | Catio Quest: the hub, a scenario, today's daily challenge |
 | `#/prowl` · `#/prowl/<sample>` · `#/prowl/p/<id>` | Catio Prowl: the hub, a sample home and catio, one of your own catios |
@@ -101,6 +105,7 @@ src/lib/ui/                    Home, EditorView, PlanView, Viewer3D, workspace p
 src/lib/quest/                 Catio Quest: scenarios, daily, pieces, design edits, nav graph, sim, scores, convert, card, render
 src/lib/quest/ui/              QuestApp (stages), hub, intro, build board + inspector, 3D explore view, results
 src/lib/prowl/                 Catio Prowl: world (surfaces, volumes, room), physics (walk, leap), game (tasks, bird), render, sound
+src/lib/build/                 Build mode: progress (ticks, done steps), StepView (3D by step), BuildApp
 src/lib/prowl/ui/              ProwlApp, hub (pick a cat and a space), play view (controls, to-do list, end card)
 tests/                         vitest suites + fixtures/web (parity with iOS)
 ```

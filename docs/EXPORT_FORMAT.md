@@ -34,7 +34,7 @@ plan +y points down. Money is the catalog currency (USD in `oc-catalog@0.1`).
     "overrides": [Acknowledgement], "alternatives": [Alternative], "observations": [Observation],
     "assumptions": Assumptions,
     "building": null | { verbatim OpenPlan3D arrays },   // only when the project came from an OpenPlan3D plan
-    "web": { view state; iOS keeps it verbatim },
+    "web": { view state and Build mode progress (`build`); iOS keeps it verbatim },
     "webProject": { … }                                  // web only, files only, never in links
   }
 }

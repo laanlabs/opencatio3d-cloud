@@ -113,12 +113,13 @@
     return viewer;
   }
 
-  async function exportAs(kind: 'print' | 'bom' | 'cuts' | 'json' | 'plan' | 'png' | 'glb' | 'share' | 'ios' | 'openplan') {
+  async function exportAs(kind: 'print' | 'build' | 'bom' | 'cuts' | 'json' | 'plan' | 'png' | 'glb' | 'share' | 'ios' | 'openplan') {
     track('export', { kind });
     const pr = editor.project, a = editor.assembly;
     try {
       switch (kind) {
         case 'print': await editor.flush(); location.hash = `#/print/${pr.id}`; return;
+        case 'build': await editor.flush(); location.hash = `#/build/${pr.id}`; return;
         case 'bom': download(fileName(pr, 'shopping-list', 'csv'), bomCsv(a), 'text/csv;charset=utf-8'); return;
         case 'cuts': download(fileName(pr, 'cut-list', 'csv'), cutListCsv(a), 'text/csv;charset=utf-8'); return;
         case 'json': download(fileName(pr, 'opencatio3d', 'json'), JSON.stringify(toOpenPlan(pr, editor.cat), null, 2), 'application/json'); return;

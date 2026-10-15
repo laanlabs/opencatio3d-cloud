@@ -48,16 +48,16 @@ function wireTexture(): THREE.Texture {
 
 const meshMats = new Map<string, THREE.Material>();
 /** Wire-look material for a mesh panel: the tile repeats once per 4 openings. */
-function wireMaterial(opening: [number, number], w: number, h: number, pvc: boolean): THREE.Material {
+function wireMaterial(opening: [number, number], w: number, h: number, pvc: boolean, tint?: string): THREE.Material {
   // Openings smaller than ~1 cm read as a haze at normal distances: draw at least 2.5 cm cells.
   const cu = Math.max(opening[0], 0.025) * 4, cv = Math.max(opening[1], 0.025) * 4;
-  const key = `${Math.round((w / cu) * 4) / 4}x${Math.round((h / cv) * 4) / 4}:${pvc}`;
+  const key = `${Math.round((w / cu) * 4) / 4}x${Math.round((h / cv) * 4) / 4}:${pvc}:${tint ?? ''}`;
   let m = meshMats.get(key);
   if (!m) {
     const t = wireTexture().clone();
     t.needsUpdate = true;
     t.repeat.set(w / cu, h / cv);
-    m = new THREE.MeshStandardMaterial({ map: t, color: pvc ? '#2f3a35' : '#9aa3ab', metalness: 0.6, roughness: 0.45, transparent: true, alphaTest: 0.2, side: THREE.DoubleSide, depthWrite: false });
+    m = new THREE.MeshStandardMaterial({ map: t, color: tint ? '#ffffff' : pvc ? '#2f3a35' : '#9aa3ab', ...(tint ? { emissive: tint, emissiveIntensity: 0.9 } : {}), metalness: 0.6, roughness: 0.45, transparent: true, alphaTest: 0.2, side: THREE.DoubleSide, depthWrite: false });
     meshMats.set(key, m);
   }
   return m;
@@ -105,7 +105,13 @@ function boxMesh(g: Extract<Geom, { type: 'box' }>, mat: THREE.Material): THREE.
   return m;
 }
 
-export interface StructureOptions { highlightOwner?: string | null }
+export interface StructureOptions {
+  highlightOwner?: string | null;
+  /** Draw only these parts (Build mode: the steps done so far). */
+  only?: Set<string>;
+  /** Draw these parts in the highlight colour (Build mode: the current step). */
+  highlightParts?: Set<string>;
+}
 
 /** One structure from its parts. `userData.structureId` on every mesh supports picking. */
 export function buildStructure(s: Structure, parts: Part[], cat: Catalog, opts: StructureOptions = {}): THREE.Group {
@@ -114,19 +120,19 @@ export function buildStructure(s: Structure, parts: Part[], cat: Catalog, opts: 
   group.position.set(s.x, s.elevation ?? 0, s.y);
   group.rotation.y = -rad(s.rotation);
   for (const p of parts) {
-    if (!p.geom) continue;
+    if (!p.geom || (opts.only && !opts.only.has(p.id))) continue;
     const m = cat.material(p.materialId);
     let obj: THREE.Mesh | null = null;
-    const hl = opts.highlightOwner && p.ownerId === opts.highlightOwner;
+    const hl = (opts.highlightOwner && p.ownerId === opts.highlightOwner) || opts.highlightParts?.has(p.id);
     if (p.geom.type === 'bar') {
       const color = hl ? '#e8a93a' : m?.kind === 'lumber' ? WOOD[m.species ?? 'spf'] ?? WOOD.spf : '#999';
       obj = barMesh(p.geom, std(color), FLAT_ROLES.has(p.role));
     } else if (p.geom.type === 'quad') {
       if (m?.kind === 'mesh') {
-        obj = quadMesh(p.geom, wireMaterial((m.opening ?? [0.0254, 0.0254]) as [number, number], p.width ?? 1, p.height ?? 1, m.coating === 'pvc-coated'), 1, 1);
+        obj = quadMesh(p.geom, wireMaterial((m.opening ?? [0.0254, 0.0254]) as [number, number], p.width ?? 1, p.height ?? 1, m.coating === 'pvc-coated', hl ? '#e8a93a' : undefined), 1, 1);
         obj.renderOrder = 2;
       } else if (m?.kind === 'roof-panel') {
-        obj = quadMesh(p.geom, m.translucent ? std('#e9f3f7', { transparent: true, opacity: 0.45, roughness: 0.2, side: THREE.DoubleSide, depthWrite: false }) : std('#9aa1a6', { metalness: 0.5, roughness: 0.5, side: THREE.DoubleSide }));
+        obj = quadMesh(p.geom, hl ? std('#e8a93a', { transparent: true, opacity: 0.75, side: THREE.DoubleSide, depthWrite: false }) : m.translucent ? std('#e9f3f7', { transparent: true, opacity: 0.45, roughness: 0.2, side: THREE.DoubleSide, depthWrite: false }) : std('#9aa1a6', { metalness: 0.5, roughness: 0.5, side: THREE.DoubleSide }));
         obj.renderOrder = 3;
       } else obj = quadMesh(p.geom, std('#999', { side: THREE.DoubleSide }));
     } else {

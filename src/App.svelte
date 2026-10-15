@@ -16,6 +16,7 @@
   // The editor (with three.js), build package and import page load on demand, so Home stays light.
   const loadEditor = () => import('./lib/ui/EditorView.svelte');
   const loadPrint = () => import('./lib/ui/PrintView.svelte');
+  const loadBuild = () => import('./lib/build/ui/BuildApp.svelte');
   const loadImport = () => import('./lib/ui/ImportView.svelte');
   // Catio Quest (the game) is its own chunk too.
   const loadQuest = () => import('./lib/quest/ui/QuestApp.svelte');
@@ -26,6 +27,7 @@
     | { name: 'home' }
     | { name: 'editor'; project: Project; workspace?: Workspace }
     | { name: 'print'; project: Project }
+    | { name: 'build'; project: Project }
     | { name: 'view'; project: Project }
     | { name: 'import'; version: string; payload: string }
     | { name: 'quest'; arg: string }
@@ -45,11 +47,12 @@
     const { head, rest, query } = parseRoute(location.hash);
     const arg = decodeURIComponent(rest.join('/'));
     try {
-      if (head === 'p' || head === 'print') {
+      if (head === 'p' || head === 'print' || head === 'build') {
         let project: Project | undefined;
         try { project = await loadProject(arg); } catch { return finish(mine, { name: 'missing', message: STORAGE_MESSAGE }); }
         if (!project) return finish(mine, { name: 'missing', message: 'This catio is not in this browser. Projects are stored locally — open it on the device where you made it, or import its file.' });
         if (head === 'print') return finish(mine, { name: 'print', project });
+        if (head === 'build') return finish(mine, { name: 'build', project });
         const workspace = parseWorkspace(query);
         if (query.toString()) history.replaceState(null, '', `#/p/${project.id}`);
         return finish(mine, { name: 'editor', project, workspace });
@@ -100,7 +103,7 @@
     if (mine !== seq) return; // a newer navigation won
     route = r;
     key++;
-    const screens: Record<string, Screen> = { home: 'home', editor: 'editor', view: 'view', print: 'print', import: 'import', missing: 'missing', quest: 'quest', prowl: 'prowl' };
+    const screens: Record<string, Screen> = { home: 'home', editor: 'editor', view: 'view', print: 'print', build: 'build', import: 'import', missing: 'missing', quest: 'quest', prowl: 'prowl' };
     if (screens[r.name]) trackScreen(screens[r.name]);
     document.title = 'project' in r ? `${r.project.name} — OpenCatio3D` : r.name === 'quest' ? 'Catio Quest — build their dream catio · OpenCatio3D' : r.name === 'prowl' ? 'Catio Prowl — a day in the life of your cat · OpenCatio3D' : 'OpenCatio3D — design a safe, buildable catio in 3D';
   }
@@ -174,6 +177,16 @@
       {#snippet failed()}
         <div class="missing"><h2>Catio Prowl hit a snag</h2><p>Something went wrong loading the game. Your saved catios are not affected.</p><a class="btn primary" href="#/prowl">Back to Catio Prowl</a></div>
       {/snippet}
+    </svelte:boundary>
+  {:else if route.name === 'build'}
+    {@const r = route}
+    <svelte:boundary>
+      {#await loadBuild()}
+        <p class="loading muted">Laying out the steps…</p>
+      {:then { default: BuildApp }}
+        <BuildApp project={r.project} />
+      {/await}
+      {#snippet failed()}{@render failedSnippet(r.project)}{/snippet}
     </svelte:boundary>
   {:else if route.name === 'print'}
     {@const r = route}

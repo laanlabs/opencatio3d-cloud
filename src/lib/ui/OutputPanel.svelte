@@ -5,7 +5,7 @@
   import type { Editor } from './editor.svelte';
   import { fmtLen, fmtStock, money, moneyRange } from '../model/units';
 
-  let { editor, onexport }: { editor: Editor; onexport: (kind: 'print' | 'bom' | 'cuts' | 'json' | 'plan' | 'png' | 'glb' | 'share' | 'ios' | 'openplan') => void } = $props();
+  let { editor, onexport }: { editor: Editor; onexport: (kind: 'print' | 'build' | 'bom' | 'cuts' | 'json' | 'plan' | 'png' | 'glb' | 'share' | 'ios' | 'openplan') => void } = $props();
   const a = $derived(editor.assembly);
   const units = $derived(editor.units);
   const letter = (id: string) => a.structures.find((s) => s.id === id)?.letter ?? '';
@@ -60,6 +60,10 @@
     <ol class="steps">
       {#each a.steps as st (st.id)}<li><strong>{letter(st.structureId)} · {st.title}</strong> <span class="muted small">{st.partIds.length} parts</span></li>{/each}
     </ol>
+    {#if !editor.readonly}
+      <div class="row"><button class="btn small" onclick={() => onexport('build')}>Build it step by step</button></div>
+      <p class="muted small">One step at a time on your phone or laptop: the parts for each step, a 3D view that grows as you go, and checks to tick. Progress is saved with this catio.</p>
+    {/if}
   </section>
 {/if}
 

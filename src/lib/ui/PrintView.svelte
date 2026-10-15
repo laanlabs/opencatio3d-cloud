@@ -12,6 +12,7 @@
   import { fmtLen, fmtStock, money, moneyRange } from '../model/units';
   import { SAFETY_LABEL } from '../catalog/catalog';
   import { track } from '../analytics';
+  import { byLabel, partSize, roleName } from '../generate/roles';
 
   let { project }: { project: Project } = $props();
   const a = $derived(generate(project, catalog));
@@ -24,15 +25,7 @@
   const partsOf = (id: string) => a.parts.filter((p) => p.structureId === id);
   const labelOf = (id: string) => a.parts.find((p) => p.id === id)?.label;
   const matName = (id: string) => catalog.material(id)?.name ?? id;
-  const ROLE: Record<string, string> = {
-    plate: 'Plate', stud: 'Stud', jamb: 'Jamb stud', header: 'Header', sill: 'Sill', rail: 'Rail', rafter: 'Rafter', purlin: 'Purlin', joist: 'Floor joist', ledger: 'Ledger',
-    seal: 'Seal trim', 'door-stile': 'Door stile', 'door-rail': 'Door rail', 'door-brace': 'Door brace', 'hoop-post': 'Hoop post', 'hoop-bar': 'Hoop bar', 'tunnel-rail': 'Tunnel rail',
-    'mesh-wall': 'Wall mesh', 'mesh-roof': 'Roof mesh', 'mesh-door': 'Door mesh', 'mesh-skirt': 'Ground skirt', 'mesh-tunnel': 'Tunnel mesh', 'roof-sheet': 'Roof sheets', 'floor-sheet': 'Floor',
-    hinge: 'Hinges', latch: 'Latch', handle: 'Handle', bracket: 'Brackets', 'corner-bracket': 'Corner brackets', 'deck-bracket': 'Deck brackets', 'knee-brace': 'Knee braces',
-    paver: 'Pavers', sand: 'Leveling sand', anchor: 'Ground anchors', 'shelf-board': 'Shelf', 'ramp-board': 'Ramp', 'ramp-cleat': 'Ramp cleat', 'bridge-board': 'Bridge', 'scratch-post': 'Scratching post', sisal: 'Sisal rope',
-    'window-insert': 'Window insert', 'cat-door': 'Cat door'
-  };
-  const size = (p: (typeof a.parts)[number]) => (p.length != null && p.kind === 'member' ? fmtLen(p.length, u) : p.width != null && p.height != null ? `${fmtLen(p.width, u)} × ${fmtLen(p.height, u)}` : p.length != null ? fmtLen(p.length, u) : '');
+  const size = (p: (typeof a.parts)[number]) => partSize(p, u);
   const plants = $derived(project.plants.map((pl) => ({ pl, plant: catalog.plant(pl.plantId) })));
   const measured = $derived(project.site.measurements.filter((m) => m.confirmed));
   $effect(() => { track('build_package', { ready }); });
@@ -42,6 +35,7 @@
   <div class="toolbar">
     <a class="btn" href="#/p/{project.id}">← Back to the planner</a>
     <button class="btn primary" onclick={() => print()}>Print / Save as PDF</button>
+    <a class="btn" href="#/build/{project.id}">Build step by step</a>
     {#if !ready}<span class="muted">Concept preview: {blockers.length} {blockers.length === 1 ? 'item blocks' : 'items block'} a build package.</span>{/if}
   </div>
   {#if !ready}<div class="watermark" aria-hidden="true">CONCEPT — NOT FOR CONSTRUCTION</div>{/if}
@@ -133,8 +127,8 @@
       <table class="grid compact">
         <thead><tr><th>Label</th><th>Part</th><th>Material</th><th>Size</th><th class="num">Qty</th></tr></thead>
         <tbody>
-          {#each partsOf(s.id).filter((p) => p.label).sort((x, y) => Number(x.label!.slice(1)) - Number(y.label!.slice(1))) as p}
-            <tr><td>{p.label}</td><td>{ROLE[p.role] ?? p.role}{p.side && p.side !== 'span' ? ` (${p.side})` : ''}</td><td>{matName(p.materialId)}</td><td>{size(p)}</td><td class="num">{p.qty}</td></tr>
+          {#each partsOf(s.id).filter((p) => p.label).sort(byLabel) as p}
+            <tr><td>{p.label}</td><td>{roleName(p)}</td><td>{matName(p.materialId)}</td><td>{size(p)}</td><td class="num">{p.qty}</td></tr>
           {/each}
         </tbody>
       </table>
