@@ -7,6 +7,7 @@ import type { HostWall, Project, SiteObstacle, Structure } from '../model/types'
 import type { Assembly } from '../generate/assembly';
 import type { Geom, Part } from '../generate/parts';
 import { rad } from '../model/geometry';
+import { makeCatModel } from '../prowl/catmodel';
 
 const WOOD: Record<string, string> = { cedar: '#b77a4f', pine: '#a99a6c', spf: '#d9c49b' };
 const KIT: Record<string, string> = {
@@ -217,22 +218,15 @@ export function buildObstacle(o: SiteObstacle): THREE.Group {
   return g;
 }
 
-/** A small low-poly cat (about 45 cm nose to tail), sitting. */
-export function buildCat(coat: string, scale = 1): THREE.Group {
+/** A cat (Catio Prowl's model), sitting up or loafing, posed once: the 3D view only draws when something changes. */
+export function buildCat(coat: string, scale = 1, loaf = false): THREE.Group {
+  const model = makeCatModel(coat);
+  // Let the pose settle: a cat that has been still for a while sits (after 1.2 s) or loafs (after 9 s).
+  const drive = { speed: 0, sneak: false, ground: true, leap: null, busy: null, busyK: 0, idle: loaf ? 10 : 2, look: null, frontDy: 0, backDy: 0, meowAgo: 99 };
+  for (let i = 0; i < 12; i++) model.update(0.5, drive);
   const g = new THREE.Group();
-  const fur = std(coat, { flatShading: true, roughness: 0.9 });
-  const body = new THREE.Mesh(new THREE.IcosahedronGeometry(0.11, 1), fur);
-  body.scale.set(0.9, 1.15, 1.35);
-  body.position.set(0, 0.12, 0);
-  const head = new THREE.Mesh(new THREE.IcosahedronGeometry(0.07, 1), fur);
-  head.position.set(0, 0.27, 0.09);
-  const ear = new THREE.ConeGeometry(0.025, 0.05, 4);
-  const e1 = new THREE.Mesh(ear, fur), e2 = new THREE.Mesh(ear, fur);
-  e1.position.set(-0.035, 0.33, 0.09); e2.position.set(0.035, 0.33, 0.09);
-  const tail = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.02, 0.26, 6), fur);
-  tail.position.set(0.06, 0.05, -0.16);
-  tail.rotation.set(Math.PI / 2.4, 0, 0.5);
-  for (const m of [body, head, e1, e2, tail]) { m.castShadow = true; g.add(m); }
+  model.root.traverse((o) => { if (o instanceof THREE.Mesh) o.castShadow = true; });
+  g.add(model.root);
   g.scale.setScalar(scale);
   return g;
 }
@@ -261,7 +255,7 @@ export function buildCats(p: Project, a: Assembly, cat: Catalog): THREE.Group {
   p.cats.forEach((c, i) => {
     const spot = spots[i % Math.max(1, spots.length)];
     if (!spot) return;
-    const mesh = buildCat(CAT_COATS[i % CAT_COATS.length], c.size === 'small' || c.ageClass === 'kitten' ? 0.8 : c.size === 'large' ? 1.15 : 1);
+    const mesh = buildCat(CAT_COATS[i % CAT_COATS.length], c.size === 'small' || c.ageClass === 'kitten' ? 0.8 : c.size === 'large' ? 1.15 : 1, i % 2 === 1);
     const holder = new THREE.Group();
     holder.position.set(spot.s.x, spot.s.elevation ?? 0, spot.s.y);
     holder.rotation.y = -rad(spot.s.rotation);
