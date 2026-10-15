@@ -79,12 +79,12 @@ function build(rig: Rig, bones: THREE.Object3D[]): Built {
     const s = L.side;
     const ids: number[] = [];
     if (L.front) {
-      ids.push(add(cone(W(L.hip, -s * 0.004, 0.024, -0.004), W(L.j[1]), 0.027, 0.016), L.j[0], 'leg', s));
-      ids.push(add(cone(W(L.j[1]), W(L.paw, 0, 0.012, 0), 0.0155, 0.0115), L.j[1], 'leg', s));
+      ids.push(add(cone(W(L.hip, -s * 0.004, 0.024, -0.004), W(L.j[1]), 0.029, 0.0175), L.j[0], 'leg', s));
+      ids.push(add(cone(W(L.j[1]), W(L.paw, 0, 0.012, 0), 0.0172, 0.0125), L.j[1], 'leg', s));
     } else {
       ids.push(add(cone(W(L.hip, -s * 0.008, 0.008, 0.006), W(L.j[1], 0, 0.012, 0), 0.041, 0.02), L.j[0], 'leg', s));
       ids.push(add(ellipsoid(W(L.hip, -s * 0.004, -0.03, 0.006), [0.03, 0.045, 0.04]), L.j[0], 'leg', s)); // the haunch
-      ids.push(add(cone(W(L.j[1]), W(L.j[2]), 0.0175, 0.012), L.j[1], 'leg', s));
+      ids.push(add(cone(W(L.j[1]), W(L.j[2]), 0.019, 0.0125), L.j[1], 'leg', s));
       ids.push(add(cone(W(L.j[2]), W(L.paw, 0, 0.01, 0), 0.0115, 0.0105), L.j[2], 'leg', s));
     }
     ids.push(add(ellipsoid(W(L.paw, 0, 0.008, 0.007), L.front ? [0.0135, 0.0085, 0.019] : [0.013, 0.0085, 0.018]), L.paw, 'paw', s));

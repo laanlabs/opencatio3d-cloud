@@ -315,7 +315,8 @@ export function makeCatModel(coat: string): CatModel {
       }
       case 'drink': case 'eat': {
         const lap = Math.sin(t * 9) * 0.06;
-        return { p: params({ bodyY: 0.135, pitch: 0.28, neck: 0.75, headPitch: 0.55 + lap, jaw: Math.max(0, lap) * 2, tailBase: -1.5, tailCurl: 0.2, tailSway: 0.04, feet: [[0.12, 0], [0.12, 0], [-0.07, 0], [-0.07, 0]] }), rate: 8 };
+        // A crouch: hind legs folded under with the hocks down, elbows bent, the chest dipped to the bowl.
+        return { p: params({ bodyY: 0.11, pitch: 0, spinePitch: 0.2, neck: 0.7, headPitch: 0.45 + lap, jaw: Math.max(0, lap) * 2, tailBase: -1.55, tailBend: -0.02, tailTip: 0.1, tailCurl: 0.25, tailSway: 0.04, hock: -1.35, feet: [[0.15, 0], [0.15, 0], [-0.03, 0], [-0.03, 0]] }), rate: 8 };
       }
       case 'sniff': {
         const sn = Math.sin(t * 14) * 0.03;
