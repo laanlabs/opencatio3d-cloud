@@ -5,6 +5,7 @@
 import type { Catalog, Material } from '../catalog/catalog';
 import type { Furnishing, Project, Side, Structure, StructureOpening, TemplateId, Vec2, Vec3 } from '../model/types';
 import { frontHeight, stableId } from '../model/types';
+import { toLocal, toPlan } from '../model/geometry';
 import {
   CLEAT_SPACING, DOOR_GAP, JOIST_SPACING, KNEE_SPACING, LEDGER_SCREW_SPACING, MESH_FASTENER_SPACING, OVERLAP, PARTIAL_COVER,
   PURLIN_SPACING, END_LAP, ROPE_PER_M, SCREWS_PER_MEMBER, SKIRT_DEPTH, STAPLE_SPACING, VESTIBULE_DEPTH, FRAME_ROLES,
@@ -182,10 +183,43 @@ function sidePoint(c: Pick<Ctx, 'W' | 'D' | 'd'>, side: Side, t: number): Vec2 {
 }
 const at = (p: Vec2, y: number): Vec3 => [p[0], y, p[1]];
 
+/** Tallest window top a tunnel riser reaches, and the sill above which the riser gets a step. */
+export const RISER_MAX = 2.1;
+export const RISER_STEP = 0.5;
+
+/** A tunnel's path with points closer than 5 cm to the previous one dropped (§3.8). */
+export function tunnelPoints(s: Structure): Vec2[] {
+  return (s.path ?? []).filter((p, i, a) => i === 0 || Math.hypot(p[0] - a[i - 1][0], p[1] - a[i - 1][1]) > 0.05);
+}
+
+/** Whether a tunnel end (plan point) butts against a cat door in the wall of another ground-level structure (§3.8). */
+export function tunnelEndAtCatDoor(t: Structure, E: Vec2, cat: Catalog, project?: Project): boolean {
+  for (const s of project?.structures ?? []) {
+    if (s.id === t.id || s.template === 'tunnel' || (s.elevation ?? 0) > 0.3) continue;
+    const [u, v] = toLocal(s, E);
+    const placed: StructureOpening[] = [];
+    for (const o of s.openings ?? []) if (openingFits(s, o, cat, placed)) placed.push(o);
+    for (const [side, off, along, span] of [['back', Math.abs(v), u, s.width], ['front', Math.abs(v - s.depth), u, s.width], ['left', Math.abs(u), v, s.depth], ['right', Math.abs(u - s.width), v, s.depth]] as const) {
+      if (off > 0.35 || along < -0.1 || along > span + 0.1) continue;
+      if (placed.some((o) => o.kind === 'cat-door' && o.side === side && Math.abs(o.offset + o.width / 2 - along) <= 0.35 && (s.elevation ?? 0) + (o.sill ?? 0) < t.height)) return true;
+    }
+  }
+  return false;
+}
+
 /** Whether a box-template opening fits its wall (CAT-BLD-006). `others` are the openings placed before it. */
 export function openingFits(s: Structure, o: StructureOpening, cat: Catalog, others: StructureOpening[] = []): boolean {
   if (!(o.width > 0 && o.height > 0) || o.offset < -1e-9) return false;
-  if (s.template === 'tunnel') return (o.side === 'back' || o.side === 'front') && (o.kind === 'cat-door' || o.kind === 'window-access') && o.width <= s.width + 1e-9 && (o.sill ?? 0) + o.height <= s.height + 1e-9;
+  if (s.template === 'tunnel') {
+    if (!((o.side === 'back' || o.side === 'front') && (o.kind === 'cat-door' || o.kind === 'window-access') && o.width <= s.width + 1e-9)) return false;
+    const top = (o.sill ?? 0) + o.height;
+    if (top <= s.height + 1e-9) return true;
+    // A window above the tunnel: a riser climbs to it (§3.8), one tunnel width deep, taken from that end's segment.
+    const pts = tunnelPoints(s);
+    if (o.kind !== 'window-access' || top > RISER_MAX + 1e-9 || pts.length < 2) return false;
+    const k = o.side === 'back' ? 0 : pts.length - 2;
+    return Math.hypot(pts[k + 1][0] - pts[k][0], pts[k + 1][1] - pts[k][1]) >= (pts.length === 2 ? 2 : 1) * s.width + 0.3 - 1e-9;
+  }
   const c = ctxFor(s, cat);
   const L = sideLength(o.side, c.W, c.D);
   if (o.kind === 'window-access') return c.layout.houseBack && o.side === 'back' && o.offset + o.width <= L + 1e-9 && (o.sill ?? 0) + o.height <= c.Hb + 1e-9;
@@ -538,18 +572,34 @@ function tunnelStructure(s: Structure, cat: Catalog, project: Project | undefine
   const mesh = meshMaterial(s, cat);
   const [d, w] = (m.actual ?? [0.038, 0.038]) as [number, number];
   const b = new Builder(s, project?.assumptions?.stockLengths ?? []);
-  const pts = (s.path ?? []).filter((p, i, a) => i === 0 || Math.hypot(p[0] - a[i - 1][0], p[1] - a[i - 1][1]) > 0.05);
-  if (pts.length < 2) return;
+  const full = tunnelPoints(s);
+  if (full.length < 2) return;
   const W = s.width, H = s.height, half = W / 2;
   const rollW = mesh.rollWidth ?? 0.9;
+  const off = (p: Vec2, n: Vec2, k: number): Vec2 => [p[0] + n[0] * k, p[1] + n[1] * k];
+  const P3 = (p: Vec2, y: number): Vec3 => [p[0], y, p[1]];
+  const unit = (p: Vec2, q: Vec2): Vec2 => { const L = Math.hypot(q[0] - p[0], q[1] - p[1]); return [(q[0] - p[0]) / L, (q[1] - p[1]) / L]; };
+  const openings: StructureOpening[] = [];
+  for (const o of s.openings ?? []) (openingFits(s, o, cat) ? openings.push(o) : res.skippedOpenings.push(o.id));
+  // Each end: its point, the direction into the tunnel, and the window top a riser climbs to (0: no riser).
+  const ends = (['start', 'end'] as const).map((end) => {
+    const sideKey = end === 'start' ? 'back' : 'front';
+    const p = end === 'start' ? full[0] : full[full.length - 1];
+    const e = end === 'start' ? unit(full[0], full[1]) : unit(full[full.length - 1], full[full.length - 2]);
+    const here = openings.filter((o) => o.side === sideKey);
+    const windows = here.filter((o) => o.kind === 'window-access');
+    const top = Math.max(0, ...windows.map((o) => (o.sill ?? 0) + o.height));
+    return { end, sideKey, p, e, here, windows, riser: top > H + 1e-9 ? top : 0 };
+  });
+  // The tunnel body starts after a riser.
+  const pts = full.slice();
+  for (const [i, x] of ends.entries()) if (x.riser) pts[i === 0 ? 0 : pts.length - 1] = off(x.p, x.e, W);
   const segs = pts.slice(0, -1).map((a, i) => {
     const z = pts[i + 1];
     const L = Math.hypot(z[0] - a[0], z[1] - a[1]);
     const e: Vec2 = [(z[0] - a[0]) / L, (z[1] - a[1]) / L];
     return { a, z, L, e, n: [-e[1], e[0]] as Vec2, bays: bayCount(L, s.frame.maxPostSpacing, rollW) };
   });
-  const off = (p: Vec2, n: Vec2, k: number): Vec2 => [p[0] + n[0] * k, p[1] + n[1] * k];
-  const P3 = (p: Vec2, y: number): Vec3 => [p[0], y, p[1]];
   // Hoops: every bay start of every segment, plus the very end.
   const hoops: { p: Vec2; n: Vec2 }[] = [];
   for (const sg of segs) for (let i = 0; i < sg.bays; i++) hoops.push({ p: off(sg.a, sg.e, (sg.L * i) / sg.bays), n: sg.n });
@@ -584,16 +634,49 @@ function tunnelStructure(s: Structure, cat: Catalog, project: Project | undefine
     b.mesh(`corner${v}:side`, 'mesh-tunnel', 'mesh', mesh, wedge, H, g(0));
     b.mesh(`corner${v}:top`, 'mesh-tunnel', 'mesh', mesh, wedge, W, g(H));
   }
-  const openings: StructureOpening[] = [];
-  for (const o of s.openings ?? []) (openingFits(s, o, cat) ? openings.push(o) : res.skippedOpenings.push(o.id));
-  for (const [end, sideKey] of [['start', 'back'], ['end', 'front']] as const) {
-    const h = end === 'start' ? hoops[0] : hoops[hoops.length - 1];
-    const here = openings.filter((o) => o.side === sideKey);
-    if (!here.some((o) => o.kind === 'window-access'))
-      b.mesh(`end-${end}:mesh`, 'mesh-tunnel', 'mesh', mesh, W, H, [P3(off(h.p, h.n, half), 0), P3(off(h.p, h.n, -half), 0), P3(off(h.p, h.n, -half), H), P3(off(h.p, h.n, half), H)]);
-    for (const o of here) b.add({ key: `${sideKey}:${o.kind}:${o.id}:kit`, kind: 'kit', role: o.kind === 'cat-door' ? 'cat-door' : 'window-insert', materialId: cat.material(o.kind === 'cat-door' ? 'kit-cat-door' : 'kit-window-insert')!.id, step: 'openings', ownerId: o.id, geom: { type: 'box', c: P3(h.p, (o.sill ?? 0) + o.height / 2), s: [o.width, o.height, 0.03] } });
+  let risers = 0, extraScrews = 0;
+  for (const x of ends) {
+    const h = x.end === 'start' ? hoops[0] : hoops[hoops.length - 1];
+    // Open where a window insert sits at this end or the end butts against a catio's cat door.
+    if (!x.windows.length && !tunnelEndAtCatDoor(s, toPlan(s, x.p[0], x.p[1]), cat, project))
+      b.mesh(`end-${x.end}:mesh`, 'mesh-tunnel', 'mesh', mesh, W, H, [P3(off(h.p, h.n, half), 0), P3(off(h.p, h.n, -half), 0), P3(off(h.p, h.n, -half), H), P3(off(h.p, h.n, half), H)]);
+    for (const o of x.here) b.add({ key: `${x.sideKey}:${o.kind}:${o.id}:kit`, kind: 'kit', role: o.kind === 'cat-door' ? 'cat-door' : 'window-insert', materialId: cat.material(o.kind === 'cat-door' ? 'kit-cat-door' : 'kit-window-insert')!.id, step: 'openings', ownerId: o.id, geom: { type: 'box', c: P3(x.p, (o.sill ?? 0) + o.height / 2), s: [o.width, o.height, 0.03] } });
+    if (!x.riser) continue;
+    // Window riser: a mesh box one tunnel width deep from the window down to the ground, the tunnel opening
+    // out of its inner face, with a step halfway down when the sill is high.
+    risers++;
+    const k = `riser-${x.end}`;
+    const n: Vec2 = [-x.e[1], x.e[0]];
+    const Q = (t: number, lat: number): Vec2 => off(off(x.p, x.e, t), n, lat);
+    const Hr = x.riser + w;
+    const sill = Math.min(...x.windows.map((o) => o.sill ?? 0));
+    for (const [key, sd] of [['l', 1], ['r', -1]] as const) {
+      b.member(`${k}:post-o${key}`, 'hoop-post', 'walls', m, P3(Q(d / 2, sd * (half - d / 2)), w), P3(Q(d / 2, sd * (half - d / 2)), Hr - w));
+      b.member(`${k}:post-i${key}`, 'hoop-post', 'walls', m, P3(Q(W, sd * (half - d / 2)), H), P3(Q(W, sd * (half - d / 2)), Hr - w));
+      b.member(`${k}:rail-t${key}`, 'tunnel-rail', 'walls', m, P3(Q(0, sd * (half - d / 2)), Hr - w / 2), P3(Q(W, sd * (half - d / 2)), Hr - w / 2));
+      b.member(`${k}:rail-b${key}`, 'tunnel-rail', 'walls', m, P3(Q(0, sd * (half - d / 2)), w / 2), P3(Q(W, sd * (half - d / 2)), w / 2));
+    }
+    b.member(`${k}:top-o`, 'hoop-bar', 'walls', m, P3(Q(d / 2, half), Hr - w / 2), P3(Q(d / 2, -half), Hr - w / 2));
+    b.member(`${k}:top-i`, 'hoop-bar', 'walls', m, P3(Q(W, half), Hr - w / 2), P3(Q(W, -half), Hr - w / 2));
+    b.member(`${k}:bottom-o`, 'hoop-bar', 'walls', m, P3(Q(d / 2, half - d), w / 2), P3(Q(d / 2, -(half - d)), w / 2));
+    b.mesh(`${k}:side-l`, 'mesh-tunnel', 'mesh', mesh, W, Hr, [P3(Q(0, half), 0), P3(Q(W, half), 0), P3(Q(W, half), Hr), P3(Q(0, half), Hr)]);
+    b.mesh(`${k}:side-r`, 'mesh-tunnel', 'mesh', mesh, W, Hr, [P3(Q(0, -half), 0), P3(Q(W, -half), 0), P3(Q(W, -half), Hr), P3(Q(0, -half), Hr)]);
+    b.mesh(`${k}:top`, 'mesh-tunnel', 'mesh', mesh, W, W, [P3(Q(0, half), Hr), P3(Q(W, half), Hr), P3(Q(W, -half), Hr), P3(Q(0, -half), Hr)]);
+    b.mesh(`${k}:front`, 'mesh-tunnel', 'mesh', mesh, W, Hr - H, [P3(Q(W, half), H), P3(Q(W, -half), H), P3(Q(W, -half), Hr), P3(Q(W, half), Hr)]);
+    if (sill > 0.02) b.mesh(`${k}:back`, 'mesh-tunnel', 'mesh', mesh, W, sill, [P3(Q(0, half), 0), P3(Q(0, -half), 0), P3(Q(0, -half), sill), P3(Q(0, half), sill)]);
+    if (sill > RISER_STEP) {
+      const board = cat.material('board-1x10-cedar')!;
+      const bd = (board.actual ?? [0.019, 0.235])[1];
+      const sy = sill / 2;
+      b.member(`${k}:step-bar`, 'hoop-bar', 'walls', m, P3(Q(d / 2, half - d), sy - w / 2), P3(Q(d / 2, -(half - d)), sy - w / 2));
+      b.member(`${k}:step`, 'shelf-board', 'furnish', board, P3(Q(d + bd / 2, half - d), sy), P3(Q(d + bd / 2, -(half - d)), sy));
+      b.add({ key: `${k}:step-brackets`, kind: 'hardware', role: 'bracket', materialId: cat.material('bracket-shelf')!.id, step: 'furnish', qty: 2 });
+      extraScrews += 8;
+    }
   }
-  const length = segs.reduce((a, sg) => a + sg.L, 0);
+  // The base runs under the whole path, risers included.
+  const fullSegs = full.slice(0, -1).map((a, i) => Math.hypot(full[i + 1][0] - a[0], full[i + 1][1] - a[1]));
+  const length = fullSegs.reduce((a, L) => a + L, 0);
   const kind = s.base?.kind ?? 'ground-skirt';
   const soft = ['grass', 'soil'].includes(project?.site?.ground ?? 'grass');
   if (kind === 'ground-skirt') {
@@ -604,11 +687,11 @@ function tunnelStructure(s: Structure, cat: Catalog, project: Project | undefine
     if (soft) b.add({ key: 'base:anchors', kind: 'base', role: 'anchor', materialId: cat.material('anchor-auger')!.id, step: 'base', qty: 4 });
   } else if (kind === 'pavers') {
     const paver = cat.material('paver-16in')!;
-    const n = 2 * segs.reduce((a, sg) => a + ceilE(sg.L / (paver.size ?? 0.4)), 0);
+    const n = 2 * fullSegs.reduce((a, L) => a + ceilE(L / (paver.size ?? 0.4)), 0);
     b.add({ key: 'base:pavers', kind: 'base', role: 'paver', materialId: paver.id, step: 'base', qty: n });
     b.add({ key: 'base:sand', kind: 'base', role: 'sand', materialId: cat.material('sand-leveling')!.id, step: 'base', qty: ceilE(n / 4) });
   }
-  fasteners(b, cat, [0, 0], hoops.length, 0);
+  fasteners(b, cat, [extraScrews, 0], hoops.length + 2 * risers, 0);
   res.parts.push(...b.parts);
 }
 

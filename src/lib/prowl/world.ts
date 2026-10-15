@@ -13,7 +13,7 @@ import type { Part } from '../generate/parts';
 import { rad, toPlan, wallDir, wallNormal } from '../model/geometry';
 import { frameMaterial, layoutFor } from '../generate/structure';
 import { mainStructure } from '../quest/design';
-import { type Flap, type TunnelRun, linkTunnels, windowAt, windowChute } from './tunnel';
+import { type Flap, type TunnelRun, linkTunnels, windowAt, windowChute, windowRiser } from './tunnel';
 
 export type Region = 'home' | 'catio' | 'tunnel';
 export type SurfaceKind = 'floor' | 'sill' | 'furniture' | 'shelf' | 'ramp' | 'bridge' | 'hammock' | 'bed' | 'kit' | 'post';
@@ -249,17 +249,30 @@ export function buildWorld(p: Project, a: Assembly, cat: Catalog): World | null 
     volumes.push({ id: 'room', region: 'home', poly: corners(rr(0, RW, 0, RD)), y0: 0, ceil: [H, 0, 0] });
     surfaces.push({ id: 'room-floor', kind: 'floor', label: 'the living-room floor', region: 'home', ...rr(0, RW, 0, RD), top: 0, bottom: -0.05, solid: false });
 
-    // The open window: a passage through the wall from the sill up, and sills on both sides.
+    // Through a tunnel: the planner's riser climbs from the tunnel to the window (older plans: a game chute).
+    const riser = via ? windowRiser(via.link, a.parts, cat) : null;
+    // The open window: a passage through the wall from the sill up (no wider than the riser), and sills on both sides.
     const sill = gate.sill;
-    const pa0 = gate.offset + 0.02, pa1 = gate.offset + gate.width - 0.02;
+    let pa0 = gate.offset + 0.02, pa1 = gate.offset + gate.width - 0.02;
+    let la0 = gate.offset - 0.04, la1 = gate.offset + gate.width + 0.04;
+    const ledge = riser ? 0.05 : 0.24; // over a riser, just the lip: the riser's step sits under the window
+    if (riser) {
+      const ra = (riser.centre[0] - wall.a[0]) * d[0] + (riser.centre[1] - wall.a[1]) * d[1];
+      pa0 = Math.max(pa0, ra - riser.inner); pa1 = Math.min(pa1, ra + riser.inner);
+      la0 = Math.max(la0, ra - riser.inner); la1 = Math.min(la1, ra + riser.inner);
+    }
     const passage = (B0p: number, B1p: number) => [WP(pa0, B0p), WP(pa1, B0p), WP(pa1, B1p), WP(pa0, B1p)];
     volumes.push({ id: 'window', region: 'home', poly: passage(-((via ? 0 : margin) + 0.25), B0 + 0.3), y0: Math.min(sill, via ? 0 : floorY) - 0.02, ceil: [sill + gate.height, 0, 0] });
     const sillRect = (B0s: number, B1s: number): Rect => ({ c: WP((gate.offset + gate.offset + gate.width) / 2, (B0s + B1s) / 2), h: [gate.width / 2 + 0.04, (B1s - B0s) / 2], yaw: wyaw });
     sillId = 'sill';
     surfaces.push({ id: 'sill', kind: 'sill', label: 'the window sill', region: 'home', ...sillRect(0, B0 + 0.16), top: sill, bottom: 0, solid: true, color: '#f4efe6' });
-    if (sill > (via ? 0 : floorY) + 0.05) surfaces.push({ id: 'sill-out', kind: 'sill', label: 'the window ledge', region: via ? 'tunnel' : 'catio', ...sillRect(-0.24, 0), top: sill, bottom: sill - 0.04, solid: false });
-    // Through a tunnel: a mesh chute drops from the window ledge to the tunnel floor.
-    if (via) {
+    if (sill > (via ? 0 : floorY) + 0.05) surfaces.push({ id: 'sill-out', kind: 'sill', label: 'the window ledge', region: via ? 'tunnel' : 'catio', c: WP((la0 + la1) / 2, -ledge / 2), h: [(la1 - la0) / 2, ledge / 2], yaw: wyaw, top: sill, bottom: sill - 0.04, solid: false });
+    if (riser) {
+      volumes.push(riser.volume);
+      surfaces.push(...riser.surfaces);
+      tunnelCams.push(riser.cameraVolume);
+      hiddenParts.push(...riser.hidden);
+    } else if (via) {
       const ch = windowChute(via.link, wall, gate, a.parts, cat);
       volumes.push(ch.volume);
       surfaces.push(ch.floor);

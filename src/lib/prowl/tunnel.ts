@@ -1,7 +1,8 @@
 // Catio Prowl tunnels: a tunnel run whose end meets the catio's cat flap becomes part of the world, a low
-// mesh corridor the cat can run along. When its other end reaches a house window, a mesh chute under the
-// window joins the two (the plan leaves that drop to the builder: the window sill is far above a tunnel)
-// and the room behind the window is added, so the cat goes window → chute → tunnel → cat flap → catio.
+// mesh corridor the cat can run along. When its other end reaches a house window, the room behind the
+// window is added and the planner's window riser (a mesh box with a step, up to the window insert) joins
+// the two, so the cat goes window → riser → tunnel → cat flap → catio. Older plans with the insert at
+// ground level have no riser; a game-only mesh chute stands in for it.
 // Tunnel parts are in the tunnel's own coordinates (u, y, v), as the generator draws them.
 import type { Catalog } from '../catalog/catalog';
 import type { HostWall, Structure, StructureOpening, Vec2, Vec3 } from '../model/types';
@@ -24,7 +25,7 @@ export interface TunnelLink {
   flap: Flap;
   hidden: string[];
   /** The tunnel's other end: plan point, plan direction into the tunnel, and the same in tunnel coordinates. */
-  far: { P: Vec2; e: Vec2; local: Vec2; eLocal: Vec2 };
+  far: { key: 'start' | 'end'; P: Vec2; e: Vec2; local: Vec2; eLocal: Vec2 };
 }
 
 /** The catio as the tunnel sees it. */
@@ -56,7 +57,6 @@ export function linkTunnels(tunnels: Structure[], all: Part[], c: CatioFrame, ca
     const loc = tunnelPath(t);
     if (loc.length < 2) continue;
     const P = loc.map((q) => toPlan(t, q[0], q[1]));
-    const tParts = all.filter((x) => x.structureId === t.id);
     const [fd, fw] = (frameMaterial(t, cat).actual ?? [0.038, 0.038]) as [number, number];
     const half = t.width / 2, hi = half - fd - 0.005, ceil = t.height - fw - 0.005;
 
@@ -116,11 +116,7 @@ export function linkTunnels(tunnels: Structure[], all: Part[], c: CatioFrame, ca
     }
     const fc = at(tc, c.depth / 2);
     const flap: Flap = { c: [fc[0], sill, fc[1]], along: alongDir, w: door.width, h: door.height };
-    const endKey = join.k === 0 ? 'start' : 'end';
-    const hidden = [
-      ...c.parts.filter((x) => x.ownerId === door.id && x.role === 'cat-door').map((x) => x.id),
-      ...tParts.filter((x) => x.key.startsWith(`end-${endKey}:mesh`)).map((x) => x.id)
-    ];
+    const hidden = c.parts.filter((x) => x.ownerId === door.id && x.role === 'cat-door').map((x) => x.id);
 
     const kf = join.k === 0 ? P.length - 1 : 0;
     const kn = kf === 0 ? 1 : P.length - 2;
@@ -135,7 +131,7 @@ export function linkTunnels(tunnels: Structure[], all: Part[], c: CatioFrame, ca
       t,
       run: { id: t.id, label: t.name || 'the tunnel', ends: [[P[join.k][0], 0, P[join.k][1]], [P[kf][0], 0, P[kf][1]]], mid: [midP[0], 0, midP[1]], length, paved: t.base?.kind === 'pavers' },
       volumes, cameraVolumes, surfaces, flap, hidden,
-      far: { P: P[kf], e: unit(sub(P[kn], P[kf])), local: loc[kf], eLocal: unit(sub(loc[kn], loc[kf])) }
+      far: { key: kf === 0 ? 'start' : 'end', P: P[kf], e: unit(sub(P[kn], P[kf])), local: loc[kf], eLocal: unit(sub(loc[kn], loc[kf])) }
     });
   }
   return out;
@@ -156,6 +152,36 @@ export function windowAt(walls: HostWall[], P: Vec2): { wall: HostWall; gate: Ho
     }
   }
   return best;
+}
+
+/** The planner's window riser at the tunnel's far end (`riser-<end>:*` parts), as the game sees it: the room
+ *  inside, its floor and step, and the camera's room. The window insert gives way to the open window. */
+export function windowRiser(link: TunnelLink, all: Part[], cat: Catalog) {
+  const { t, far } = link;
+  const k = `riser-${far.key}:`;
+  const parts = all.filter((x) => x.structureId === t.id && x.key.startsWith(k));
+  if (!parts.length) return null;
+  const [fd, fw] = (frameMaterial(t, cat).actual ?? [0.038, 0.038]) as [number, number];
+  const W = t.width, half = W / 2;
+  const Hr = Math.max(...parts.flatMap((x) => (x.geom?.type === 'quad' ? x.geom.p.map((q) => q[1]) : [0])));
+  const yaw = Math.atan2(far.e[1], far.e[0]);
+  const c = add(far.P, far.e, W / 2);
+  const inner = half - fd - 0.005;
+  const volume: Volume = { id: 'chute', region: 'tunnel', poly: rectPoly(c, far.e, W / 2, inner), y0: 0, ceil: [Hr - fw - 0.005, 0, 0] };
+  const cameraVolume: Volume = { id: 'chute-view', region: 'tunnel', poly: rectPoly(add(far.P, far.e, (W + 1.2) / 2), far.e, (W + 1.2) / 2, half + 0.8), y0: 0, ceil: [Hr + 0.6, 0, 0] };
+  const floor: Surface = { id: 'chute-floor', kind: 'floor', label: 'the bottom of the window riser', region: 'tunnel', c, h: [W / 2, half - fd], yaw, top: 0, bottom: -0.05, solid: false };
+  const surfaces: Surface[] = [floor];
+  const step = parts.find((x) => x.key === `${k}step`);
+  if (step?.geom?.type === 'bar') {
+    const g = step.geom;
+    const A = toPlan(t, g.a[0], g.a[2]), B = toPlan(t, g.b[0], g.b[2]);
+    const thick = Math.min(...g.size), wide = Math.max(...g.size);
+    const top = g.a[1] + thick / 2;
+    surfaces.push({ id: 'riser-step', kind: 'shelf', label: 'the step in the window riser', region: 'tunnel', c: [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2], h: [len(sub(B, A)) / 2, wide / 2], yaw: Math.atan2(B[1] - A[1], B[0] - A[0]), top, bottom: top - thick, solid: false });
+  }
+  const side = far.key === 'start' ? 'back' : 'front';
+  const hidden = all.filter((x) => x.structureId === t.id && x.role === 'window-insert' && x.key.startsWith(`${side}:`)).map((x) => x.id);
+  return { volume, cameraVolume, surfaces, hidden, centre: c, inner };
 }
 
 /** The mesh chute from a house window down into the tunnel: volume, floor, the camera's room, and its parts

@@ -39,11 +39,13 @@ function reachable(w: World): Set<string> {
         const st: CatState = { p: [x, y.y, z], v: [0, 0], vy: 0, heading, ground: true, surfaceId: s.id, leap: null };
         const t = leapTarget(w, st);
         const next: string[] = t ? [t.surface.id] : [];
-        // Walking a short way: onto a neighbouring step, or off an edge and down.
-        const nx = x + Math.sin(heading) * 0.22, nz = z + Math.cos(heading) * 0.22;
-        if (contained(w, nx, y.y, nz) && !blocked(w, nx, nz, y.y)) {
-          const g = groundAt(w, nx, nz, y.y + STEP);
-          if (g.surface) next.push(g.surface.id);
+        // Walking a short way: onto a neighbouring step, or off an edge and down (a narrow gap needs the short step).
+        for (const k of [0.12, 0.22]) {
+          const nx = x + Math.sin(heading) * k, nz = z + Math.cos(heading) * k;
+          if (contained(w, nx, y.y, nz) && !blocked(w, nx, nz, y.y)) {
+            const g = groundAt(w, nx, nz, y.y + STEP);
+            if (g.surface) next.push(g.surface.id);
+          }
         }
         for (const id of next) if (!seen.has(id)) { seen.add(id); queue.push(id); }
       }
@@ -208,23 +210,37 @@ describe('Catio Prowl game', () => {
 });
 
 describe('Catio Prowl tunnels', () => {
-  it('joins the laundry window to the garden catio: chute, tunnel and cat flap', () => {
+  it('joins the laundry window to the garden catio: riser, tunnel and cat flap', () => {
     const w = sample('garden-retreat');
     expect(w.tunnels).toHaveLength(1);
     expect(w.tunnels[0].length).toBeCloseTo(3.6, 3);
     expect(w.flaps).toHaveLength(1);
     expect(w.surfaces.some((s) => s.id === 'chute-floor')).toBe(true);
     expect(w.toys.some((t) => t.where === 'halfway along the tunnel')).toBe(true);
-    // The planner's cat-door kit and the tunnel's end panel over it give way to the game's flap; the chute is drawn.
+    expect(w.surfaces.find((s) => s.id === 'riser-step')?.top).toBeCloseTo(0.4595, 3);
+    // The planner leaves the tunnel open at the cat door and builds the riser; the game swaps the kits for an
+    // open window and a flap, and needs no chute of its own.
     const p = buildSample('garden-retreat', catalog)!;
     const a = generate(p, catalog);
+    const tParts = a.parts.filter((x) => x.structureId === p.structures[1].id);
+    expect(tParts.some((x) => x.key.startsWith('end-'))).toBe(false);
+    expect(tParts.some((x) => x.key.startsWith('riser-start:'))).toBe(true);
     const hidden = a.parts.filter((x) => w.hiddenParts.includes(x.id));
-    expect(hidden.some((x) => x.role === 'cat-door')).toBe(true);
-    expect(hidden.some((x) => x.key.startsWith('end-end:mesh'))).toBe(true);
+    expect(hidden.map((x) => x.role).sort()).toEqual(['cat-door', 'window-insert']);
+    expect(w.extraParts).toEqual([]);
+  });
+
+  it('falls back to a game chute for a window insert at ground level (older plans)', () => {
+    const p = buildSample('garden-retreat', catalog)!;
+    p.structures[1].openings[0].sill = 0;
+    const w = worldOf(p);
+    expect(w.home).toBe(true);
+    expect(w.surfaces.some((s) => s.id === 'chute-floor')).toBe(true);
+    expect(w.surfaces.some((s) => s.id === 'riser-step')).toBe(false);
     expect(w.extraParts.some((x) => x.key === 'prowl:chute:top')).toBe(true);
   });
 
-  it('runs from the window chute through the tunnel and the cat flap into the catio, and back', () => {
+  it('runs from the window riser through the tunnel and the cat flap into the catio, and back', () => {
     const w = sample('garden-retreat');
     const g = new Prowl(w, catalog, true);
     const chute = w.surfaces.find((s) => s.id === 'chute-floor')!;
@@ -242,9 +258,15 @@ describe('Catio Prowl tunnels', () => {
     g.cat.surfaceId = 'catio-floor';
     for (let i = 0; i < 60 * 5; i++) g.update(1 / 60, { move: [0, -1] });
     expect(g.cat.surfaceId === 'chute-floor' || g.cat.surfaceId?.startsWith('tunnel:')).toBe(true);
-    // In the middle of the chute (not right under the outside ledge), facing the window.
-    g.cat.p = [chute.c[0], 0, chute.c[1]];
+    // In the riser facing the window: up to the step, and from the step up to the window.
+    g.cat.p = [chute.c[0], 0, chute.c[1] + 0.12];
+    g.cat.surfaceId = chute.id;
     g.cat.heading = Math.PI; // the house is toward −z
+    g.update(1 / 60, { move: [0, 0] });
+    expect(['riser-step', 'sill', 'sill-out']).toContain(g.target?.surface.id);
+    const step = w.surfaces.find((s) => s.id === 'riser-step')!;
+    g.cat.p = [step.c[0], step.top, step.c[1]];
+    g.cat.surfaceId = step.id;
     g.update(1 / 60, { move: [0, 0] });
     expect(['sill', 'sill-out']).toContain(g.target?.surface.id);
   });

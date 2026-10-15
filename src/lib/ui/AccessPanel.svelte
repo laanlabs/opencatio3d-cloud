@@ -6,12 +6,29 @@
   import { frontHeight } from '../model/types';
   import LengthInput from './LengthInput.svelte';
   import { layoutFor, sideLength } from '../generate/structure';
+  import { distToSegment, toPlan, wallDir } from '../model/geometry';
 
   let { editor }: { editor: Editor } = $props();
   const s = $derived(editor.current);
   const info = $derived(s ? editor.assembly.structures.find((x) => x.id === s.id) : undefined);
   const NAMES: Record<OpeningKind, string> = { 'human-door': 'Human door', 'cat-door': 'Cat door', 'window-access': 'Window insert', 'cleaning-hatch': 'Cleaning hatch', vestibule: 'Vestibule' };
   const LATCHES: { id: Latch | ''; name: string }[] = [{ id: 'hasp', name: 'Hasp (padlockable)' }, { id: 'slide-bolt', name: 'Slide bolt' }, { id: 'keyed', name: 'Keyed latch' }, { id: 'gravity', name: 'Gravity latch' }, { id: '', name: 'No latch' }];
+
+  /** Sill of the house window within 0.35 m of a tunnel's start, where its window insert goes (0: none). */
+  function startWindowSill(st: NonNullable<typeof s>): number {
+    const p0 = st.path?.[0];
+    if (!p0) return 0;
+    const E = toPlan(st, p0[0], p0[1]);
+    for (const w of editor.project.site.walls) {
+      const d = wallDir(w);
+      for (const o of w.openings) {
+        if (o.kind !== 'window') continue;
+        const a: [number, number] = [w.a[0] + d[0] * o.offset, w.a[1] + d[1] * o.offset];
+        if (distToSegment(E, a, [a[0] + d[0] * o.width, a[1] + d[1] * o.width]) <= 0.35) return o.sill;
+      }
+    }
+    return 0;
+  }
 
   function defaults(kind: OpeningKind): Omit<StructureOpening, 'id'> {
     const st = s!;
@@ -22,7 +39,7 @@
       case 'human-door': { const w = Math.min(0.762, L - 0.3); return { kind, side, offset: (L - w) / 2, width: w, height: Math.min(1.829, frontHeight(st) - 0.2), swing: 'out', hinge: 'left', latch: 'hasp', selfClosing: true }; }
       case 'cleaning-hatch': { const w = Math.min(0.5, L - 0.2); return { kind, side, offset: (L - w) / 2, width: w, height: Math.min(0.4, frontHeight(st) - 0.25), sill: 0.1, swing: 'out', hinge: 'left', latch: 'slide-bolt' }; }
       case 'cat-door': return tunnel ? { kind, side: 'front', offset: 0, width: Math.min(0.25, st.width), height: Math.min(0.3, st.height), sill: 0 } : { kind, side, offset: Math.max(0.1, L / 2 - 0.125), width: 0.25, height: 0.3, sill: 0.1 };
-      case 'window-access': return { kind, side: 'back', offset: Math.max(0, L / 2 - 0.4), width: Math.min(0.8, L), height: Math.min(0.9, st.height), sill: tunnel ? 0 : 0.9 };
+      case 'window-access': return { kind, side: 'back', offset: Math.max(0, L / 2 - 0.4), width: Math.min(0.8, L), height: Math.min(0.9, st.height), sill: tunnel ? startWindowSill(st) : 0.9 };
       case 'vestibule': { const w = Math.min(1.1, st.width); return { kind, side: 'front', offset: Math.max(0, (st.width - w) / 2), width: w, height: Math.min(2.0, frontHeight(st)), depth: 0.9, latch: 'hasp' }; }
     }
   }

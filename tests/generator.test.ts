@@ -1,6 +1,6 @@
 // Generator properties: determinism, stable ids, cut-plan invariants and monotone resizing.
 import { describe, expect, it } from 'vitest';
-import { allCases, cat, templateCase } from './helpers';
+import { allCases, cat, sampleCase, templateCase } from './helpers';
 import { generate, cutPlan } from '../src/lib/generate/assembly';
 import { bayCount, stockFor } from '../src/lib/generate/structure';
 import { OVERLAP } from '../src/lib/generate/parts';
@@ -104,5 +104,48 @@ describe('generator', () => {
     const a = generate(templateCase('porch-infill', 'default'), cat);
     expect(a.parts.length).toBeGreaterThan(20);
     expect(a.conceptOnly).toBe(true);
+  });
+});
+
+describe('tunnel ends', () => {
+  const garden = () => sampleCase('garden-retreat');
+  const tunnelParts = (p: Project) => generate(p, cat).parts.filter((x) => x.structureId === p.structures[1].id);
+
+  it('leaves the end open where it butts against the catio’s cat door, and meshes it shut otherwise', () => {
+    expect(tunnelParts(garden()).some((x) => x.key.startsWith('end-end:mesh'))).toBe(false);
+    const p = garden();
+    p.structures[0].openings = p.structures[0].openings.filter((o) => o.kind !== 'cat-door');
+    expect(tunnelParts(p).some((x) => x.key.startsWith('end-end:mesh'))).toBe(true);
+    const q = garden();
+    q.structures[0].x += 1; // the door is now 1 m along the wall from the tunnel
+    expect(tunnelParts(q).some((x) => x.key.startsWith('end-end:mesh'))).toBe(true);
+  });
+
+  it('builds a riser up to a window above the tunnel, with a step for a high sill', () => {
+    const parts = tunnelParts(garden());
+    const top = parts.find((x) => x.key === 'riser-start:top:0')!;
+    expect(top.geom?.type === 'quad' && top.geom.p[0][1]).toBeCloseTo(0.9 + 0.457 + 0.038, 6);
+    expect(parts.some((x) => x.key === 'riser-start:step' && x.role === 'shelf-board')).toBe(true);
+    // The tunnel body starts at the riser's inner face; the pavers still run the whole length.
+    const hoop0 = parts.find((x) => x.key === 'hoop0:post-l')!;
+    expect(hoop0.geom?.type === 'bar' && hoop0.geom.a[2]).toBeCloseTo(0.457, 6);
+    expect(parts.find((x) => x.key === 'base:pavers')!.qty).toBe(18);
+    // A low sill: a riser without a step. At ground level: no riser at all.
+    const low = garden();
+    low.structures[1].openings[0].sill = 0.3;
+    expect(tunnelParts(low).some((x) => x.key === 'riser-start:top:0')).toBe(true);
+    expect(tunnelParts(low).some((x) => x.key.startsWith('riser-start:step'))).toBe(false);
+    const ground = garden();
+    ground.structures[1].openings[0].sill = 0;
+    expect(tunnelParts(ground).some((x) => x.key.startsWith('riser-'))).toBe(false);
+  });
+
+  it('skips a window insert too high or on a segment too short for a riser', () => {
+    const high = garden();
+    high.structures[1].openings[0].sill = 1.8;
+    expect(generate(high, cat).structures[1].skippedOpenings).toEqual([high.structures[1].openings[0].id]);
+    const short = garden();
+    short.structures[1].path = [[0, 0], [0, 1.1]];
+    expect(generate(short, cat).structures[1].skippedOpenings).toHaveLength(1);
   });
 });

@@ -167,7 +167,9 @@ back `(t, d/2)`, front `(t, D − d/2)`, left `(d/2, t)`, right `(W − d/2, t)`
 - others: side is meshed; offset ≥ t0 + w and offset + width ≤ t1 − w; sill ≥ 0; sill + height ≤
   min(h(offset), h(offset + width)) − w; sill is 0 or ≥ w; and its span widened by w on both sides does
   not overlap an earlier framed opening on the same side.
-- tunnel: side back/front, kind cat-door or window-access, width ≤ W, sill + height ≤ H.
+- tunnel: side back/front, kind cat-door or window-access, width ≤ W, and sill + height ≤ H — or, for a
+  window-access (a house window above the tunnel, which gets a riser, §3.8), sill + height ≤ 2.1 and the
+  segment at that end (path points as in §3.8) at least k·W + 0.3 long (k = 2 for a one-segment path, else 1).
 Non-fitting openings are listed in `skippedOpenings` and generate nothing.
 
 ### 3.3 Walls (each framed side, in the order back, front, left, right as listed in §3.2)
@@ -243,22 +245,41 @@ Opening hardware key prefix `<side>:<kind>:<openingId>`:
   sill, rail, rafter, purlin, joist, door-stile, door-rail, door-brace, hoop-post, hoop-bar, tunnel-rail}
   + furnishing screws + 8·corners for deck bases.
 - `fasten:corner-brackets` (`bracket-corner`) qty = 4 × (framed walls + 3 per vestibule) — tunnels:
-  4 × hoops.
+  4 × (hoops + 2 per riser).
 - `fasten:mesh-screws` (`screw-ext-1in-washer`) qty = Σ over wall/roof/door/tunnel mesh panels of
   2·ceilE(width/0.15) + 2·ceilE(height/0.15), + seal trim (ceilE(L/0.3) + 1 each) + ramp cleat screws;
   `fasten:mesh-washers` (`washer-fender-1in`) qty = the mesh part only. Skirts use staples.
 
 ### 3.8 Tunnels
 
-Points closer than 0.05 m to the previous one are dropped; < 2 points → no parts. For each segment k
+Points closer than 0.05 m to the previous one are dropped; < 2 points → no parts. Each end (start = side
+`back`, path point p0 and e = unit(p1 − p0); end = side `front`, the last point and e pointing back along the
+last segment) has a **riser** when a fitting window-access there has sill + height > H: top = the highest
+such sill + height. The tunnel body then starts W further in (that path point moves to p + e·W) and
+everything below uses those points, except the base. For each segment k
 (a → z, length L, unit e, n = (−e.y, e.x)), bays = bayCount(L). Hoops at each segment's bay starts
 `a + e·L·i/bays` (i = 0…bays−1) plus the final end, numbered in order: `hoop<i>:post-l|post-r` (y = w →
 H − w at ±(W/2 − d/2)), `hoop<i>:top` (±W/2, y = H − w/2), `hoop<i>:bottom` (±(W/2 − d), y = w/2).
 Rails `seg<k>:rail-tl|rail-tr|rail-bl|rail-br` along the segment. Mesh per bay `seg<k>:bay<i>:side-l`,
 `:side-r` (pitch L/bays, height H) and `:top` (height W). At each bend v ≥ 1 with turn θ > 0.01 rad:
 wedge = W·tan(min(θ, 1.4)/2), `corner<v>:side` (wedge, H) and `corner<v>:top` (wedge, W). End panels
-`end-start:mesh` / `end-end:mesh` (W, H) unless a window-access sits at that end; opening kits keyed
-`<back|front>:<kind>:<id>:kit`. Base: skirt `base:skirt` (perimeter = 2ΣL + 2W) with staples
+`end-start:mesh` / `end-end:mesh` (W, H) at that end's hoop unless a window-access sits at that end or the
+end **joins a cat door**; opening kits keyed `<back|front>:<kind>:<id>:kit` at the end's original point
+(y = sill + height/2). An end joins a cat door when, for another structure s′ (not a tunnel, elevation ≤ 0.3)
+with the end's plan point in s′ local (u, v), one of back (|v|, along u, span W′), front (|v − D′|, u, W′),
+left (|u|, v, D′), right (|u − W′|, v, D′) has distance ≤ 0.35 and −0.1 ≤ along ≤ span + 0.1, and a
+cat-door that s′ places on that side (§3.2, in order) has |offset + width/2 − along| ≤ 0.35 and
+elevation′ + sill < H.
+
+Riser `riser-<start|end>:*` (Q(t, l) = p + e·t + n·l, n = (−e.y, e.x), Hr = top + w, sill = lowest
+window-access sill there): for l = l (+1) and r (−1): `post-o<l>` at Q(d/2, ±(W/2 − d/2)) y = w → Hr − w,
+`post-i<l>` at Q(W, …) y = H → Hr − w (on the tunnel's hoop), `rail-t<l>` / `rail-b<l>` (tunnel-rail) from
+Q(0, …) to Q(W, …) at y = Hr − w/2 / w/2; `top-o` / `top-i` (hoop-bar) Q(d/2 | W, ±W/2) at Hr − w/2;
+`bottom-o` Q(d/2, ±(W/2 − d)) at w/2. Mesh `side-l`, `side-r` (W, Hr), `top` (W, W), `front` (W, Hr − H,
+above the tunnel at t = W) and, if sill > 0.02, `back` (W, sill). If sill > 0.5: `step-bar` (hoop-bar)
+Q(d/2, ±(W/2 − d)) at sill/2 − w/2, `step` (shelf-board, `board-1x10-cedar`) Q(d + board width/2,
+±(W/2 − d)) at sill/2, `step-brackets` (2 × `bracket-shelf`, step furnish) and 8 extra frame screws.
+Base over the original path: skirt `base:skirt` (perimeter = 2ΣL + 2W) with staples
 ceilE(perimeter/0.3) + 2 and 4 anchors on soft ground; or pavers 2·Σ ceilE(L/paver.size) + sand.
 
 ### 3.9 Labels, cut plan, BOM, cost, steps

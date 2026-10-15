@@ -435,7 +435,7 @@
             "kind" : "window-access",
             "offset" : 0,
             "side" : "back",
-            "sill" : 0,
+            "sill" : 0.90000000000000002,
             "width" : 0.45700000000000002
           }
         ],

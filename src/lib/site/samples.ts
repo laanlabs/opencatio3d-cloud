@@ -90,11 +90,11 @@ export function buildSample(id: string, catalog: Catalog): Project | undefined {
       { id: '', componentId: 'litter-annex', side: 'left', offset: 0.95, mountHeight: 0 } as Furnishing
     );
     stable(s, 'garden-retreat:s');
-    // Tunnel: from the laundry window straight out, then right into the catio's back cat door.
+    // Tunnel: from the laundry window (a riser climbs to its 0.9 m sill) straight out into the catio's back cat door.
     const t = stable(newStructure('tunnel', catalog, { x: 2.3, y: 0, rotation: 0, name: 'Tunnel run' }), 'garden-retreat:t');
     t.path = [[0, 0], [0, 3.6]];
     t.base = { kind: 'pavers' };
-    t.openings = [{ id: stableId('sample:garden-retreat:t:opening:0'), kind: 'window-access', side: 'back', offset: 0, width: 0.457, height: 0.457, sill: 0 }];
+    t.openings = [{ id: stableId('sample:garden-retreat:t:opening:0'), kind: 'window-access', side: 'back', offset: 0, width: 0.457, height: 0.457, sill: 0.9 }];
     p.structures = [s, t];
     p.cats = [cat('pepper', 'Pepper', {}), cat('biscuit', 'Biscuit', { ageClass: 'senior', mobility: 'reduced', climber: false }), cat('olive', 'Olive', { escapeRisk: 'low' })];
     confirm(p);
