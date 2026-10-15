@@ -235,6 +235,11 @@ describe('Catio Prowl game', () => {
     for (let i = 0; i < 120; i++) g.update(1 / 60, { move: [0, 0] });
     expect(mug.state).toBe('down');
     expect(g.count('knock')).toBe(1);
+    // Lying on the floor, it is nudged aside too.
+    g.cat.p = [mug.p[0] - 0.05, 0, mug.p[2]];
+    g.cat.surfaceId = 'room-floor';
+    g.update(1 / 60, { move: [0, 0] });
+    expect(Math.hypot(mug.p[0] - g.cat.p[0], mug.p[2] - g.cat.p[2])).toBeGreaterThan(0.1);
   });
 
   it('watching the bird from a high perch in the catio completes the task; meowing scares it off', () => {

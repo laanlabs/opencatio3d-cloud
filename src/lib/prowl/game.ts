@@ -330,14 +330,17 @@ export class Prowl {
     }
   }
 
-  /** The cat's body nudges things on a top out of its way, the way a cat shoulders past a mug; nudged over
-   *  the edge, they fall (and count as knocked off). Things never stand inside the cat. */
+  /** The cat's body nudges things out of its way, the way a cat shoulders past a mug; nudged over an edge,
+   *  they fall (and count as knocked off). Things, standing or knocked over, are never inside the cat. */
   private bumpItems() {
     const c = this.cat;
     const fx = Math.sin(c.heading), fz = Math.cos(c.heading);
     for (const it of this.items) {
-      if (it.state !== 'rest') continue;
-      const [w, h, d] = it.item.size;
+      if (it.state === 'falling') continue;
+      // Standing, or knocked over and lying on its side.
+      const down = it.state === 'down';
+      const h = down ? it.item.size[0] : it.item.size[1];
+      const foot = down ? Math.max(it.item.size[1], it.item.size[2]) : Math.max(it.item.size[0], it.item.size[2]);
       // Its base below the cat's back, its top above the belly (the legs are thin enough to step between).
       if (it.p[1] > c.p[1] + 0.25 || it.p[1] + h < c.p[1] + 0.05) continue;
       // The body: a capsule from the rump to the chest, or to the head for something tall.
@@ -345,7 +348,7 @@ export class Prowl {
       const rx = it.p[0] - c.p[0], rz = it.p[2] - c.p[2];
       const along = Math.max(back, Math.min(front, rx * fx + rz * fz));
       let dx = rx - fx * along, dz = rz - fz * along;
-      const dist = Math.hypot(dx, dz), min = 0.065 + Math.max(w, d) / 2;
+      const dist = Math.hypot(dx, dz), min = 0.065 + foot / 2;
       if (dist >= min) continue;
       if (dist < 1e-4) { dx = fz; dz = -fx; } else { dx /= dist; dz /= dist; } // dead centre: to one side
       const nx = it.p[0] + dx * (min - dist), nz = it.p[2] + dz * (min - dist);
