@@ -131,13 +131,15 @@ interface Params {
   bodyY: number; pitch: number; roll: number; spinePitch: number; spineYaw: number; neck: number; headPitch: number; headYaw: number; headRoll: number;
   tailBase: number; tailSide: number; tailBend: number; tailTip: number; tailCurl: number; tailSway: number;
   ears: number; eyes: number; jaw: number; gait: number; stretch: number;
+  /** Hock-to-paw angle in root space: slightly forward standing, near flat (-π/2) when sitting or lying. */
+  hock: number;
   feet: Feet;
 }
 const REST: Feet = [[0.118, 0], [0.118, 0], [-0.118, 0], [-0.118, 0]];
 const params = (o: Partial<Params>): Params => ({
   bodyY: 0.19, pitch: 0, roll: 0, spinePitch: 0, spineYaw: 0, neck: 0, headPitch: 0, headYaw: 0, headRoll: 0,
   tailBase: -0.75, tailSide: 0, tailBend: 0.05, tailTip: 0.25, tailCurl: 0, tailSway: 0.12,
-  ears: 0, eyes: 1, jaw: 0, gait: 0, stretch: 1, feet: REST.map((f) => [...f] as [number, number]), ...o
+  ears: 0, eyes: 1, jaw: 0, gait: 0, stretch: 1, hock: -0.28, feet: REST.map((f) => [...f] as [number, number]), ...o
 });
 
 export function makeCatModel(coat: string): CatModel {
@@ -303,7 +305,9 @@ export function makeCatModel(coat: string): CatModel {
       return { p: params({ bodyY: 0.2, pitch: 0.18, neck: 0.1, tailBase: -1.25, tailTip: 0.1, tailSway: 0, ears: 0.15, feet: [[0.2, -0.03], [0.22, -0.03], [-0.2, 0.06], [-0.18, 0.07]] }), rate: 18 };
     }
     if (!d.ground) return { p: params({ bodyY: 0.2, pitch: 0.1, tailBase: -0.6, tailSway: 0, ears: 0.3, feet: [[0.16, -0.04], [0.16, -0.04], [-0.15, -0.03], [-0.15, -0.03]] }), rate: 14 };
-    const sitting: Partial<Params> = { bodyY: 0.108, pitch: -0.62, spinePitch: 0.14, neck: 0.5, headPitch: 0.42, tailBase: -1.57, tailBend: 0, tailTip: 0, tailCurl: 0.3, tailSway: 0.05, feet: [[0.12, 0], [0.12, 0], [0.0, 0], [0.0, 0]] };
+    const sitting: Partial<Params> = { bodyY: 0.12, pitch: -0.7, spinePitch: 0.2, neck: 0.62, headPitch: 0.5, tailBase: -1.57, tailBend: 0, tailTip: 0, tailCurl: 0.3, tailSway: 0.05, hock: -1.45, feet: [[0.1, 0], [0.1, 0], [0.0, 0], [0.0, 0]] };
+    // Lying down: belly on the floor, forearms folded under the chest, hind legs tucked with the hocks flat.
+    const lying: Partial<Params> = { bodyY: 0.064, pitch: -0.06, hock: -1.5, tailBase: -1.6, tailBend: 0, tailTip: 0, tailCurl: 0.36, tailSway: 0.03, feet: [[0.15, 0.004], [0.15, 0.004], [-0.035, 0.004], [-0.035, 0.004]] };
     switch (d.busy) {
       case 'scratch': case 'sofa': {
         const s = Math.sin(t * 11) * 0.05;
@@ -325,7 +329,7 @@ export function makeCatModel(coat: string): CatModel {
       }
       case 'nap': {
         const br = Math.sin(t * 1.6) * 0.004;
-        return { p: params({ bodyY: 0.083 + br, roll: 0.18, spineYaw: 0.75, neck: 0.55, headPitch: 0.25, headYaw: 0.6, headRoll: 0.5, eyes: 0, tailBase: -1.6, tailBend: 0, tailTip: 0.1, tailCurl: 0.4, tailSway: 0.02, ears: 0.15, feet: [[0.07, 0.01], [0.07, 0.01], [-0.06, 0], [-0.06, 0]] }), rate: 3 };
+        return { p: params({ ...lying, bodyY: 0.06 + br, roll: 0.22, spineYaw: 1.0, neck: 1.0, headPitch: 1.05, headYaw: 0.9, headRoll: 0.5, eyes: 0, tailBase: -1.62, tailSide: -0.9, tailCurl: -0.45, tailSway: 0.02, ears: 0.15 }), rate: 3 };
       }
       case 'swipe': {
         const kk = d.busyK;
@@ -341,7 +345,7 @@ export function makeCatModel(coat: string): CatModel {
       look(p, 0.6);
       return { p, rate: 10 };
     }
-    if (d.idle > 9) return { p: params({ bodyY: 0.092, neck: 0.12, headPitch: 0.15, tailBase: -1.6, tailBend: 0, tailTip: 0, tailCurl: 0.36, tailSway: 0.03, eyes: 0.55, feet: [[0.08, 0.02], [0.08, 0.02], [-0.07, 0], [-0.07, 0]] }), rate: 3 };
+    if (d.idle > 9) return { p: params({ ...lying, neck: 0.12, headPitch: 0.15, eyes: 0.55 }), rate: 3 };
     if (d.idle > 1.2) {
       const p = params(sitting);
       p.headYaw = idleYaw; p.headPitch += idlePitch;
@@ -409,7 +413,7 @@ export function makeCatModel(coat: string): CatModel {
         L.paw.rotation.x = -(pt + a + b);
       } else {
         // Aim the knee at the hock, which sits behind and above the paw; the last bone runs down to the paw.
-        const ha = -0.28; // hock-to-paw angle in root space (paw slightly ahead of the hock)
+        const ha = p.hock;
         local(fy + H3 * Math.cos(ha), fz + H3 * Math.sin(ha));
         const [a, b] = ik2(tgt.y - L.hip.position.y, tgt.z - L.hip.position.z, H1, H2, true);
         L.j[0].rotation.x = a; L.j[1].rotation.x = b;
@@ -420,7 +424,7 @@ export function makeCatModel(coat: string): CatModel {
     });
 
     // Tail: base angle in root space, bending along the chain, a travelling sway, a curl around the body.
-    tailRoot.rotation.set(p.tailBase - pitch, p.tailSide, 0);
+    tailRoot.rotation.set(p.tailBase - pitch, p.tailSide, 0, 'YXZ');
     tail.forEach((g, i) => {
       const f = i / (TAIL_N - 1);
       const sway = Math.sin(t * (1.6 + p.tailSway * 4) - i * 0.55) * p.tailSway * (0.3 + f);
