@@ -4,7 +4,7 @@
 // drink, sniff, watch, swipe, meow) blend smoothly into one another; the walk keeps its feet planted by
 // matching stride to speed. Browser only (three.js); the game decides what the cat is doing.
 import * as THREE from 'three';
-import { coatOf, furBody, furHead, furRings } from './textures';
+import { coatOf, furBody, furHead, furNeck, furRings } from './textures';
 
 export type CatBusy = 'scratch' | 'sofa' | 'drink' | 'eat' | 'sniff' | 'watch' | 'nap' | 'swipe' | 'meow' | null;
 export interface CatDrive {
@@ -71,10 +71,10 @@ function headGeometry() {
   const p = g.attributes.position;
   for (let i = 0; i < p.count; i++) {
     let x = p.getX(i), y = p.getY(i), z = p.getZ(i);
-    x *= 1.1 * (y < 0 ? 1 + 0.12 * (-y / 0.05) : 1); // cheeks
-    y *= y > 0 ? 0.86 : 0.95;
-    z *= 0.92;
-    if (z < 0) z *= 1.08; // back of the skull
+    x *= 1.16 * (y < 0.01 ? 1 + 0.14 * Math.min(1, (0.01 - y) / 0.05) : 1); // wide cheeks
+    y *= y > 0 ? 0.8 - 0.1 * Math.max(0, z / 0.05) : 0.92; // a flat crown sloping to the brow
+    z *= 0.9;
+    if (z < 0) z *= 1.1; // back of the skull
     p.setXYZ(i, x, y, z);
   }
   g.computeVertexNormals();
@@ -179,10 +179,11 @@ export function makeCatModel(coat: string): CatModel {
   const headFur = own(new THREE.MeshStandardMaterial({ map: furHead(coat), roughness: 0.82 }));
   const legFur = own(new THREE.MeshStandardMaterial({ map: furRings(coat, 0.45), roughness: 0.85 }));
   const tailFur = own(new THREE.MeshStandardMaterial({ map: furRings(coat, 1), roughness: 0.85 }));
+  const muscleFur = own(new THREE.MeshStandardMaterial({ map: furRings(coat, 0), roughness: 0.85 })); // plain: no rings on a round haunch
   const light = own(new THREE.MeshStandardMaterial({ color: k.light, roughness: 0.85 }));
   const pink = own(new THREE.MeshStandardMaterial({ color: k.nose, roughness: 0.6 }));
   const innerEar = own(new THREE.MeshStandardMaterial({ color: '#e3a9a6', roughness: 0.9, side: THREE.DoubleSide }));
-  const iris = own(new THREE.MeshStandardMaterial({ color: k.eye, roughness: 0.08, emissive: new THREE.Color(k.eye).multiplyScalar(0.25) }));
+  const iris = own(new THREE.MeshStandardMaterial({ color: k.eye, roughness: 0.08, emissive: new THREE.Color(k.eye).multiplyScalar(0.15) }));
   const pupil = own(new THREE.MeshStandardMaterial({ color: '#0b0b0c', roughness: 0.05 }));
   const mouth = own(new THREE.MeshStandardMaterial({ color: '#5a2a2e', roughness: 0.7 }));
 
@@ -192,24 +193,23 @@ export function makeCatModel(coat: string): CatModel {
   const mesh = (g: THREE.BufferGeometry, m: THREE.Material, shadow = true) => { own(g); const x = new THREE.Mesh(g, m); x.castShadow = shadow; return x; };
 
   body.add(mesh(torsoGeometry(), fur));
-  // Chest ruff, lighter.
-  const chest = mesh(new THREE.SphereGeometry(0.05, 18, 12), light, false);
-  chest.scale.set(0.95, 1.1, 0.8);
-  chest.position.set(0, -0.022, 0.15);
-  body.add(chest);
+  // The pale bib is painted into the body fur (furBody), so it has no edge.
 
   // Neck and head.
   const neck = new THREE.Group();
   neck.position.set(0, 0.03, 0.155);
   body.add(neck);
-  const neckGeo = new THREE.CapsuleGeometry(0.041, 0.04, 4, 14);
-  neckGeo.rotateX(0.95);
-  neckGeo.translate(0, 0.02, 0.016);
-  const plainFur = own(new THREE.MeshStandardMaterial({ color: k.base, roughness: 0.85 }));
-  neck.add(mesh(neckGeo, plainFur));
+  const neckFur = own(new THREE.MeshStandardMaterial({ map: furNeck(coat), roughness: 0.84 }));
+  const neckTube = new Tube(14, 16, neckFur, 1);
+  owned.push(neckTube.mesh.geometry);
+  body.add(neckTube.mesh);
+  const marker = (parent: THREE.Object3D, x: number, y: number, z: number) => { const o = new THREE.Object3D(); o.position.set(x, y, z); parent.add(o); return o; };
   const head = new THREE.Group();
   head.position.set(0, 0.05, 0.072);
   neck.add(head);
+  // The neck's path: inside the chest, the base of the neck, its middle, the nape and the middle of the skull.
+  const neckPath = [marker(body, 0, -0.004, 0.1), marker(body, 0, 0.026, 0.15), marker(neck, 0, 0.036, 0.038), marker(head, 0, -0.004, -0.02), marker(head, 0, -0.006, 0.004)];
+  const neckRadii = [0.062, 0.058, 0.052, 0.048, 0.04];
   const skull = mesh(headGeometry(), headFur);
   head.add(skull);
   head.scale.setScalar(1.1);
@@ -217,9 +217,9 @@ export function makeCatModel(coat: string): CatModel {
   muzzle.scale.set(1.25, 0.78, 0.9);
   muzzle.position.set(0, -0.017, 0.036);
   head.add(muzzle);
-  const nose = mesh(new THREE.SphereGeometry(0.0075, 10, 8), pink, false);
-  nose.scale.set(1.35, 0.75, 0.9);
-  nose.position.set(0, -0.006, 0.058);
+  const nose = mesh(new THREE.SphereGeometry(0.0062, 10, 8), pink, false);
+  nose.scale.set(1.4, 0.72, 0.85);
+  nose.position.set(0, -0.007, 0.057);
   head.add(nose);
   const jaw = new THREE.Group();
   jaw.position.set(0, -0.029, 0.018);
@@ -234,10 +234,10 @@ export function makeCatModel(coat: string): CatModel {
   const eyes: THREE.Group[] = [];
   for (const s of [-1, 1]) {
     const e = new THREE.Group();
-    e.position.set(s * 0.0235, 0.007, 0.039);
-    e.rotation.y = s * 0.38;
-    const ball = mesh(new THREE.SphereGeometry(0.0125, 16, 12), iris, false);
-    ball.scale.set(1, 0.78, 0.55);
+    e.position.set(s * 0.024, 0.006, 0.035);
+    e.rotation.set(0, s * 0.42, -s * 0.12); // almond eyes, tilted up at the outer corner
+    const ball = mesh(new THREE.SphereGeometry(0.0122, 16, 12), iris, false);
+    ball.scale.set(1.05, 0.72, 0.5);
     const pu = mesh(new THREE.SphereGeometry(0.0125, 12, 10), pupil, false);
     pu.scale.set(0.3, 0.7, 0.5);
     pu.position.z = 0.0028;
@@ -246,15 +246,15 @@ export function makeCatModel(coat: string): CatModel {
     eyes.push(e);
   }
   const ears: THREE.Group[] = [];
-  const earGeo = new THREE.ConeGeometry(0.022, 0.05, 14, 1);
+  const earGeo = new THREE.ConeGeometry(0.025, 0.044, 14, 1);
   earGeo.scale(1, 1, 0.42);
-  earGeo.translate(0, 0.025, 0);
-  const innerGeo = new THREE.ConeGeometry(0.0155, 0.037, 12, 1);
+  earGeo.translate(0, 0.022, 0);
+  const innerGeo = new THREE.ConeGeometry(0.018, 0.033, 12, 1);
   innerGeo.scale(1, 1, 0.25);
-  innerGeo.translate(0, 0.02, 0.006);
+  innerGeo.translate(0, 0.018, 0.0065);
   for (const s of [-1, 1]) {
     const e = new THREE.Group();
-    e.position.set(s * 0.028, 0.03, -0.004);
+    e.position.set(s * 0.031, 0.026, -0.006);
     e.rotation.set(-0.12, s * 0.28, -s * 0.3);
     e.add(mesh(earGeo, headFur), mesh(innerGeo, innerEar, false));
     head.add(e);
@@ -288,9 +288,9 @@ export function makeCatModel(coat: string): CatModel {
       if (i > 0) g.position.y = -lens[i - 1];
       if (i === 0) {
         // Shoulder blade or haunch: muscle along the top bone (the round haunch of a sitting cat).
-        const m = mesh(new THREE.SphereGeometry(1, 18, 12), legFur);
+        const m = mesh(new THREE.SphereGeometry(1, 18, 12), muscleFur);
         if (front) { m.scale.set(0.02, 0.048, 0.028); m.position.set(-s * 0.005, -0.022, 0.002); }
-        else { m.scale.set(0.029, 0.056, 0.043); m.position.set(-s * 0.007, -0.034, 0.004); }
+        else { m.scale.set(0.026, 0.052, 0.042); m.position.set(-s * 0.011, -0.034, 0.004); }
         g.add(m);
       }
       parent.add(g);
@@ -304,7 +304,7 @@ export function makeCatModel(coat: string): CatModel {
     owned.push(tube.mesh.geometry);
     body.add(tube.mesh);
     // Radii at: inside the body, shoulder/hip, elbow/knee, (hock), paw.
-    const radii = front ? [0.026, 0.023, 0.0145, 0.0115] : [0.036, 0.036, 0.019, 0.012, 0.011];
+    const radii = front ? [0.026, 0.023, 0.0145, 0.0115] : [0.029, 0.034, 0.019, 0.012, 0.011];
     legs.push({ hip, j, paw, front, x: s * at[0], tube, radii });
   }
 
@@ -484,9 +484,15 @@ export function makeCatModel(coat: string): CatModel {
   const legPts = legs.map((L) => Array.from({ length: L.front ? 4 : 5 }, () => new THREE.Vector3()));
   const UP = new THREE.Vector3(0, 0.03, 0), BACK = new THREE.Vector3(0, 0, 0.03);
   const tailPts = Array.from({ length: TAIL_N + 2 }, () => new THREE.Vector3());
+  const neckPts = neckPath.map(() => new THREE.Vector3());
   function sweep() {
     root.updateMatrixWorld(true);
     inv.copy(body.matrixWorld).invert();
+    neckPath.forEach((o, i) => jp(o, neckPts[i]));
+    neckTube.update(neckPts, (u) => {
+      const x = u * (neckRadii.length - 1), a = Math.floor(Math.min(neckRadii.length - 1 - 1e-6, x)), t2 = x - a;
+      return neckRadii[a] + (neckRadii[a + 1] - neckRadii[a]) * (t2 * t2 * (3 - 2 * t2));
+    });
     legs.forEach((L, i) => {
       const pts = legPts[i];
       // From inside the body, through the shoulder or hip, down each joint to the paw.

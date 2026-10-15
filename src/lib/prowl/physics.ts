@@ -109,9 +109,22 @@ export function groundAt(w: World, x: number, z: number, maxY: number): { y: num
   return { y, surface };
 }
 
-/** Solid furniture taller than a step in the way of a body at (x, y, z). */
-export function blocked(w: World, x: number, z: number, y: number, rad = R): boolean {
-  return w.surfaces.some((s) => s.solid && s.top > y + STEP && s.bottom < y + HEAD && inRect(s, x, z, -rad));
+/** A board (a shelf, ramp, bridge, hammock or window ledge) through a body at (x, y, z): it only carries a cat,
+ *  but between a step above its paws and its head it is in the way. A cat lined up with a ramp's foot (centre
+ *  at cx, cz) walks up onto it rather than into it. */
+function boardIn(s: Surface, x: number, z: number, y: number, rad: number, cx: number, cz: number): boolean {
+  if (s.solid || s.kind === 'floor' || s.kind === 'post' || !inRect(s, x, z, -rad)) return false;
+  if (s.low === undefined) return s.top > y + STEP && s.bottom < y + HEAD;
+  const c = Math.cos(s.yaw), sn = Math.sin(s.yaw);
+  const hi = topAt(s, x + c * rad, z + sn * rad), lo = topAt(s, x - c * rad, z - sn * rad) - (s.thick ?? 0.03);
+  if (hi <= y + STEP || lo >= y + HEAD) return false;
+  const across = -(cx - s.c[0]) * sn + (cz - s.c[1]) * c;
+  return !(Math.abs(across) <= s.h[1] && topAt(s, cx, cz) <= y + STEP + 0.01);
+}
+
+/** Solid furniture taller than a step, or a board, in the way of a body at (x, y, z); (cx, cz) is the cat's centre. */
+export function blocked(w: World, x: number, z: number, y: number, rad = R, cx = x, cz = z): boolean {
+  return w.surfaces.some((s) => (s.solid ? s.top > y + STEP && s.bottom < y + HEAD && inRect(s, x, z, -rad) : boardIn(s, x, z, y, rad, cx, cz)));
 }
 
 const canStand = (w: World, x: number, z: number, y: number) => contained(w, x, y, z) && !blocked(w, x, z, y);
@@ -130,11 +143,11 @@ export function bodyPoints(x: number, z: number, heading: number): [number, numb
 export const wallsClear = (w: World, x: number, z: number, y: number, heading: number) =>
   bodyPoints(x, z, heading).every(([px, pz, r]) => contained(w, px, y, pz, r, CROUCH * 0.75));
 
-/** Which of the nose, chest and hips (bits 1, 2, 4) are in solid furniture. */
+/** Which of the nose, chest and hips (bits 1, 2, 4) are in solid furniture or a board. */
 export const inFurniture = (w: World, x: number, z: number, y: number, heading: number) =>
-  bodyPoints(x, z, heading).reduce((m, [px, pz, r], i) => (blocked(w, px, pz, y, r) ? m | (1 << i) : m), 0);
+  bodyPoints(x, z, heading).reduce((m, [px, pz, r], i) => (blocked(w, px, pz, y, r, x, z) ? m | (1 << i) : m), 0);
 
-/** Whether the nose, chest and hips are clear of solid furniture and inside the volumes. */
+/** Whether the nose, chest and hips are clear of solid furniture and boards, and inside the volumes. */
 export const bodyClear = (w: World, x: number, z: number, y: number, heading: number) => wallsClear(w, x, z, y, heading) && !inFurniture(w, x, z, y, heading);
 
 /** A cat standing there, centre and body. */
@@ -151,7 +164,12 @@ export function unpoke(w: World, st: CatState, onGround = true, reach = 0.15): V
       const m = Math.hypot(ax, az);
       const qx = x + (ax / m) * k, qz = z + (az / m) * k;
       if (!fits(w, qx, qz, y, st.heading)) continue;
-      if (!onGround) return [qx, qz];
+      if (!onGround) {
+        // Falling: it has to fit where it lands as well (a tunnel riser is too short for that: it squeezes).
+        const g = groundAt(w, qx, qz, y + 0.02);
+        if (!g.surface || fits(w, qx, qz, g.y, st.heading) || regionAt(w, [qx, g.y, qz]) === 'tunnel') return [qx, qz];
+        continue;
+      }
       const g = groundAt(w, qx, qz, y + 0.01);
       if (g.surface && Math.abs(g.y - y) < 0.01) return [qx, qz];
     }
@@ -199,22 +217,31 @@ export function leapTarget(w: World, st: CatState): LeapTarget | null {
     for (const lat of [0, -0.16, 0.16]) {
       const px = x + fx * d + rx * lat, pz = z + fz * d + rz * lat;
       for (const s of w.surfaces) {
-        if (s.kind === 'post' || s.low !== undefined || !inRect(s, px, pz, 0.04)) continue;
+        // A ramp can be hopped onto from the side (a steep one has no foot to walk onto), but not along itself.
+        if (s.kind === 'post' || (s.low !== undefined && s.id === st.surfaceId) || !inRect(s, px, pz, 0.04)) continue;
         const ty = topAt(s, px, pz);
         if (s.id === st.surfaceId && Math.abs(ty - y) < 0.05) continue;
         const dy = ty - y;
         if (dy > MAX_UP || dy < -3) continue;
-        let kind: LeapTarget['kind'] = dy > 0.2 ? 'up' : dy < -0.35 ? 'down' : 'across';
+        let kind: LeapTarget['kind'] = dy > STEP ? 'up' : dy < -0.35 ? 'down' : 'across';
         if (kind === 'across') {
           // Only a leap if there is a drop in between; otherwise the cat can just walk there.
           const mx = (x + px) / 2, mz = (z + pz) / 2;
           if (groundAt(w, mx, mz, y + STEP).y > y - 0.3) continue;
         }
         if (kind !== 'up' && d < 0.45) continue;
-        const [lx, lz] = clampInto(s, px, pz, Math.min(0.12, Math.min(s.h[0], s.h[1]) * 0.6));
+        let [lx, lz] = clampInto(s, px, pz, Math.min(0.12, Math.min(s.h[0], s.h[1]) * 0.6));
+        // A narrow board against a wall (a ramp up the mesh): land on its near side, where the body fits.
+        for (let k = 0.03, m = Math.hypot(x - lx, z - lz); k <= 0.09 + 1e-9 && m > 0.1 && !canStand(w, lx, lz, topAt(s, lx, lz)); k += 0.03) {
+          const qx = lx + ((x - lx) / m) * 0.03, qz = lz + ((z - lz) / m) * 0.03;
+          if (!inRect(s, qx, qz, 0.02)) break;
+          [lx, lz] = [qx, qz];
+        }
         const ly = topAt(s, lx, lz);
         if (groundAt(w, lx, lz, ly + 0.01).surface?.id !== s.id) continue; // something else sits on top there
         if (!canStand(w, lx, lz, ly)) continue;
+        // No room for the body (a shelf just above), except in a tunnel riser, which is shorter than a cat anyway.
+        if (landingHeading(w, [lx, ly, lz], Math.atan2(lx - x, lz - z)) === null && regionAt(w, [lx, ly, lz]) !== 'tunnel') continue;
         const up = ly > y + 0.05;
         // Arc height: a little above the higher end, lowered to fit under a catio roof.
         const hi = Math.max(y, ly);
@@ -233,17 +260,17 @@ export function leapTarget(w: World, st: CatState): LeapTarget | null {
 }
 
 /** The heading nearest `h` in which a cat standing at p fits nose to hips (it lands turned along a narrow
- *  shelf or a window seat rather than with its nose in the wall); `h` itself when none does. */
-export function landingHeading(w: World, p: Vec3, h: number): number {
+ *  shelf or a window seat rather than with its nose in the wall); null when none does. */
+export function landingHeading(w: World, p: Vec3, h: number): number | null {
   for (let k = 0; k <= 9; k++) for (const sg of k ? [1, -1] : [1]) if (bodyClear(w, p[0], p[2], p[1], h + sg * k * 0.35)) return h + sg * k * 0.35;
-  return h;
+  return null;
 }
 
 export function startLeap(st: CatState, t: LeapTarget, w?: World) {
   const from: Vec3 = [...st.p];
   const dist = Math.hypot(t.p[0] - from[0], t.p[2] - from[2]);
   if (dist > 0.05) st.heading = Math.atan2(t.p[0] - from[0], t.p[2] - from[2]);
-  const h1 = w ? landingHeading(w, t.p, st.heading) : st.heading;
+  const h1 = (w ? landingHeading(w, t.p, st.heading) : null) ?? st.heading;
   st.leap = { from, to: t.p, t: 0, T: 0.32 + 0.12 * dist + 0.1 * Math.abs(t.p[1] - from[1]), up: t.p[1] > from[1] + 0.05, apex: t.apex, surfaceId: t.surface.id, h0: st.heading, h1 };
   st.ground = false;
   st.v = [0, 0];
@@ -264,10 +291,16 @@ function turnToward(a: number, b: number, max: number) {
 }
 
 /** Turn a cat toward `goal` by up to `max`. On the ground it does not swing its nose or hips into furniture:
- *  it steps back to make room, turns the other way round, or stops turning. In the air it just turns. */
+ *  it steps back to make room, turns the other way round, or stops turning. In the air it turns unless that
+ *  swings it into furniture where it will land. */
 function turn(w: World, st: CatState, goal: number, max: number) {
   const nh = turnToward(st.heading, goal, max);
-  if (!st.ground) { st.heading = nh; return; }
+  if (!st.ground) {
+    // In a hop or a fall: turn freely, except into furniture beside the spot it will land on.
+    const [x, y, z] = st.p, g = groundAt(w, x, z, y + 0.02).y;
+    if (!Number.isFinite(g) || !inFurniture(w, x, z, g, nh)) st.heading = nh;
+    return;
+  }
   const [x, y, z] = st.p;
   const now = inFurniture(w, x, z, y, st.heading);
   if (!(inFurniture(w, x, z, y, nh) & ~now)) { st.heading = nh; return; }
@@ -280,6 +313,19 @@ function turn(w: World, st: CatState, goal: number, max: number) {
   while (d < -Math.PI) d += 2 * Math.PI;
   const lh = st.heading - Math.sign(d || 1) * max;
   if (!(inFurniture(w, x, z, y, lh) & ~now)) st.heading = lh;
+}
+
+/** The heading, nearest its own, in which a cat stepping off an edge at (x, z) comes down clear (where it
+ *  lands, or within 30 cm of it): it turns as it drops. Null when none does (it stays on the edge). */
+function dropHeading(w: World, st: CatState, x: number, z: number): number | null {
+  const g = groundAt(w, x, z, st.p[1]);
+  if (!g.surface) return st.heading;
+  for (let k = 0; k <= 9; k++) for (const sg of k ? [1, -1] : [1]) {
+    const h = st.heading + sg * k * 0.35;
+    if (!inFurniture(w, x, z, g.y, h) || unpoke(w, { ...st, p: [x, g.y, z], heading: h }, false, 0.3)) return h;
+  }
+  // A tunnel riser is shorter than a cat: it squeezes down it, as it squeezes through the tunnel.
+  return regionAt(w, [x, g.y, z]) === 'tunnel' ? st.heading : null;
 }
 
 /** Advance the cat by dt seconds. Returns what happened (leaps, hops, landings). */
@@ -330,7 +376,9 @@ export function step(w: World, st: CatState, input: MoveInput, dt: number): Step
     const hd = st.heading;
     const wallsOk = !st.ground || wallsClear(w, x, z, y, hd);
     const stuckIn = st.ground ? inFurniture(w, x, z, y, hd) : 0;
-    const ok = (qx: number, qz: number, h = hd) => canStand(w, qx, qz, y) && (!wallsOk || wallsClear(w, qx, qz, y, h)) && (inFurniture(w, qx, qz, y, h) & ~stuckIn) === 0;
+    // In a hop the spot below has to take the cat as well (it lands there): not beside a pot with its chest in it.
+    const landsOk = (qx: number, qz: number, h: number) => { const g = groundAt(w, qx, qz, y + 0.02); return !g.surface || (!blocked(w, qx, qz, g.y) && !inFurniture(w, qx, qz, g.y, h)) || regionAt(w, [qx, g.y, qz]) === 'tunnel'; };
+    const ok = (qx: number, qz: number, h = hd) => canStand(w, qx, qz, y) && (!wallsOk || wallsClear(w, qx, qz, y, h)) && (inFurniture(w, qx, qz, y, h) & ~stuckIn) === 0 && (st.ground || landsOk(qx, qz, h));
     // The cat turns along the wall it slides on.
     const along = (rx: number, rz: number) => turnToward(hd, Math.atan2(rx, rz), 6 * dt);
     if (ok(x + dx, z + dz)) { x += dx; z += dz; }
@@ -355,8 +403,14 @@ export function step(w: World, st: CatState, input: MoveInput, dt: number): Step
   // Up and down.
   if (st.ground) {
     const g = groundAt(w, x, z, y + STEP);
-    if (!g.surface || g.y < y - 0.03) { st.ground = false; st.vy = 0; }
-    else if (g.y > y && !canStand(w, x, z, g.y)) { x = st.p[0]; z = st.p[2]; st.v = [0, 0]; }
+    if (!g.surface || g.y < y - 0.03) {
+      // Stepping off an edge: only where the body can come down clear of what it leaves (not into a tight corner).
+      const drop = dropHeading(w, st, x, z);
+      if (drop === null) { x = st.p[0]; z = st.p[2]; st.v = [0, 0]; }
+      else { st.heading = drop; st.ground = false; st.vy = 0; }
+    }
+    // Stepping up onto something: the body has to fit there too (no shelf just above the bed it steps onto).
+    else if (g.y > y && (!canStand(w, x, z, g.y) || (inFurniture(w, x, z, g.y, st.heading) & ~inFurniture(w, st.p[0], st.p[2], y, st.heading)))) { x = st.p[0]; z = st.p[2]; st.v = [0, 0]; }
     else { y = g.y; st.surfaceId = g.surface.id; }
   }
   if (!st.ground) {

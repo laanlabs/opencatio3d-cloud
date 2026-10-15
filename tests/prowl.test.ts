@@ -272,6 +272,19 @@ describe('Catio Prowl tunnels', () => {
     expect(['sill', 'sill-out']).toContain(g.target?.surface.id);
   });
 
+  it('walks off the window ledge, down the riser and along the tunnel into the catio without a leap', () => {
+    const w = sample('garden-retreat');
+    const sill = w.surfaces.find((s) => s.id === 'sill')!;
+    const st = newCat([sill.c[0], sill.top, sill.c[1]], 0, w);
+    const been = new Set<string>();
+    for (let i = 0; i < 60 * 5 && st.surfaceId !== 'catio-floor'; i++) {
+      step(w, st, { move: [0, 1] }, 1 / 60);
+      if (st.surfaceId) been.add(st.surfaceId.split(':').slice(0, 1).join() === 'tunnel' ? 'tunnel' : st.surfaceId);
+    }
+    expect([...been]).toEqual(expect.arrayContaining(['sill-out', 'riser-step', 'tunnel']));
+    expect(st.surfaceId).toBe('catio-floor');
+  });
+
   it('keeps the tunnel to its own end when the catio has no cat door there', () => {
     const p = buildSample('garden-retreat', catalog)!;
     p.structures[0].openings = p.structures[0].openings.filter((o) => o.kind !== 'cat-door');
@@ -282,8 +295,8 @@ describe('Catio Prowl tunnels', () => {
 });
 
 describe('Catio Prowl body collision', () => {
-  /** A body sample (nose, chest, hips) inside solid furniture the cat is not standing on. */
-  const inSolid = (w: World, st: CatState) => bodyPoints(st.p[0], st.p[2], st.heading).find(([x, z]) => blocked(w, x, z, st.p[1], 0));
+  /** A body sample (nose, chest, hips) inside solid furniture or through a board the cat is not standing on. */
+  const inSolid = (w: World, st: CatState) => bodyPoints(st.p[0], st.p[2], st.heading).find(([x, z]) => blocked(w, x, z, st.p[1], 0, st.p[0], st.p[2]));
   /** A body sample outside the walls (a mesh wall, a house wall). */
   const outside = (w: World, st: CatState) => bodyPoints(st.p[0], st.p[2], st.heading).find(([x, z]) => !contained(w, x, st.p[1], z, 0, 0.1));
   const walkAt = (w: World, from: [number, number, number], heading: number, secs: number, each?: (st: CatState) => void) => {
@@ -339,6 +352,61 @@ describe('Catio Prowl body collision', () => {
     }
   });
 
+  it('does not walk through a ramp, shelf or ledge from the side or underneath', () => {
+    let walks = 0;
+    for (const id of SAMPLE_IDS) {
+      const w = sample(id);
+      const floors = w.surfaces.filter((s) => s.kind === 'floor');
+      const boards = w.surfaces.filter((s) => !s.solid && s.kind !== 'floor' && s.kind !== 'post');
+      for (const b of boards) {
+        for (const f of floors) {
+          for (let k = 0; k < 16; k++) {
+            const a = (k / 16) * Math.PI * 2;
+            for (const reach of [Math.min(b.h[0], b.h[1]) + 0.35, Math.max(b.h[0], b.h[1]) + 0.35]) {
+              const from: [number, number, number] = [b.c[0] + Math.sin(a) * reach, f.top, b.c[1] + Math.cos(a) * reach];
+              if (!inRect(f, from[0], from[2], 0.12) || !contained(w, from[0], from[1], from[2])) continue;
+              const st0 = newCat(from, a + Math.PI, w);
+              if (st0.surfaceId !== f.id || inSolid(w, st0) || outside(w, st0)) continue;
+              walks++;
+              walkAt(w, from, a + Math.PI, 2, (st) => {
+                if (!st.ground || st.leap) return;
+                expect(inSolid(w, st), `${id}: ${b.label} (${b.id}) from ${f.id} ${k}`).toBeUndefined();
+              });
+            }
+          }
+        }
+      }
+    }
+    expect(walks).toBeGreaterThan(50);
+  });
+
+  it('hops onto the lean-to ramp from beside it and walks up it', () => {
+    const w = sample('lean-to-window');
+    const ramp = w.surfaces.find((s) => s.kind === 'ramp')!;
+    const c = Math.cos(ramp.yaw), sn = Math.sin(ramp.yaw);
+    // Beside the low end (it starts at the house wall), on whichever side has floor.
+    const along = -ramp.h[0] + 0.1;
+    let st: CatState | null = null;
+    for (const side of [1, -1]) {
+      const off = side * (ramp.h[1] + 0.25);
+      const from: [number, number, number] = [ramp.c[0] + c * along - sn * off, 0, ramp.c[1] + sn * along + c * off];
+      if (!contained(w, from[0], 0, from[2]) || blocked(w, from[0], from[2], 0)) continue;
+      const toward = Math.atan2(ramp.c[0] + c * along - from[0], ramp.c[1] + sn * along - from[2]);
+      st = newCat(from, toward, w);
+      for (let i = 0; i < 60 && st.surfaceId !== ramp.id; i++) step(w, st, { move: [Math.sin(toward), Math.cos(toward)], jump: i === 20 }, 1 / 60);
+      break;
+    }
+    expect(st?.surfaceId, 'onto the ramp').toBe(ramp.id);
+    const up = Math.atan2(c, sn);
+    let top = st!.p[1];
+    for (let i = 0; i < 60 * 3; i++) {
+      step(w, st!, { move: [Math.sin(up), Math.cos(up)] }, 1 / 60);
+      top = Math.max(top, st!.p[1]);
+      if (st!.ground && !st!.leap) expect(inSolid(w, st!), `frame ${i}`).toBeUndefined();
+    }
+    expect(top).toBeGreaterThan(ramp.top - 0.2);
+  });
+
   it('steps back out when a turn swings the nose into furniture', () => {
     const w = sample('garden-retreat');
     const box = w.surfaces.find((s) => s.label === 'the litter annex')!;
@@ -356,6 +424,25 @@ describe('Catio Prowl body collision', () => {
       expect(inSolid(w, st), `side ${k}`).toBeUndefined();
     }
     expect(turns).toBeGreaterThan(0);
+  });
+
+  it('keeps furniture and boards out of the body in every template, hopping and leaping as it goes', () => {
+    let frames = 0;
+    for (const t of templates) for (const size of ['min', 'default', 'max'] as const) {
+      const w = worldOf(templateCase(t, size));
+      if (!w) continue;
+      for (const seed of [3, 5]) {
+        const r = rng(seed * 97);
+        const st = newCat(w.start.p, w.start.heading, w);
+        let move: [number, number] = [0, 1];
+        for (let i = 0; i < 60 * 20; i++) {
+          if (i % 40 === 0) { const a = r() * Math.PI * 2; move = [Math.sin(a), Math.cos(a)]; }
+          step(w, st, { move, jump: i % 70 === 69 }, 1 / 60);
+          if (i > 30 && st.ground && !st.leap) { frames++; expect(inSolid(w, st), `${t} ${size} seed ${seed} frame ${i}`).toBeUndefined(); }
+        }
+      }
+    }
+    expect(frames).toBeGreaterThan(10000);
   });
 
   it('never ends up with the body inside furniture on a random prowl', () => {

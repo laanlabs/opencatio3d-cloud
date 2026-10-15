@@ -30,8 +30,11 @@ export interface Surface extends Rect {
   top: number;
   /** Ramp: height at the local −x end. */
   low?: number;
+  /** Ramp: board thickness. */
+  thick?: number;
   bottom: number;
-  /** Solid furniture blocks a cat below its top; ledges (shelves, tables, hammocks) only carry it. */
+  /** Solid furniture blocks a cat below its top; ledges (shelves, ramps, tables, hammocks) carry it, and only a
+   *  board between a step above its paws and its head is in its way (physics `blocked`). */
   solid: boolean;
   /** Indoor furniture is drawn from the surface (the catio is drawn from the generator's parts). */
   color?: string;
@@ -149,7 +152,7 @@ export function buildWorld(p: Project, a: Assembly, cat: Catalog): World | null 
       const c: Vec2 = [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2];
       if (pt.role === 'ramp-board') {
         const lo = Math.min(ya, yb) === ya;
-        surfaces.push({ id, kind: 'ramp', label: furnLabel(pt.role), region: 'catio', c, h: [run / 2, wide / 2], yaw: lo ? yaw : yaw + Math.PI, low: r3(elev + Math.min(ya, yb) + thick / 2), top: r3(elev + Math.max(ya, yb) + thick / 2), bottom: elev, solid: false });
+        surfaces.push({ id, kind: 'ramp', label: furnLabel(pt.role), region: 'catio', c, h: [run / 2, wide / 2], yaw: lo ? yaw : yaw + Math.PI, low: r3(elev + Math.min(ya, yb) + thick / 2), top: r3(elev + Math.max(ya, yb) + thick / 2), bottom: elev, thick, solid: false });
       } else {
         const top = r3(elev + ya + thick / 2);
         surfaces.push({ id, kind: pt.role === 'bridge-board' ? 'bridge' : 'shelf', label: furnLabel(pt.role), region: 'catio', c, h: [run / 2, wide / 2], yaw, top, bottom: top - thick, solid: false });
