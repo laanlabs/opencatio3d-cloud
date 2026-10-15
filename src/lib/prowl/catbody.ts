@@ -252,7 +252,8 @@ function paint(b: Built, coat: string): Float32Array {
     } else {
       // Face, in the head's frame.
       const qx = x - b.headAt[0], qy = y - b.headAt[1], qz = z - b.headAt[2];
-      light = part === 'jaw' ? 1 : smooth(-0.004, -0.017, qy) * smooth(0.004, 0.026, qz);
+      // Pale muzzle and chin; the cheeks keep the coat colour.
+      light = part === 'jaw' ? 1 : smooth(-0.006, -0.018, qy) * smooth(0.014, 0.034, qz) * smooth(0.03, 0.017, Math.abs(qx));
       if (st > 0.2) {
         const brow = smooth(0.0, 0.016, qy) * smooth(-0.012, 0.016, qz) * smooth(0.032, 0.02, Math.abs(qx));
         const m = Math.min(...[-0.015, -0.005, 0.005, 0.015].map((lx) => Math.abs(qx - lx)));

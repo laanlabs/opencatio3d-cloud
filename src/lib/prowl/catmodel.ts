@@ -147,7 +147,8 @@ export function makeCatModel(coat: string): CatModel {
   const headFur = own(new THREE.MeshStandardMaterial({ map: furHead(coat), roughness: 0.82 }));
   const tailFur = own(new THREE.MeshStandardMaterial({ map: furRings(coat, 1), roughness: 0.85 }));
   const pink = own(new THREE.MeshStandardMaterial({ color: k.nose, roughness: 0.6 }));
-  const innerEar = own(new THREE.MeshStandardMaterial({ color: '#e3a9a6', roughness: 0.9, side: THREE.DoubleSide }));
+  const innerEar = own(new THREE.MeshStandardMaterial({ color: new THREE.Color('#d99f98').lerp(new THREE.Color(k.light), 0.25), roughness: 0.95, side: THREE.DoubleSide }));
+  const rim = own(new THREE.MeshStandardMaterial({ color: '#2a201b', roughness: 0.6 }));
   const iris = own(new THREE.MeshStandardMaterial({ color: k.eye, roughness: 0.08, emissive: new THREE.Color(k.eye).multiplyScalar(0.15) }));
   const pupil = own(new THREE.MeshStandardMaterial({ color: '#0b0b0c', roughness: 0.05 }));
   const mouth = own(new THREE.MeshStandardMaterial({ color: '#5a2a2e', roughness: 0.7 }));
@@ -166,9 +167,12 @@ export function makeCatModel(coat: string): CatModel {
   const head = new THREE.Bone();
   head.position.set(0, 0.05, 0.072);
   neck.add(head);
-  const nose = mesh(new THREE.SphereGeometry(0.0056, 10, 8), pink, false);
-  nose.scale.set(1.45, 0.72, 0.85);
-  nose.position.set(0, -0.007, 0.0525);
+  // Nose leather: small, wider at the top, sitting on the end of the muzzle.
+  const noseGeo = new THREE.SphereGeometry(0.0046, 12, 8);
+  noseGeo.scale(1.45, 0.78, 0.8);
+  { const q = noseGeo.attributes.position; for (let i = 0; i < q.count; i++) if (q.getY(i) < 0) q.setX(i, q.getX(i) * (1 + q.getY(i) / 0.0045 * 0.45)); }
+  const nose = mesh(noseGeo, pink, false);
+  nose.position.set(0, -0.0065, 0.0515);
   head.add(nose);
   const jaw = new THREE.Bone();
   jaw.position.set(0, -0.029, 0.018);
@@ -180,24 +184,28 @@ export function makeCatModel(coat: string): CatModel {
   const eyes: THREE.Group[] = [];
   for (const s of [-1, 1]) {
     const e = new THREE.Group();
-    e.position.set(s * 0.0205, 0.004, 0.0335);
+    e.position.set(s * 0.0205, 0.005, 0.0312);
     e.rotation.set(0, s * 0.45, -s * 0.14); // almond eyes, tilted up at the outer corner
-    const ball = mesh(new THREE.SphereGeometry(0.0112, 16, 12), iris, false);
-    ball.scale.set(1.05, 0.7, 0.5);
-    const pu = mesh(new THREE.SphereGeometry(0.0115, 12, 10), pupil, false);
-    pu.scale.set(0.28, 0.68, 0.5);
-    pu.position.z = 0.0026;
-    e.add(ball, pu);
+    // A dark rim (cats' "eyeliner"), the iris set into it, and the pupil flush with the iris.
+    const lid = mesh(new THREE.SphereGeometry(0.0146, 16, 12), rim, false);
+    lid.scale.set(1.1, 0.88, 0.36);
+    lid.position.z = -0.0008;
+    const ball = mesh(new THREE.SphereGeometry(0.0136, 18, 14), iris, false);
+    ball.scale.set(1.04, 0.82, 0.42);
+    const pu = mesh(new THREE.SphereGeometry(0.0136, 14, 12), pupil, false);
+    pu.scale.set(0.36, 0.78, 0.43);
+    pu.position.z = 0.0002;
+    e.add(lid, ball, pu);
     head.add(e);
     eyes.push(e);
   }
   const ears: THREE.Group[] = [];
-  const earGeo = new THREE.ConeGeometry(0.022, 0.04, 14, 1);
-  earGeo.scale(1, 1, 0.4);
+  const earGeo = new THREE.ConeGeometry(0.024, 0.04, 16, 1);
+  earGeo.scale(1, 1, 0.42);
   earGeo.translate(0, 0.02, 0);
-  const innerGeo = new THREE.ConeGeometry(0.016, 0.03, 12, 1);
-  innerGeo.scale(1, 1, 0.25);
-  innerGeo.translate(0, 0.016, 0.006);
+  const innerGeo = new THREE.ConeGeometry(0.0165, 0.029, 14, 1);
+  innerGeo.scale(1, 1, 0.22);
+  innerGeo.translate(0, 0.0165, 0.0068);
   for (const s of [-1, 1]) {
     const e = new THREE.Group();
     e.position.set(s * 0.026, 0.03, -0.008);
