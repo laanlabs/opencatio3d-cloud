@@ -1,10 +1,11 @@
-// Catio Prowl's cat: a slender, smooth-shaded short-haired cat with painted tabby fur, almond eyes,
-// whiskers and a jointed rig: two-bone leg IK (hind legs with a raised hock), a ten-joint tail and a
+// Catio Prowl's cat: one smooth skinned body (catbody.ts) with painted tabby fur, almond eyes, whiskers
+// and a jointed rig: two-bone leg IK (hind legs with a raised hock), a ten-joint tail and a
 // neck and head that look at things. Poses (stand, walk, trot, sneak, sit, loaf, sleep, leap, scratch,
 // drink, sniff, watch, swipe, meow) blend smoothly into one another; the walk keeps its feet planted by
 // matching stride to speed. Browser only (three.js); the game decides what the cat is doing.
 import * as THREE from 'three';
-import { coatOf, furBody, furHead, furNeck, furRings } from './textures';
+import { coatOf, furHead, furRings } from './textures';
+import { catBody } from './catbody';
 
 export type CatBusy = 'scratch' | 'sofa' | 'drink' | 'eat' | 'sniff' | 'watch' | 'nap' | 'swipe' | 'meow' | null;
 export interface CatDrive {
@@ -47,38 +48,6 @@ function profile(t: number, pts: [number, number][]) {
     }
   }
   return pts[pts.length - 1][1];
-}
-
-function torsoGeometry() {
-  const g = new THREE.SphereGeometry(1, 40, 26);
-  g.rotateX(Math.PI / 2); // poles along z, the chest (v = 1) at +z
-  const p = g.attributes.position;
-  for (let i = 0; i < p.count; i++) {
-    const x = p.getX(i), y = p.getY(i), z = p.getZ(i);
-    const rx = profile(z, [[-1, 0.06], [-0.55, 0.068], [-0.05, 0.058], [0.45, 0.07], [1, 0.064]]);
-    const ry = profile(z, [[-1, 0.064], [-0.55, 0.07], [-0.1, 0.06], [0.42, 0.084], [1, 0.074]]);
-    // Underside: a deep chest tucking up toward the hind legs.
-    let Y = y * ry * (y < 0 ? 1.04 + 0.1 * Math.max(0, z) - 0.08 * Math.max(0, -z - 0.1) : 1);
-    Y += 0.006 * Math.cos(z * Math.PI * 0.9) - 0.004 * z; // a little rise at the hips
-    p.setXYZ(i, x * rx, Y, z * 0.205);
-  }
-  g.computeVertexNormals();
-  return g;
-}
-
-function headGeometry() {
-  const g = new THREE.SphereGeometry(0.05, 32, 22);
-  const p = g.attributes.position;
-  for (let i = 0; i < p.count; i++) {
-    let x = p.getX(i), y = p.getY(i), z = p.getZ(i);
-    x *= 1.16 * (y < 0.01 ? 1 + 0.14 * Math.min(1, (0.01 - y) / 0.05) : 1); // wide cheeks
-    y *= y > 0 ? 0.8 - 0.1 * Math.max(0, z / 0.05) : 0.92; // a flat crown sloping to the brow
-    z *= 0.9;
-    if (z < 0) z *= 1.1; // back of the skull
-    p.setXYZ(i, x, y, z);
-  }
-  g.computeVertexNormals();
-  return g;
 }
 
 /** A smooth tapered tube swept through control points (Catmull-Rom), rebuilt every frame: legs and tail. */
@@ -175,12 +144,8 @@ export function makeCatModel(coat: string): CatModel {
   const k = coatOf(coat);
   const owned: { dispose(): void }[] = [];
   const own = <T extends { dispose(): void }>(x: T) => (owned.push(x), x);
-  const fur = own(new THREE.MeshStandardMaterial({ map: furBody(coat), roughness: 0.82 }));
   const headFur = own(new THREE.MeshStandardMaterial({ map: furHead(coat), roughness: 0.82 }));
-  const legFur = own(new THREE.MeshStandardMaterial({ map: furRings(coat, 0.45), roughness: 0.85 }));
   const tailFur = own(new THREE.MeshStandardMaterial({ map: furRings(coat, 1), roughness: 0.85 }));
-  const muscleFur = own(new THREE.MeshStandardMaterial({ map: furRings(coat, 0), roughness: 0.85 })); // plain: no rings on a round haunch
-  const light = own(new THREE.MeshStandardMaterial({ color: k.light, roughness: 0.85 }));
   const pink = own(new THREE.MeshStandardMaterial({ color: k.nose, roughness: 0.6 }));
   const innerEar = own(new THREE.MeshStandardMaterial({ color: '#e3a9a6', roughness: 0.9, side: THREE.DoubleSide }));
   const iris = own(new THREE.MeshStandardMaterial({ color: k.eye, roughness: 0.08, emissive: new THREE.Color(k.eye).multiplyScalar(0.15) }));
@@ -188,73 +153,54 @@ export function makeCatModel(coat: string): CatModel {
   const mouth = own(new THREE.MeshStandardMaterial({ color: '#5a2a2e', roughness: 0.7 }));
 
   const root = new THREE.Group();
-  const body = new THREE.Group();
+  // Joints are bones: the body mesh (catbody.ts) is skinned to them; eyes, ears, nose and whiskers ride on the head.
+  const body = new THREE.Bone();
+  body.position.y = 0.19;
   root.add(body);
   const mesh = (g: THREE.BufferGeometry, m: THREE.Material, shadow = true) => { own(g); const x = new THREE.Mesh(g, m); x.castShadow = shadow; return x; };
 
-  body.add(mesh(torsoGeometry(), fur));
-  // The pale bib is painted into the body fur (furBody), so it has no edge.
-
   // Neck and head.
-  const neck = new THREE.Group();
+  const neck = new THREE.Bone();
   neck.position.set(0, 0.03, 0.155);
   body.add(neck);
-  const neckFur = own(new THREE.MeshStandardMaterial({ map: furNeck(coat), roughness: 0.84 }));
-  const neckTube = new Tube(14, 16, neckFur, 1);
-  owned.push(neckTube.mesh.geometry);
-  body.add(neckTube.mesh);
-  const marker = (parent: THREE.Object3D, x: number, y: number, z: number) => { const o = new THREE.Object3D(); o.position.set(x, y, z); parent.add(o); return o; };
-  const head = new THREE.Group();
+  const head = new THREE.Bone();
   head.position.set(0, 0.05, 0.072);
   neck.add(head);
-  // The neck's path: inside the chest, the base of the neck, its middle, the nape and the middle of the skull.
-  const neckPath = [marker(body, 0, -0.004, 0.1), marker(body, 0, 0.026, 0.15), marker(neck, 0, 0.036, 0.038), marker(head, 0, -0.004, -0.02), marker(head, 0, -0.006, 0.004)];
-  const neckRadii = [0.062, 0.058, 0.052, 0.048, 0.04];
-  const skull = mesh(headGeometry(), headFur);
-  head.add(skull);
-  head.scale.setScalar(1.1);
-  const muzzle = mesh(new THREE.SphereGeometry(0.025, 18, 12), light, false);
-  muzzle.scale.set(1.25, 0.78, 0.9);
-  muzzle.position.set(0, -0.017, 0.036);
-  head.add(muzzle);
-  const nose = mesh(new THREE.SphereGeometry(0.0062, 10, 8), pink, false);
-  nose.scale.set(1.4, 0.72, 0.85);
-  nose.position.set(0, -0.007, 0.057);
+  const nose = mesh(new THREE.SphereGeometry(0.0056, 10, 8), pink, false);
+  nose.scale.set(1.45, 0.72, 0.85);
+  nose.position.set(0, -0.007, 0.0525);
   head.add(nose);
-  const jaw = new THREE.Group();
+  const jaw = new THREE.Bone();
   jaw.position.set(0, -0.029, 0.018);
   head.add(jaw);
-  const jawMesh = mesh(new THREE.SphereGeometry(0.016, 12, 8), light, false);
-  jawMesh.scale.set(1.15, 0.5, 1.15);
-  jawMesh.position.set(0, -0.002, 0.016);
-  const inside = mesh(new THREE.SphereGeometry(0.013, 10, 8), mouth, false);
+  const inside = mesh(new THREE.SphereGeometry(0.011, 10, 8), mouth, false);
   inside.scale.set(1.1, 0.4, 1.1);
-  inside.position.set(0, 0.004, 0.016);
-  jaw.add(jawMesh, inside);
+  inside.position.set(0, 0.004, 0.014);
+  jaw.add(inside);
   const eyes: THREE.Group[] = [];
   for (const s of [-1, 1]) {
     const e = new THREE.Group();
-    e.position.set(s * 0.024, 0.006, 0.035);
-    e.rotation.set(0, s * 0.42, -s * 0.12); // almond eyes, tilted up at the outer corner
-    const ball = mesh(new THREE.SphereGeometry(0.0122, 16, 12), iris, false);
-    ball.scale.set(1.05, 0.72, 0.5);
-    const pu = mesh(new THREE.SphereGeometry(0.0125, 12, 10), pupil, false);
-    pu.scale.set(0.3, 0.7, 0.5);
-    pu.position.z = 0.0028;
+    e.position.set(s * 0.0205, 0.004, 0.0335);
+    e.rotation.set(0, s * 0.45, -s * 0.14); // almond eyes, tilted up at the outer corner
+    const ball = mesh(new THREE.SphereGeometry(0.0112, 16, 12), iris, false);
+    ball.scale.set(1.05, 0.7, 0.5);
+    const pu = mesh(new THREE.SphereGeometry(0.0115, 12, 10), pupil, false);
+    pu.scale.set(0.28, 0.68, 0.5);
+    pu.position.z = 0.0026;
     e.add(ball, pu);
     head.add(e);
     eyes.push(e);
   }
   const ears: THREE.Group[] = [];
-  const earGeo = new THREE.ConeGeometry(0.025, 0.044, 14, 1);
-  earGeo.scale(1, 1, 0.42);
-  earGeo.translate(0, 0.022, 0);
-  const innerGeo = new THREE.ConeGeometry(0.018, 0.033, 12, 1);
+  const earGeo = new THREE.ConeGeometry(0.022, 0.04, 14, 1);
+  earGeo.scale(1, 1, 0.4);
+  earGeo.translate(0, 0.02, 0);
+  const innerGeo = new THREE.ConeGeometry(0.016, 0.03, 12, 1);
   innerGeo.scale(1, 1, 0.25);
-  innerGeo.translate(0, 0.018, 0.0065);
+  innerGeo.translate(0, 0.016, 0.006);
   for (const s of [-1, 1]) {
     const e = new THREE.Group();
-    e.position.set(s * 0.031, 0.026, -0.006);
+    e.position.set(s * 0.026, 0.03, -0.008);
     e.rotation.set(-0.12, s * 0.28, -s * 0.3);
     e.add(mesh(earGeo, headFur), mesh(innerGeo, innerEar, false));
     head.add(e);
@@ -262,50 +208,35 @@ export function makeCatModel(coat: string): CatModel {
   }
   // Whiskers.
   const wpts: number[] = [];
-  for (const s of [-1, 1]) for (const [dy, dz] of [[0.008, 0.006], [0, 0], [-0.008, -0.004]]) wpts.push(s * 0.02, -0.018, 0.052, s * 0.085, -0.016 + dy * 2.2, 0.06 + dz * 2);
+  for (const s of [-1, 1]) for (const [dy, dz] of [[0.008, 0.006], [0, 0], [-0.008, -0.004]]) wpts.push(s * 0.018, -0.018, 0.047, s * 0.08, -0.016 + dy * 2.2, 0.055 + dz * 2);
   const wg = own(new THREE.BufferGeometry());
   wg.setAttribute('position', new THREE.Float32BufferAttribute(wpts, 3));
   const whiskers = new THREE.LineSegments(wg, own(new THREE.LineBasicMaterial({ color: '#f4f1ea', transparent: true, opacity: 0.75 })));
   head.add(whiskers);
   owned.push(earGeo, innerGeo);
 
-  // Legs: joints are groups; segments hang down (-y) from their joint.
-  interface Leg { hip: THREE.Group; j: THREE.Group[]; paw: THREE.Mesh; front: boolean; x: number; tube: Tube; radii: number[] }
-  const pawGeo = own(new THREE.SphereGeometry(0.017, 14, 10));
-  pawGeo.scale(1, 0.55, 1.35);
-  pawGeo.translate(0, 0.002, 0.007);
+  // Legs: joints are bones; segments hang down (-y) from their joint.
+  interface Leg { hip: THREE.Bone; j: THREE.Bone[]; paw: THREE.Bone; front: boolean; x: number; side: number }
   const legs: Leg[] = [];
   for (const [front, s] of [[true, -1], [true, 1], [false, -1], [false, 1]] as const) {
     const at = front ? SHOULDER : HIP;
-    const hip = new THREE.Group();
+    const hip = new THREE.Bone();
     hip.position.set(s * at[0], at[1], at[2]);
     body.add(hip);
     const lens = front ? [F1, F2] : [H1, H2, H3];
-    const j: THREE.Group[] = [];
+    const j: THREE.Bone[] = [];
     let parent: THREE.Object3D = hip;
     lens.forEach((_, i) => {
-      const g = new THREE.Group();
+      const g = new THREE.Bone();
       if (i > 0) g.position.y = -lens[i - 1];
-      if (i === 0) {
-        // Shoulder blade or haunch: muscle along the top bone (the round haunch of a sitting cat).
-        const m = mesh(new THREE.SphereGeometry(1, 18, 12), muscleFur);
-        if (front) { m.scale.set(0.02, 0.048, 0.028); m.position.set(-s * 0.005, -0.022, 0.002); }
-        else { m.scale.set(0.026, 0.052, 0.042); m.position.set(-s * 0.011, -0.034, 0.004); }
-        g.add(m);
-      }
       parent.add(g);
       j.push(g);
       parent = g;
     });
-    const paw = mesh(pawGeo, k.stripes > 0.5 ? legFur : light, false);
+    const paw = new THREE.Bone();
     paw.position.y = -lens[lens.length - 1];
     parent.add(paw);
-    const tube = new Tube(front ? 16 : 20, 12, legFur, 3);
-    owned.push(tube.mesh.geometry);
-    body.add(tube.mesh);
-    // Radii at: inside the body, shoulder/hip, elbow/knee, (hock), paw.
-    const radii = front ? [0.026, 0.023, 0.0145, 0.0115] : [0.029, 0.034, 0.019, 0.012, 0.011];
-    legs.push({ hip, j, paw, front, x: s * at[0], tube, radii });
+    legs.push({ hip, j, paw, front, x: s * at[0], side: s });
   }
 
   // Tail: a chain of joints from the rump; each segment points up (+y) from its joint.
@@ -327,6 +258,13 @@ export function makeCatModel(coat: string): CatModel {
   const tailTube = new Tube(34, 10, tailFur, TAIL_N);
   owned.push(tailTube.mesh.geometry);
   body.add(tailTube.mesh);
+
+  // The body, skinned to the joints at rest.
+  root.updateMatrixWorld(true);
+  const bones: THREE.Bone[] = [body, neck, head, jaw, ...legs.flatMap((L) => [L.hip, ...L.j, L.paw])];
+  const skin = catBody({ body, neck, head, jaw, legs: legs.map((L) => ({ hip: L.hip, j: L.j, paw: L.paw, front: L.front, side: L.side })) }, bones, coat);
+  owned.push(skin.geometry, skin.material as THREE.Material, skin.skeleton);
+  root.add(skin);
 
   // ---------- animation ----------
   const cur = params({});
@@ -478,43 +416,20 @@ export function makeCatModel(coat: string): CatModel {
     sweep();
   }
 
-  // Sweep the leg and tail tubes through their joints (in the body's frame).
+  // Sweep the tail tube through its joints (in the body's frame).
   const inv = new THREE.Matrix4();
   const jp = (o: THREE.Object3D, out: THREE.Vector3) => out.setFromMatrixPosition(o.matrixWorld).applyMatrix4(inv);
-  const legPts = legs.map((L) => Array.from({ length: L.front ? 4 : 5 }, () => new THREE.Vector3()));
-  const UP = new THREE.Vector3(0, 0.03, 0), BACK = new THREE.Vector3(0, 0, 0.03);
+  const BACK = new THREE.Vector3(0, 0, 0.03);
   const tailPts = Array.from({ length: TAIL_N + 2 }, () => new THREE.Vector3());
-  const neckPts = neckPath.map(() => new THREE.Vector3());
   function sweep() {
     root.updateMatrixWorld(true);
     inv.copy(body.matrixWorld).invert();
-    neckPath.forEach((o, i) => jp(o, neckPts[i]));
-    neckTube.update(neckPts, (u) => {
-      const x = u * (neckRadii.length - 1), a = Math.floor(Math.min(neckRadii.length - 1 - 1e-6, x)), t2 = x - a;
-      return neckRadii[a] + (neckRadii[a + 1] - neckRadii[a]) * (t2 * t2 * (3 - 2 * t2));
-    });
-    legs.forEach((L, i) => {
-      const pts = legPts[i];
-      // From inside the body, through the shoulder or hip, down each joint to the paw.
-      jp(L.hip, pts[1]);
-      pts[0].copy(pts[1]).add(UP);
-      jp(L.j[1], pts[2]);
-      if (L.front) jp(L.paw, pts[3]);
-      else { jp(L.j[2], pts[3]); jp(L.paw, pts[4]); }
-      const r = L.radii;
-      const n = pts.length - 1;
-      L.tube.update(pts, (u) => {
-        const x = u * n, a = Math.floor(Math.min(n - 1e-6, x)), t2 = x - a;
-        const ra = r[a], rb = r[a + 1];
-        return ra + (rb - ra) * (t2 * t2 * (3 - 2 * t2));
-      });
-    });
     jp(tailRoot, tailPts[0]);
     tailPts[0].add(BACK);
     for (let i = 0; i < TAIL_N; i++) jp(tail[i], tailPts[i + 1]);
     jp(tailTip, tailPts[TAIL_N + 1]);
     tailTube.update(tailPts, (u) => {
-      const base = 0.0175 - u * 0.0085;
+      const base = 0.0165 - u * 0.0085;
       return u > 0.965 ? base * Math.sqrt(Math.max(0, (1 - u) / 0.035)) : base;
     });
   }

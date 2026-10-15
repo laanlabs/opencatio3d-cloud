@@ -30,7 +30,6 @@ const hex = (c: string) => new THREE.Color(c);
 const css = (c: THREE.Color) => `#${c.getHexString()}`;
 const mix = (a: string, b: string, k: number) => css(hex(a).lerp(hex(b), k));
 /** sRGB 0–255 channels of a #rrggbb colour (no colour management: canvas pixels are sRGB). */
-const rgb = (c: string) => [1, 3, 5].map((i) => parseInt(c.slice(i, i + 2), 16));
 
 /** Speckle a painted canvas with ±amp brightness noise. */
 function grain(g: CanvasRenderingContext2D, w: number, h: number, amp: number, seed: number) {
@@ -58,38 +57,6 @@ const COATS: Record<string, Coat> = {
 };
 export const coatOf = (c: string): Coat => COATS[c] ?? { base: c, dark: mix(c, '#000000', 0.45), light: mix(c, '#ffffff', 0.55), stripes: 0.5, eye: '#c9a43a', nose: '#d98a8a' };
 
-const smooth = (a: number, b: number, x: number) => { const t = Math.max(0, Math.min(1, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
-
-/** Body fur for a sphere stretched along z (u around the body, spine at u = 0.75; v = 1 at the chest). */
-export function furBody(coat: string): THREE.Texture {
-  const k = coatOf(coat);
-  return canvasTexture(`fur-body:${coat}`, 256, 256, (g, w, h) => {
-    const img = g.createImageData(w, h);
-    const B = rgb(k.base), D = rgb(k.dark), L = rgb(k.light);
-    const r = rng(7);
-    const wob = Array.from({ length: 16 }, () => r() * 6.28);
-    const lerp = (a: number[], b: number[], t: number) => { a[0] += (b[0] - a[0]) * t; a[1] += (b[1] - a[1]) * t; a[2] += (b[2] - a[2]) * t; };
-    for (let y = 0; y < h; y++) {
-      const v = 1 - y / h;
-      for (let x = 0; x < w; x++) {
-        const u = x / w;
-        const dorsal = Math.cos(2 * Math.PI * (u - 0.75));
-        const c = [...B];
-        lerp(c, L, smooth(-0.15, -0.75, dorsal) * 0.9);
-        // Tabby bands across the back, wavy, fading toward the belly; a darker line down the spine.
-        const s = Math.sin(v * Math.PI * 2 * 7.5 + Math.sin(u * Math.PI * 6 + wob[Math.floor(v * 15)]) * 0.9 + Math.sin(u * Math.PI * 12) * 0.15);
-        lerp(c, D, smooth(0.35, 0.8, s) * smooth(-0.35, 0.45, dorsal) * k.stripes * 0.85);
-        lerp(c, D, smooth(0.86, 0.98, dorsal) * k.stripes * 0.5);
-        // A pale bib on the front of the chest.
-        lerp(c, L, smooth(0.8, 0.95, v) * smooth(0.45, -0.2, dorsal) * 0.92);
-        const i = (y * w + x) * 4;
-        img.data[i] = c[0]; img.data[i + 1] = c[1]; img.data[i + 2] = c[2]; img.data[i + 3] = 255;
-      }
-    }
-    g.putImageData(img, 0, 0);
-    grain(g, w, h, 0.06, 11);
-  }, { repeat: false });
-}
 
 /** Head fur (sphere UVs, the face at u = 0.25): forehead "M" stripes and cheek lines. */
 export function furHead(coat: string): THREE.Texture {
@@ -112,30 +79,6 @@ export function furHead(coat: string): THREE.Texture {
       g.globalAlpha = 1;
     }
     grain(g, w, h, 0.05, 12);
-  }, { repeat: false });
-}
-
-/** Neck fur for a swept tube (u around it, the nape at u = 0.25 and the throat at u = 0.75; v from chest to head):
- *  the body colour, a pale throat and the faint "necklace" bands of a tabby. */
-export function furNeck(coat: string): THREE.Texture {
-  const k = coatOf(coat);
-  return canvasTexture(`fur-neck:${coat}`, 64, 64, (g, w, h) => {
-    const img = g.createImageData(w, h);
-    const B = rgb(k.base), D = rgb(k.dark), L = rgb(k.light);
-    const lerp = (a: number[], b: number[], t: number) => { a[0] += (b[0] - a[0]) * t; a[1] += (b[1] - a[1]) * t; a[2] += (b[2] - a[2]) * t; };
-    for (let y = 0; y < h; y++) {
-      const v = y / h;
-      for (let x = 0; x < w; x++) {
-        const nape = Math.cos(2 * Math.PI * (x / w - 0.25));
-        const c = [...B];
-        lerp(c, L, smooth(-0.1, -0.7, nape) * 0.9);
-        lerp(c, D, smooth(0.4, 0.85, Math.sin(v * Math.PI * 2 * 2.5)) * smooth(-0.3, 0.5, nape) * k.stripes * 0.7);
-        const i = (y * w + x) * 4;
-        img.data[i] = c[0]; img.data[i + 1] = c[1]; img.data[i + 2] = c[2]; img.data[i + 3] = 255;
-      }
-    }
-    g.putImageData(img, 0, 0);
-    grain(g, w, h, 0.05, 14);
   }, { repeat: false });
 }
 
