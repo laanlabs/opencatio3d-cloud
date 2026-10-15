@@ -26,6 +26,8 @@ export interface CatDrive {
   backDy: number;
   /** Seconds since the last meow. */
   meowAgo: number;
+  /** Room above the paws just ahead (a shelf or roof over the cat), if less than a stretch needs. */
+  headroom?: number;
 }
 
 export interface CatModel {
@@ -310,8 +312,10 @@ export function makeCatModel(coat: string): CatModel {
     const lying: Partial<Params> = { bodyY: 0.064, pitch: -0.06, hock: -1.5, tailBase: -1.6, tailBend: 0, tailTip: 0, tailCurl: 0.36, tailSway: 0.03, feet: [[0.15, 0.004], [0.15, 0.004], [-0.035, 0.004], [-0.035, 0.004]] };
     switch (d.busy) {
       case 'scratch': case 'sofa': {
-        const s = Math.sin(t * 11) * 0.05;
-        return { p: params({ bodyY: 0.2, pitch: -1.0, neck: -0.25, headPitch: 0.5, tailBase: -1.45, tailTip: 0.15, tailSway: 0.2, ears: 0.1, feet: [[0.25, 0.26 + s], [0.25, 0.26 - s], [-0.02, 0], [-0.02, 0]] }), rate: 10 };
+        // Up on the hind legs, raking; under a shelf, a long low stretch instead.
+        const lo = clamp((0.62 - (d.headroom ?? 9)) / 0.18, 0, 1), m = (a: number, b: number) => a + (b - a) * lo;
+        const s = Math.sin(t * 11) * m(0.05, 0.035);
+        return { p: params({ bodyY: m(0.2, 0.12), pitch: m(-1.0, -0.32), neck: m(-0.25, 0.05), headPitch: m(0.5, 0.15), tailBase: -1.45, tailTip: 0.15, tailSway: 0.2, ears: 0.1, hock: m(-0.28, -0.9), feet: [[m(0.25, 0.27), m(0.26, 0.1) + s], [m(0.25, 0.27), m(0.26, 0.1) - s], [m(-0.02, -0.1), 0], [m(-0.02, -0.1), 0]] }), rate: 10 };
       }
       case 'drink': case 'eat': {
         const lap = Math.sin(t * 9) * 0.06;

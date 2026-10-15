@@ -4,7 +4,7 @@
 import type { Catalog } from '../catalog/catalog';
 import type { Vec2, Vec3 } from '../model/types';
 import type { Pose } from '../quest/sim';
-import { type CatState, type LeapTarget, type MoveInput, HEAD, groundAt, inRect, leapTarget, newCat, regionAt, step } from './physics';
+import { type CatState, type LeapTarget, type MoveInput, HEAD, canStand, groundAt, inFurnitureAt, inRect, leapTarget, newCat, regionAt, step } from './physics';
 import type { Item, Region, Spot, World } from './world';
 
 export type TaskId = 'sill' | 'tunnel' | 'catio' | 'perch' | 'bird' | 'knock' | 'scratch' | 'toys' | 'drink' | 'sniff' | 'nap';
@@ -16,7 +16,8 @@ export type Action =
   | { kind: 'knock'; item: ItemState; label: string }
   | { kind: 'watch'; label: string }
   | { kind: 'spot'; spot: Spot; label: string };
-export type Busy = { kind: 'scratch' | 'sofa' | 'drink' | 'eat' | 'sniff' | 'watch' | 'nap' | 'swipe'; t: number; T: number; spot?: Spot };
+/** `from`/`to`: the cat steps into place over the first moments (paws on the post, chin over the bowl). */
+export type Busy = { kind: 'scratch' | 'sofa' | 'drink' | 'eat' | 'sniff' | 'watch' | 'nap' | 'swipe'; t: number; T: number; spot?: Spot; from?: Vec3; to?: Vec3 };
 export type Message = { text: string; tone: 'info' | 'good' | 'task' | 'warn'; sound?: 'meow' | 'crash' | 'chirp' | 'ding' | 'purr' | 'thud' };
 
 const KEY = 'oc3d-prowl-progress-v1';
@@ -155,6 +156,11 @@ export class Prowl {
     this.updateItems(dt);
     if (this.busy) {
       this.busy.t += dt;
+      const b = this.busy;
+      if (b.from && b.to) {
+        const k = Math.min(1, b.t / 0.35), e = k * k * (3 - 2 * k);
+        for (let i = 0; i < 3; i++) this.cat.p[i] = b.from[i] + (b.to[i] - b.from[i]) * e;
+      }
       if (this.busy.t >= this.busy.T) this.finishBusy();
       this.target = null;
       this.action = null;
@@ -279,7 +285,30 @@ export class Prowl {
     const kind: Busy['kind'] = s.kind === 'plant' ? 'sniff' : s.kind;
     this.busy = { kind, t: 0, T, spot: s };
     if (s.kind === 'nap') this.say('Zzz…', 'info', 'purr');
-    if (s.kind === 'scratch' || s.kind === 'sofa') this.cat.heading = Math.atan2(s.p[0] - this.cat.p[0], s.p[2] - this.cat.p[2]);
+    if (s.kind === 'scratch' || s.kind === 'sofa' || s.kind === 'drink' || s.kind === 'eat') {
+      this.cat.heading = Math.atan2(s.p[0] - this.cat.p[0], s.p[2] - this.cat.p[2]);
+      const to = this.stepTo(s);
+      if (to) { this.busy.from = [...this.cat.p]; this.busy.to = to; }
+    }
+  }
+
+  /** Where the cat stands for a spot it faces: front paws on the post or sofa (up on its hind legs they reach
+   *  0.26 m ahead), chin over the bowl (0.23 m ahead in a crouch). Null to stay put: already there, or no room. */
+  private stepTo(s: Spot): Vec3 | null {
+    const c = this.cat;
+    const fx = Math.sin(c.heading), fz = Math.cos(c.heading);
+    let ahead: number;
+    if (s.kind === 'scratch' || s.kind === 'sofa') {
+      // The near face of the post: the first solid thing straight ahead at paw height.
+      let face = -1;
+      for (let d = 0; d <= 0.8; d += 0.01) if (inFurnitureAt(this.world, c.p[0] + fx * d, c.p[1] + 0.22, c.p[2] + fz * d, 0)) { face = d; break; }
+      if (face < 0) return null;
+      ahead = face - 0.26;
+    } else ahead = Math.hypot(s.p[0] - c.p[0], s.p[2] - c.p[2]) - 0.23;
+    if (Math.abs(ahead) < 0.01 || Math.abs(ahead) > 0.45) return null;
+    const x = c.p[0] + fx * ahead, z = c.p[2] + fz * ahead;
+    if (Math.abs(groundAt(this.world, x, z, c.p[1] + 0.02).y - c.p[1]) > 0.02 || !canStand(this.world, x, z, c.p[1])) return null;
+    return [x, c.p[1], z];
   }
 
   meow() {

@@ -127,7 +127,8 @@ export function blocked(w: World, x: number, z: number, y: number, rad = R, cx =
   return w.surfaces.some((s) => (s.solid ? s.top > y + STEP && s.bottom < y + HEAD && inRect(s, x, z, -rad) : boardIn(s, x, z, y, rad, cx, cz)));
 }
 
-const canStand = (w: World, x: number, z: number, y: number) => contained(w, x, y, z) && !blocked(w, x, z, y);
+/** Whether the cat's centre (radius R) can stand at (x, y, z): inside the volumes, clear of furniture. */
+export const canStand = (w: World, x: number, z: number, y: number) => contained(w, x, y, z) && !blocked(w, x, z, y);
 
 /** The cat's body beyond the centre cylinder, as circles along its heading: nose, chest and hips
  *  (forward distance from the centre, radius). The tail is left out: it bends out of the way. */

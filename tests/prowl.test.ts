@@ -242,6 +242,30 @@ describe('Catio Prowl game', () => {
     expect(Math.hypot(mug.p[0] - g.cat.p[0], mug.p[2] - g.cat.p[2])).toBeGreaterThan(0.1);
   });
 
+  it('steps up to the scratching post and the water bowl: paws on the post, chin over the bowl', () => {
+    const w = sample('lean-to-window');
+    for (const [id, want] of [['scratch:tree', 0.26 + 0.06], ['drink:bowl', 0.23]] as const) {
+      const g = new Prowl(w, catalog, true);
+      const s = w.spots.find((x) => x.id === id)!;
+      // From the open floor side, near the edge of the spot.
+      let best: CatState | null = null;
+      for (let a = 0; a < 32 && !best; a++) {
+        const h = (a / 32) * Math.PI * 2, d = s.r - 0.03;
+        const x = s.p[0] - Math.sin(h) * d, z = s.p[2] - Math.cos(h) * d;
+        const gr = groundAt(w, x, z, 0.01);
+        if (gr.surface?.kind !== 'floor' || !contained(w, x, 0, z) || blocked(w, x, z, 0)) continue;
+        best = newCat([x, 0, z], h, w);
+      }
+      Object.assign(g.cat, best!);
+      g.update(1 / 60, { move: [0, 0] });
+      expect(g.action?.kind, id).toBe('spot');
+      g.act();
+      for (let i = 0; i < 30; i++) g.update(1 / 60, { move: [0, 0] });
+      expect(g.busy?.kind).toBe(s.kind);
+      expect(Math.hypot(s.p[0] - g.cat.p[0], s.p[2] - g.cat.p[2]), id).toBeCloseTo(want, 1);
+    }
+  });
+
   it('watching the bird from a high perch in the catio completes the task; meowing scares it off', () => {
     const w = sample('lean-to-window');
     const g = new Prowl(w, catalog, true);

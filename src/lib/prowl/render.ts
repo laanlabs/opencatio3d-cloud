@@ -436,9 +436,18 @@ export function createProwlScene(host: HTMLElement, p: Project, a: Assembly, wor
         backDy = on?.low !== undefined ? onRamp(-0.12) : paws(-0.12);
       }
       const busy = game.busy ? (game.busy.kind as CatBusy) : null;
+      // Room overhead for stretching up (to scratch): the lowest shelf, board or roof just ahead of the chest.
+      let headroom = 9;
+      if (busy === 'scratch' || busy === 'sofa') {
+        for (const k of [0.05, 0.15, 0.25]) {
+          const x = c.p[0] + sh * k, z = c.p[2] + ch * k;
+          for (const s of world.surfaces) if (s.kind !== 'floor' && s.bottom > c.p[1] + STEP && inRect(s, x, z)) headroom = Math.min(headroom, s.bottom - c.p[1]);
+          for (let y = 0.2; y < headroom; y += 0.02) if (!inVolumes(world, x, c.p[1] + y, z, 0)) { headroom = y; break; }
+        }
+      }
       kitty.update(opts.reduceMotion ? Math.min(dt, 0.02) : dt, {
         speed: Math.hypot(c.v[0], c.v[1]), sneak: game.sneak, ground: c.ground, leap: c.leap ? { k: Math.min(1, c.leap.t / c.leap.T), up: c.leap.up } : null,
-        busy, busyK: game.busy ? game.busy.t / game.busy.T : 0, idle: game.idle, look, frontDy, backDy, meowAgo: game.time - game.meowAt
+        busy, busyK: game.busy ? game.busy.t / game.busy.T : 0, idle: game.idle, look, frontDy, backDy, meowAgo: game.time - game.meowAt, headroom
       });
       const under = c.ground ? c.p[1] : groundAt(world, c.p[0], c.p[2], c.p[1]).y;
       shadowBlob.visible = Number.isFinite(under);
