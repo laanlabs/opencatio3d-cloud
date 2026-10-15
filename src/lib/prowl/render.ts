@@ -12,7 +12,7 @@ import type { Assembly } from '../generate/assembly';
 import { buildHouse, buildStructure, disposeGroup } from '../scene/build';
 import { mat } from '../quest/catrig';
 import type { Prowl } from './game';
-import { STEP, groundAt, inFurnitureAt, inRect, inVolumes } from './physics';
+import { STEP, groundAt, inFurnitureAt, inRect, inVolumes, topAt } from './physics';
 import type { Rect, WallSpec, World } from './world';
 import { type CatBusy, makeCatModel } from './catmodel';
 import { ROOF_LAYER, buildHouseShell, buildInterior, buildSky, buildTunnelFloors, buildYard, houseWall, mergeStatics, sunDirection } from './scenery';
@@ -428,8 +428,12 @@ export function createProwlScene(host: HTMLElement, p: Project, a: Assembly, wor
           if (up && g.surface.kind !== 'ramp' && !inRect(g.surface, x, z, 0.05)) return 0;
           return Math.max(-0.06, Math.min(0.1, g.y - c.p[1]));
         };
-        frontDy = paws(0.12);
-        backDy = paws(-0.12);
+        // On a ramp both paws stand on the ramp itself, however steep: the body tilts with it rather than
+        // staying level with the board through its middle.
+        const on = world.surfaces.find((s) => s.id === c.surfaceId);
+        const onRamp = (k: number) => topAt(on!, c.p[0] + sh * k, c.p[2] + ch * k) - c.p[1];
+        frontDy = on?.low !== undefined ? onRamp(0.12) : paws(0.12);
+        backDy = on?.low !== undefined ? onRamp(-0.12) : paws(-0.12);
       }
       const busy = game.busy ? (game.busy.kind as CatBusy) : null;
       kitty.update(opts.reduceMotion ? Math.min(dt, 0.02) : dt, {
