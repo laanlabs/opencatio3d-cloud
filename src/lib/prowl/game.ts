@@ -165,6 +165,7 @@ export class Prowl {
     for (const e of step(this.world, this.cat, input, dt)) {
       if (e.type === 'land' && e.drop > 1.2) this.say('Thud. Landed on all four paws.', 'info', 'thud');
     }
+    this.bumpItems();
     this.target = this.cat.ground && !this.cat.leap ? leapTarget(this.world, this.cat) : null;
     this.action = this.cat.ground && !this.cat.leap ? this.findAction() : null;
     this.checkPlace();
@@ -325,6 +326,36 @@ export class Prowl {
         if (s.sunny || !anySunny) this.complete('nap');
         else this.say('A nice nap, but a sunbeam would be warmer.', 'info');
         break;
+      }
+    }
+  }
+
+  /** The cat's body nudges things on a top out of its way, the way a cat shoulders past a mug; nudged over
+   *  the edge, they fall (and count as knocked off). Things never stand inside the cat. */
+  private bumpItems() {
+    const c = this.cat;
+    const fx = Math.sin(c.heading), fz = Math.cos(c.heading);
+    for (const it of this.items) {
+      if (it.state !== 'rest') continue;
+      const [w, h, d] = it.item.size;
+      // Its base below the cat's back, its top above the belly (the legs are thin enough to step between).
+      if (it.p[1] > c.p[1] + 0.25 || it.p[1] + h < c.p[1] + 0.05) continue;
+      // The body: a capsule from the rump to the chest, or to the head for something tall.
+      const front = h > 0.16 ? 0.26 : 0.17, back = -0.2;
+      const rx = it.p[0] - c.p[0], rz = it.p[2] - c.p[2];
+      const along = Math.max(back, Math.min(front, rx * fx + rz * fz));
+      let dx = rx - fx * along, dz = rz - fz * along;
+      const dist = Math.hypot(dx, dz), min = 0.065 + Math.max(w, d) / 2;
+      if (dist >= min) continue;
+      if (dist < 1e-4) { dx = fz; dz = -fx; } else { dx /= dist; dz /= dist; } // dead centre: to one side
+      const nx = it.p[0] + dx * (min - dist), nz = it.p[2] + dz * (min - dist);
+      if (!this.world.volumes.some((v) => insideXZ(v.poly, nx, nz))) continue;
+      it.p[0] = nx; it.p[2] = nz;
+      if (groundAt(this.world, nx, nz, it.p[1] + 0.01).y < it.p[1] - 0.02) {
+        it.v = [dx * 0.6, 0, dz * 0.6];
+        it.spin = 3 + Math.random() * 3;
+        it.state = 'falling';
+        it.fromY = it.p[1];
       }
     }
   }

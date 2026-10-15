@@ -180,7 +180,7 @@ describe('Catio Prowl game', () => {
     const w = sample('lean-to-window');
     const g = new Prowl(w, catalog, true);
     const mug = g.items.find((i) => i.item.id === 'mug')!;
-    g.cat.p = [mug.p[0] - 0.2, mug.p[1], mug.p[2]];
+    g.cat.p = [mug.p[0], mug.p[1], mug.p[2] - 0.13]; // beside it, not touching
     g.cat.surfaceId = 'coffee';
     g.cat.heading = Math.PI / 2;
     g.update(1 / 60, { move: [0, 0] });
@@ -191,6 +191,50 @@ describe('Catio Prowl game', () => {
     expect(mug.p[1]).toBeCloseTo(0, 3);
     expect(g.count('knock')).toBe(1);
     expect(g.messages.some((m) => m.sound === 'crash')).toBe(true);
+  });
+
+  it('walking into the vase on the cabinet nudges it aside: it never stands inside the cat', () => {
+    const w = sample('lean-to-window');
+    const g = new Prowl(w, catalog, true);
+    const vase = g.items.find((i) => i.item.id === 'vase')!;
+    const cab = w.surfaces.find((s) => s.id === 'cabinet')!;
+    // Along the cabinet's length, a little way from the vase, walking towards it.
+    const dx = -Math.sin(cab.yaw), dz = Math.cos(cab.yaw);
+    g.cat.p = [vase.p[0] + dx * 0.33, cab.top, vase.p[2] + dz * 0.33];
+    g.cat.surfaceId = cab.id;
+    g.cat.ground = true;
+    g.cat.heading = Math.atan2(-dx, -dz);
+    const start = [...vase.p];
+    let worst = 9;
+    for (let i = 0; i < 60; i++) {
+      g.update(1 / 60, { move: [-dx, -dz] });
+      if (vase.state !== 'rest') break;
+      const fx = Math.sin(g.cat.heading), fz = Math.cos(g.cat.heading);
+      const rx = vase.p[0] - g.cat.p[0], rz = vase.p[2] - g.cat.p[2];
+      const along = Math.max(-0.2, Math.min(0.26, rx * fx + rz * fz));
+      worst = Math.min(worst, Math.hypot(rx - fx * along, rz - fz * along) - (0.065 + vase.item.size[0] / 2));
+    }
+    expect(Math.hypot(vase.p[0] - start[0], vase.p[2] - start[2])).toBeGreaterThan(0.05);
+    expect(worst).toBeGreaterThan(-0.01);
+  });
+
+  it('a mug nudged over the edge of the coffee table falls and counts as knocked off', () => {
+    const w = sample('lean-to-window');
+    const g = new Prowl(w, catalog, true);
+    const mug = g.items.find((i) => i.item.id === 'mug')!;
+    const t = w.surfaces.find((s) => s.id === 'coffee')!;
+    const ox = Math.cos(t.yaw), oz = Math.sin(t.yaw); // out across the table's long side
+    const lx = t.h[0] - 0.03;
+    mug.p = [t.c[0] + ox * lx, t.top, t.c[1] + oz * lx];
+    g.cat.p = [mug.p[0] - ox * 0.06, t.top, mug.p[2] - oz * 0.06];
+    g.cat.surfaceId = t.id;
+    g.cat.ground = true;
+    g.cat.heading = Math.atan2(-oz, ox); // walking along the edge
+    g.update(1 / 60, { move: [0, 0] });
+    expect(mug.state).toBe('falling');
+    for (let i = 0; i < 120; i++) g.update(1 / 60, { move: [0, 0] });
+    expect(mug.state).toBe('down');
+    expect(g.count('knock')).toBe(1);
   });
 
   it('watching the bird from a high perch in the catio completes the task; meowing scares it off', () => {
