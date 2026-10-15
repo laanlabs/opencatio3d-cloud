@@ -11,6 +11,7 @@ type Part = 'torso' | 'neck' | 'head' | 'jaw' | 'leg' | 'paw';
 /** The rig's joints at rest, as the model builds them. */
 export interface Rig {
   body: THREE.Object3D;
+  chest: THREE.Object3D;
   neck: THREE.Object3D;
   head: THREE.Object3D;
   jaw: THREE.Object3D;
@@ -54,11 +55,11 @@ function build(rig: Rig, bones: THREE.Object3D[]): Built {
   const bi = (o: THREE.Object3D) => bones.indexOf(o);
   const prims: Prim[] = [];
   const add = (d: Prim['d'] & { c: V; r: number }, o: THREE.Object3D, part: Part, side = 0) => { prims.push({ d, bone: bi(o), part, side, c: d.c, r: d.r }); return prims.length - 1; };
-  const { body, neck, head, jaw } = rig;
+  const { body, chest, neck, head, jaw } = rig;
 
   // Torso: a deep chest, a tucked waist and a round rump, and the root of the tail.
   const torso = [
-    add(ellipsoid(W(body, 0, -0.004, 0.083), [0.05, 0.072, 0.1]), body, 'torso'),
+    add(ellipsoid(W(body, 0, -0.004, 0.083), [0.05, 0.072, 0.1]), chest, 'torso'),
     add(ellipsoid(W(body, 0, 0.006, -0.02), [0.047, 0.057, 0.11]), body, 'torso'),
     add(ellipsoid(W(body, 0, 0.008, -0.122), [0.055, 0.062, 0.082]), body, 'torso'),
     add(cone(W(body, 0, 0.022, -0.168), W(body, 0, 0.03, -0.205), 0.028, 0.016), body, 'torso')

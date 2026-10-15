@@ -128,14 +128,14 @@ const TAIL_N = 10, TAIL_SEG = 0.031;
 
 type Feet = [number, number][]; // [z, y] per leg: FL, FR, HL, HR (root space)
 interface Params {
-  bodyY: number; pitch: number; roll: number; neck: number; headPitch: number; headYaw: number; headRoll: number;
+  bodyY: number; pitch: number; roll: number; spinePitch: number; spineYaw: number; neck: number; headPitch: number; headYaw: number; headRoll: number;
   tailBase: number; tailSide: number; tailBend: number; tailTip: number; tailCurl: number; tailSway: number;
   ears: number; eyes: number; jaw: number; gait: number; stretch: number;
   feet: Feet;
 }
 const REST: Feet = [[0.118, 0], [0.118, 0], [-0.118, 0], [-0.118, 0]];
 const params = (o: Partial<Params>): Params => ({
-  bodyY: 0.19, pitch: 0, roll: 0, neck: 0, headPitch: 0, headYaw: 0, headRoll: 0,
+  bodyY: 0.19, pitch: 0, roll: 0, spinePitch: 0, spineYaw: 0, neck: 0, headPitch: 0, headYaw: 0, headRoll: 0,
   tailBase: -0.75, tailSide: 0, tailBend: 0.05, tailTip: 0.25, tailCurl: 0, tailSway: 0.12,
   ears: 0, eyes: 1, jaw: 0, gait: 0, stretch: 1, feet: REST.map((f) => [...f] as [number, number]), ...o
 });
@@ -160,10 +160,14 @@ export function makeCatModel(coat: string): CatModel {
   root.add(body);
   const mesh = (g: THREE.BufferGeometry, m: THREE.Material, shadow = true) => { own(g); const x = new THREE.Mesh(g, m); x.castShadow = shadow; return x; };
 
+  // The spine bends in the middle: the chest (front legs, neck and head) turns and tilts on the hips.
+  const chest = new THREE.Bone();
+  body.add(chest);
+
   // Neck and head.
   const neck = new THREE.Bone();
   neck.position.set(0, 0.03, 0.155);
-  body.add(neck);
+  chest.add(neck);
   const head = new THREE.Bone();
   head.position.set(0, 0.05, 0.072);
   neck.add(head);
@@ -230,7 +234,7 @@ export function makeCatModel(coat: string): CatModel {
     const at = front ? SHOULDER : HIP;
     const hip = new THREE.Bone();
     hip.position.set(s * at[0], at[1], at[2]);
-    body.add(hip);
+    (front ? chest : body).add(hip);
     const lens = front ? [F1, F2] : [H1, H2, H3];
     const j: THREE.Bone[] = [];
     let parent: THREE.Object3D = hip;
@@ -269,8 +273,8 @@ export function makeCatModel(coat: string): CatModel {
 
   // The body, skinned to the joints at rest.
   root.updateMatrixWorld(true);
-  const bones: THREE.Bone[] = [body, neck, head, jaw, ...legs.flatMap((L) => [L.hip, ...L.j, L.paw])];
-  const skin = catBody({ body, neck, head, jaw, legs: legs.map((L) => ({ hip: L.hip, j: L.j, paw: L.paw, front: L.front, side: L.side })) }, bones, coat);
+  const bones: THREE.Bone[] = [body, chest, neck, head, jaw, ...legs.flatMap((L) => [L.hip, ...L.j, L.paw])];
+  const skin = catBody({ body, chest, neck, head, jaw, legs: legs.map((L) => ({ hip: L.hip, j: L.j, paw: L.paw, front: L.front, side: L.side })) }, bones, coat);
   owned.push(skin.geometry, skin.material as THREE.Material, skin.skeleton);
   root.add(skin);
 
@@ -299,7 +303,7 @@ export function makeCatModel(coat: string): CatModel {
       return { p: params({ bodyY: 0.2, pitch: 0.18, neck: 0.1, tailBase: -1.25, tailTip: 0.1, tailSway: 0, ears: 0.15, feet: [[0.2, -0.03], [0.22, -0.03], [-0.2, 0.06], [-0.18, 0.07]] }), rate: 18 };
     }
     if (!d.ground) return { p: params({ bodyY: 0.2, pitch: 0.1, tailBase: -0.6, tailSway: 0, ears: 0.3, feet: [[0.16, -0.04], [0.16, -0.04], [-0.15, -0.03], [-0.15, -0.03]] }), rate: 14 };
-    const sitting: Partial<Params> = { bodyY: 0.105, pitch: -0.6, neck: 0.5, headPitch: 0.42, tailBase: -1.57, tailBend: 0, tailTip: 0, tailCurl: 0.3, tailSway: 0.05, feet: [[0.12, 0], [0.12, 0], [0.0, 0], [0.0, 0]] };
+    const sitting: Partial<Params> = { bodyY: 0.108, pitch: -0.62, spinePitch: 0.14, neck: 0.5, headPitch: 0.42, tailBase: -1.57, tailBend: 0, tailTip: 0, tailCurl: 0.3, tailSway: 0.05, feet: [[0.12, 0], [0.12, 0], [0.0, 0], [0.0, 0]] };
     switch (d.busy) {
       case 'scratch': case 'sofa': {
         const s = Math.sin(t * 11) * 0.05;
@@ -321,7 +325,7 @@ export function makeCatModel(coat: string): CatModel {
       }
       case 'nap': {
         const br = Math.sin(t * 1.6) * 0.004;
-        return { p: params({ bodyY: 0.083 + br, roll: 0.18, neck: 0.55, headPitch: 0.25, headYaw: 0.95, headRoll: 0.5, eyes: 0, tailBase: -1.6, tailBend: 0, tailTip: 0.1, tailCurl: 0.4, tailSway: 0.02, ears: 0.15, feet: [[0.07, 0.01], [0.07, 0.01], [-0.06, 0], [-0.06, 0]] }), rate: 3 };
+        return { p: params({ bodyY: 0.083 + br, roll: 0.18, spineYaw: 0.75, neck: 0.55, headPitch: 0.25, headYaw: 0.6, headRoll: 0.5, eyes: 0, tailBase: -1.6, tailBend: 0, tailTip: 0.1, tailCurl: 0.4, tailSway: 0.02, ears: 0.15, feet: [[0.07, 0.01], [0.07, 0.01], [-0.06, 0], [-0.06, 0]] }), rate: 3 };
       }
       case 'swipe': {
         const kk = d.busyK;
@@ -349,6 +353,7 @@ export function makeCatModel(coat: string): CatModel {
     return { p, rate: 7 };
   }
 
+  const tgt = new THREE.Vector3(), toParent = new THREE.Matrix4();
   function apply(p: Params, d: CatDrive) {
     // Gait: lateral-sequence walk blending into a trot; stride matches speed so paws stay planted.
     const sp = Math.max(0.0, d.speed);
@@ -376,6 +381,8 @@ export function makeCatModel(coat: string): CatModel {
     body.position.set(0, by - squash, 0);
     body.rotation.set(pitch, 0, p.roll + p.gait * 0.035 * Math.sin(phase * Math.PI * 2));
     body.scale.set(1, 1, p.stretch);
+    // The chest sways a little from side to side as the cat walks.
+    chest.rotation.set(p.spinePitch, p.spineYaw + p.gait * 0.06 * Math.sin(phase * Math.PI * 2 + 0.6), 0, 'YXZ');
     neck.rotation.x = p.neck;
     head.rotation.set(p.headPitch - p.neck * 0.6 + p.gait * 0.03 * Math.cos(phase * Math.PI * 4), p.headYaw, p.headRoll, 'YXZ');
     jaw.rotation.x = p.jaw * 0.6;
@@ -387,30 +394,28 @@ export function makeCatModel(coat: string): CatModel {
       e.rotation.set(-0.12 - p.ears * 0.9 - tw * 0.4, s * (0.28 + p.ears * 0.5), -s * (0.3 + p.ears * 0.5));
     });
 
-    // Legs.
-    const cp = Math.cos(pitch), spn = Math.sin(pitch);
+    // Legs: each foot target goes from root space into the frame its leg hangs from (the hips or the chest).
+    root.updateMatrixWorld(true);
     const ground = (i: number) => (i < 2 ? d.frontDy : d.backDy);
     legs.forEach((L, i) => {
-      // Foot target in root space → body space (undo body position and pitch) → relative to the joint.
       const fz = feet[i][0], fy = feet[i][1] + (d.ground ? ground(i) : 0) + squash * 0.2;
-      const ry = fy - (by - squash), rz = fz / p.stretch;
-      const byy = ry * cp + rz * spn, bz = -ry * spn + rz * cp;
-      const ty = byy - L.hip.position.y, tz = bz - L.hip.position.z;
+      toParent.copy(L.hip.parent!.matrixWorld).invert().multiply(root.matrixWorld);
+      const local = (y: number, z: number) => tgt.set(L.x, y, z).applyMatrix4(toParent);
+      const pt = pitch + (L.front ? p.spinePitch : 0); // how far the leg's frame is tipped
       if (L.front) {
-        const [a, b] = ik2(ty, tz, F1, F2, false);
+        local(fy, fz);
+        const [a, b] = ik2(tgt.y - L.hip.position.y, tgt.z - L.hip.position.z, F1, F2, false);
         L.j[0].rotation.x = a; L.j[1].rotation.x = b;
-        L.paw.rotation.x = -(pitch + a + b);
+        L.paw.rotation.x = -(pt + a + b);
       } else {
         // Aim the knee at the hock, which sits behind and above the paw; the last bone runs down to the paw.
         const ha = -0.28; // hock-to-paw angle in root space (paw slightly ahead of the hock)
-        const hy = fy + H3 * Math.cos(ha), hz = fz + H3 * Math.sin(ha);
-        const ry2 = hy - (by - squash), rz2 = hz / p.stretch;
-        const by2 = ry2 * cp + rz2 * spn, bz2 = -ry2 * spn + rz2 * cp;
-        const [a, b] = ik2(by2 - L.hip.position.y, bz2 - L.hip.position.z, H1, H2, true);
+        local(fy + H3 * Math.cos(ha), fz + H3 * Math.sin(ha));
+        const [a, b] = ik2(tgt.y - L.hip.position.y, tgt.z - L.hip.position.z, H1, H2, true);
         L.j[0].rotation.x = a; L.j[1].rotation.x = b;
-        const c = ha - pitch - a - b;
+        const c = ha - pt - a - b;
         L.j[2].rotation.x = c;
-        L.paw.rotation.x = -(pitch + a + b + c);
+        L.paw.rotation.x = -(pt + a + b + c);
       }
     });
 
