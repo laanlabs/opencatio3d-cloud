@@ -39,6 +39,7 @@
   const doneCount = $derived(steps.filter((s) => isDone(progress, s)).length);
   const finished = $derived(steps.length > 0 && doneCount === steps.length);
   let heading = $state<HTMLHeadingElement>();
+  let online = $state(typeof navigator === 'undefined' || navigator.onLine);
 
   track('build_mode', { steps: steps.length, ready, resumed: resumed.done.length > 0 });
 
@@ -74,6 +75,8 @@
   function reopen() { if (step) save(setDone(project, progress, steps, step, false)); }
 </script>
 
+<svelte:window ononline={() => (online = true)} onoffline={() => (online = false)} />
+
 <div class="build">
   <header class="bar">
     <a class="btn small" href="#/p/{project.id}">← Planner</a>
@@ -88,6 +91,9 @@
 
   {#if !ready}
     <p class="banner concept"><strong>Concept only.</strong> {blockers.length} {blockers.length === 1 ? 'item blocks' : 'items block'} the build package — fix {blockers.length === 1 ? 'it' : 'them'} in the <a href="#/p/{project.id}">planner</a> before you buy or cut anything. You can still walk through the steps.</p>
+  {/if}
+  {#if !online}
+    <p class="banner" role="status">You’re offline. Build mode keeps working, and your ticks save on this device.</p>
   {/if}
   {#if changed}
     <p class="banner">The design was changed after you started building. Your ticks are kept — check finished steps against the new parts list.</p>

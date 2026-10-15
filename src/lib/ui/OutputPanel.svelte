@@ -62,7 +62,7 @@
     </ol>
     {#if !editor.readonly}
       <div class="row"><button class="btn small" onclick={() => onexport('build')}>Build it step by step</button></div>
-      <p class="muted small">One step at a time on your phone or laptop: the parts for each step, a 3D view that grows as you go, and checks to tick. Progress is saved with this catio.</p>
+      <p class="muted small">One step at a time on your phone or laptop: the parts for each step, a 3D view that grows as you go, and checks to tick. Progress is saved with this catio, and it works offline once you have opened it here.</p>
     {/if}
   </section>
 {/if}

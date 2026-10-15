@@ -33,6 +33,9 @@ Sibling repos (not public yet): `opencatio3d-www` (website; owns the shared cata
 - **Build mode (`#/build/<id>`):** the assembly steps one at a time — each step's labelled parts and fixings, a 3D
   view that grows as steps are done (this step in yellow), and checks to tick before a step counts as done.
   Progress saves with the catio in `web.build` (`build/progress.ts`) and is flagged if the design changes later
+- **Offline:** after one visit the whole app (planner, Build mode, build package, both games; about 2 MB) works
+  without a connection. `vite build` writes `dist/sw.js` from `src/sw/sw.js` with every built file and a content
+  version; pages are network-first, so a deploy shows up on the next load and replaces the cached copy
   (cover sheet with assumptions/limitations/reviewer fields, plan, elevations, schedules, findings,
   maintenance checklist) — watermarked "concept" until no blockers remain. CSV, project JSON, plan PNG,
   3D PNG, GLB, view-only share links, links into the iOS app, and Open in OpenPlan3D.

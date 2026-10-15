@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import type { Plugin } from 'vite';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -11,8 +13,34 @@ const OPENPLAN = process.env.OPENPLAN3D_DIR ?? resolve(here, '../../openplan/ope
 const hasOpenPlan = existsSync(resolve(OPENPLAN, 'src/lib/utils/roomplanImport.ts')) && existsSync(resolve(OPENPLAN, 'node_modules'));
 const openplanPlugins = hasOpenPlan ? [(await import(resolve(OPENPLAN, 'tooling/catalog-assets.mjs'))).catalogAssets()] : [];
 
+// Offline: writes dist/sw.js from src/sw/sw.js with every built file (the app, its lazy chunks and the
+// icons) and a version that changes whenever any of them does. Registered in src/main.ts.
+const PUBLIC_SKIP = new Set(['og.png', 'robots.txt']);
+function offlinePlugin(): Plugin {
+  return {
+    name: 'oc3d-offline',
+    apply: 'build',
+    generateBundle(_options, bundle) {
+      const template = readFileSync(resolve(here, 'src/sw/sw.js'), 'utf8');
+      const hash = createHash('sha256').update(template);
+      const files = Object.keys(bundle).filter((f) => f !== 'index.html' && !f.endsWith('.map')).sort();
+      for (const f of files) hash.update(f);
+      const html = bundle['index.html'];
+      if (html && html.type === 'asset') hash.update(String(html.source));
+      const pub = resolve(here, 'public');
+      const publicFiles = readdirSync(pub).filter((f) => !f.startsWith('.') && !PUBLIC_SKIP.has(f)).sort();
+      for (const f of publicFiles) hash.update(f).update(readFileSync(resolve(pub, f)));
+      const urls = ['/', ...publicFiles.map((f) => `/${f}`), ...files.map((f) => `/${f}`)];
+      const source = template
+        .replace("'__VERSION__'", JSON.stringify(hash.digest('hex').slice(0, 12)))
+        .replace('__PRECACHE__', JSON.stringify(urls));
+      this.emitFile({ type: 'asset', fileName: 'sw.js', source });
+    }
+  };
+}
+
 export default defineConfig({
-  plugins: [svelte()],
+  plugins: [svelte(), offlinePlugin()],
   build: {
     target: 'es2022',
     chunkSizeWarningLimit: 700,
