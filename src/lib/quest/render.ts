@@ -120,7 +120,8 @@ export function createQuestScene(host: HTMLElement, p: Project, a: Assembly, sim
         if (Math.hypot(dx, dz) > 0.05) rig.heading = Math.atan2(dx, dz);
       }
       rig.root.rotation.y = rig.heading;
-      pose(rig, at.pose, reduceMotion ? 0 : t * 0.9 + rigs.indexOf(rig), at.k);
+      const up = !!at.seg && at.seg.to[1] > at.seg.from[1] + 0.05;
+      pose(rig, at.pose, at.k, up, performance.now(), reduceMotion);
     }
     const raining = during('rain', t);
     rain.visible = !!raining && !reduceMotion;
@@ -162,6 +163,7 @@ export function createQuestScene(host: HTMLElement, p: Project, a: Assembly, sim
     },
     dispose() {
       controls.dispose();
+      for (const rig of rigs) rig.model.dispose();
       disposeGroup(world);
       disposeGroup(frame);
       rainGeo.dispose();
