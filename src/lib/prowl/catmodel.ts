@@ -28,6 +28,9 @@ export interface CatDrive {
   meowAgo: number;
   /** Room above the paws just ahead (a shelf or roof over the cat), if less than a stretch needs. */
   headroom?: number;
+  /** Clear room for the tail behind the rump, and to either side of it (toward the cat's +x and -x), when less
+   *  than a tail's length: a cat with its back to a wall wraps its tail around beside it instead. */
+  tailRoom?: [number, number, number];
 }
 
 export interface CatModel {
@@ -127,6 +130,7 @@ const HIP: [number, number, number] = [0.042, -0.002, -0.128];
 const F1 = 0.085, F2 = 0.088; // upper arm, forearm
 const H1 = 0.085, H2 = 0.078, H3 = 0.056; // thigh, shin, hock to paw
 const TAIL_N = 10, TAIL_SEG = 0.031;
+const X_AXIS = new THREE.Vector3(1, 0, 0), Y_AXIS = new THREE.Vector3(0, 1, 0);
 
 type Feet = [number, number][]; // [z, y] per leg: FL, FR, HL, HR (root space)
 interface Params {
@@ -289,6 +293,7 @@ export function makeCatModel(coat: string): CatModel {
   let earTwitchAt = 3, earT = -1, earSide = 0;
   let idleLookAt = 0, idleYaw = 0, idlePitch = 0;
   let prevGround = true, land = 0;
+  let wrapTo = 1; // which side (+x or -x) a tail with no room behind it wraps around to
 
   function goalFor(d: CatDrive): { p: Params; rate: number } {
     const look = (p: Params, maxYaw = 1.0) => {
@@ -363,6 +368,7 @@ export function makeCatModel(coat: string): CatModel {
   }
 
   const tgt = new THREE.Vector3(), toParent = new THREE.Matrix4();
+  const tailQ = new THREE.Quaternion(), qa = new THREE.Quaternion(), qb = new THREE.Quaternion();
   function apply(p: Params, d: CatDrive) {
     // Gait: lateral-sequence walk blending into a trot; stride matches speed so paws stay planted.
     const sp = Math.max(0.0, d.speed);
@@ -429,7 +435,10 @@ export function makeCatModel(coat: string): CatModel {
     });
 
     // Tail: base angle in root space, bending along the chain, a travelling sway, a curl around the body.
-    tailRoot.rotation.set(p.tailBase - pitch, p.tailSide, 0, 'YXZ');
+    // Its side-to-side swing is about the vertical, not the body's tilted up axis (a sitting cat's tail lies
+    // along the floor wherever it swings to).
+    tailQ.setFromAxisAngle(X_AXIS, -pitch).multiply(qa.setFromAxisAngle(Y_AXIS, p.tailSide)).multiply(qb.setFromAxisAngle(X_AXIS, p.tailBase));
+    tailRoot.quaternion.copy(tailQ);
     tail.forEach((g, i) => {
       const f = i / (TAIL_N - 1);
       const sway = Math.sin(t * (1.6 + p.tailSway * 4) - i * 0.55) * p.tailSway * (0.3 + f);
@@ -484,6 +493,21 @@ export function makeCatModel(coat: string): CatModel {
       land = Math.max(0, land - dt * 5);
 
       const { p, rate } = goalFor(d);
+      // A wall or furniture right behind: a tail lying low behind a resting cat wraps around to the side with
+      // more room (around its paws); a low tail on the move is carried higher, over the obstruction.
+      if (d.tailRoom && p.tailBase < -1.2) {
+        const [back, px, nx] = d.tailRoom;
+        const w = smooth(0.36, 0.12, back);
+        if (w > 0) {
+          if (Math.max(px, nx) > 0.12 && (wrapTo > 0 ? px : nx) < 0.6 * (wrapTo > 0 ? nx : px)) wrapTo = -wrapTo;
+          if (p.bodyY < 0.15 && d.speed < 0.3 && !d.sneak) {
+            const s = -wrapTo; // a yaw of -1.5 swings the tail toward +x
+            p.tailSide += (s * 1.5 - p.tailSide) * w;
+            p.tailCurl += (s * 0.3 - p.tailCurl) * w;
+            p.tailSway *= 1 - w * 0.7;
+          } else p.tailBase += (-0.55 - p.tailBase) * w;
+        }
+      }
       if (d.meowAgo < 0.6) { p.jaw = Math.max(p.jaw, Math.sin((d.meowAgo / 0.6) * Math.PI)); p.headPitch -= 0.25 * Math.sin((d.meowAgo / 0.6) * Math.PI); p.ears -= 0.1; }
       lerpParams(p, 1 - Math.exp(-dt * rate));
       cur.jaw = p.jaw; // the jaw follows at once

@@ -12,7 +12,7 @@ import type { Assembly } from '../generate/assembly';
 import { buildHouse, buildStructure, disposeGroup } from '../scene/build';
 import { mat } from '../quest/catrig';
 import type { Prowl } from './game';
-import { STEP, groundAt, inFurnitureAt, inRect, inVolumes, topAt } from './physics';
+import { STEP, groundAt, inFurnitureAt, inRect, inVolumes, openAir, topAt } from './physics';
 import type { Rect, WallSpec, World } from './world';
 import { type CatBusy, makeCatModel } from './catmodel';
 import { ROOF_LAYER, buildHouseShell, buildInterior, buildSky, buildTunnelFloors, buildYard, houseWall, mergeStatics, sunDirection } from './scenery';
@@ -445,9 +445,16 @@ export function createProwlScene(host: HTMLElement, p: Project, a: Assembly, wor
           for (let y = 0.2; y < headroom; y += 0.02) if (!inVolumes(world, x, c.p[1] + y, z, 0)) { headroom = y; break; }
         }
       }
+      // Room for the tail behind the rump and to either side of it: walls, the mesh and solid furniture.
+      let tailRoom: [number, number, number] | undefined;
+      if (c.ground && !c.leap) {
+        const free = (lx: number, lz: number) => openAir(world, c.p[0] + lx * ch + lz * sh, c.p[1] + 0.07, c.p[2] - lx * sh + lz * ch, 0.01);
+        const reach = (dx: number, dz: number, x0: number, z0: number) => { let k = 0; while (k < 0.4 && free(x0 + dx * k, z0 + dz * k)) k += 0.04; return k; };
+        tailRoom = [reach(0, -1, 0, -0.2), reach(1, 0, 0, -0.22), reach(-1, 0, 0, -0.22)];
+      }
       kitty.update(opts.reduceMotion ? Math.min(dt, 0.02) : dt, {
         speed: Math.hypot(c.v[0], c.v[1]), sneak: game.sneak, ground: c.ground, leap: c.leap ? { k: Math.min(1, c.leap.t / c.leap.T), up: c.leap.up } : null,
-        busy, busyK: game.busy ? game.busy.t / game.busy.T : 0, idle: game.idle, look, frontDy, backDy, meowAgo: game.time - game.meowAt, headroom
+        busy, busyK: game.busy ? game.busy.t / game.busy.T : 0, idle: game.idle, look, frontDy, backDy, meowAgo: game.time - game.meowAt, headroom, tailRoom
       });
       const under = c.ground ? c.p[1] : groundAt(world, c.p[0], c.p[2], c.p[1]).y;
       shadowBlob.visible = Number.isFinite(under);
